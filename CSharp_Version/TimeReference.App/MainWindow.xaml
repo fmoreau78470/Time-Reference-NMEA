@@ -1,0 +1,67 @@
+﻿<Window x:Class="TimeReference.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Time Reference NMEA" Height="500" Width="550">
+    <Grid Margin="20">
+        <StackPanel>
+            <!-- Zone de Connexion -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBlock Text="Port COM :" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox x:Name="TxtPort" Text="COM3" Width="80" Margin="0,0,10,0" VerticalContentAlignment="Center"/>
+                <Button x:Name="BtnConnect" Content="Connecter" Click="BtnConnect_Click" Padding="10,5" Margin="0,0,10,0"/>
+                <Button x:Name="BtnGenerateNtp" Content="Générer NTP" Click="BtnGenerateNtp_Click" Padding="10,5"/>
+            </StackPanel>
+
+            <!-- Zone d'Affichage -->
+            <GroupBox Header="Données GPS" Padding="10">
+                <StackPanel>
+                    <TextBlock x:Name="LblStatus" Text="Statut : Déconnecté" Foreground="Gray" Margin="0,0,0,10"/>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Heure UTC :" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="LblTime" Text="--:--:--"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Latitude :" FontWeight="Bold" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LblLat" Text="--" Margin="0,5,0,0"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Longitude :" FontWeight="Bold" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" x:Name="LblLon" Text="--" Margin="0,5,0,0"/>
+                    </Grid>
+                </StackPanel>
+            </GroupBox>
+            
+            <!-- Logs bruts (pour voir ce qui se passe) -->
+            <TextBlock Text="Dernière trame brute :" Margin="0,15,0,2" FontSize="10" Foreground="Gray"/>
+            <TextBlock x:Name="LblRaw" Text="..." Foreground="Gray" FontSize="10" TextTrimming="CharacterEllipsis"/>
+
+            <!-- Zone de contrôle NTP (Spec 5) -->
+            <StackPanel Margin="0,20,0,0">
+                <TextBlock x:Name="LblNtpStatus" Text="Service NTP : Inconnu" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <Button x:Name="BtnStartNtp" Content="Démarrer" Width="80" Margin="5" Click="BtnStartNtp_Click"/>
+                    <Button x:Name="BtnStopNtp" Content="Arrêter" Width="80" Margin="5" Click="BtnStopNtp_Click"/>
+                    <Button x:Name="BtnRestartNtp" Content="Redémarrer" Width="80" Margin="5" Click="BtnRestartNtp_Click"/>
+                </StackPanel>
+
+                <!-- Boutons Paramètres et Logs (Spec 5) -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                    <Button x:Name="BtnSettings" Content="Paramètres" Width="100" Height="30" Margin="5" Click="BtnSettings_Click"/>
+                    <Button x:Name="BtnLogs" Content="Logs" Width="100" Height="30" Margin="5" Click="BtnLogs_Click"/>
+                    <Button x:Name="BtnMonitor" Content="Moniteur NTP" Width="100" Height="30" Margin="5" Click="BtnMonitor_Click"/>
+                    <Button x:Name="BtnIqt" Content="Qualité Signal" Width="100" Height="30" Margin="5" Click="BtnIqt_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
