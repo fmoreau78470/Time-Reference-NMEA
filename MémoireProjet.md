@@ -1,15 +1,16 @@
 # Mémoire du projet GPS NTP
 
 ## 📑 Table des matières
-1. [Présentation du Projet](#1-présentation-du-projet)
-2. [Environnement de Développement](#2-environnement-de-développement)
-3. [Configuration NTP (Meinberg)](#3-configuration-ntp-meinberg)
-4. [Monitoring & Logs](#4-monitoring--logs)
-5. [Matériel & Protocoles](#5-matériel--protocoles)
-6. [Dépannage](#6-dépannage)
-7. [Firmware RP2040 (Stratum 0)](#7-firmware-rp2040-stratum-0)
-8. [Indice de Qualité Temporelle](#8-indice-de-qualité-temporelle)
-9. [Stratégie Multi-sites](#9-stratégie-multi-sites)
+*   [1. Présentation du Projet](#1-présentation-du-projet)
+*   [2. Environnement de Développement](#2-environnement-de-développement)
+*   [3. Configuration NTP (Meinberg)](#3-configuration-ntp-meinberg)
+*   [4. Monitoring & Logs](#4-monitoring--logs)
+*   [5. Matériel & Protocoles](#5-matériel--protocoles)
+*   [6. Dépannage](#6-dépannage)
+*   [7. Firmware RP2040 (Stratum 0)](#7-firmware-rp2040-stratum-0)
+*   [8. Indice de Qualité Temporelle](#8-indice-de-qualité-temporelle)
+*   [9. Stratégie Multi-sites](#9-stratégie-multi-sites)
+*   [10. Algorithme de Calibration](#10-algorithme-de-calibration-dune-source-de-temps-gpsnmea)
 ## Session du 25/12/2025
 ### ❓ Question
 Je veux créer un programme en python qui fera l'interface entre un GPS NMEA (sur un port série) et le programme NTP de Meinberg. Ce programme devra pouvoir modifier un fichier qui nécessite des droits administrateurs. Un certain nombre d'informations seront stockées dans un fichier de config json
