@@ -1,5 +1,25 @@
 # Spécifications du projet "Time Reference NMEA"
 
+## 📑 Table des matières
+*   [25/12/2025](#25122025)
+    *   [ℹ️ Remarques générales pour tout le projet](#ℹ️-remarques-générales-pour-tout-le-projet)
+    *   [ℹ️ Spec 1](#ℹ️-spec-1)
+    *   [ℹ️ Spec 2](#ℹ️-spec-2)
+    *   [ℹ️ Spec 3](#ℹ️-spec-3)
+    *   [ℹ️ Spec 4](#ℹ️-spec-4)
+    *   [ℹ️ Spec 5](#ℹ️-spec-5)
+    *   [ℹ️ Améliorations suite au débogage de Spec 5](#ℹ️-améliorations-suite-au-débogage-de-spec-5)
+    *   [ℹ️ Spec 6](#ℹ️-spec-6)
+    *   [ℹ️ Spec 7](#ℹ️-spec-7)
+    *   [ℹ️ Améliorations suite au débogage de Spec 7](#ℹ️-améliorations-suite-au-débogage-de-spec-7)
+    *   [ℹ️ Spec 8](#ℹ️-spec-8)
+    *   [ℹ️ Spec 9](#ℹ️-spec-9)
+    *   [ℹ️ Spec 10](#ℹ️-spec-10)
+    *   [ℹ️ Spec 12](#ℹ️-spec-12)
+    *   [ℹ️ Spec 13](#ℹ️-spec-13)
+    *   [ℹ️ Spec 14](#ℹ️-spec-14)
+    *   [ℹ️ Documentation du fichier de configuration (config.json)](#ℹ️-documentation-du-fichier-de-configuration-configjson)
+
 ## 25/12/2025
 ### ℹ️ Remarques générales pour tout le projet
 *   ✅ L'IA Gemini mettra à jour ce fichier en mettant cochant les spec qui auront été codées avec succès.
