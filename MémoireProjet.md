@@ -29,6 +29,7 @@ C'est un excellent projet. Interfacer un GPS matériel avec le service NTP de Me
 
 ### Objectif
 Créer une interface Python entre un GPS NMEA (port série) et le service NTP de Meinberg sous Windows.
+
 Le programme doit :
 *   Modifier des fichiers nécessitant des droits administrateur (`ntp.conf`).
 *   Stocker sa configuration dans un fichier JSON.
@@ -150,6 +151,8 @@ Si je redémarre VS Code en mode administrateur, est-ce que mes fichiers ouverts
 
 ### ℹ️ Infos complémentaires
 Fichier ntp.conf de référence   
+
+```conf
 # ==========================================================
 # CONFIGURATION NTP - MODE TERRAIN (PILOTE 20 NMEA)
 # ==========================================================
@@ -188,6 +191,7 @@ server 127.127.20.6 mode 17 minpoll 4 maxpoll 4 prefer
 # refid GPS  : Nom affiché dans ntpq
 # time1      : Offset pour le signal PPS (si présent sur DCD)
 # time2      : Offset pour la trame série NMEA (Latence USB/Série)
+```
 
 # Paramètres Fudge
 # time1 : Offset PPS (si DCD actif)
@@ -207,6 +211,7 @@ Le fichier `loopstats` est généré par le démon NTP pour suivre la performanc
 
 | Emplacement | Unité | Exemple | Équivalent |
 | :--- | :--- | :--- | :--- |
+
 Voici le décodage colonne par colonne pour votre extrait :
 
 ### 1. Date (MJD) : `61034`
