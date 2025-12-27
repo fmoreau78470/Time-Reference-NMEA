@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: GPS NTP Bridge",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/gps_ntp_bridge.py",
+            "console": "integratedTerminal"
+        }
+    ]
+}
