@@ -2,10 +2,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: GPS NTP Bridge",
-            "type": "python",
+            "name": "Python: Main",
+            "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/gps_ntp_bridge.py",
+            "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal"
         }
     ]
