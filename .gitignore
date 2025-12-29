@@ -4,3 +4,7 @@ obj/
 *.user
 *.suo
 *.pdb
+
+# Python cache
+__pycache__/
+*.pyc
