@@ -40,11 +40,11 @@
         <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="{DynamicResource PrimaryText}"/>
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontSize" Value="10"/>
         </Style>
         <Style x:Key="ClockTextStyle" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Consolas"/>
-            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontFamily" Value="Digital-7, Consolas, Monospace"/>
+            <Setter Property="FontSize" Value="10"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
         <Style TargetType="Button">
@@ -86,10 +86,14 @@
 
     <Grid Margin="15">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- 0: Header Dashboard -->
-            <RowDefinition Height="Auto"/> <!-- 1: Connection (Hidden) -->
-            <RowDefinition Height="Auto"/> <!-- 2: Main Controls -->
-            <RowDefinition Height="*"/>    <!-- 3: Peers Data -->
+            <RowDefinition Height="Auto"/>
+            <!-- 0: Header Dashboard -->
+            <RowDefinition Height="Auto"/>
+            <!-- 1: Connection (Hidden) -->
+            <RowDefinition Height="Auto"/>
+            <!-- 2: Main Controls -->
+            <RowDefinition Height="*"/>
+            <!-- 3: Peers Data -->
         </Grid.RowDefinitions>
 
         <!-- 0. Header Dashboard (Horloges, Santé, Position) -->
@@ -99,23 +103,29 @@
             </Border.Effect>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/> <!-- Clocks -->
-                    <ColumnDefinition Width="*"/>    <!-- Health/Status -->
-                    <ColumnDefinition Width="Auto"/> <!-- Quality -->
-                    <ColumnDefinition Width="Auto"/> <!-- Position -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Clocks -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Health/Status -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Quality -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Position -->
                 </Grid.ColumnDefinitions>
 
                 <!-- Clocks -->
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,2">
                         <TextBlock Text="SYSTÈME" Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" Width="60"/>
                         <TextBlock x:Name="LblSysTime" Text="--:--:--" Style="{StaticResource ClockTextStyle}" Foreground="{DynamicResource PrimaryText}"/>
-                        <TextBlock Text="UTC" VerticalAlignment="Center" Margin="10,0,5,0" Foreground="{DynamicResource PrimaryText}"/>
-                        <ToggleButton x:Name="ChkUtc" VerticalAlignment="Center" Click="ChkUtc_Click" Style="{StaticResource SwitchToggleStyle}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
                         <TextBlock Text="GPS" Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" Width="60"/>
                         <TextBlock x:Name="LblGpsTimeHeader" Text="--:--:--" Style="{StaticResource ClockTextStyle}" Foreground="{DynamicResource AccentColor}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="UTC" VerticalAlignment="Center" Margin="60,0,5,0" Foreground="{DynamicResource PrimaryText}" FontSize="10"/>
+                        <ToggleButton x:Name="ChkUtc" Click="ChkUtc_Click" Style="{StaticResource SwitchToggleStyle}"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -129,22 +139,22 @@
                 <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="20,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,2">
                         <TextBlock Text="Offset: " FontSize="11" Foreground="{DynamicResource SecondaryText}"/>
-                        <TextBlock x:Name="LblOffset" Text="-- ms" FontWeight="Bold" FontSize="11"/>
+                        <TextBlock x:Name="LblOffset" Text="-- ms" FontSize="11"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Text="Jitter: " FontSize="11" Foreground="{DynamicResource SecondaryText}"/>
-                        <TextBlock x:Name="LblJitter" Text="-- ms" FontWeight="Bold" FontSize="11"/>
+                        <TextBlock x:Name="LblJitter" Text="-- ms" FontSize="11"/>
                     </StackPanel>
                 </StackPanel>
 
                 <!-- Position -->
                 <StackPanel Grid.Column="3" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <TextBlock x:Name="LblLat" Text="--" FontFamily="Consolas" FontWeight="Bold" FontSize="11"/>
+                        <TextBlock x:Name="LblLat" Text="--" FontFamily="Consolas"  FontSize="11"/>
                         <TextBlock x:Name="LblLatDms" Text="" FontFamily="Consolas" Foreground="{DynamicResource SecondaryText}" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <TextBlock x:Name="LblLon" Text="--" FontFamily="Consolas" FontWeight="Bold" FontSize="11"/>
+                        <TextBlock x:Name="LblLon" Text="--" FontFamily="Consolas"  FontSize="11"/>
                         <TextBlock x:Name="LblLonDms" Text="" FontFamily="Consolas" Foreground="{DynamicResource SecondaryText}" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
@@ -170,23 +180,20 @@
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.1" Direction="270" Color="{DynamicResource ShadowColor}"/>
                 </Border.Effect>
-                <Grid>
+                <Grid Margin="0,0,0,30">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" MinWidth="88"/>
+                        <ColumnDefinition Width="Auto" MinWidth="84.997"/>
                     </Grid.ColumnDefinitions>
-                    
-                    <Button Grid.Row="0" Grid.Column="0" x:Name="BtnSettings" Content="Paramètres" Click="BtnSettings_Click" Height="25" FontSize="11" Margin="0,0,5,5" Width="80"/>
-                    <Button Grid.Row="0" Grid.Column="1" x:Name="BtnCalibration" Content="Calibration" Click="BtnCalibration_Click" Height="25" FontSize="11" Margin="0,0,5,5" Width="80"/>
-                    <Button Grid.Row="0" Grid.Column="2" x:Name="BtnLogs" Content="Logs" Click="BtnLogs_Click" Height="25" FontSize="11" Margin="0,0,0,5" Width="80"/>
-                    
-                    <Button Grid.Row="1" Grid.Column="0" x:Name="BtnMonitor" Content="Moniteur" Click="BtnMonitor_Click" Height="25" FontSize="11" Margin="0,0,5,0" Width="80"/>
-                    <Button Grid.Row="1" Grid.Column="1" x:Name="BtnIqt" Content="Qualité" Click="BtnIqt_Click" Height="25" FontSize="11" Margin="0,0,5,0" Width="80"/>
+
+                    <Button Grid.Row="1" Grid.Column="1" x:Name="BtnSettings" Content="Paramètres" Click="BtnSettings_Click" Height="NaN" FontSize="11" Margin="6,-1,5,5" HorizontalAlignment="Left" Width="70"/>
+                    <Button Grid.Row="0" x:Name="BtnCalibration" Content="Calibration" Click="BtnCalibration_Click" Height="NaN" FontSize="11" Margin="6,-1,5,5" HorizontalAlignment="Left" Width="70"/>
+                    <Button Grid.Row="0" Grid.Column="1" x:Name="BtnLogs" Content="Logs" Click="BtnLogs_Click" Height="NaN" FontSize="11" Margin="6,-1,5,5" HorizontalAlignment="Left" Width="70"/>
+                    <Button Grid.Row="1" Grid.Column="0" x:Name="BtnIqt" Content="Qualité" Click="BtnIqt_Click" Height="NaN" FontSize="11" Margin="6,-1,5,5" HorizontalAlignment="Left" Width="70"/>
                 </Grid>
             </Border>
 
@@ -200,17 +207,17 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    
+
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5">
-                         <TextBlock x:Name="LblNtpStatus" Text="SERVICE NTP : INCONNU" FontWeight="Bold" Foreground="{DynamicResource WarningColor}" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                         <TextBlock Text="Pairs" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryText}" FontSize="11"/>
-                         <ToggleButton x:Name="ChkShowPeers" VerticalAlignment="Center" Click="ChkShowPeers_Click" Style="{StaticResource SwitchToggleStyle}"/>
+                        <TextBlock x:Name="LblNtpStatus" Text="SERVICE NTP : INCONNU" FontWeight="Bold" Foreground="{DynamicResource WarningColor}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock Text="Pairs" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryText}" FontSize="11"/>
+                        <ToggleButton x:Name="ChkShowPeers" VerticalAlignment="Center" Click="ChkShowPeers_Click" Style="{StaticResource SwitchToggleStyle}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
                         <Button x:Name="BtnStartNtp" Content="Démarrer" Width="80" Background="{DynamicResource SuccessColor}" Foreground="White" Click="BtnStartNtp_Click" BorderThickness="0" Height="25" FontSize="11" Margin="0,0,5,0"/>
-                        <Button x:Name="BtnStopNtp" Content="Arrêter" Width="80" Click="BtnStopNtp_Click" Height="25" FontSize="11" Margin="0,0,5,0"/>
-                        <Button x:Name="BtnRestartNtp" Content="Redémarrer" Width="80" Click="BtnRestartNtp_Click" Height="25" FontSize="11"/>
+                        <Button x:Name="BtnStopNtp" Content="Arrêter" Width="80" Background="{DynamicResource SuccessColor}" Foreground="White" Click="BtnStopNtp_Click" Height="25" FontSize="11" Margin="0,0,5,0"/>
+                        <Button x:Name="BtnRestartNtp" Content="Redémarrer" Width="80" Background="{DynamicResource SuccessColor}" Foreground="White" Click="BtnRestartNtp_Click" Height="25" FontSize="11"/>
                     </StackPanel>
                 </Grid>
             </Border>

@@ -1,7 +1,7 @@
 <Window x:Class="TimeReference.App.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Paramètres" Height="550" Width="450"
+        Title="Paramètres" Height="550" Width="451"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -14,14 +14,14 @@
             
             <!-- Port COM -->
             <DockPanel Margin="0,0,0,5">
-                <TextBlock Text="Port Série :" Width="120" VerticalAlignment="Center"/>
-                <TextBox x:Name="TxtSerialPort"/>
+                <TextBlock Text="Port Série :" Width="120" />
+                <TextBox x:Name="TxtSerialPort" Width="143" HorizontalAlignment="Left"/>
             </DockPanel>
 
             <!-- Baud Rate -->
             <DockPanel Margin="0,0,0,5">
                 <TextBlock Text="Vitesse (Bauds) :" Width="120" VerticalAlignment="Center"/>
-                <ComboBox x:Name="CmbBaudRate">
+                <ComboBox x:Name="CmbBaudRate" Width="116" HorizontalAlignment="Left">
                     <ComboBoxItem Content="4800"/>
                     <ComboBoxItem Content="9600"/>
                     <ComboBoxItem Content="19200"/>
@@ -34,7 +34,7 @@
             <!-- Fudge Time -->
             <DockPanel Margin="0,0,0,20">
                 <TextBlock Text="Fudge Time2 (s) :" Width="120" VerticalAlignment="Center"/>
-                <TextBox x:Name="TxtFudge"/>
+                <TextBox x:Name="TxtFudge" Width="115" HorizontalAlignment="Left"/>
             </DockPanel>
 
             <TextBlock Text="Configuration NTP" FontWeight="Bold" Margin="0,0,0,10"/>
@@ -54,6 +54,7 @@
         </StackPanel>
 
         <!-- Boutons -->
+        <Button Grid.Row="1" Content="Moniteur NTP" Width="100" Height="30" Margin="0,15,0,0" HorizontalAlignment="Left" Click="BtnMonitor_Click"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
             <Button Content="Enregistrer" Width="100" Height="30" Margin="5" Click="BtnSave_Click"/>
             <Button Content="Annuler" Width="100" Height="30" Margin="5" Click="BtnCancel_Click"/>

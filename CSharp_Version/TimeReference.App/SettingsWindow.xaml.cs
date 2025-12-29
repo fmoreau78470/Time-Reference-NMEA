@@ -83,5 +83,14 @@ namespace TimeReference.App
             DialogResult = false;
             Close();
         }
+
+        private void BtnMonitor_Click(object sender, RoutedEventArgs e)
+        {
+            Logger.Info("Ouverture du Moniteur NTP (ClockVar) depuis Paramètres.");
+            var monitorWindow = new ClockVarWindow();
+            monitorWindow.Owner = this;
+            monitorWindow.Closed += (s, args) => Logger.Info("Fermeture du Moniteur NTP (ClockVar).");
+            monitorWindow.Show();
+        }
     }
 }

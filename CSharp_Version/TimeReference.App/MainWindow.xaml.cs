@@ -442,16 +442,6 @@ public partial class MainWindow : Window
         }
     }
 
-    private void BtnMonitor_Click(object sender, RoutedEventArgs e)
-    {
-        Logger.Info("Ouverture du Moniteur NTP (ClockVar).");
-        // Fenêtre non-modale (Show au lieu de ShowDialog) pour pouvoir surveiller en parallèle
-        var monitorWindow = new ClockVarWindow();
-        monitorWindow.Owner = this;
-        monitorWindow.Closed += (s, args) => Logger.Info("Fermeture du Moniteur NTP (ClockVar).");
-        monitorWindow.Show();
-    }
-
     private void BtnIqt_Click(object sender, RoutedEventArgs e)
     {
         // Rechargement de la configuration pour être sûr d'avoir les dernières valeurs

@@ -554,3 +554,10 @@ Pour éviter que l'indicateur de santé ne se réinitialise à 100% lors d'un re
 
 1.  **Sauvegarde** : À la fermeture, le score de santé actuel et l'heure sont sauvegardés dans `appstate.json`.
 2.  **Restauration** : Au démarrage, si une sauvegarde existe et date de moins de 5 minutes, le score est restauré. Sinon, il repart de 100%.
+
+## Étape 55 : Déplacement du Moniteur NTP
+
+Pour simplifier l'interface principale, le bouton d'accès au moniteur technique (ClockVar) est déplacé dans la fenêtre de paramètres.
+
+1.  **Interface** : Suppression du bouton "Moniteur" dans `MainWindow` et ajout dans `SettingsWindow`.
+2.  **Logique** : Déplacement du gestionnaire d'événement `BtnMonitor_Click` vers le code-behind de la fenêtre de paramètres.
