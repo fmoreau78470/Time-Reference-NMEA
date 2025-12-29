@@ -12,3 +12,10 @@ logs/
 
 # Fichiers générés localement par le script
 ntp.conf
+
+# C# / .NET
+bin/
+obj/
+.vs/
+*.user
+*.suo
