@@ -10,8 +10,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using System.Windows.Input;
-using System.Runtime.InteropServices;
-using System.Windows.Interop;
 using TimeReference.Core.Models;
 using TimeReference.Core.Services;
 
@@ -34,16 +32,8 @@ public partial class MainWindow : Window
     private bool _expectingNtpStateChange = false;
     private string _currentTheme = "Light";
     private static Mutex? _mutex = null;
-    private bool _isMiniMode = false;
-    private double _restoreLeft;
-    private double _restoreTop;
-
-    [DllImport("gdi32.dll")]
-    private static extern IntPtr CreateRoundRectRgn(int x1, int y1, int x2, int y2, int cx, int cy);
-
-    [DllImport("user32.dll")]
-    private static extern int SetWindowRgn(IntPtr hWnd, IntPtr hRgn, bool bRedraw);
-
+    // La logique du "MiniMode" est obsolète avec la nouvelle interface "Raquette"
+    
     public MainWindow()
     {
         // Spec 1 : Instance unique
@@ -62,13 +52,7 @@ public partial class MainWindow : Window
         splash.Show();
 
         InitializeComponent();
-
         this.Loaded += Window_Loaded;
-        this.SizeChanged += MainWindow_SizeChanged;
-
-        // Ajout des événements pour l'opacité dynamique en mode mini
-        this.MouseEnter += (s, e) => { if (_isMiniMode) this.Opacity = 1.0; };
-        this.MouseLeave += (s, e) => { if (_isMiniMode) this.Opacity = _config.MiniModeOpacity > 0.1 ? _config.MiniModeOpacity : 1.0; };
 
         // Chargement de la configuration
         _configService = new ConfigService();
@@ -83,8 +67,7 @@ public partial class MainWindow : Window
         UpdateHealthUI();
 
         // Initialisation de l'interface (remplit le champ texte avec le port sauvegardé)
-        TxtPort.Text = _config.SerialPort;
-        ChkUtc.IsChecked = _config.UtcMode;
+        UpdateUtcButtonAppearance();
 
         // On instancie notre lecteur GPS
         _gpsReader = new SerialGpsReader();
@@ -200,44 +183,6 @@ public partial class MainWindow : Window
         }
 
         return true;
-    }
-
-    private void BtnConnect_Click(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            if (!_gpsReader.IsConnected)
-            {
-                // Mise à jour et sauvegarde de la config avant connexion
-                _config.SerialPort = TxtPort.Text;
-                _configService.Save(_config);
-
-                // Tentative de connexion
-                _gpsReader.Start(_config.SerialPort, _config.BaudRate);
-                Logger.Info($"Tentative de connexion au port {_config.SerialPort} à {_config.BaudRate} bauds.");
-                
-                if (_gpsReader.IsConnected)
-                {
-                    BtnConnect.Content = "Déconnecter";
-                    LblStatus.Text = "Connecté (En attente...)";
-                    LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "WarningColor");
-                }
-            }
-            else
-            {
-                // Déconnexion
-                _gpsReader.Stop();
-                Logger.Info("Déconnexion manuelle.");
-                BtnConnect.Content = "Connecter";
-                LblStatus.Text = "Déconnecté";
-                LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "SecondaryText");
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Erreur de connexion :\n{ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
-            Logger.Error($"Erreur connexion : {ex.Message}");
-        }
     }
 
     // --- GESTION DU SERVICE NTP (Spec 5) ---
@@ -382,7 +327,6 @@ public partial class MainWindow : Window
                     if (result == MessageBoxResult.Yes)
                     {
                         _config = newConfig;
-                        TxtPort.Text = _config.SerialPort;
                         
                         // Régénération et Redémarrage
                         var ntpService = new NtpService();
@@ -397,7 +341,6 @@ public partial class MainWindow : Window
                         // Annulation : On restaure l'ancienne config
                         _configService.Save(oldConfig);
                         _config = oldConfig;
-                        TxtPort.Text = _config.SerialPort;
                         Logger.Info("Modification des paramètres annulée par l'utilisateur (Refus de redémarrage).");
                         MessageBox.Show("Les modifications ont été annulées car le service n'a pas été redémarré.", "Annulation", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
@@ -405,7 +348,6 @@ public partial class MainWindow : Window
                 else
                 {
                     _config = newConfig;
-                    TxtPort.Text = _config.SerialPort;
                     Logger.Info("Paramètres mis à jour (sans impact NTP).");
                 }
             }
@@ -470,8 +412,6 @@ public partial class MainWindow : Window
     private void BtnIqt_Click(object sender, RoutedEventArgs e)
     {
         // Rechargement de la configuration pour être sûr d'avoir les dernières valeurs
-        _config = _configService.Load();
-        TxtPort.Text = _config.SerialPort;
 
         // Vérification du service NTP (doit être arrêté pour accès exclusif COM)
         var status = WindowsServiceHelper.GetStatus("NTP");
@@ -500,7 +440,6 @@ public partial class MainWindow : Window
         if (_gpsReader.IsConnected)
         {
             _gpsReader.Stop();
-            BtnConnect.Content = "Connecter";
             LblStatus.Text = "Déconnecté (Requis pour IQT)";
             LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "SecondaryText");
         }
@@ -535,13 +474,7 @@ public partial class MainWindow : Window
 
     private void ChkShowPeers_Click(object sender, RoutedEventArgs e)
     {
-        if (GrpPeers == null) return;
-        bool show = ChkShowPeers.IsChecked == true;
-        
-        GrpPeers.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
-
-        this.SizeToContent = SizeToContent.Manual;
-        this.Height = show ? 450 : 320;
+        // Cette fonctionnalité est obsolète avec la nouvelle interface
     }
 
     private void ThemeIcon_Click(object sender, MouseButtonEventArgs e)
@@ -584,146 +517,30 @@ public partial class MainWindow : Window
         catch (Exception ex) { Logger.Error($"Erreur chargement thème {theme}: {ex.Message}"); }
     }
 
-    private void BtnMiniMode_Click(object sender, RoutedEventArgs e)
-    {
-        ToggleMiniMode();
-    }
-
-    private void ToggleMiniMode()
-    {
-        _isMiniMode = !_isMiniMode;
-
-        if (_isMiniMode)
-        {
-            // Sauvegarde de la position avant réduction
-            _restoreLeft = this.Left;
-            _restoreTop = this.Top;
-
-            // Rechargement de la config pour s'assurer d'avoir les dernières valeurs (transparence, etc.)
-            _config = _configService.Load();
-
-            // Passage en mode Mini
-            this.WindowStyle = WindowStyle.None;
-            this.ResizeMode = ResizeMode.NoResize;
-            
-            // On force la couleur de fond actuelle pour éviter le rendu noir (transparent)
-            this.Background = (Brush)FindResource("WindowBackground");
-
-            this.Topmost = _config.MiniModeAlwaysOnTop;
-            this.Opacity = IsMouseOver ? 1.0 : (_config.MiniModeOpacity > 0.1 ? _config.MiniModeOpacity : 1.0);
-
-            // Ajout de la bordure colorée d'état
-            HeaderBorder.BorderThickness = new Thickness(2);
-            UpdateHealthUI();
-            
-            // Masquage des éléments non essentiels
-            ColClocks.Width = new GridLength(0);
-            ColPosition.Width = new GridLength(0);
-            GridControls.Visibility = Visibility.Collapsed;
-            if (GrpPeers != null) GrpPeers.Visibility = Visibility.Collapsed;
-
-            // Ajustement des marges pour compacité maximale
-            MainRootGrid.Margin = new Thickness(0);
-            HeaderBorder.Margin = new Thickness(0);
-
-            this.SizeToContent = SizeToContent.WidthAndHeight;
-
-            // Restauration de la position du mode mini si elle existe
-            if (_config.MiniModeLeft > 0 && _config.MiniModeTop > 0)
-            {
-                this.Left = _config.MiniModeLeft;
-                this.Top = _config.MiniModeTop;
-            }
-
-            // Application de la forme arrondie
-            Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(UpdateMiniWindowRegion));
-        }
-        else
-        {
-            // Sauvegarde de la position du mode mini pour la prochaine fois
-            _config.MiniModeLeft = this.Left;
-            _config.MiniModeTop = this.Top;
-            _configService.Save(_config);
-            // Force la sauvegarde physique pour persistance entre sessions
-            string json = System.Text.Json.JsonSerializer.Serialize(_config, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
-            System.IO.File.WriteAllText("config.json", json);
-
-            // Retour en mode Normal
-            this.WindowStyle = WindowStyle.SingleBorderWindow;
-            this.ResizeMode = ResizeMode.CanMinimize;
-            this.SetResourceReference(BackgroundProperty, "WindowBackground");
-            this.Topmost = false;
-            this.Opacity = 1.0;
-
-            // Suppression de la bordure
-            HeaderBorder.BorderThickness = new Thickness(0);
-            
-            // Restauration des éléments
-            ColClocks.Width = GridLength.Auto;
-            ColPosition.Width = GridLength.Auto;
-            GridControls.Visibility = Visibility.Visible;
-            
-            // Restauration des marges
-            MainRootGrid.Margin = new Thickness(15);
-            HeaderBorder.Margin = new Thickness(0, 0, 0, 15);
-
-            // Restauration de la taille et de la visibilité des pairs
-            ChkShowPeers_Click(this, new RoutedEventArgs());
-            this.Width = 700;
-
-            // Restauration de la position d'origine
-            this.Left = _restoreLeft;
-            this.Top = _restoreTop;
-
-            // Réinitialisation de la forme (rectangulaire)
-            var helper = new WindowInteropHelper(this);
-            SetWindowRgn(helper.Handle, IntPtr.Zero, true);
-        }
-    }
-
     private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        if (_isMiniMode && e.ChangedButton == MouseButton.Left)
-        {
-            this.DragMove();
-        }
+        // Permet de déplacer la fenêtre "Raquette" en cliquant n'importe où
+        if (e.ChangedButton == MouseButton.Left) this.DragMove();
     }
 
     private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-        if (_isMiniMode)
-        {
-            ToggleMiniMode();
-        }
+        // La fonctionnalité de double-clic pour le mode mini est obsolète.
     }
 
     private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        if (_isMiniMode)
-        {
-            UpdateMiniWindowRegion();
-        }
+        // La logique de changement de taille pour le mode mini est obsolète.
     }
 
-    private void UpdateMiniWindowRegion()
+    private void BtnClose_Click(object sender, RoutedEventArgs e)
     {
-        if (!_isMiniMode) return;
+        this.Close();
+    }
 
-        var source = PresentationSource.FromVisual(this);
-        if (source?.CompositionTarget == null) return;
-        
-        // Gestion du DPI (mise à l'échelle de l'écran)
-        double dpiX = source.CompositionTarget.TransformToDevice.M11;
-        double dpiY = source.CompositionTarget.TransformToDevice.M22;
-
-        int width = (int)(this.ActualWidth * dpiX);
-        int height = (int)(this.ActualHeight * dpiY);
-
-        // Création d'une région arrondie (20px de rayon)
-        IntPtr hRgn = CreateRoundRectRgn(0, 0, width, height, 20, 20);
-        
-        var helper = new WindowInteropHelper(this);
-        SetWindowRgn(helper.Handle, hRgn, true);
+    private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+    {
+        this.WindowState = WindowState.Minimized;
     }
 
     // --- GESTION HORLOGES & QUALITÉ (Step 24) ---
@@ -731,7 +548,7 @@ public partial class MainWindow : Window
     private void UpdateSystemClock()
     {
         if (LblSysTime == null) return;
-        bool isUtc = ChkUtc.IsChecked == true;
+        bool isUtc = _config.UtcMode;
         DateTime now = isUtc ? DateTime.UtcNow : DateTime.Now;
         LblSysTime.Text = now.ToString("HH:mm:ss");
     }
@@ -739,11 +556,27 @@ public partial class MainWindow : Window
     private void ChkUtc_Click(object sender, RoutedEventArgs e)
     {
         // Sauvegarde de la préférence
-        _config.UtcMode = ChkUtc.IsChecked == true;
+        _config.UtcMode = !_config.UtcMode; // Bascule de l'état
         _configService.Save(_config);
 
         // Mise à jour immédiate lors du clic
         UpdateSystemClock();
+        UpdateUtcButtonAppearance();
+    }
+
+    private void UpdateUtcButtonAppearance()
+    {
+        if (BtnUtc == null) return; // Sécurité pour l'initialisation
+        if (_config.UtcMode)
+        {
+            BtnUtc.Content = "UTC";
+            BtnUtc.SetResourceReference(BackgroundProperty, "SuccessColor");
+        }
+        else
+        {
+            BtnUtc.Content = "LOCAL";
+            BtnUtc.SetResourceReference(BackgroundProperty, "AccentColor");
+        }
     }
 
     private async Task UpdateNtpQualityAsync()
@@ -969,10 +802,7 @@ public partial class MainWindow : Window
 
         LblHealth.SetResourceReference(TextBlock.ForegroundProperty, colorKey);
 
-        if (_isMiniMode)
-        {
-            HeaderBorder.SetResourceReference(Border.BorderBrushProperty, colorKey);
-        }
+        // La bordure colorée du mode mini est obsolète.
     }
 
     private void ParseAndDisplayNmea(string nmea)
@@ -994,7 +824,7 @@ public partial class MainWindow : Window
                         DateTime now = DateTime.UtcNow;
                         DateTime gpsTime = new DateTime(now.Year, now.Month, now.Day, t.Hour, t.Minute, t.Second, DateTimeKind.Utc);
 
-                        bool isUtc = ChkUtc.IsChecked == true;
+                        bool isUtc = _config.UtcMode;
                         if (!isUtc) gpsTime = gpsTime.ToLocalTime();
                         
                         string formattedTime = gpsTime.ToString("HH:mm:ss");
@@ -1086,7 +916,7 @@ public partial class MainWindow : Window
             if (data.UtcTime != DateTime.MinValue)
             {
                 DateTime displayTime = data.UtcTime;
-                bool isUtc = ChkUtc.IsChecked == true;
+                bool isUtc = _config.UtcMode;
                 if (!isUtc) displayTime = displayTime.ToLocalTime();
                 
                 LblGpsTimeHeader.Text = displayTime.ToString("HH:mm:ss");
@@ -1104,7 +934,7 @@ public partial class MainWindow : Window
                 if (data.UtcTime != DateTime.MinValue)
                 {
                     DateTime displayTime = data.UtcTime;
-                    bool isUtc = ChkUtc.IsChecked == true;
+                    bool isUtc = _config.UtcMode;
                     if (!isUtc) displayTime = displayTime.ToLocalTime();
                 }
                 LblLat.Text = string.Format(CultureInfo.InvariantCulture, "{0,11:F5}", data.Latitude);
@@ -1130,7 +960,6 @@ public partial class MainWindow : Window
             // Si l'erreur a coupé la connexion, on met à jour l'interface
             if (!_gpsReader.IsConnected)
             {
-                BtnConnect.Content = "Connecter";
                 LblStatus.Text = "Erreur";
                 LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "ErrorColor");
             }
@@ -1197,15 +1026,7 @@ public partial class MainWindow : Window
 
     protected override void OnStateChanged(EventArgs e)
     {
-        // Si l'utilisateur clique sur le bouton réduire (WindowState devient Minimized)
-        if (WindowState == WindowState.Minimized)
-        {
-            // On annule la réduction standard (retour à Normal)
-            WindowState = WindowState.Normal;
-            
-            // Si on n'est pas déjà en mode mini, on l'active
-            if (!_isMiniMode) ToggleMiniMode();
-        }
+        // La logique de bascule en mode mini lors de la minimisation est obsolète.
         base.OnStateChanged(e);
     }
 }
