@@ -561,3 +561,16 @@ Pour simplifier l'interface principale, le bouton d'accès au moniteur technique
 
 1.  **Interface** : Suppression du bouton "Moniteur" dans `MainWindow` et ajout dans `SettingsWindow`.
 2.  **Logique** : Déplacement du gestionnaire d'événement `BtnMonitor_Click` vers le code-behind de la fenêtre de paramètres.
+
+## Étape 56 : Mode Mini (Widget)
+
+Pour permettre une surveillance discrète sans encombrer l'écran, nous avons ajouté un mode réduit "Widget".
+
+1.  **Interface** : Ajout d'un bouton "Mode Mini" dans la zone des outils.
+2.  **Comportement** :
+    *   La fenêtre perd ses bordures et devient transparente (`WindowStyle="None"`, `Background="Transparent"`).
+    *   Elle passe au premier plan (`Topmost="True"`) pour rester visible.
+    *   Les éléments non essentiels (Horloges, Position, Contrôles) sont masqués pour ne garder que la Santé, le Statut et la Qualité.
+3.  **Interactions** :
+    *   **Déplacement** : Possible via un glisser-déposer sur n'importe quelle zone visible (`DragMove`).
+    *   **Restauration** : Un double-clic rétablit la fenêtre en mode normal, à sa position et taille d'origine.

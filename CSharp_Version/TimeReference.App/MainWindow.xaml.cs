@@ -8,6 +8,7 @@ using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
+using System.Windows.Input;
 using TimeReference.Core.Models;
 using TimeReference.Core.Services;
 
@@ -30,6 +31,9 @@ public partial class MainWindow : Window
     private bool _expectingNtpStateChange = false;
     private string _currentTheme = "Light";
     private static Mutex? _mutex = null;
+    private bool _isMiniMode = false;
+    private double _restoreLeft;
+    private double _restoreTop;
 
     public MainWindow()
     {
@@ -544,6 +548,82 @@ public partial class MainWindow : Window
             Application.Current.Resources.MergedDictionaries.Add(dict);
         }
         catch (Exception ex) { Logger.Error($"Erreur chargement thème {theme}: {ex.Message}"); }
+    }
+
+    private void BtnMiniMode_Click(object sender, RoutedEventArgs e)
+    {
+        ToggleMiniMode();
+    }
+
+    private void ToggleMiniMode()
+    {
+        _isMiniMode = !_isMiniMode;
+
+        if (_isMiniMode)
+        {
+            // Sauvegarde de la position avant réduction
+            _restoreLeft = this.Left;
+            _restoreTop = this.Top;
+
+            // Passage en mode Mini
+            this.WindowStyle = WindowStyle.None;
+            this.ResizeMode = ResizeMode.NoResize;
+            this.Background = Brushes.Transparent;
+            this.Topmost = true;
+            
+            // Masquage des éléments non essentiels
+            ColClocks.Width = new GridLength(0);
+            ColPosition.Width = new GridLength(0);
+            GridControls.Visibility = Visibility.Collapsed;
+            if (GrpPeers != null) GrpPeers.Visibility = Visibility.Collapsed;
+
+            // Ajustement des marges pour compacité maximale
+            MainRootGrid.Margin = new Thickness(0);
+            HeaderBorder.Margin = new Thickness(0);
+
+            this.SizeToContent = SizeToContent.WidthAndHeight;
+        }
+        else
+        {
+            // Retour en mode Normal
+            this.WindowStyle = WindowStyle.SingleBorderWindow;
+            this.ResizeMode = ResizeMode.CanMinimize;
+            this.SetResourceReference(BackgroundProperty, "WindowBackground");
+            this.Topmost = false;
+            
+            // Restauration des éléments
+            ColClocks.Width = GridLength.Auto;
+            ColPosition.Width = GridLength.Auto;
+            GridControls.Visibility = Visibility.Visible;
+            
+            // Restauration des marges
+            MainRootGrid.Margin = new Thickness(15);
+            HeaderBorder.Margin = new Thickness(0, 0, 0, 15);
+
+            // Restauration de la taille et de la visibilité des pairs
+            ChkShowPeers_Click(this, new RoutedEventArgs());
+            this.Width = 700;
+
+            // Restauration de la position d'origine
+            this.Left = _restoreLeft;
+            this.Top = _restoreTop;
+        }
+    }
+
+    private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (_isMiniMode && e.ChangedButton == MouseButton.Left)
+        {
+            this.DragMove();
+        }
+    }
+
+    private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        if (_isMiniMode)
+        {
+            ToggleMiniMode();
+        }
     }
 
     // --- GESTION HORLOGES & QUALITÉ (Step 24) ---
