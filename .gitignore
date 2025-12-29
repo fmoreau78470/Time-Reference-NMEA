@@ -1,21 +1,6 @@
-# Python cache
-__pycache__/
-*.py[cod]
-
-# Environnement virtuel
-venv/
-.venv/
-
-# Logs de l'application
-logs/
-*.log
-
-# Fichiers générés localement par le script
-ntp.conf
-
-# C# / .NET
 bin/
 obj/
 .vs/
 *.user
 *.suo
+*.pdb

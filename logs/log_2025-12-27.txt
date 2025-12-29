@@ -1,0 +1,1201 @@
+2025-12-27 00:15:38,548 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 00:15:38,548 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 00:15:38,583 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : D:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 00:15:38,644 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 00:15:48,419 - GPS_NTP_App - INFO - Ouverture de la fenêtre IQT.
+2025-12-27 00:15:50,410 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 00:16:19,607 - GPS_NTP_App - INFO - Fermeture IQT -> Redémarrage NTP.
+2025-12-27 00:16:19,607 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 00:16:25,184 - GPS_NTP_App - INFO - Ouverture de la fenêtre de calibration.
+2025-12-27 00:16:29,673 - GPS_NTP_App - INFO - Fermeture de la fenêtre de calibration.
+2025-12-27 00:18:12,103 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 00:37:05,625 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 00:37:52,890 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 00:37:52,890 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 00:37:52,952 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 00:37:53,051 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 00:38:44,920 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 00:44:21,870 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 00:44:21,870 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 00:44:21,909 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 00:44:21,910 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 00:45:26,398 - GPS_NTP_App - INFO - Utilisateur a refusé la mise à jour de ntp.conf.
+2025-12-27 00:45:26,456 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 00:45:46,747 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 00:46:05,470 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 00:46:05,471 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 00:46:05,510 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 00:46:05,511 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 00:46:50,599 - GPS_NTP_App - INFO - Utilisateur a refusé la mise à jour de ntp.conf.
+2025-12-27 00:46:50,657 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 00:46:52,499 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 00:47:00,025 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 00:47:00,025 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 00:47:00,070 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 00:47:00,070 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 00:47:25,963 - GPS_NTP_App - INFO - Utilisateur a refusé la mise à jour de ntp.conf.
+2025-12-27 00:47:26,017 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 00:47:29,408 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 00:50:16,161 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 00:50:16,161 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 00:50:16,203 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 00:50:16,204 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 00:50:34,721 - GPS_NTP_App - INFO - Utilisateur a refusé la mise à jour de ntp.conf.
+2025-12-27 00:50:34,776 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 00:50:36,665 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 00:57:08,329 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 00:57:08,329 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 00:57:08,372 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 00:57:08,372 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 00:57:26,313 - GPS_NTP_App - INFO - Utilisateur a refusé la mise à jour de ntp.conf.
+2025-12-27 00:57:26,368 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 00:57:28,046 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 00:59:22,239 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 00:59:22,240 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 00:59:22,284 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 00:59:22,284 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 00:59:35,211 - GPS_NTP_App - INFO - Utilisateur a refusé la mise à jour de ntp.conf.
+2025-12-27 00:59:35,268 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 00:59:37,152 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 01:00:15,949 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 01:00:15,949 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 01:00:15,984 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 01:00:15,985 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 01:00:17,437 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 01:00:17,452 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 01:00:19,996 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 01:00:19,996 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 01:00:22,079 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 01:00:42,924 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 01:00:47,686 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 01:02:12,526 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 01:04:34,175 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 01:05:23,521 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 01:05:23,522 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 01:05:23,564 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 01:05:23,564 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 01:05:30,297 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 01:05:30,312 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 01:05:32,853 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 01:05:32,853 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 01:05:34,962 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 01:06:45,272 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 01:07:00,296 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 01:07:00,297 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 01:07:00,328 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 01:07:00,389 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 01:07:03,670 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 01:08:41,096 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 01:08:41,096 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 01:08:41,128 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 01:08:41,188 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 01:09:21,153 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 01:11:05,294 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 01:11:05,294 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 01:11:05,328 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 01:11:05,390 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 01:11:22,356 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 01:11:24,897 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 01:13:19,459 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 01:27:41,954 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 01:27:41,954 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 01:27:41,994 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 01:27:41,994 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 01:28:04,658 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 01:28:04,676 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 01:28:07,222 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 01:28:07,223 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 01:28:09,308 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 01:29:02,174 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 01:29:04,702 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 01:31:07,453 - GPS_NTP_App - INFO - Ouverture de la fenêtre IQT.
+2025-12-27 01:31:09,029 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 01:31:58,228 - GPS_NTP_App - INFO - Fermeture IQT -> Redémarrage NTP.
+2025-12-27 01:31:58,228 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 01:32:02,409 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 01:35:29,248 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 01:35:29,248 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 01:35:29,290 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 01:35:29,363 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 01:35:31,628 - GPS_NTP_App - INFO - Ouverture de la fenêtre IQT.
+2025-12-27 01:35:33,128 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 01:35:48,960 - GPS_NTP_App - INFO - Fermeture IQT -> Redémarrage NTP.
+2025-12-27 01:35:48,960 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 01:35:52,055 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 01:37:14,972 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 01:37:14,972 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 01:37:15,006 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 01:37:15,066 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 01:37:17,096 - GPS_NTP_App - INFO - Ouverture de la fenêtre IQT.
+2025-12-27 01:37:18,533 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 01:38:10,468 - GPS_NTP_App - INFO - Fermeture IQT -> Redémarrage NTP.
+2025-12-27 01:38:10,468 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 01:38:26,126 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 01:41:03,226 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 01:41:03,227 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 01:41:03,262 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : D:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 01:41:03,322 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 01:56:58,655 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 01:56:58,655 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 01:56:58,728 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 01:56:58,809 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 01:57:45,064 - GPS_NTP_App - INFO - Application Mode Terrain: False (Opts: iburst)
+2025-12-27 01:57:45,065 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 01:57:47,608 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 01:57:49,644 - GPS_NTP_App - INFO - Mode Terrain appliqué avec succès.
+2025-12-27 01:58:44,530 - GPS_NTP_App - INFO - Application Mode Terrain: True (Opts: iburst noselect)
+2025-12-27 01:58:44,530 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 01:58:47,066 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 01:58:49,118 - GPS_NTP_App - INFO - Mode Terrain appliqué avec succès.
+2025-12-27 01:58:55,283 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 01:58:59,025 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 01:59:05,864 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 01:59:05,865 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 01:59:05,908 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : D:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 01:59:05,977 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 01:59:48,847 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 01:59:48,847 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 01:59:48,882 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : D:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 01:59:48,965 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 01:59:54,383 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 02:00:08,950 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 02:06:14,391 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 02:06:14,391 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 02:06:14,450 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 02:06:14,552 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 02:06:16,726 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 02:06:26,720 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 02:06:26,720 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 02:06:26,759 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : D:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 02:06:26,826 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 08:38:52,342 - GPS_NTP_App - INFO - Ouverture de la fenêtre IQT.
+2025-12-27 08:38:53,963 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 08:39:21,794 - GPS_NTP_App - INFO - Fermeture IQT -> Redémarrage NTP.
+2025-12-27 08:39:21,794 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 08:50:58,849 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 08:48:33,506 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 08:52:19,902 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 08:52:42,110 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 08:53:04,742 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 08:53:04,742 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 08:53:04,811 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 08:53:05,674 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 09:05:34,053 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 09:05:38,555 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 09:05:38,556 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 09:05:38,605 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 09:05:38,680 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 09:05:52,413 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 09:13:31,239 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 09:13:31,239 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 09:13:31,294 - GPS_NTP_App - WARNING - Service W32Time détecté actif mais le service NTP est fonctionnel. L'application continue.
+2025-12-27 09:13:31,312 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 09:13:31,376 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 09:22:40,514 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 09:23:28,423 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 09:24:42,348 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 09:24:44,879 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 09:25:40,563 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 09:25:58,715 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 09:26:55,323 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 09:29:17,012 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 09:29:17,012 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 09:29:17,066 - GPS_NTP_App - WARNING - Service W32Time détecté actif mais le service NTP est fonctionnel. L'application continue.
+2025-12-27 09:29:17,096 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 09:29:17,096 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 09:29:26,672 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 09:29:26,690 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 09:29:29,240 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 09:29:29,241 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 09:29:31,350 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 09:32:01,212 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 09:32:03,741 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 09:32:59,116 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 09:33:01,668 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 09:33:59,056 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 09:34:01,586 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 09:37:48,339 - GPS_NTP_App - INFO - Ouverture de la fenêtre de calibration.
+2025-12-27 09:37:50,906 - GPS_NTP_App - INFO - Lancement de la calibration (Durée: 5 min).
+2025-12-27 09:37:50,920 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 09:37:53,469 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:04:28,611 - GPS_NTP_App - INFO - Calibration validée par l'utilisateur. Ancien Fudge: 0.8620, Nouveau Fudge: 0.8631
+2025-12-27 10:04:28,612 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:04:31,156 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:04:33,203 - GPS_NTP_App - INFO - Fermeture de la fenêtre de calibration (Succès).
+2025-12-27 10:04:33,235 - GPS_NTP_App - INFO - Fin de la procédure de calibration.
+2025-12-27 10:08:21,921 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 10:08:31,632 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 10:08:31,632 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 10:08:31,681 - GPS_NTP_App - WARNING - Service W32Time détecté actif mais le service NTP est fonctionnel. L'application continue.
+2025-12-27 10:08:31,697 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 10:08:31,778 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 10:12:05,487 - GPS_NTP_App - INFO - Ouverture de la fenêtre de calibration.
+2025-12-27 10:12:08,604 - GPS_NTP_App - INFO - Lancement de la calibration (Durée: 2 min).
+2025-12-27 10:12:08,621 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:12:11,159 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:15:18,583 - GPS_NTP_App - INFO - Fin de la procédure de calibration.
+2025-12-27 10:15:33,209 - GPS_NTP_App - INFO - Fermeture de la fenêtre de calibration.
+2025-12-27 10:15:43,889 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:15:46,427 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:18:28,156 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:18:30,690 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:18:59,992 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 10:33:28,904 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 10:33:36,539 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 10:33:36,539 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 10:33:36,588 - GPS_NTP_App - WARNING - Service W32Time détecté actif mais le service NTP est fonctionnel. L'application continue.
+2025-12-27 10:33:36,605 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 10:33:36,669 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 10:33:52,191 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:33:54,734 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:39:07,739 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 10:39:52,102 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 10:39:52,102 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 10:39:52,153 - GPS_NTP_App - WARNING - Service W32Time détecté actif mais le service NTP est fonctionnel. L'application continue.
+2025-12-27 10:39:52,169 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 10:39:52,169 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 10:40:14,685 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 10:40:14,702 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:40:17,238 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 10:40:17,238 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:40:19,333 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 10:40:28,466 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:40:31,002 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:41:21,094 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 10:42:13,747 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 10:42:13,747 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 10:42:13,798 - GPS_NTP_App - WARNING - Service W32Time détecté actif mais le service NTP est fonctionnel. L'application continue.
+2025-12-27 10:42:13,814 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 10:42:13,814 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 10:42:21,600 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 10:42:21,615 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:42:24,153 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 10:42:24,153 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:42:26,245 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 10:42:33,541 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:42:36,078 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:44:01,458 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 10:45:33,950 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 10:45:33,950 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 10:45:33,998 - GPS_NTP_App - WARNING - Service W32Time détecté actif mais le service NTP est fonctionnel. L'application continue.
+2025-12-27 10:45:34,013 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 10:45:34,014 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 10:45:35,913 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 10:45:35,929 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:45:38,474 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 10:45:38,474 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:45:40,571 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 10:45:47,452 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:45:49,984 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:46:52,234 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:46:54,766 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:47:14,187 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:47:16,727 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:49:27,639 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:49:30,181 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:49:35,378 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 10:50:56,297 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 10:50:56,297 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 10:50:56,350 - GPS_NTP_App - WARNING - Service W32Time détecté actif mais le service NTP est fonctionnel. L'application continue.
+2025-12-27 10:50:56,365 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 10:50:56,365 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 10:50:58,087 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 10:50:58,101 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:51:00,640 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 10:51:00,640 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:51:02,728 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 10:51:08,221 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:51:10,756 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:52:33,684 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:52:36,217 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:53:02,787 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 10:54:30,099 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 10:54:30,100 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 10:54:30,148 - GPS_NTP_App - WARNING - Service W32Time détecté actif mais le service NTP est fonctionnel. L'application continue.
+2025-12-27 10:54:30,164 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 10:54:30,164 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 10:54:46,162 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 10:54:46,181 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:54:48,713 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 10:54:48,713 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:54:50,811 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 10:55:13,351 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 10:55:15,887 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 10:59:47,811 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 10:59:58,860 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 10:59:58,860 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 10:59:58,908 - GPS_NTP_App - WARNING - Service W32Time détecté actif mais le service NTP est fonctionnel. L'application continue.
+2025-12-27 10:59:58,929 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 10:59:58,998 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 11:00:08,745 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 11:00:15,016 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 11:00:15,019 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 11:00:15,022 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:00:17,549 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:00:19,585 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 11:00:34,604 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 11:00:34,608 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 11:00:34,626 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=1, Jitter=0.0ms
+2025-12-27 11:00:39,645 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=7, Jitter=0.529ms
+2025-12-27 11:00:44,661 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=17, Jitter=0.261ms
+2025-12-27 11:00:49,681 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.222ms
+2025-12-27 11:00:54,703 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.243ms
+2025-12-27 11:00:59,723 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=177, Jitter=0.247ms
+2025-12-27 11:01:04,744 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=377, Jitter=0.192ms
+2025-12-27 11:01:04,749 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 11:01:04,767 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6...
+2025-12-27 11:01:09,787 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6...
+2025-12-27 11:01:14,806 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6...
+2025-12-27 11:01:19,822 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6...
+2025-12-27 11:01:24,839 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6...
+2025-12-27 11:01:29,862 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6...
+2025-12-27 11:01:34,866 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.836 ms
+2025-12-27 11:01:34,873 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 999.710 ms
+2025-12-27 11:01:34,878 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : 998.875 ms
+2025-12-27 11:01:34,886 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 11:01:34,889 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.0000 s
+2025-12-27 11:01:34,892 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 0.9989 s
+2025-12-27 11:01:56,896 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:01:59,434 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:02:01,479 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration sauvegardée et service redémarré.
+2025-12-27 11:30:08,469 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:30:11,000 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:08:20,027 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:08:28,998 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 11:09:15,180 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 11:09:15,180 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 11:09:15,218 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : D:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 11:09:15,283 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 11:09:25,671 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:10:02,185 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 11:10:16,346 - GPS_NTP_App - INFO - [Assistant Calibration] Fermeture de la fenêtre.
+2025-12-27 11:10:43,363 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:10:45,904 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:13:06,156 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 11:15:10,833 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 11:15:10,833 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 11:15:10,893 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 11:15:10,957 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 11:15:58,269 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 11:16:05,295 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 11:16:05,299 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 11:16:05,302 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:16:07,839 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:16:09,888 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 11:16:15,753 - GPS_NTP_App - ERROR - [Assistant Calibration] Arrêt demandé par l'utilisateur...
+2025-12-27 11:16:27,474 - GPS_NTP_App - INFO - [Assistant Calibration] Restauration de la configuration initiale...
+2025-12-27 11:16:27,478 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:16:30,016 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:16:32,060 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration restaurée.
+2025-12-27 11:16:32,061 - GPS_NTP_App - INFO - [Assistant Calibration] Fermeture de la fenêtre.
+2025-12-27 11:17:47,531 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 11:18:18,980 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 11:18:18,980 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 11:18:19,016 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 11:18:19,083 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 11:18:22,035 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 11:18:34,728 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 11:18:34,731 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 11:18:34,733 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:18:37,267 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:18:39,312 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 11:18:54,327 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 11:18:54,329 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 11:18:54,347 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=1, Jitter=0.0ms
+2025-12-27 11:18:59,366 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=7, Jitter=0.096ms
+2025-12-27 11:19:04,348 - GPS_NTP_App - WARNING - [Assistant Calibration] Assistant en PAUSE...
+2025-12-27 11:19:23,866 - GPS_NTP_App - INFO - [Assistant Calibration] Reprise de l'assistant...
+2025-12-27 11:19:23,901 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=377, Jitter=0.385ms
+2025-12-27 11:19:23,908 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 11:19:23,924 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6...
+2025-12-27 11:19:28,945 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6...
+2025-12-27 11:19:33,968 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6...
+2025-12-27 11:19:38,986 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6...
+2025-12-27 11:19:42,418 - GPS_NTP_App - WARNING - [Assistant Calibration] Assistant en PAUSE...
+2025-12-27 11:20:49,511 - GPS_NTP_App - INFO - [Assistant Calibration] Reprise de l'assistant...
+2025-12-27 11:20:49,556 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6...
+2025-12-27 11:20:54,577 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6...
+2025-12-27 11:20:59,581 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.364 ms
+2025-12-27 11:20:59,586 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 0.903 ms
+2025-12-27 11:20:59,591 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : 0.539 ms
+2025-12-27 11:20:59,602 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 11:20:59,603 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.9989 s
+2025-12-27 11:20:59,611 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 0.9994 s
+2025-12-27 11:21:04,916 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:21:07,445 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:21:09,478 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration sauvegardée et service redémarré.
+2025-12-27 11:25:50,817 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:25:53,354 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:25:59,361 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 11:26:00,951 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 11:26:00,956 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 11:26:00,958 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:26:03,498 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:26:05,539 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 11:26:20,057 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 11:26:20,060 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 11:26:20,076 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=0, Jitter=0.0ms
+2025-12-27 11:26:25,100 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=3, Jitter=0.194ms
+2025-12-27 11:26:30,117 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=7, Jitter=0.103ms
+2025-12-27 11:26:35,139 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.082ms
+2025-12-27 11:26:40,159 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.176ms
+2025-12-27 11:26:45,183 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=77, Jitter=0.176ms
+2025-12-27 11:26:50,202 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=177, Jitter=0.158ms
+2025-12-27 11:26:55,221 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 8/40 : Reach=377, Jitter=0.094ms
+2025-12-27 11:26:55,227 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 11:26:55,243 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6...
+2025-12-27 11:27:00,265 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6...
+2025-12-27 11:27:05,284 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6...
+2025-12-27 11:27:10,306 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6...
+2025-12-27 11:27:15,324 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6...
+2025-12-27 11:27:20,346 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6...
+2025-12-27 11:27:25,350 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.480 ms
+2025-12-27 11:27:25,355 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 499.230 ms
+2025-12-27 11:27:25,364 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : 498.751 ms
+2025-12-27 11:27:25,372 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 11:27:25,376 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.5000 s
+2025-12-27 11:27:25,386 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 0.9988 s
+2025-12-27 11:27:45,859 - GPS_NTP_App - INFO - [Assistant Calibration] Annulé par l'utilisateur. Retour à la configuration précédente.
+2025-12-27 11:27:45,862 - GPS_NTP_App - INFO - [Assistant Calibration] Restauration de la configuration initiale...
+2025-12-27 11:27:45,864 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:27:48,405 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:27:50,444 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration restaurée.
+2025-12-27 11:27:50,530 - GPS_NTP_App - INFO - [Assistant Calibration] Fermeture de la fenêtre.
+2025-12-27 11:28:41,459 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 11:28:48,106 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 11:28:48,106 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 11:28:48,147 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 11:28:48,147 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 11:28:50,369 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 11:28:50,393 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:28:52,930 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 11:28:52,931 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:28:55,024 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 11:29:02,423 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 11:29:04,845 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 11:29:04,846 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 11:29:04,850 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:29:07,381 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:29:09,429 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 11:29:23,945 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 11:29:23,947 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 11:29:23,965 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=0, Jitter=0.0ms
+2025-12-27 11:29:28,986 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=3, Jitter=0.034ms
+2025-12-27 11:29:34,008 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=7, Jitter=0.118ms
+2025-12-27 11:29:39,027 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.107ms
+2025-12-27 11:29:44,046 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.715ms
+2025-12-27 11:29:49,069 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=77, Jitter=0.715ms
+2025-12-27 11:29:54,095 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=177, Jitter=0.306ms
+2025-12-27 11:29:59,113 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 8/40 : Reach=377, Jitter=0.307ms
+2025-12-27 11:29:59,119 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 11:29:59,136 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6 : GPS=0.469 ms | Net(moy)=501.355 ms
+2025-12-27 11:30:04,157 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6 : GPS=0.469 ms | Net(moy)=501.745 ms
+2025-12-27 11:30:09,177 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6 : GPS=0.469 ms | Net(moy)=501.745 ms
+2025-12-27 11:30:14,197 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6 : GPS=0.603 ms | Net(moy)=501.745 ms
+2025-12-27 11:30:19,220 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6 : GPS=0.603 ms | Net(moy)=501.745 ms
+2025-12-27 11:30:24,244 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6 : GPS=0.603 ms | Net(moy)=501.745 ms
+2025-12-27 11:30:29,249 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.536 ms
+2025-12-27 11:30:29,260 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 500.730 ms
+2025-12-27 11:30:29,266 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : 500.194 ms
+2025-12-27 11:30:29,276 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 11:30:29,277 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.5000 s
+2025-12-27 11:30:29,284 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 1.0002 s
+2025-12-27 11:30:41,587 - GPS_NTP_App - INFO - [Assistant Calibration] Annulé par l'utilisateur. Retour à la configuration précédente.
+2025-12-27 11:30:41,590 - GPS_NTP_App - INFO - [Assistant Calibration] Restauration de la configuration initiale...
+2025-12-27 11:30:41,592 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:30:44,124 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:30:46,174 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration restaurée.
+2025-12-27 11:31:06,681 - GPS_NTP_App - INFO - [Assistant Calibration] Fermeture de la fenêtre.
+2025-12-27 11:31:10,158 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 11:33:36,238 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 11:33:36,238 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 11:33:36,280 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 11:33:36,280 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 11:33:37,904 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 11:33:37,919 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:33:40,457 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 11:33:40,457 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:33:42,548 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 11:33:54,992 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 11:34:01,736 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 11:34:01,739 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 11:34:01,743 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:34:04,278 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:34:06,325 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 11:34:20,847 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 11:34:20,848 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 11:34:20,865 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=0, Jitter=0.0ms
+2025-12-27 11:34:25,884 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=3, Jitter=0.245ms
+2025-12-27 11:34:30,899 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=7, Jitter=0.134ms
+2025-12-27 11:34:35,917 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.152ms
+2025-12-27 11:34:40,938 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.181ms
+2025-12-27 11:34:45,958 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=77, Jitter=0.181ms
+2025-12-27 11:34:50,977 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=177, Jitter=0.109ms
+2025-12-27 11:34:55,997 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 8/40 : Reach=377, Jitter=0.148ms
+2025-12-27 11:34:56,003 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 11:34:56,018 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6 : GPS=0.399 ms | Net(moy)=374.913 ms
+2025-12-27 11:35:01,040 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6 : GPS=0.399 ms | Net(moy)=374.928 ms
+2025-12-27 11:35:06,060 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6 : GPS=0.399 ms | Net(moy)=374.928 ms
+2025-12-27 11:35:11,083 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6 : GPS=0.210 ms | Net(moy)=374.928 ms
+2025-12-27 11:35:16,104 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6 : GPS=0.210 ms | Net(moy)=500.260 ms
+2025-12-27 11:35:21,122 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6 : GPS=0.210 ms | Net(moy)=500.062 ms
+2025-12-27 11:35:26,126 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.304 ms
+2025-12-27 11:35:26,135 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 499.930 ms
+2025-12-27 11:35:26,143 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : 499.625 ms
+2025-12-27 11:35:26,154 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 11:35:26,158 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.5000 s
+2025-12-27 11:35:26,164 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 0.9996 s
+2025-12-27 11:35:36,002 - GPS_NTP_App - INFO - [Assistant Calibration] Annulé par l'utilisateur. Retour à la configuration précédente.
+2025-12-27 11:35:36,006 - GPS_NTP_App - INFO - [Assistant Calibration] Restauration de la configuration initiale...
+2025-12-27 11:35:36,008 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:35:38,541 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:35:40,586 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration restaurée.
+2025-12-27 11:35:40,655 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 11:38:57,410 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 11:38:57,411 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 11:38:57,447 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 11:38:57,447 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 11:38:58,997 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 11:38:59,011 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:39:01,544 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 11:39:01,545 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:39:03,636 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 11:39:06,910 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 11:39:11,630 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 11:39:11,632 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 11:39:11,633 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:39:14,162 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:39:16,205 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 11:39:30,737 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 11:39:30,740 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 11:39:30,757 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=0, Jitter=0.0ms
+2025-12-27 11:39:35,780 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=3, Jitter=0.171ms
+2025-12-27 11:39:40,801 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=7, Jitter=0.153ms
+2025-12-27 11:39:45,825 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.198ms
+2025-12-27 11:39:50,845 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.255ms
+2025-12-27 11:39:55,866 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=77, Jitter=0.255ms
+2025-12-27 11:40:00,884 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=177, Jitter=0.263ms
+2025-12-27 11:40:05,903 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 8/40 : Reach=377, Jitter=0.223ms
+2025-12-27 11:40:05,909 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 11:40:05,927 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6 : GPS=0.436 ms | Net(moy)=499.170 ms
+2025-12-27 11:40:10,949 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6 : GPS=0.436 ms | Net(moy)=500.705 ms
+2025-12-27 11:40:15,970 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6 : GPS=0.436 ms | Net(moy)=500.595 ms
+2025-12-27 11:40:20,992 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6 : GPS=0.622 ms | Net(moy)=500.595 ms
+2025-12-27 11:40:26,013 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6 : GPS=0.622 ms | Net(moy)=500.595 ms
+2025-12-27 11:40:31,034 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6 : GPS=0.622 ms | Net(moy)=500.245 ms
+2025-12-27 11:40:36,038 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.529 ms
+2025-12-27 11:40:36,061 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 500.150 ms
+2025-12-27 11:40:36,067 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : 499.621 ms
+2025-12-27 11:40:36,077 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 11:40:36,078 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.5000 s
+2025-12-27 11:40:36,084 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 0.9996 s
+2025-12-27 11:40:40,624 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:40:43,161 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:40:45,204 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration sauvegardée et service redémarré.
+2025-12-27 11:41:05,104 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 11:59:15,775 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 11:59:15,776 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 11:59:15,813 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 11:59:15,875 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 11:59:41,097 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:59:43,636 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 11:59:50,648 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 11:59:55,717 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 11:59:55,720 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 11:59:55,723 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 11:59:58,254 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 12:00:00,301 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 12:00:15,314 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 12:00:15,317 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 12:00:15,339 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=1, Jitter=0.0ms
+2025-12-27 12:00:20,356 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=7, Jitter=0.025ms
+2025-12-27 12:00:25,377 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=17, Jitter=0.242ms
+2025-12-27 12:00:30,397 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.357ms
+2025-12-27 12:00:35,416 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.654ms
+2025-12-27 12:00:40,435 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=177, Jitter=0.737ms
+2025-12-27 12:00:45,452 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=377, Jitter=0.809ms
+2025-12-27 12:00:45,461 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 12:00:45,479 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6 : GPS=0.771 ms | Net(moy)=1.272 ms
+2025-12-27 12:00:50,499 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6 : GPS=0.771 ms | Net(moy)=1.272 ms
+2025-12-27 12:00:55,520 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6 : GPS=0.771 ms | Net(moy)=1.272 ms
+2025-12-27 12:01:00,540 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6 : GPS=0.686 ms | Net(moy)=1.272 ms
+2025-12-27 12:01:05,562 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6 : GPS=0.686 ms | Net(moy)=1.272 ms
+2025-12-27 12:01:10,584 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6 : GPS=0.686 ms | Net(moy)=-0.503 ms
+2025-12-27 12:01:15,588 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.729 ms
+2025-12-27 12:01:15,592 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 1.149 ms
+2025-12-27 12:01:15,599 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : 0.420 ms
+2025-12-27 12:01:15,612 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 12:01:15,616 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.0000 s
+2025-12-27 12:01:15,619 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 0.0004 s
+2025-12-27 12:01:35,459 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 12:01:37,996 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 12:01:40,039 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration sauvegardée et service redémarré.
+2025-12-27 12:03:18,390 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 12:03:18,390 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 12:03:18,438 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : D:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 12:03:18,499 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 12:03:40,816 - GPS_NTP_App - INFO - Ouverture de la fenêtre IQT.
+2025-12-27 12:03:41,798 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 12:11:52,458 - GPS_NTP_App - INFO - Fermeture IQT -> Redémarrage NTP.
+2025-12-27 12:11:52,458 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 12:33:28,446 - GPS_NTP_App - INFO - Ouverture de la fenêtre de test GPS.
+2025-12-27 12:33:32,830 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 12:33:45,059 - GPS_NTP_App - INFO - Redémarrage du service NTP suite fermeture test GPS.
+2025-12-27 12:33:45,059 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 12:34:00,665 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 12:34:37,950 - GPS_NTP_App - INFO - Ouverture de la fenêtre IQT.
+2025-12-27 12:34:39,024 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 12:35:14,889 - GPS_NTP_App - INFO - Fermeture IQT -> Redémarrage NTP.
+2025-12-27 12:35:14,889 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 12:35:36,001 - GPS_NTP_App - INFO - Ouverture de la fenêtre de calibration.
+2025-12-27 12:35:38,903 - GPS_NTP_App - INFO - Lancement de la calibration (Durée: 5 min).
+2025-12-27 12:35:38,918 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 12:35:41,454 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 12:36:59,898 - GPS_NTP_App - INFO - Fin de la procédure de calibration.
+2025-12-27 12:37:03,021 - GPS_NTP_App - INFO - Lancement de la calibration (Durée: 20 min).
+2025-12-27 12:37:03,039 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 12:37:05,582 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:02:22,112 - GPS_NTP_App - INFO - Calibration validée par l'utilisateur. Ancien Fudge: 0.0004, Nouveau Fudge: 0.0009
+2025-12-27 14:02:22,113 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:02:24,651 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:02:26,699 - GPS_NTP_App - INFO - Fermeture de la fenêtre de calibration (Succès).
+2025-12-27 14:02:26,722 - GPS_NTP_App - INFO - Fin de la procédure de calibration.
+2025-12-27 14:03:17,547 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 14:04:23,485 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 14:04:23,486 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 14:04:23,557 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 14:04:23,653 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 14:04:26,026 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 14:04:47,129 - GPS_NTP_App - INFO - [Assistant Calibration] Fermeture de la fenêtre.
+2025-12-27 14:04:48,331 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 14:07:25,810 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 14:07:25,810 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 14:07:25,850 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 14:07:25,911 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 14:07:27,543 - GPS_NTP_App - INFO - Ouverture de la fenêtre de calibration.
+2025-12-27 14:07:29,809 - GPS_NTP_App - INFO - Fermeture de la fenêtre de calibration.
+2025-12-27 14:07:31,750 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 14:11:03,753 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 14:11:03,754 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 14:11:03,792 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 14:11:03,855 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 14:11:05,210 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 14:11:07,757 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 14:11:07,760 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 14:11:07,763 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:11:10,295 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:11:12,343 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 14:11:24,639 - GPS_NTP_App - ERROR - [Assistant Calibration] Arrêt demandé par l'utilisateur...
+2025-12-27 14:11:27,090 - GPS_NTP_App - INFO - [Assistant Calibration] Restauration de la configuration initiale...
+2025-12-27 14:11:27,094 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:11:29,638 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:11:31,718 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration restaurée.
+2025-12-27 14:11:31,718 - GPS_NTP_App - INFO - [Assistant Calibration] Fermeture de la fenêtre.
+2025-12-27 14:11:43,648 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:11:46,187 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:11:51,662 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 14:11:53,019 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 14:11:53,022 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 14:11:53,026 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:11:55,558 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:11:57,609 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 14:12:12,927 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 14:12:12,934 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 14:12:12,952 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=0, Jitter=0.0ms
+2025-12-27 14:12:17,976 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=3, Jitter=0.02ms
+2025-12-27 14:12:23,000 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=7, Jitter=0.16ms
+2025-12-27 14:12:28,024 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.787ms
+2025-12-27 14:12:33,048 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.46ms
+2025-12-27 14:12:38,071 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=77, Jitter=0.46ms
+2025-12-27 14:12:43,090 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=177, Jitter=0.659ms
+2025-12-27 14:12:48,111 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 8/40 : Reach=377, Jitter=0.435ms
+2025-12-27 14:12:48,117 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 14:12:48,132 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6 : GPS=0.695 ms | Net(moy)=-299.650 ms
+2025-12-27 14:12:53,153 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6 : GPS=0.695 ms | Net(moy)=-299.650 ms
+2025-12-27 14:12:58,176 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6 : GPS=0.695 ms | Net(moy)=-299.650 ms
+2025-12-27 14:13:03,204 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6 : GPS=0.586 ms | Net(moy)=-298.343 ms
+2025-12-27 14:13:08,230 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6 : GPS=0.586 ms | Net(moy)=-299.300 ms
+2025-12-27 14:13:13,255 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6 : GPS=0.586 ms | Net(moy)=-299.743 ms
+2025-12-27 14:13:18,259 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.640 ms
+2025-12-27 14:13:18,270 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : -299.650 ms
+2025-12-27 14:13:18,279 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : -300.290 ms
+2025-12-27 14:13:18,290 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 14:13:18,295 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.3000 s
+2025-12-27 14:13:18,302 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: -0.0003 s
+2025-12-27 14:13:24,435 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:13:26,972 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:13:29,017 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration sauvegardée et service redémarré.
+2025-12-27 14:13:38,358 - GPS_NTP_App - INFO - [Assistant Calibration] Prêt pour l'affinage. Sélectionnez une durée et démarrez.
+2025-12-27 14:13:52,828 - GPS_NTP_App - INFO - [Assistant Calibration] Arrêt du service NTP...
+2025-12-27 14:13:52,832 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:13:55,363 - GPS_NTP_App - INFO - [Assistant Calibration] Suppression du fichier loopstats...
+2025-12-27 14:13:55,367 - GPS_NTP_App - INFO - [Assistant Calibration] Démarrage du service NTP...
+2025-12-27 14:13:55,369 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:13:57,407 - GPS_NTP_App - INFO - [Assistant Calibration] Attente synchronisation GPS (Reach 377)...
+2025-12-27 14:14:42,716 - GPS_NTP_App - INFO - [Assistant Calibration] Synchronisation OK. Échantillonnage (5 min)...
+2025-12-27 14:19:43,571 - GPS_NTP_App - INFO - [Assistant Calibration] Calcul du nouveau Fudge...
+2025-12-27 14:19:43,586 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Médian: 0.000571 s
+2025-12-27 14:19:43,590 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge proposé: 0.0003 s
+2025-12-27 14:20:00,529 - GPS_NTP_App - INFO - [Assistant Calibration] Application des changements...
+2025-12-27 14:20:00,532 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:20:03,061 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:20:05,109 - GPS_NTP_App - INFO - [Assistant Calibration] Succès ! Configuration mise à jour.
+2025-12-27 14:20:45,968 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 14:20:47,777 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 14:20:47,782 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 14:20:47,785 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:20:50,315 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:20:52,362 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 14:21:07,380 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 14:21:07,383 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 14:21:07,400 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=1, Jitter=0.0ms
+2025-12-27 14:21:12,421 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=7, Jitter=0.727ms
+2025-12-27 14:21:17,450 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=17, Jitter=0.368ms
+2025-12-27 14:21:22,471 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.71ms
+2025-12-27 14:21:27,496 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.791ms
+2025-12-27 14:21:32,518 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=177, Jitter=0.764ms
+2025-12-27 14:21:37,541 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=377, Jitter=0.675ms
+2025-12-27 14:21:37,547 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 14:21:37,563 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6 : GPS=0.362 ms | Net(moy)=0.627 ms
+2025-12-27 14:21:42,585 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6 : GPS=0.362 ms | Net(moy)=0.627 ms
+2025-12-27 14:21:47,608 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6 : GPS=0.362 ms | Net(moy)=0.627 ms
+2025-12-27 14:21:52,629 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6 : GPS=0.966 ms | Net(moy)=0.627 ms
+2025-12-27 14:21:57,648 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6 : GPS=0.966 ms | Net(moy)=0.627 ms
+2025-12-27 14:22:02,672 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6 : GPS=0.966 ms | Net(moy)=0.798 ms
+2025-12-27 14:22:07,676 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.664 ms
+2025-12-27 14:22:07,680 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 0.732 ms
+2025-12-27 14:22:07,689 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : 0.068 ms
+2025-12-27 14:22:07,701 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 14:22:07,719 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.0003 s
+2025-12-27 14:22:07,725 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 0.0004 s
+2025-12-27 14:22:20,371 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:22:22,899 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:22:24,935 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration sauvegardée et service redémarré.
+2025-12-27 14:26:33,891 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 14:26:38,291 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 14:26:38,291 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 14:26:38,327 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 14:26:38,388 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 14:26:41,011 - GPS_NTP_App - INFO - Ouverture de la fenêtre de calibration.
+2025-12-27 14:26:43,816 - GPS_NTP_App - INFO - Fermeture de la fenêtre de calibration.
+2025-12-27 14:26:47,242 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 14:26:48,922 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 14:26:48,924 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 14:26:48,927 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:26:51,459 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:26:53,506 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 14:27:08,535 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 14:27:08,537 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 14:27:08,554 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=1, Jitter=0.0ms
+2025-12-27 14:27:13,573 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=7, Jitter=0.78ms
+2025-12-27 14:27:18,593 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=17, Jitter=0.453ms
+2025-12-27 14:27:23,612 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.388ms
+2025-12-27 14:27:28,629 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.322ms
+2025-12-27 14:27:33,648 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=177, Jitter=0.295ms
+2025-12-27 14:27:38,671 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=377, Jitter=0.3ms
+2025-12-27 14:27:38,678 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 14:27:38,696 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6 : GPS=0.877 ms | Net(moy)=0.151 ms
+2025-12-27 14:27:43,716 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6 : GPS=0.877 ms | Net(moy)=0.151 ms
+2025-12-27 14:27:48,738 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6 : GPS=0.877 ms | Net(moy)=0.151 ms
+2025-12-27 14:27:53,758 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6 : GPS=0.806 ms | Net(moy)=0.151 ms
+2025-12-27 14:27:58,780 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6 : GPS=0.806 ms | Net(moy)=0.151 ms
+2025-12-27 14:28:03,801 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6 : GPS=0.806 ms | Net(moy)=0.517 ms
+2025-12-27 14:28:08,807 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.842 ms
+2025-12-27 14:28:08,816 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 0.473 ms
+2025-12-27 14:28:08,824 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : -0.369 ms
+2025-12-27 14:28:08,839 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 14:28:08,845 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.0004 s
+2025-12-27 14:28:08,850 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 0.0000 s
+2025-12-27 14:35:53,625 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:35:56,167 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:35:58,216 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration sauvegardée et service redémarré.
+2025-12-27 14:36:04,709 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 14:36:12,726 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 14:36:12,726 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 14:36:12,764 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 14:36:12,829 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 14:36:16,631 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 14:36:18,692 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 14:36:18,693 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 14:36:18,697 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:36:21,225 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:36:23,276 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 14:36:38,291 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 14:36:38,294 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 14:36:38,314 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=1, Jitter=0.0ms
+2025-12-27 14:36:43,334 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=7, Jitter=0.57ms
+2025-12-27 14:36:48,354 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=17, Jitter=0.495ms
+2025-12-27 14:36:53,373 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.346ms
+2025-12-27 14:36:58,397 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.328ms
+2025-12-27 14:37:03,419 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=177, Jitter=0.309ms
+2025-12-27 14:37:08,444 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=377, Jitter=0.274ms
+2025-12-27 14:37:08,452 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 14:37:08,472 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6 : GPS=0.051 ms | Net(moy)=-3.187 ms
+2025-12-27 14:37:13,497 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6 : GPS=0.051 ms | Net(moy)=-3.187 ms
+2025-12-27 14:37:18,522 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6 : GPS=0.051 ms | Net(moy)=-3.187 ms
+2025-12-27 14:37:23,549 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6 : GPS=0.781 ms | Net(moy)=-3.187 ms
+2025-12-27 14:37:28,572 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6 : GPS=0.781 ms | Net(moy)=-3.187 ms
+2025-12-27 14:37:33,596 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6 : GPS=0.781 ms | Net(moy)=-2.309 ms
+2025-12-27 14:37:38,599 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.416 ms
+2025-12-27 14:37:38,603 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : -1.182 ms
+2025-12-27 14:37:38,609 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : -1.598 ms
+2025-12-27 14:37:38,618 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 14:37:38,620 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.0000 s
+2025-12-27 14:37:38,623 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: -0.0016 s
+2025-12-27 14:40:44,473 - GPS_NTP_App - INFO - [Assistant Calibration] Annulé par l'utilisateur. Retour à la configuration précédente.
+2025-12-27 14:40:44,475 - GPS_NTP_App - INFO - [Assistant Calibration] Restauration de la configuration initiale...
+2025-12-27 14:40:44,477 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:40:47,006 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:40:49,059 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration restaurée.
+2025-12-27 14:40:53,616 - GPS_NTP_App - INFO - [Assistant Calibration] Fermeture de la fenêtre.
+2025-12-27 14:41:49,177 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 14:41:53,555 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 14:41:53,555 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 14:41:53,592 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 14:41:53,592 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 14:41:59,561 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 14:41:59,576 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:42:02,107 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 14:42:02,107 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:42:04,208 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 14:42:22,855 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 14:42:24,949 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 14:42:24,952 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 14:42:24,955 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:42:27,494 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:42:29,540 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 14:42:44,557 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 14:42:44,560 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 14:42:44,579 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=1, Jitter=0.0ms
+2025-12-27 14:42:49,601 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=7, Jitter=0.402ms
+2025-12-27 14:42:54,626 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=17, Jitter=0.262ms
+2025-12-27 14:42:59,647 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.224ms
+2025-12-27 14:43:04,675 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.199ms
+2025-12-27 14:43:09,695 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=177, Jitter=0.673ms
+2025-12-27 14:43:14,718 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=377, Jitter=0.83ms
+2025-12-27 14:43:14,724 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 14:43:14,741 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6 : GPS=0.082 ms | Net(moy)=0.368 ms
+2025-12-27 14:43:19,765 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6 : GPS=0.082 ms | Net(moy)=0.368 ms
+2025-12-27 14:43:24,787 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6 : GPS=0.082 ms | Net(moy)=0.368 ms
+2025-12-27 14:43:29,811 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6 : GPS=0.170 ms | Net(moy)=0.368 ms
+2025-12-27 14:43:34,834 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6 : GPS=0.170 ms | Net(moy)=0.368 ms
+2025-12-27 14:43:39,858 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6 : GPS=0.170 ms | Net(moy)=1.135 ms
+2025-12-27 14:43:44,863 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.126 ms
+2025-12-27 14:43:44,872 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 1.099 ms
+2025-12-27 14:43:44,880 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : 0.973 ms
+2025-12-27 14:43:44,893 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 14:43:44,899 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.0000 s
+2025-12-27 14:43:44,907 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 0.0010 s
+2025-12-27 14:46:24,062 - GPS_NTP_App - INFO - [Assistant Calibration] Annulé par l'utilisateur. Retour à la configuration précédente.
+2025-12-27 14:46:24,063 - GPS_NTP_App - INFO - [Assistant Calibration] Restauration de la configuration initiale...
+2025-12-27 14:46:24,065 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:46:26,595 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:46:28,638 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration restaurée.
+2025-12-27 14:46:31,442 - GPS_NTP_App - INFO - [Assistant Calibration] Fermeture de la fenêtre.
+2025-12-27 14:46:57,412 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 14:47:37,191 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 14:47:37,191 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 14:47:37,224 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 14:47:37,225 - GPS_NTP_App - INFO - Différence détectée dans ntp.conf ou fichier manquant.
+2025-12-27 14:47:38,798 - GPS_NTP_App - INFO - Utilisateur a accepté la mise à jour de ntp.conf.
+2025-12-27 14:47:38,813 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:47:41,345 - GPS_NTP_App - INFO - Fichier C:\Program Files (x86)\NTP\etc\ntp.conf mis à jour avec succès.
+2025-12-27 14:47:41,346 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:47:43,449 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 14:47:46,053 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 14:47:47,757 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 14:47:47,758 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 14:47:47,762 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:47:50,295 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:47:52,324 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 14:48:07,341 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 14:48:07,346 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 14:48:07,363 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=1, Jitter=0.0ms
+2025-12-27 14:48:12,388 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=7, Jitter=0.815ms
+2025-12-27 14:48:17,406 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=17, Jitter=0.452ms
+2025-12-27 14:48:22,427 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.358ms
+2025-12-27 14:48:27,450 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.33ms
+2025-12-27 14:48:32,470 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=177, Jitter=0.303ms
+2025-12-27 14:48:37,491 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=377, Jitter=0.314ms
+2025-12-27 14:48:37,497 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 14:48:37,514 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6 : GPS=0.124 ms | Net(moy)=2.218 ms
+2025-12-27 14:48:42,537 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6 : GPS=0.124 ms | Net(moy)=2.218 ms
+2025-12-27 14:48:47,561 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6 : GPS=0.124 ms | Net(moy)=2.218 ms
+2025-12-27 14:48:52,586 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6 : GPS=0.155 ms | Net(moy)=2.218 ms
+2025-12-27 14:48:57,611 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6 : GPS=0.155 ms | Net(moy)=2.218 ms
+2025-12-27 14:49:02,635 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6 : GPS=0.155 ms | Net(moy)=2.014 ms
+2025-12-27 14:49:07,639 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.140 ms
+2025-12-27 14:49:07,648 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 0.817 ms
+2025-12-27 14:49:07,655 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : 0.677 ms
+2025-12-27 14:49:07,663 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 14:49:07,665 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.0000 s
+2025-12-27 14:49:07,673 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 0.0007 s
+2025-12-27 14:49:28,098 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:49:30,628 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:49:32,674 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration sauvegardée et service redémarré.
+2025-12-27 14:50:07,355 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 14:51:22,519 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 14:51:22,519 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 14:51:22,559 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 14:51:22,622 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 14:51:25,893 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 14:51:27,301 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 14:51:27,304 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 14:51:27,308 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:51:29,843 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:51:31,892 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 14:51:46,911 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 14:51:46,930 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 14:51:46,950 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=1, Jitter=0.0ms
+2025-12-27 14:51:51,972 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=7, Jitter=0.411ms
+2025-12-27 14:51:56,996 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=17, Jitter=0.531ms
+2025-12-27 14:52:02,021 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.649ms
+2025-12-27 14:52:07,043 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.36ms
+2025-12-27 14:52:12,066 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=177, Jitter=0.814ms
+2025-12-27 14:52:17,089 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=377, Jitter=0.88ms
+2025-12-27 14:52:17,097 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (30s) ===
+2025-12-27 14:52:17,116 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/6 : GPS=0.243 ms | Net(med)=0.199 ms
+2025-12-27 14:52:22,138 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/6 : GPS=0.243 ms | Net(med)=0.199 ms
+2025-12-27 14:52:27,162 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/6 : GPS=0.243 ms | Net(med)=0.199 ms
+2025-12-27 14:52:32,185 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/6 : GPS=0.875 ms | Net(med)=0.199 ms
+2025-12-27 14:52:37,208 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/6 : GPS=0.875 ms | Net(med)=0.199 ms
+2025-12-27 14:52:42,229 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/6 : GPS=0.875 ms | Net(med)=-0.064 ms
+2025-12-27 14:52:47,233 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.559 ms
+2025-12-27 14:52:47,241 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 0.199 ms
+2025-12-27 14:52:47,248 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : -0.360 ms
+2025-12-27 14:52:47,256 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 14:52:47,261 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.0007 s
+2025-12-27 14:52:47,267 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 0.0003 s
+2025-12-27 14:52:56,022 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:52:58,568 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:53:00,661 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration sauvegardée et service redémarré.
+2025-12-27 14:53:08,988 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 14:54:15,526 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 14:54:15,527 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 14:54:15,560 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 14:54:15,622 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 14:54:16,849 - GPS_NTP_App - INFO - Ouverture de l'Assistant de Calibration (Expert).
+2025-12-27 14:54:18,191 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 1 : Initialisation ===
+2025-12-27 14:54:18,193 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration NTP en mode 'Observation'...
+2025-12-27 14:54:18,196 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:54:20,734 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:54:22,769 - GPS_NTP_App - INFO - [Assistant Calibration] Service redémarré. Stabilisation (15s)...
+2025-12-27 14:54:37,787 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 2 : Analyse de Santé ===
+2025-12-27 14:54:37,793 - GPS_NTP_App - INFO - [Assistant Calibration] Attente de la synchronisation complète (Reach=377)...
+2025-12-27 14:54:37,812 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 1/40 : Reach=1, Jitter=0.0ms
+2025-12-27 14:54:42,831 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 2/40 : Reach=7, Jitter=0.754ms
+2025-12-27 14:54:47,852 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 3/40 : Reach=17, Jitter=0.363ms
+2025-12-27 14:54:52,869 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 4/40 : Reach=37, Jitter=0.318ms
+2025-12-27 14:54:57,891 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 5/40 : Reach=77, Jitter=0.652ms
+2025-12-27 14:55:02,910 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 6/40 : Reach=177, Jitter=0.358ms
+2025-12-27 14:55:07,936 - GPS_NTP_App - INFO - [Assistant Calibration] Essai 7/40 : Reach=377, Jitter=0.375ms
+2025-12-27 14:55:07,944 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 3 : Mesure (2 min) ===
+2025-12-27 14:55:07,963 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 1/24 : GPS=0.624 ms | Net(med)=-0.334 ms
+2025-12-27 14:55:12,980 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 2/24 : GPS=0.624 ms | Net(med)=-0.334 ms
+2025-12-27 14:55:18,002 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 3/24 : GPS=0.624 ms | Net(med)=-0.334 ms
+2025-12-27 14:55:23,019 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 4/24 : GPS=0.672 ms | Net(med)=-0.334 ms
+2025-12-27 14:55:28,040 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 5/24 : GPS=0.672 ms | Net(med)=-0.334 ms
+2025-12-27 14:55:33,058 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 6/24 : GPS=0.672 ms | Net(med)=0.574 ms
+2025-12-27 14:55:38,077 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 7/24 : GPS=0.672 ms | Net(med)=0.537 ms
+2025-12-27 14:55:43,097 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 8/24 : GPS=0.764 ms | Net(med)=0.537 ms
+2025-12-27 14:55:48,122 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 9/24 : GPS=0.764 ms | Net(med)=0.537 ms
+2025-12-27 14:55:53,146 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 10/24 : GPS=0.764 ms | Net(med)=0.537 ms
+2025-12-27 14:55:58,168 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 11/24 : GPS=0.614 ms | Net(med)=0.537 ms
+2025-12-27 14:56:03,197 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 12/24 : GPS=0.614 ms | Net(med)=0.537 ms
+2025-12-27 14:56:08,223 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 13/24 : GPS=0.614 ms | Net(med)=0.537 ms
+2025-12-27 14:56:13,247 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 14/24 : GPS=0.714 ms | Net(med)=0.537 ms
+2025-12-27 14:56:18,274 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 15/24 : GPS=0.714 ms | Net(med)=0.537 ms
+2025-12-27 14:56:23,303 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 16/24 : GPS=0.714 ms | Net(med)=0.537 ms
+2025-12-27 14:56:28,327 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 17/24 : GPS=0.687 ms | Net(med)=0.537 ms
+2025-12-27 14:56:33,354 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 18/24 : GPS=0.687 ms | Net(med)=0.537 ms
+2025-12-27 14:56:38,382 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 19/24 : GPS=0.687 ms | Net(med)=0.537 ms
+2025-12-27 14:56:43,409 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 20/24 : GPS=0.689 ms | Net(med)=0.537 ms
+2025-12-27 14:56:48,430 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 21/24 : GPS=0.689 ms | Net(med)=0.537 ms
+2025-12-27 14:56:50,357 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 14:56:53,448 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 22/24 : GPS=0.689 ms | Net(med)=0.537 ms
+2025-12-27 14:56:58,468 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 23/24 : GPS=0.689 ms | Net(med)=0.537 ms
+2025-12-27 14:57:03,494 - GPS_NTP_App - INFO - [Assistant Calibration] Mesure 24/24 : GPS=0.742 ms | Net(med)=0.537 ms
+2025-12-27 14:57:08,498 - GPS_NTP_App - INFO - [Assistant Calibration] Offset GPS Médian : 0.687 ms
+2025-12-27 14:57:08,508 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Internet Médian : 0.537 ms
+2025-12-27 14:57:08,514 - GPS_NTP_App - INFO - [Assistant Calibration] Écart constaté (Net - GPS) : -0.150 ms
+2025-12-27 14:57:08,525 - GPS_NTP_App - INFO - [Assistant Calibration] === Étape 4 : Application ===
+2025-12-27 14:57:08,529 - GPS_NTP_App - INFO - [Assistant Calibration] Ancien Fudge: 0.0003 s
+2025-12-27 14:57:08,535 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge: 0.0002 s
+2025-12-27 14:57:19,778 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:57:22,318 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:57:24,366 - GPS_NTP_App - INFO - [Assistant Calibration] Configuration sauvegardée et service redémarré.
+2025-12-27 14:57:24,376 - GPS_NTP_App - INFO - [Assistant Calibration] Prêt pour l'affinage. Sélectionnez une durée et démarrez.
+2025-12-27 14:57:28,855 - GPS_NTP_App - INFO - [Assistant Calibration] Arrêt du service NTP...
+2025-12-27 14:57:28,859 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 14:57:31,409 - GPS_NTP_App - INFO - [Assistant Calibration] Suppression du fichier loopstats...
+2025-12-27 14:57:31,411 - GPS_NTP_App - INFO - [Assistant Calibration] Démarrage du service NTP...
+2025-12-27 14:57:31,415 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 14:57:33,459 - GPS_NTP_App - INFO - [Assistant Calibration] Attente synchronisation GPS (Reach 377)...
+2025-12-27 14:58:18,762 - GPS_NTP_App - INFO - [Assistant Calibration] Synchronisation OK. Échantillonnage (5 min)...
+2025-12-27 15:03:20,515 - GPS_NTP_App - INFO - [Assistant Calibration] Calcul du nouveau Fudge...
+2025-12-27 15:03:20,536 - GPS_NTP_App - INFO - [Assistant Calibration] Offset Médian: 0.822 ms
+2025-12-27 15:03:20,540 - GPS_NTP_App - INFO - [Assistant Calibration] Nouveau Fudge proposé: 1.022 ms
+2025-12-27 15:03:25,658 - GPS_NTP_App - INFO - [Assistant Calibration] Application des changements...
+2025-12-27 15:03:25,661 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 15:03:28,207 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 15:03:30,244 - GPS_NTP_App - INFO - [Assistant Calibration] Succès ! Configuration mise à jour.
+2025-12-27 15:04:29,807 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 15:05:43,723 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 15:05:43,723 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 15:05:43,755 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 15:05:43,817 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 15:05:48,322 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 15:06:25,168 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 15:06:27,699 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 15:14:27,676 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 15:14:32,461 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 15:14:32,462 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 15:14:32,497 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 15:14:32,558 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 15:14:39,840 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 15:15:13,483 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 15:15:16,016 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 15:16:00,282 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 15:18:41,710 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 15:18:41,710 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 15:18:41,742 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 15:18:41,808 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 15:18:44,158 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 15:19:11,934 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 15:19:14,470 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 15:24:25,709 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 15:25:14,259 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 15:25:14,259 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 15:25:14,293 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 15:25:14,352 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 15:25:15,851 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 15:25:33,515 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 15:25:36,052 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 15:26:17,930 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 15:29:26,597 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 15:29:26,597 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 15:29:26,633 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 15:29:26,698 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 15:29:28,425 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 15:29:37,541 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 15:29:40,069 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 16:21:07,397 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 16:21:18,614 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 16:21:18,614 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 16:21:18,653 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : D:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 16:21:18,721 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 16:21:23,954 - GPS_NTP_App - INFO - Ouverture de la fenêtre IQT.
+2025-12-27 16:21:25,568 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 16:22:05,844 - GPS_NTP_App - INFO - Fermeture IQT -> Redémarrage NTP.
+2025-12-27 16:22:05,844 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 16:22:08,067 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 16:22:29,992 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 16:25:46,559 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 16:25:46,559 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 16:25:46,594 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 16:25:46,655 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 16:25:56,739 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 16:25:59,271 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 16:26:04,362 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 16:26:34,679 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 16:30:49,717 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 16:30:49,718 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 16:30:49,751 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 16:30:49,813 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 16:30:53,546 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 16:38:39,550 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 16:38:42,087 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 16:39:37,789 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 16:39:40,327 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 16:43:16,284 - GPS_NTP_App - INFO - Ouverture de la fenêtre de calibration.
+2025-12-27 16:43:18,386 - GPS_NTP_App - INFO - Fermeture de la fenêtre de calibration.
+2025-12-27 16:46:01,616 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 16:58:49,108 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 16:58:49,109 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 16:58:49,141 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 16:58:49,206 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 16:58:53,457 - GPS_NTP_App - INFO - Ouverture du choix de mode de calibration.
+2025-12-27 16:59:06,907 - GPS_NTP_App - INFO - Choix : Calibration GPS Seul (Loopstats).
+2025-12-27 16:59:06,907 - GPS_NTP_App - INFO - Ouverture de la fenêtre de calibration.
+2025-12-27 16:59:11,786 - GPS_NTP_App - INFO - Fermeture de la fenêtre de calibration.
+2025-12-27 16:59:14,856 - GPS_NTP_App - INFO - Ouverture du choix de mode de calibration.
+2025-12-27 16:59:16,411 - GPS_NTP_App - INFO - Choix : Assistant Calibration Expert (GPS vs Net).
+2025-12-27 16:59:24,766 - GPS_NTP_App - INFO - [Assistant Calibration] Fermeture de la fenêtre.
+2025-12-27 16:59:28,660 - GPS_NTP_App - INFO - Ouverture du choix de mode de calibration.
+2025-12-27 16:59:37,564 - GPS_NTP_App - INFO - Choix : Calibration GPS Seul (Loopstats).
+2025-12-27 16:59:37,564 - GPS_NTP_App - INFO - Ouverture de la fenêtre de calibration.
+2025-12-27 16:59:40,551 - GPS_NTP_App - INFO - Lancement de la calibration (Durée: 5 min).
+2025-12-27 16:59:40,569 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 16:59:43,115 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 17:06:18,340 - GPS_NTP_App - INFO - Calibration validée par l'utilisateur. Ancien Fudge: 0.0001, Nouveau Fudge: 0.0011
+2025-12-27 17:06:18,341 - GPS_NTP_App - INFO - Tentative d'arrêt du service NTP...
+2025-12-27 17:06:20,878 - GPS_NTP_App - INFO - Tentative de démarrage du service NTP...
+2025-12-27 17:06:22,925 - GPS_NTP_App - INFO - Fermeture de la fenêtre de calibration (Succès).
+2025-12-27 17:06:22,955 - GPS_NTP_App - INFO - Fin de la procédure de calibration.
+2025-12-27 17:06:28,905 - GPS_NTP_App - INFO - Ouverture de la fenêtre Clockvar.
+2025-12-27 17:08:47,507 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 17:09:03,307 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 17:09:03,307 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 17:09:03,342 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 17:09:03,405 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 17:13:52,337 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 17:13:56,807 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 17:13:56,807 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 17:13:56,848 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 17:13:56,914 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 17:15:40,158 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 17:18:00,331 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 17:18:00,332 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 17:18:00,368 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 17:18:00,433 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 17:18:29,629 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 17:41:37,948 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 17:41:37,949 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 17:41:37,984 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 17:41:38,047 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 17:45:21,851 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 17:45:30,252 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 17:45:30,253 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 17:45:30,290 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 17:45:30,354 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 17:48:33,720 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 17:48:43,083 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 17:48:43,083 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 17:48:43,123 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 17:48:43,190 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 17:51:37,220 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 17:51:52,310 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 17:51:52,310 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 17:51:52,349 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 17:51:52,416 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 17:52:13,673 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 17:54:50,896 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 17:54:50,896 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 17:54:50,931 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 17:54:50,992 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 17:58:21,008 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 17:58:42,622 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 17:58:42,622 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 17:58:42,656 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : d:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 17:58:42,720 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 17:59:30,399 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 17:59:37,835 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 17:59:37,835 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 17:59:37,878 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : D:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 17:59:37,948 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 18:03:02,665 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 18:03:08,396 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 18:03:08,396 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 18:03:08,432 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : D:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 18:03:08,493 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 18:07:57,257 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 18:08:01,883 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 18:08:01,884 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 18:08:01,929 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : D:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 18:08:01,993 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 19:30:42,500 - GPS_NTP_App - INFO - === Arrêt de l'application ===
+2025-12-27 19:33:59,940 - GPS_NTP_App - INFO - === Démarrage de l'application ===
+2025-12-27 19:33:59,941 - GPS_NTP_App - INFO - Droits administrateur confirmés.
+2025-12-27 19:33:59,991 - GPS_NTP_App - INFO - Copie locale de ntp.conf créée : D:\Francis\Documents\code\Time reference NMEA\ntp.conf
+2025-12-27 19:34:00,599 - GPS_NTP_App - INFO - Interface graphique initialisée.
+2025-12-27 22:16:12,312 - GPS_NTP_App - INFO - === Arrêt de l'application ===
