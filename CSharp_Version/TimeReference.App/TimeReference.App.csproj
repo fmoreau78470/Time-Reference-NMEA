@@ -7,10 +7,31 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\Icone-Time-Reference.ico</ApplicationIcon>
+    <!-- Informations de l'application -->
+    <Version>1.0.0</Version>
+    <Authors>Francis Moreau</Authors>
+    <Company>After Midnight</Company>
+    <Product>Time Reference NMEA</Product>
+    <Copyright>Francis Moreau</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TimeReference.Core\TimeReference.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\ntp.template" Link="ntp.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Icone-Time-Reference.ico" />
+    <Resource Include="Assets\splash.png" />
   </ItemGroup>
 
 </Project>

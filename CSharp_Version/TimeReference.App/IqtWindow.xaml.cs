@@ -13,7 +13,6 @@ namespace TimeReference.App
         private readonly SerialGpsReader _gpsReader;
         private readonly IqtService _iqtService;
         private readonly DispatcherTimer _uiTimer;
-        private bool _ntpWasRunning = false;
 
         public IqtWindow(AppConfig config)
         {
@@ -30,24 +29,22 @@ namespace TimeReference.App
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            TxtStatus.Text = "Arrêt du service NTP en cours...";
-            
-            // 1. Arrêter NTP pour libérer le port COM
-            await Task.Run(() =>
-            {
-                var status = WindowsServiceHelper.GetStatus("NTP");
-                if (status == System.ServiceProcess.ServiceControllerStatus.Running)
-                {
-                    _ntpWasRunning = true;
-                    WindowsServiceHelper.StopService("NTP");
-                }
-            });
-
-            TxtStatus.Text = "Connexion au GPS...";
-
             // 2. Démarrer la lecture GPS
             _gpsReader.GpsDataReceived += OnGpsDataReceived;
             _gpsReader.ErrorOccurred += OnGpsError;
+
+            await TryConnectAsync();
+        }
+
+        private Task TryConnectAsync()
+        {
+            TxtStatus.Text = "Connexion au GPS...";
+            if (BtnRetry != null) BtnRetry.IsEnabled = false;
+
+            // Sécurité : on s'assure que c'est fermé avant de tenter
+            _gpsReader.Stop();
+
+            // Tentative directe (sans boucle de retry)
             _gpsReader.Start(_config.SerialPort, _config.BaudRate);
 
             if (_gpsReader.IsConnected)
@@ -55,10 +52,13 @@ namespace TimeReference.App
                 TxtStatus.Text = $"Connecté à {_config.SerialPort}. Analyse en cours...";
                 _uiTimer.Start();
             }
-            else
+            else if (!TxtStatus.Text.StartsWith("Erreur GPS"))
             {
-                TxtStatus.Text = "Erreur : Impossible d'ouvrir le port COM.";
+                TxtStatus.Text = "Erreur : Impossible d'ouvrir le port COM (Occupé ?).";
+                if (BtnRetry != null) BtnRetry.IsEnabled = true;
             }
+            
+            return Task.CompletedTask;
         }
 
         private void OnGpsDataReceived(GpsData data)
@@ -81,15 +81,11 @@ namespace TimeReference.App
             var result = _iqtService.Calculate();
 
             // Mise à jour de l'UI
-            UpdateGauges(result);
+            UpdateValues(result);
         }
 
-        private void UpdateGauges(IqtResult result)
+        private void UpdateValues(IqtResult result)
         {
-            // 1. Score Global (Aiguille)
-            // Map 0..100 vers -135..+135 degrés
-            double angle = (result.TotalScore * 2.7) - 135;
-            MainNeedleTransform.Angle = angle;
             TxtTotalScore.Text = $"{result.TotalScore:F1} %";
 
             // Couleur dynamique du score
@@ -97,29 +93,20 @@ namespace TimeReference.App
             else if (result.TotalScore > 50) TxtTotalScore.Foreground = System.Windows.Media.Brushes.Orange;
             else TxtTotalScore.Foreground = System.Windows.Media.Brushes.Red;
 
-            // 2. Sous-jauges
-            PbSnr.Value = result.SnrScore;
             TxtSnrVal.Text = $"{result.RawAvgSnr:F1} dB";
-
-            PbHdop.Value = result.HdopScore;
             TxtHdopVal.Text = $"{result.RawHdop:F1}";
-
-            PbSat.Value = result.SatScore;
             TxtSatVal.Text = $"{result.RawSatCount}";
         }
 
-        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _uiTimer.Stop();
             _gpsReader.Stop();
+        }
 
-            if (_ntpWasRunning)
-            {
-                TxtStatus.Text = "Redémarrage du service NTP...";
-                // On évite de bloquer la fermeture de la fenêtre, mais on lance la tâche
-                // Note : Dans une vraie app, on pourrait afficher un spinner bloquant.
-                await Task.Run(() => WindowsServiceHelper.StartService("NTP"));
-            }
+        private async void BtnRetry_Click(object sender, RoutedEventArgs e)
+        {
+            await TryConnectAsync();
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)

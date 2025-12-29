@@ -25,7 +25,7 @@ filegen clockstats file clockstats type day enable
 # --- 3. SOURCE GNSS (Pilote 20 NMEA) ---
 # Adresse : 127.127.20.X (X = numéro du port COM)
 # Mode 17 : 9600 baud + trame $GPRMC
-server 127.127.20.{{ COM_PORT }} mode {{ MODE }} minpoll 4 maxpoll 4 prefer true
+server 127.127.20.{{ COM_PORT }} mode 17 minpoll 4 maxpoll 4 prefer true
 
 # --- 4. PARAMÈTRES FUDGE ---
 fudge 127.127.20.{{ COM_PORT }} stratum 1 refid GPS

@@ -1,102 +1,72 @@
 <Window x:Class="TimeReference.App.IqtWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Analyse Qualité Signal (IQT)" Height="500" Width="800"
-        Background="#1E1E1E" Foreground="#E0E0E0"
-        WindowStartupLocation="CenterOwner"
+        Title="Qualité Signal GPS (IQT)" Height="300" Width="400"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         Loaded="Window_Loaded" Closing="Window_Closing">
-    
-    <Window.Resources>
-        <!-- Style pour les textes des jauges -->
-        <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Consolas, Courier New, Monospace"/>
-            <Setter Property="Foreground" Value="#FFD700"/> <!-- Or Vintage -->
-        </Style>
-    </Window.Resources>
-
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- En-tête -->
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,20">
-            <TextBlock Text="INDICE DE QUALITÉ TEMPORELLE" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <TextBlock Text="Analyse en temps réel des trames NMEA" FontSize="14" Foreground="#AAAAAA" HorizontalAlignment="Center"/>
-        </StackPanel>
+        <TextBlock Text="Analyse de la Qualité du Signal" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-        <!-- Zone des Jauges -->
-        <Grid Grid.Row="1">
+        <!-- Valeurs Numériques -->
+        <Grid Grid.Row="1" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/> <!-- Grande jauge -->
-                <ColumnDefinition Width="1*"/> <!-- Colonne des petites jauges -->
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <!-- Grande Jauge : Score Global -->
-            <Grid Grid.Column="0" Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                
-                <!-- Cadran -->
-                <Canvas x:Name="MainGaugeCanvas" Width="250" Height="250" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Ellipse Width="250" Height="250" Stroke="#FFD700" StrokeThickness="4" Fill="#101010"/>
-                    <!-- Marques (simplifiées) -->
-                    <Line X1="125" Y1="10" X2="125" Y2="30" Stroke="#555" StrokeThickness="2"/>
-                    <Line X1="125" Y1="240" X2="125" Y2="220" Stroke="#555" StrokeThickness="2"/>
-                    <Line X1="10" Y1="125" X2="30" Y2="125" Stroke="#555" StrokeThickness="2"/>
-                    <Line X1="240" Y1="125" X2="220" Y2="125" Stroke="#555" StrokeThickness="2"/>
-                    
-                    <!-- Aiguille (Pivot au centre 125,125) -->
-                    <Line x:Name="MainNeedle" X1="125" Y1="125" X2="125" Y2="40" Stroke="Red" StrokeThickness="3" RenderTransformOrigin="0.5,0.5">
-                        <Line.RenderTransform>
-                            <RotateTransform x:Name="MainNeedleTransform" Angle="-135"/>
-                        </Line.RenderTransform>
-                    </Line>
-                    <Ellipse Width="16" Height="16" Fill="#FFD700" Canvas.Left="117" Canvas.Top="117"/>
-                </Canvas>
+            <!-- Score Global -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Score Global :" FontWeight="Bold" FontSize="14" Margin="0,0,10,10"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtTotalScore" Text="-- %" FontWeight="Bold" FontSize="14" Margin="0,0,0,10">
+                <TextBlock.ToolTip>
+                    Indice global de qualité (0-100%) calculé à partir du SNR, HDOP et nombre de satellites.
+                </TextBlock.ToolTip>
+            </TextBlock>
 
-                <!-- Valeur -->
-                <StackPanel Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0">
-                    <TextBlock x:Name="TxtTotalScore" Text="0.0 %" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <TextBlock Text="SCORE GLOBAL" FontSize="16" HorizontalAlignment="Center" Foreground="#888"/>
-                </StackPanel>
-            </Grid>
+            <!-- SNR -->
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="SNR Moyen :" Margin="0,0,10,5"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtSnrVal" Text="-- dB" FontWeight="Bold" Margin="0,0,0,5">
+                <TextBlock.ToolTip>
+                    Signal-to-Noise Ratio moyen des satellites utilisés. > 30dB est excellent.
+                </TextBlock.ToolTip>
+            </TextBlock>
 
-            <!-- Petites Jauges -->
-            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                
-                <!-- SNR -->
-                <StackPanel Margin="0,0,0,20">
-                    <TextBlock Text="SNR (Signal/Bruit)" FontSize="14" HorizontalAlignment="Center"/>
-                    <ProgressBar x:Name="PbSnr" Height="15" Width="200" Minimum="0" Maximum="100" Value="0" Background="#333" Foreground="#FFD700" BorderBrush="#555"/>
-                    <TextBlock x:Name="TxtSnrVal" Text="0 dB" FontSize="12" HorizontalAlignment="Right" Margin="0,2,30,0"/>
-                </StackPanel>
+            <!-- HDOP -->
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="HDOP :" Margin="0,0,10,5"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtHdopVal" Text="--" FontWeight="Bold" Margin="0,0,0,5">
+                <TextBlock.ToolTip>
+                    Horizontal Dilution of Precision. Plus c'est bas, mieux c'est (&lt; 1.0 idéal).
+                </TextBlock.ToolTip>
+            </TextBlock>
 
-                <!-- HDOP -->
-                <StackPanel Margin="0,0,0,20">
-                    <TextBlock Text="HDOP (Précision)" FontSize="14" HorizontalAlignment="Center"/>
-                    <ProgressBar x:Name="PbHdop" Height="15" Width="200" Minimum="0" Maximum="100" Value="0" Background="#333" Foreground="#FFD700" BorderBrush="#555"/>
-                    <TextBlock x:Name="TxtHdopVal" Text="0.0" FontSize="12" HorizontalAlignment="Right" Margin="0,2,30,0"/>
-                </StackPanel>
-
-                <!-- Satellites -->
-                <StackPanel>
-                    <TextBlock Text="Satellites Visibles" FontSize="14" HorizontalAlignment="Center"/>
-                    <ProgressBar x:Name="PbSat" Height="15" Width="200" Minimum="0" Maximum="100" Value="0" Background="#333" Foreground="#FFD700" BorderBrush="#555"/>
-                    <TextBlock x:Name="TxtSatVal" Text="0" FontSize="12" HorizontalAlignment="Right" Margin="0,2,30,0"/>
-                </StackPanel>
-
-            </StackPanel>
+            <!-- Satellites -->
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Satellites :" Margin="0,0,10,5"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TxtSatVal" Text="--" FontWeight="Bold" Margin="0,0,0,5">
+                <TextBlock.ToolTip>
+                    Nombre de satellites utilisés pour le calcul de la position.
+                </TextBlock.ToolTip>
+            </TextBlock>
         </Grid>
 
-        <!-- Pied de page / Contrôles -->
-        <Grid Grid.Row="2" Margin="0,20,0,0">
-            <TextBlock x:Name="TxtStatus" Text="Initialisation..." FontSize="12" Foreground="#888" VerticalAlignment="Center"/>
-            <Button Content="Fermer" HorizontalAlignment="Right" Width="100" Height="30" Click="BtnClose_Click" Background="#333" Foreground="White"/>
-        </Grid>
+        <!-- Status -->
+        <TextBlock Grid.Row="2" x:Name="TxtStatus" Text="Initialisation..." Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,20,0,10"/>
+
+        <!-- Boutons -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="BtnRetry" Content="Réessayer" Width="100" Margin="0,0,10,0" Click="BtnRetry_Click" IsEnabled="False"/>
+            <Button Content="Fermer" Width="100" Click="BtnClose_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

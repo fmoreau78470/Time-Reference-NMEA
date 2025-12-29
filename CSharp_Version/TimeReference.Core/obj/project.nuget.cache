@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "BUdelcIpm/E=",
+  "dgSpecHash": "xwqaR9YzOMI=",
   "success": true,
   "projectFilePath": "D:\\Francis\\Documents\\code\\Time reference NMEA\\CSharp_Version\\TimeReference.Core\\TimeReference.Core.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Francis\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.22\\microsoft.net.illink.tasks.8.0.22.nupkg.sha512",
     "C:\\Users\\Francis\\.nuget\\packages\\runtime.android-arm.runtime.native.system.io.ports\\10.0.1\\runtime.android-arm.runtime.native.system.io.ports.10.0.1.nupkg.sha512",
     "C:\\Users\\Francis\\.nuget\\packages\\runtime.android-arm64.runtime.native.system.io.ports\\10.0.1\\runtime.android-arm64.runtime.native.system.io.ports.10.0.1.nupkg.sha512",
     "C:\\Users\\Francis\\.nuget\\packages\\runtime.android-x64.runtime.native.system.io.ports\\10.0.1\\runtime.android-x64.runtime.native.system.io.ports.10.0.1.nupkg.sha512",
@@ -23,7 +24,10 @@
     "C:\\Users\\Francis\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\10.0.1\\runtime.osx-x64.runtime.native.system.io.ports.10.0.1.nupkg.sha512",
     "C:\\Users\\Francis\\.nuget\\packages\\system.diagnostics.eventlog\\10.0.1\\system.diagnostics.eventlog.10.0.1.nupkg.sha512",
     "C:\\Users\\Francis\\.nuget\\packages\\system.io.ports\\10.0.1\\system.io.ports.10.0.1.nupkg.sha512",
-    "C:\\Users\\Francis\\.nuget\\packages\\system.serviceprocess.servicecontroller\\10.0.1\\system.serviceprocess.servicecontroller.10.0.1.nupkg.sha512"
+    "C:\\Users\\Francis\\.nuget\\packages\\system.serviceprocess.servicecontroller\\10.0.1\\system.serviceprocess.servicecontroller.10.0.1.nupkg.sha512",
+    "C:\\Users\\Francis\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.22\\microsoft.netcore.app.runtime.win-x64.8.0.22.nupkg.sha512",
+    "C:\\Users\\Francis\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.22\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.22.nupkg.sha512",
+    "C:\\Users\\Francis\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.22\\microsoft.aspnetcore.app.runtime.win-x64.8.0.22.nupkg.sha512"
   ],
   "logs": []
 }

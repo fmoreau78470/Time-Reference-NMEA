@@ -2,47 +2,53 @@
 <Window x:Class="TimeReference.App.ClockVarWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Moniteur NTP (clockvar)" Height="400" Width="600" WindowStartupLocation="CenterOwner">
-    <Grid Margin="15">
+        Title="Moniteur NTP (clockvar)" Height="800" Width="600"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="État du Pilote NMEA (Mise à jour : 1s)" FontWeight="Bold" FontSize="16" Margin="0,0,0,15"/>
+        <TextBlock Text="Variables internes du pilote NTP (Mise à jour : 1s)" FontWeight="Bold" Margin="0,0,0,10"/>
 
-        <!-- Tableau de bord -->
-        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" Padding="10" Margin="0,0,0,15" Background="#FAFAFA">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+        <!-- Tableau des variables -->
+        <DataGrid Grid.Row="1" x:Name="DgVars" AutoGenerateColumns="False" IsReadOnly="True" 
+                  HeadersVisibility="Column" GridLinesVisibility="Horizontal" Background="White">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Paramètre" Binding="{Binding Key}" Width="120" FontWeight="Bold"/>
+                <DataGridTextColumn Header="Valeur" Binding="{Binding Value}" Width="*"/>
+            </DataGrid.Columns>
+            
+            <!-- Style pour ajouter le ToolTip sur toute la ligne -->
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="ToolTip">
+                        <Setter.Value>
+                            <ToolTip Content="{Binding Description}"/>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Fudge Time 2 (ms) :" FontWeight="Bold"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="LblFudge" Text="--" Foreground="Blue"/>
+        <TextBlock Grid.Row="2" Text="Réponse brute ntpq :" FontWeight="Bold" Margin="0,10,0,5"/>
+        
+        <TextBox Grid.Row="3" x:Name="TxtRaw" TextWrapping="Wrap" IsReadOnly="True" 
+                 VerticalScrollBarVisibility="Auto" FontFamily="Consolas" Background="#F5F5F5" Margin="0,0,0,10"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Stratum :" FontWeight="Bold" Margin="0,5,0,0"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LblStratum" Text="--" Margin="0,5,0,0"/>
+        <TextBlock Grid.Row="4" Text="Survolez une ligne pour voir la description du paramètre." 
+                   FontStyle="Italic" Foreground="Gray" Margin="0,5,0,0" HorizontalAlignment="Center"/>
 
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Ref ID :" FontWeight="Bold" Margin="0,5,0,0"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="LblRefId" Text="--" Margin="0,5,0,0"/>
-
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Santé (Poll/NoReply) :" FontWeight="Bold" Margin="0,5,0,0"/>
-                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="LblHealth" Text="--" Margin="0,5,0,0"/>
-            </Grid>
-        </Border>
-
-        <!-- Données brutes -->
-        <GroupBox Grid.Row="2" Header="Réponse brute ntpq">
-            <TextBox x:Name="TxtRaw" TextWrapping="Wrap" IsReadOnly="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas"/>
-        </GroupBox>
+        <!-- Boutons d'action -->
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button x:Name="BtnPause" Content="Pause" Width="100" Margin="0,0,10,0" Click="BtnPause_Click"/>
+            <Button x:Name="BtnCopy" Content="Copier" Width="100" Margin="0,0,10,0" Click="BtnCopy_Click"/>
+            <Button Content="Fermer" Width="100" Click="BtnClose_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

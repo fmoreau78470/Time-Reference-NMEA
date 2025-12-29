@@ -1,67 +1,240 @@
 ﻿<Window x:Class="TimeReference.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Time Reference NMEA" Height="500" Width="550">
-    <Grid Margin="20">
-        <StackPanel>
-            <!-- Zone de Connexion -->
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                <TextBlock Text="Port COM :" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBox x:Name="TxtPort" Text="COM3" Width="80" Margin="0,0,10,0" VerticalContentAlignment="Center"/>
-                <Button x:Name="BtnConnect" Content="Connecter" Click="BtnConnect_Click" Padding="10,5" Margin="0,0,10,0"/>
-                <Button x:Name="BtnGenerateNtp" Content="Générer NTP" Click="BtnGenerateNtp_Click" Padding="10,5"/>
-            </StackPanel>
+        Title="Time Reference NMEA - Control Panel" 
+        Width="700" Height="320"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        Icon="Assets/Icone-Time-Reference.ico"
+        Background="{DynamicResource WindowBackground}">
 
-            <!-- Zone d'Affichage -->
-            <GroupBox Header="Données GPS" Padding="10">
-                <StackPanel>
-                    <TextBlock x:Name="LblStatus" Text="Statut : Déconnecté" Foreground="Gray" Margin="0,0,0,10"/>
-                    
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+    <Window.Resources>
+        <!-- Style pour les interrupteurs modernes -->
+        <Style x:Key="SwitchToggleStyle" TargetType="ToggleButton">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid Cursor="Hand">
+                            <Border x:Name="Track" CornerRadius="10" Background="{DynamicResource SecondaryText}" Opacity="0.5"/>
+                            <Border x:Name="Thumb" CornerRadius="8" Background="White" Width="16" Height="16" HorizontalAlignment="Left" Margin="2,0,0,0">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="1" BlurRadius="2" Opacity="0.2"/>
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Track" Property="Background" Value="{DynamicResource SuccessColor}"/>
+                                <Setter TargetName="Track" Property="Opacity" Value="1"/>
+                                <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Right"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Heure UTC :" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="LblTime" Text="--:--:--"/>
+        <!-- Styles pour harmoniser l'apparence -->
+        <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryText}"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style x:Key="ClockTextStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="{DynamicResource CardBackground}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="6">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="4" ShadowDepth="1.5" Opacity="0.2" Direction="270" Color="{DynamicResource ShadowColor}"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.6"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Latitude :" FontWeight="Bold" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LblLat" Text="--" Margin="0,5,0,0"/>
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- 0: Header Dashboard -->
+            <RowDefinition Height="Auto"/> <!-- 1: Connection (Hidden) -->
+            <RowDefinition Height="Auto"/> <!-- 2: Main Controls -->
+            <RowDefinition Height="*"/>    <!-- 3: Peers Data -->
+        </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Longitude :" FontWeight="Bold" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="2" Grid.Column="1" x:Name="LblLon" Text="--" Margin="0,5,0,0"/>
-                    </Grid>
+        <!-- 0. Header Dashboard (Horloges, Santé, Position) -->
+        <Border Grid.Row="0" Background="{DynamicResource CardBackground}" CornerRadius="8" Padding="15" Margin="0,0,0,15">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.1" Direction="270" Color="{DynamicResource ShadowColor}"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/> <!-- Clocks -->
+                    <ColumnDefinition Width="*"/>    <!-- Health/Status -->
+                    <ColumnDefinition Width="Auto"/> <!-- Quality -->
+                    <ColumnDefinition Width="Auto"/> <!-- Position -->
+                </Grid.ColumnDefinitions>
+
+                <!-- Clocks -->
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="SYSTÈME" Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" Width="60"/>
+                        <TextBlock x:Name="LblSysTime" Text="--:--:--" Style="{StaticResource ClockTextStyle}" Foreground="{DynamicResource PrimaryText}"/>
+                        <TextBlock Text="UTC" VerticalAlignment="Center" Margin="10,0,5,0" Foreground="{DynamicResource PrimaryText}"/>
+                        <ToggleButton x:Name="ChkUtc" VerticalAlignment="Center" Click="ChkUtc_Click" Style="{StaticResource SwitchToggleStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="GPS" Style="{StaticResource HeaderTextStyle}" VerticalAlignment="Center" Width="60"/>
+                        <TextBlock x:Name="LblGpsTimeHeader" Text="--:--:--" Style="{StaticResource ClockTextStyle}" Foreground="{DynamicResource AccentColor}" />
+                    </StackPanel>
                 </StackPanel>
-            </GroupBox>
-            
-            <!-- Logs bruts (pour voir ce qui se passe) -->
-            <TextBlock Text="Dernière trame brute :" Margin="0,15,0,2" FontSize="10" Foreground="Gray"/>
-            <TextBlock x:Name="LblRaw" Text="..." Foreground="Gray" FontSize="10" TextTrimming="CharacterEllipsis"/>
 
-            <!-- Zone de contrôle NTP (Spec 5) -->
-            <StackPanel Margin="0,20,0,0">
-                <TextBlock x:Name="LblNtpStatus" Text="Service NTP : Inconnu" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,5"/>
-                
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-                    <Button x:Name="BtnStartNtp" Content="Démarrer" Width="80" Margin="5" Click="BtnStartNtp_Click"/>
-                    <Button x:Name="BtnStopNtp" Content="Arrêter" Width="80" Margin="5" Click="BtnStopNtp_Click"/>
-                    <Button x:Name="BtnRestartNtp" Content="Redémarrer" Width="80" Margin="5" Click="BtnRestartNtp_Click"/>
+                <!-- Health & Status -->
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="LblStatus" Text="Prêt" FontWeight="SemiBold" Foreground="{DynamicResource SecondaryText}" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                    <TextBlock x:Name="LblHealth" Text="100%" FontSize="36" FontWeight="Black" Foreground="{DynamicResource SuccessColor}" HorizontalAlignment="Center" />
                 </StackPanel>
 
-                <!-- Boutons Paramètres et Logs (Spec 5) -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-                    <Button x:Name="BtnSettings" Content="Paramètres" Width="100" Height="30" Margin="5" Click="BtnSettings_Click"/>
-                    <Button x:Name="BtnLogs" Content="Logs" Width="100" Height="30" Margin="5" Click="BtnLogs_Click"/>
-                    <Button x:Name="BtnMonitor" Content="Moniteur NTP" Width="100" Height="30" Margin="5" Click="BtnMonitor_Click"/>
-                    <Button x:Name="BtnIqt" Content="Qualité Signal" Width="100" Height="30" Margin="5" Click="BtnIqt_Click"/>
+                <!-- Quality (Offset/Jitter) -->
+                <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="20,0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,2">
+                        <TextBlock Text="Offset: " FontSize="11" Foreground="{DynamicResource SecondaryText}"/>
+                        <TextBlock x:Name="LblOffset" Text="-- ms" FontWeight="Bold" FontSize="11"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="Jitter: " FontSize="11" Foreground="{DynamicResource SecondaryText}"/>
+                        <TextBlock x:Name="LblJitter" Text="-- ms" FontWeight="Bold" FontSize="11"/>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+
+                <!-- Position -->
+                <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock x:Name="LblLat" Text="--" FontFamily="Consolas" FontWeight="Bold" FontSize="11"/>
+                        <TextBlock x:Name="LblLatDms" Text="" FontFamily="Consolas" Foreground="{DynamicResource SecondaryText}" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock x:Name="LblLon" Text="--" FontFamily="Consolas" FontWeight="Bold" FontSize="11"/>
+                        <TextBlock x:Name="LblLonDms" Text="" FontFamily="Consolas" Foreground="{DynamicResource SecondaryText}" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 1. Connection (Hidden but required for code-behind) -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Visibility="Collapsed">
+            <TextBox x:Name="TxtPort"/>
+            <Button x:Name="BtnConnect" Click="BtnConnect_Click"/>
         </StackPanel>
+
+        <!-- 2. Main Controls (Tools + NTP) -->
+        <Grid Grid.Row="2" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Tools Buttons (Left) -->
+            <Border Grid.Column="0" Background="{DynamicResource CardBackground}" CornerRadius="8" Padding="10" Margin="0,0,15,0">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.1" Direction="270" Color="{DynamicResource ShadowColor}"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Grid.Row="0" Grid.Column="0" x:Name="BtnSettings" Content="Paramètres" Click="BtnSettings_Click" Height="25" FontSize="11" Margin="0,0,5,5" Width="80"/>
+                    <Button Grid.Row="0" Grid.Column="1" x:Name="BtnCalibration" Content="Calibration" Click="BtnCalibration_Click" Height="25" FontSize="11" Margin="0,0,5,5" Width="80"/>
+                    <Button Grid.Row="0" Grid.Column="2" x:Name="BtnLogs" Content="Logs" Click="BtnLogs_Click" Height="25" FontSize="11" Margin="0,0,0,5" Width="80"/>
+                    
+                    <Button Grid.Row="1" Grid.Column="0" x:Name="BtnMonitor" Content="Moniteur" Click="BtnMonitor_Click" Height="25" FontSize="11" Margin="0,0,5,0" Width="80"/>
+                    <Button Grid.Row="1" Grid.Column="1" x:Name="BtnIqt" Content="Qualité" Click="BtnIqt_Click" Height="25" FontSize="11" Margin="0,0,5,0" Width="80"/>
+                </Grid>
+            </Border>
+
+            <!-- NTP Control (Right) -->
+            <Border Grid.Column="1" Background="{DynamicResource CardBackground}" CornerRadius="8" Padding="10">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.1" Direction="270" Color="{DynamicResource ShadowColor}"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5">
+                         <TextBlock x:Name="LblNtpStatus" Text="SERVICE NTP : INCONNU" FontWeight="Bold" Foreground="{DynamicResource WarningColor}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                         <TextBlock Text="Pairs" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="{DynamicResource PrimaryText}" FontSize="11"/>
+                         <ToggleButton x:Name="ChkShowPeers" VerticalAlignment="Center" Click="ChkShowPeers_Click" Style="{StaticResource SwitchToggleStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button x:Name="BtnStartNtp" Content="Démarrer" Width="80" Background="{DynamicResource SuccessColor}" Foreground="White" Click="BtnStartNtp_Click" BorderThickness="0" Height="25" FontSize="11" Margin="0,0,5,0"/>
+                        <Button x:Name="BtnStopNtp" Content="Arrêter" Width="80" Click="BtnStopNtp_Click" Height="25" FontSize="11" Margin="0,0,5,0"/>
+                        <Button x:Name="BtnRestartNtp" Content="Redémarrer" Width="80" Click="BtnRestartNtp_Click" Height="25" FontSize="11"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Theme Slider (Right) -->
+            <Border Grid.Column="2" Background="{DynamicResource CardBackground}" CornerRadius="8" Padding="10" Margin="15,0,0,0">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.1" Direction="270" Color="{DynamicResource ShadowColor}"/>
+                </Border.Effect>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Thème" FontSize="10" Foreground="{DynamicResource SecondaryText}" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                    <Slider x:Name="ThemeSlider" Orientation="Vertical" Minimum="0" Maximum="2" Value="0"
+                            IsSnapToTickEnabled="True" TickFrequency="1" Height="60"
+                            ValueChanged="ThemeSlider_ValueChanged"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- 3. Peers Data (Logs) -->
+        <Border Grid.Row="3" x:Name="GrpPeers" Background="{DynamicResource ConsoleBackground}" CornerRadius="4" MinHeight="150" Visibility="Collapsed">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="PnlNtpPeers" Margin="10"/>
+            </ScrollViewer>
+        </Border>
+
     </Grid>
 </Window>

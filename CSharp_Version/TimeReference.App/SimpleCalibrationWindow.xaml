@@ -1,0 +1,48 @@
+<Window x:Class="TimeReference.App.SimpleCalibrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Calibration Simple (Loopstats)" Height="550" Width="700" WindowStartupLocation="CenterOwner">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Calibration GPS vs Horloge Locale" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+        <TextBlock Text="Analyse de la stabilité via les fichiers loopstats" FontStyle="Italic" Foreground="Gray" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+
+        <!-- Configuration -->
+        <GroupBox Grid.Row="1" Header="Paramètres de l'analyse" Margin="0,0,0,15">
+            <StackPanel Margin="10">
+                <TextBlock Text="Durée de l'analyse (Minutes) :" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Slider x:Name="SldDuration" Minimum="2" Maximum="20" Value="5" Width="300" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" ValueChanged="SldDuration_ValueChanged"/>
+                    <TextBlock x:Name="LblDuration" Text="5 min" VerticalAlignment="Center" Margin="10,0,0,0" FontWeight="Bold"/>
+                </StackPanel>
+                <TextBlock Text="Une durée plus longue offre une meilleure précision (lissage du Jitter)." FontSize="11" Foreground="Gray" Margin="0,5,0,0"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Status Area -->
+        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" Padding="10" Margin="0,0,0,10" Background="#F0F0F0">
+            <StackPanel>
+                <TextBlock x:Name="LblStatus" Text="Prêt. Sélectionnez une durée et cliquez sur Démarrer." FontWeight="Bold"/>
+                <ProgressBar x:Name="PbProgress" Height="20" Margin="0,10,0,0" Minimum="0" Maximum="100"/>
+                <TextBlock x:Name="LblStats" Text="Moyenne Offset : -- ms | Échantillons : 0" Margin="0,5,0,0" FontSize="11"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Logs -->
+        <TextBox Grid.Row="3" x:Name="TxtLogs" IsReadOnly="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" FontSize="12" Background="Black" Foreground="LightGreen" TextWrapping="Wrap"/>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button x:Name="BtnStart" Content="Démarrer" Width="100" Margin="5" Click="BtnStart_Click"/>
+            <Button x:Name="BtnApply" Content="Appliquer" Width="100" Margin="5" IsEnabled="False" Click="BtnApply_Click"/>
+            <Button x:Name="BtnClose" Content="Fermer" Width="100" Margin="5" Click="BtnClose_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
