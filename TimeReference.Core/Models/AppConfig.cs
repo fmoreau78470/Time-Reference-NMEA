@@ -28,5 +28,17 @@ namespace TimeReference.Core.Models
 
         [JsonPropertyName("utc_mode")]
         public bool UtcMode { get; set; } = false;
+
+        [JsonPropertyName("mini_mode_always_on_top")]
+        public bool MiniModeAlwaysOnTop { get; set; } = true;
+
+        [JsonPropertyName("mini_mode_opacity")]
+        public double MiniModeOpacity { get; set; } = 1.0;
+
+        [JsonPropertyName("mini_mode_left")]
+        public double MiniModeLeft { get; set; } = -1;
+
+        [JsonPropertyName("mini_mode_top")]
+        public double MiniModeTop { get; set; } = -1;
     }
 }

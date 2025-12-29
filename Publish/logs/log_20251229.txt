@@ -1,0 +1,11 @@
+2025-12-29 20:13:32 [INFO] === OUVERTURE DE L'APPLICATION ===
+2025-12-29 20:13:32 [INFO] Service NTP : Changement d'état détecté (Inconnu -> Running) [Cause EXTÉRIEURE]
+2025-12-29 20:13:36 [INFO] Ouverture de la fenêtre Paramètres.
+2025-12-29 20:13:41 [INFO] Paramètres mis à jour (sans impact NTP).
+2025-12-29 20:13:42 [INFO] Fermeture de la fenêtre Paramètres.
+2025-12-29 20:13:43 [INFO] Ouverture de la fenêtre Paramètres.
+2025-12-29 20:13:49 [INFO] Fermeture de la fenêtre Paramètres.
+2025-12-29 20:13:53 [INFO] Ouverture de la fenêtre Paramètres.
+2025-12-29 20:13:55 [INFO] Paramètres mis à jour (sans impact NTP).
+2025-12-29 20:13:55 [INFO] Fermeture de la fenêtre Paramètres.
+2025-12-29 20:14:18 [INFO] Fermeture de l'application.

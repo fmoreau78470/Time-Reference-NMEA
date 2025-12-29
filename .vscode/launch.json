@@ -5,11 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Débogueur Python : Fichier actuel",
-            "type": "debugpy",
+            "name": "C#: TimeReference.App",
+            "type": "coreclr",
             "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal"
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/TimeReference.App/bin/Debug/net8.0-windows/TimeReference.App.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/TimeReference.App",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "logging": {
+                "moduleLoad": false
+            }
         }
     ]
 }

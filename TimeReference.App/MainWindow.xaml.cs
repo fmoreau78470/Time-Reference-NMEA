@@ -7,8 +7,11 @@ using System.Windows;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using System.Windows.Input;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
 using TimeReference.Core.Models;
 using TimeReference.Core.Services;
 
@@ -35,6 +38,12 @@ public partial class MainWindow : Window
     private double _restoreLeft;
     private double _restoreTop;
 
+    [DllImport("gdi32.dll")]
+    private static extern IntPtr CreateRoundRectRgn(int x1, int y1, int x2, int y2, int cx, int cy);
+
+    [DllImport("user32.dll")]
+    private static extern int SetWindowRgn(IntPtr hWnd, IntPtr hRgn, bool bRedraw);
+
     public MainWindow()
     {
         // Spec 1 : Instance unique
@@ -55,6 +64,11 @@ public partial class MainWindow : Window
         InitializeComponent();
 
         this.Loaded += Window_Loaded;
+        this.SizeChanged += MainWindow_SizeChanged;
+
+        // Ajout des événements pour l'opacité dynamique en mode mini
+        this.MouseEnter += (s, e) => { if (_isMiniMode) this.Opacity = 1.0; };
+        this.MouseLeave += (s, e) => { if (_isMiniMode) this.Opacity = _config.MiniModeOpacity > 0.1 ? _config.MiniModeOpacity : 1.0; };
 
         // Chargement de la configuration
         _configService = new ConfigService();
@@ -323,15 +337,22 @@ public partial class MainWindow : Window
         catch (Exception ex) { _expectingNtpStateChange = false; MessageBox.Show(ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error); Logger.Error(ex.Message); }
     }
 
-    private void BtnRestartNtp_Click(object sender, RoutedEventArgs e)
+    private async void BtnRestartNtp_Click(object sender, RoutedEventArgs e)
     {
         try 
         { 
             _expectingNtpStateChange = true;
             Logger.Info("ACTION UTILISATEUR : Demande de REDÉMARRAGE du service NTP.");
-            WindowsServiceHelper.RestartService("NTP"); 
+            
+            BtnRestartNtp.IsEnabled = false;
+
+            await Task.Run(() => WindowsServiceHelper.RestartService("NTP")); 
         }
         catch (Exception ex) { _expectingNtpStateChange = false; MessageBox.Show(ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error); Logger.Error(ex.Message); }
+        finally
+        {
+            BtnRestartNtp.IsEnabled = true;
+        }
     }
 
     private void BtnSettings_Click(object sender, RoutedEventArgs e)
@@ -523,21 +544,34 @@ public partial class MainWindow : Window
         this.Height = show ? 450 : 320;
     }
 
-    private void ThemeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    private void ThemeIcon_Click(object sender, MouseButtonEventArgs e)
     {
-        // Évite de se déclencher pendant l'initialisation de la fenêtre
-        if (!this.IsLoaded) return;
-
-        string themeName = (int)e.NewValue switch
+        if (sender is FrameworkElement element && element.Tag is string theme)
         {
-            1 => "Dark",
-            2 => "Red",
-            _ => "Light",
-        };
-        ChangeTheme(themeName);
+            ChangeTheme(theme);
+        }
     }
 
     private void ChangeTheme(string theme)
+    {
+        if (!IsLoaded)
+        {
+            ApplyThemeResources(theme);
+            return;
+        }
+
+        // Animation de transition fluide
+        var fadeOut = new DoubleAnimation(0.3, TimeSpan.FromMilliseconds(150));
+        fadeOut.Completed += (s, e) =>
+        {
+            ApplyThemeResources(theme);
+            var fadeIn = new DoubleAnimation(1.0, TimeSpan.FromMilliseconds(150));
+            this.BeginAnimation(OpacityProperty, fadeIn);
+        };
+        this.BeginAnimation(OpacityProperty, fadeOut);
+    }
+
+    private void ApplyThemeResources(string theme)
     {
         _currentTheme = theme;
         string uri = $"Themes/{theme}Theme.xaml";
@@ -565,11 +599,22 @@ public partial class MainWindow : Window
             _restoreLeft = this.Left;
             _restoreTop = this.Top;
 
+            // Rechargement de la config pour s'assurer d'avoir les dernières valeurs (transparence, etc.)
+            _config = _configService.Load();
+
             // Passage en mode Mini
             this.WindowStyle = WindowStyle.None;
             this.ResizeMode = ResizeMode.NoResize;
-            this.Background = Brushes.Transparent;
-            this.Topmost = true;
+            
+            // On force la couleur de fond actuelle pour éviter le rendu noir (transparent)
+            this.Background = (Brush)FindResource("WindowBackground");
+
+            this.Topmost = _config.MiniModeAlwaysOnTop;
+            this.Opacity = IsMouseOver ? 1.0 : (_config.MiniModeOpacity > 0.1 ? _config.MiniModeOpacity : 1.0);
+
+            // Ajout de la bordure colorée d'état
+            HeaderBorder.BorderThickness = new Thickness(2);
+            UpdateHealthUI();
             
             // Masquage des éléments non essentiels
             ColClocks.Width = new GridLength(0);
@@ -582,14 +627,36 @@ public partial class MainWindow : Window
             HeaderBorder.Margin = new Thickness(0);
 
             this.SizeToContent = SizeToContent.WidthAndHeight;
+
+            // Restauration de la position du mode mini si elle existe
+            if (_config.MiniModeLeft > 0 && _config.MiniModeTop > 0)
+            {
+                this.Left = _config.MiniModeLeft;
+                this.Top = _config.MiniModeTop;
+            }
+
+            // Application de la forme arrondie
+            Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(UpdateMiniWindowRegion));
         }
         else
         {
+            // Sauvegarde de la position du mode mini pour la prochaine fois
+            _config.MiniModeLeft = this.Left;
+            _config.MiniModeTop = this.Top;
+            _configService.Save(_config);
+            // Force la sauvegarde physique pour persistance entre sessions
+            string json = System.Text.Json.JsonSerializer.Serialize(_config, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+            System.IO.File.WriteAllText("config.json", json);
+
             // Retour en mode Normal
             this.WindowStyle = WindowStyle.SingleBorderWindow;
             this.ResizeMode = ResizeMode.CanMinimize;
             this.SetResourceReference(BackgroundProperty, "WindowBackground");
             this.Topmost = false;
+            this.Opacity = 1.0;
+
+            // Suppression de la bordure
+            HeaderBorder.BorderThickness = new Thickness(0);
             
             // Restauration des éléments
             ColClocks.Width = GridLength.Auto;
@@ -607,6 +674,10 @@ public partial class MainWindow : Window
             // Restauration de la position d'origine
             this.Left = _restoreLeft;
             this.Top = _restoreTop;
+
+            // Réinitialisation de la forme (rectangulaire)
+            var helper = new WindowInteropHelper(this);
+            SetWindowRgn(helper.Handle, IntPtr.Zero, true);
         }
     }
 
@@ -624,6 +695,35 @@ public partial class MainWindow : Window
         {
             ToggleMiniMode();
         }
+    }
+
+    private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        if (_isMiniMode)
+        {
+            UpdateMiniWindowRegion();
+        }
+    }
+
+    private void UpdateMiniWindowRegion()
+    {
+        if (!_isMiniMode) return;
+
+        var source = PresentationSource.FromVisual(this);
+        if (source?.CompositionTarget == null) return;
+        
+        // Gestion du DPI (mise à l'échelle de l'écran)
+        double dpiX = source.CompositionTarget.TransformToDevice.M11;
+        double dpiY = source.CompositionTarget.TransformToDevice.M22;
+
+        int width = (int)(this.ActualWidth * dpiX);
+        int height = (int)(this.ActualHeight * dpiY);
+
+        // Création d'une région arrondie (20px de rayon)
+        IntPtr hRgn = CreateRoundRectRgn(0, 0, width, height, 20, 20);
+        
+        var helper = new WindowInteropHelper(this);
+        SetWindowRgn(helper.Handle, hRgn, true);
     }
 
     // --- GESTION HORLOGES & QUALITÉ (Step 24) ---
@@ -862,10 +962,17 @@ public partial class MainWindow : Window
     {
         if (LblHealth == null) return;
         LblHealth.Text = $"{_healthScore:F0}%";
-        
-        if (_healthScore > 90) LblHealth.SetResourceReference(TextBlock.ForegroundProperty, "SuccessColor");
-        else if (_healthScore > 50) LblHealth.SetResourceReference(TextBlock.ForegroundProperty, "WarningColor");
-        else LblHealth.SetResourceReference(TextBlock.ForegroundProperty, "ErrorColor");
+
+        string colorKey = "ErrorColor";
+        if (_healthScore > 90) colorKey = "SuccessColor";
+        else if (_healthScore > 50) colorKey = "WarningColor";
+
+        LblHealth.SetResourceReference(TextBlock.ForegroundProperty, colorKey);
+
+        if (_isMiniMode)
+        {
+            HeaderBorder.SetResourceReference(Border.BorderBrushProperty, colorKey);
+        }
     }
 
     private void ParseAndDisplayNmea(string nmea)
@@ -948,7 +1055,7 @@ public partial class MainWindow : Window
 
             // On force une largeur de 3 pour TOUS les degrés (Lat et Lon) pour garantir une largeur de chaîne identique
             int padWidth = 3;
-            return $"{degrees.ToString().PadLeft(padWidth)}°{intMin:00}'{seconds:00.00}\" {dir}";
+            return $"{degrees.ToString().PadLeft(padWidth)}°{intMin:00}'{seconds:00}\" {dir}";
         }
         return "";
     }
@@ -964,7 +1071,7 @@ public partial class MainWindow : Window
         string dir = isLat ? (decimalDeg >= 0 ? "N" : "S") : (decimalDeg >= 0 ? "E" : "W");
         // On force une largeur de 3 pour TOUS les degrés pour aligner parfaitement le bloc de gauche (Décimal)
         int padWidth = 3;
-        return $"{degrees.ToString().PadLeft(padWidth)}°{intMin:00}'{seconds:00.00}\" {dir}";
+        return $"{degrees.ToString().PadLeft(padWidth)}°{intMin:00}'{seconds:00}\" {dir}";
     }
 
     // IMPORTANT : Cet événement est déclenché par le Thread de lecture (arrière-plan).
@@ -1068,12 +1175,6 @@ public partial class MainWindow : Window
                     if (!string.IsNullOrEmpty(state.Theme))
                     {
                         _currentTheme = state.Theme;
-                        ThemeSlider.Value = _currentTheme switch
-                        {
-                            "Dark" => 1,
-                            "Red" => 2,
-                            _ => 0,
-                        };
                         Logger.Info($"Thème restauré : {_currentTheme}");
                     }
                 }
@@ -1092,6 +1193,20 @@ public partial class MainWindow : Window
             System.IO.File.WriteAllText(path, json);
         }
         catch (Exception ex) { Logger.Error($"Erreur sauvegarde état : {ex.Message}"); }
+    }
+
+    protected override void OnStateChanged(EventArgs e)
+    {
+        // Si l'utilisateur clique sur le bouton réduire (WindowState devient Minimized)
+        if (WindowState == WindowState.Minimized)
+        {
+            // On annule la réduction standard (retour à Normal)
+            WindowState = WindowState.Normal;
+            
+            // Si on n'est pas déjà en mode mini, on l'active
+            if (!_isMiniMode) ToggleMiniMode();
+        }
+        base.OnStateChanged(e);
     }
 }
 
