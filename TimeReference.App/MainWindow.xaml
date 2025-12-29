@@ -91,7 +91,7 @@
 
     <Grid>
         <!-- Corps de la raquette -->
-        <Path Data="M 20,2 L 330,2 A 18,18 0 0 1 348,20 L 348,215 C 348,265 290,265 290,300 L 290,530 A 18,18 0 0 1 272,548 L 78,548 A 18,18 0 0 1 60,530 L 60,300 C 60,265 2,265 2,215 L 2,20 A 18,18 0 0 1 20,2 Z"
+        <Path x:Name="RaquetteBackground" Data="M 20,2 L 330,2 A 18,18 0 0 1 348,20 L 348,215 C 348,265 290,265 290,300 L 290,530 A 18,18 0 0 1 272,548 L 78,548 A 18,18 0 0 1 60,530 L 60,300 C 60,265 2,265 2,215 L 2,20 A 18,18 0 0 1 20,2 Z"
               Fill="{DynamicResource WindowBackground}"
               Stroke="{DynamicResource BorderColor}"
               StrokeThickness="4">
@@ -111,7 +111,7 @@
             </Grid.RowDefinitions>
 
             <!-- Logo / Titre -->
-            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
+            <StackPanel x:Name="LogoPanel" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
                 <TextBlock Text="NMEA" FontWeight="Black" FontSize="16" Foreground="{DynamicResource PrimaryText}" Margin="0,0,5,0"/>
                 <TextBlock Text="CONTROLLER" FontWeight="Light" FontSize="16" Foreground="{DynamicResource SecondaryText}"/>
             </StackPanel>
@@ -135,14 +135,14 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" HorizontalAlignment="Left">
-                            <TextBlock Text="SYS" FontSize="9" Foreground="#FF888888"/>
-                            <TextBlock x:Name="LblSysTime" Text="--:--:--" Style="{StaticResource ClockTextStyle}" Foreground="#FFCCCCCC" FontSize="16"/>
+                            <TextBlock Text="SYS" FontSize="9" Foreground="{DynamicResource AccentColor}"/>
+                            <TextBlock x:Name="LblSysTime" Text="--:--:--" Style="{StaticResource ClockTextStyle}" Foreground="{DynamicResource AccentColor}" FontSize="16"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Column="1" Text="UTC" FontSize="10" Foreground="#FF555555" VerticalAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock x:Name="LblTimeMode" Grid.Column="1" Text="UTC" FontSize="10" Foreground="{DynamicResource AccentColor}" VerticalAlignment="Center" FontWeight="Bold"/>
 
                         <StackPanel Grid.Column="2" HorizontalAlignment="Right">
-                            <TextBlock Text="GPS" FontSize="9" Foreground="#FF888888" HorizontalAlignment="Right"/>
+                            <TextBlock Text="GPS" FontSize="9" Foreground="{DynamicResource AccentColor}" HorizontalAlignment="Right"/>
                             <TextBlock x:Name="LblGpsTimeHeader" Text="--:--:--" Style="{StaticResource ClockTextStyle}" Foreground="{DynamicResource AccentColor}" FontSize="16"/>
                         </StackPanel>
                     </Grid>
@@ -157,21 +157,21 @@
                                 <TextBlock x:Name="LblHealth" Text="100%" FontSize="22" FontWeight="Bold" Foreground="{DynamicResource SuccessColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <TextBlock x:Name="LblLat" Text="--.-----" FontFamily="Consolas" Foreground="White" FontSize="14" Margin="0,0,5,0" Visibility="Collapsed"/>
-                                    <TextBlock x:Name="LblLatDms" Text="" FontFamily="Consolas" Foreground="#FFAAAAAA" FontSize="10" VerticalAlignment="Bottom"/>
+                                    <TextBlock x:Name="LblLat" Text="--.-----" FontFamily="Consolas" Foreground="{DynamicResource AccentColor}" FontSize="14" Margin="0,0,5,0" Visibility="Collapsed"/>
+                                    <TextBlock x:Name="LblLatDms" Text="" FontFamily="Consolas" Foreground="{DynamicResource AccentColor}" FontSize="10" VerticalAlignment="Bottom"/>
                                 </StackPanel>
                             </Grid>
                             <Grid>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                    <TextBlock Text="Ofs: " FontSize="10" Foreground="#FF666666"/>
-                                    <TextBlock x:Name="LblOffset" Text="-- ms" FontSize="10" Foreground="#FF999999" Margin="0,0,8,0"/>
-                                    <TextBlock Text="Jit: " FontSize="10" Foreground="#FF666666"/>
-                                    <TextBlock x:Name="LblJitter" Text="-- ms" FontSize="10" Foreground="#FF999999"/>
+                                    <TextBlock Text="Jitter: " FontSize="10" Foreground="{DynamicResource AccentColor}"/>
+                                    <TextBlock x:Name="LblJitter" Text="-- ms" FontSize="10" Foreground="{DynamicResource AccentColor}" Margin="0,0,8,0"/>
+                                    <TextBlock Text="Offset " FontSize="10" Foreground="{DynamicResource AccentColor}"/>
+                                    <TextBlock x:Name="LblOffset" Text="-- ms" FontSize="10" Foreground="{DynamicResource AccentColor}"/>
                                 </StackPanel>
                                 <TextBlock Text="LON" Foreground="#FF888888" FontSize="10" VerticalAlignment="Center" Visibility="Collapsed"/>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <TextBlock x:Name="LblLon" Text="--.-----" FontFamily="Consolas" Foreground="White" FontSize="14" Margin="0,0,5,0" Visibility="Collapsed"/>
-                                    <TextBlock x:Name="LblLonDms" Text="" FontFamily="Consolas" Foreground="#FFAAAAAA" FontSize="10" VerticalAlignment="Bottom"/>
+                                    <TextBlock x:Name="LblLon" Text="--.-----" FontFamily="Consolas" Foreground="{DynamicResource AccentColor}" FontSize="14" Margin="0,0,5,0" Visibility="Collapsed"/>
+                                    <TextBlock x:Name="LblLonDms" Text="" FontFamily="Consolas" Foreground="{DynamicResource AccentColor}" FontSize="10" VerticalAlignment="Bottom"/>
                                 </StackPanel>
                             </Grid>
                         </StackPanel>
@@ -183,21 +183,21 @@
                             <!-- <TextBlock x:Name="LblStatus" Text="Prêt" FontSize="11" FontWeight="Bold" Foreground="{DynamicResource SecondaryText}"/> -->
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBlock Text="Santé: " FontSize="11" Foreground="#FF888888" Visibility="Collapsed"/>
+                            <TextBlock Text="Santé: " FontSize="11" Foreground="{DynamicResource AccentColor}" Visibility="Collapsed"/>
                         </StackPanel>
                     </Grid>
 
                     <!-- Ligne 4 : Status NTP (Texte) -->
-                    <TextBlock Grid.Row="4" x:Name="LblNtpStatus" Text="NTP: --" FontSize="9" Foreground="#FF555555" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                    <TextBlock Grid.Row="4" x:Name="LblNtpStatus" Text="NTP: --" FontSize="9" Foreground="{DynamicResource AccentColor}" HorizontalAlignment="Center" Margin="0,5,0,0"/>
                 </Grid>
             </Border>
 
             <!-- Clavier de commande -->
-            <UniformGrid Grid.Row="2" Columns="3" Rows="4" Margin="0,40,0,0" HorizontalAlignment="Center">
+            <UniformGrid x:Name="KeypadGrid" Grid.Row="2" Columns="3" Rows="4" Margin="0,40,0,0" HorizontalAlignment="Center">
                 <!-- Rangée 3: NTP Control -->
                 <Button x:Name="BtnStartNtp" Content="START" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource SuccessColor}" Click="BtnStartNtp_Click"/>
                 <Button x:Name="BtnStopNtp" Content="STOP" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource ErrorColor}" Click="BtnStopNtp_Click"/>
-                <Button x:Name="BtnRestartNtp" Content="RESET" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource WarningColor}" Click="BtnRestartNtp_Click"/>
+                <Button x:Name="BtnRestartNtp" Content="RESTART" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource WarningColor}" Click="BtnRestartNtp_Click"/>
 
 
                 <!-- Rangée 1: Modes -->
@@ -206,12 +206,12 @@
                 <Button x:Name="BtnLogs" Content="LOGS" Style="{StaticResource KeypadButtonStyle}" Click="BtnLogs_Click"/>
 
                 <!-- Rangée 2: Outils -->
-                <Button x:Name="BtnCalibration" Content="CALIB" Style="{StaticResource KeypadButtonStyle}" Click="BtnCalibration_Click"/>
+                <Button x:Name="BtnCalibration" Content="Calibration" Style="{StaticResource KeypadButtonStyle}" Click="BtnCalibration_Click"/>
                 <Button x:Name="BtnIqt" Content="IQT" Style="{StaticResource KeypadButtonStyle}" Click="BtnIqt_Click"/>
-                <Button x:Name="BtnEnter" Content="ENTER" Style="{StaticResource KeypadButtonStyle}" IsEnabled="False" ToolTip="Non implémenté"/>
+                <Button x:Name="BtnEnter" Content="" Style="{StaticResource KeypadButtonStyle}" IsEnabled="False" ToolTip="Non implémenté"/>
 
                 <!-- Rangée 4: Système & UTC -->
-                <Button x:Name="BtnBack" Content="BACK" Style="{StaticResource KeypadButtonStyle}" IsEnabled="False" ToolTip="Non implémenté"/>
+                <Button x:Name="BtnBack" Content="Style" Style="{StaticResource KeypadButtonStyle}" Click="BtnBack_Click" ToolTip="Changer le thème"/>
                 <Button Content="_" Style="{StaticResource KeypadButtonStyle}" Click="BtnMinimize_Click" Background="#FF555555"/>
                 <Button Content="OFF" Style="{StaticResource KeypadButtonStyle}" Background="#FFCC0000" Click="BtnClose_Click" ToolTip="Fermer l'application"/>
             </UniformGrid>

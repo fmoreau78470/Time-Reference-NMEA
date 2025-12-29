@@ -9,6 +9,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
 using System.Windows.Input;
 using TimeReference.Core.Models;
 using TimeReference.Core.Services;
@@ -32,7 +34,18 @@ public partial class MainWindow : Window
     private bool _expectingNtpStateChange = false;
     private string _currentTheme = "Light";
     private static Mutex? _mutex = null;
-    // La logique du "MiniMode" est obsolète avec la nouvelle interface "Raquette"
+    private DateTime? _lastGpsUtcTime;
+    private bool _isMiniMode = false;
+    private double _restoreLeft;
+    private double _restoreTop;
+    private double _restoreWidth;
+    private double _restoreHeight;
+
+    [DllImport("gdi32.dll")]
+    private static extern IntPtr CreateRoundRectRgn(int x1, int y1, int x2, int y2, int cx, int cy);
+
+    [DllImport("user32.dll")]
+    private static extern int SetWindowRgn(IntPtr hWnd, IntPtr hRgn, bool bRedraw);
     
     public MainWindow()
     {
@@ -53,6 +66,11 @@ public partial class MainWindow : Window
 
         InitializeComponent();
         this.Loaded += Window_Loaded;
+        this.SizeChanged += MainWindow_SizeChanged;
+
+        // Gestion de la transparence pour le mode mini
+        this.MouseEnter += (s, e) => { if (_isMiniMode) this.Opacity = 1.0; };
+        this.MouseLeave += (s, e) => { if (_isMiniMode) this.Opacity = _config.MiniModeOpacity > 0.1 ? _config.MiniModeOpacity : 1.0; };
 
         // Chargement de la configuration
         _configService = new ConfigService();
@@ -472,6 +490,18 @@ public partial class MainWindow : Window
         Logger.Info("Fermeture de l'assistant de Calibration.");
     }
 
+    private void BtnBack_Click(object sender, RoutedEventArgs e)
+    {
+        string nextTheme = _currentTheme switch
+        {
+            "Light" => "Dark",
+            "Dark" => "Red",
+            "Red" => "Light",
+            _ => "Light"
+        };
+        ChangeTheme(nextTheme);
+    }
+
     private void ChkShowPeers_Click(object sender, RoutedEventArgs e)
     {
         // Cette fonctionnalité est obsolète avec la nouvelle interface
@@ -519,18 +549,23 @@ public partial class MainWindow : Window
 
     private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
+        // Gestion du double-clic pour sortir du mode mini
+        if (e.ClickCount == 2)
+        {
+            if (_isMiniMode) ToggleMiniMode();
+            return;
+        }
+
         // Permet de déplacer la fenêtre "Raquette" en cliquant n'importe où
         if (e.ChangedButton == MouseButton.Left) this.DragMove();
     }
 
-    private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        // La fonctionnalité de double-clic pour le mode mini est obsolète.
-    }
-
     private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        // La logique de changement de taille pour le mode mini est obsolète.
+        if (_isMiniMode)
+        {
+            UpdateMiniWindowRegion();
+        }
     }
 
     private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -540,7 +575,94 @@ public partial class MainWindow : Window
 
     private void BtnMinimize_Click(object sender, RoutedEventArgs e)
     {
-        this.WindowState = WindowState.Minimized;
+        ToggleMiniMode();
+    }
+
+    private void ToggleMiniMode()
+    {
+        _isMiniMode = !_isMiniMode;
+
+        if (_isMiniMode)
+        {
+            // --- Passage en Mode Mini ---
+            _restoreLeft = this.Left;
+            _restoreTop = this.Top;
+            _restoreWidth = this.Width;
+            _restoreHeight = this.Height;
+
+            // On capture la largeur actuelle de l'écran LCD pour la conserver
+            double targetWidth = HeaderBorder.ActualWidth;
+
+            _config = _configService.Load();
+
+            LogoPanel.Visibility = Visibility.Collapsed;
+            KeypadGrid.Visibility = Visibility.Collapsed;
+            RaquetteBackground.Visibility = Visibility.Collapsed;
+
+            MainRootGrid.Margin = new Thickness(0);
+            HeaderBorder.Margin = new Thickness(0);
+
+            this.Topmost = _config.MiniModeAlwaysOnTop;
+            this.Opacity = IsMouseOver ? 1.0 : (_config.MiniModeOpacity > 0.1 ? _config.MiniModeOpacity : 1.0);
+            this.ResizeMode = ResizeMode.NoResize;
+            
+            this.Width = targetWidth;
+            this.SizeToContent = SizeToContent.Height;
+
+            if (_config.MiniModeLeft > 0 && _config.MiniModeTop > 0)
+            {
+                this.Left = _config.MiniModeLeft;
+                this.Top = _config.MiniModeTop;
+            }
+        }
+        else
+        {
+            // --- Retour au Mode Normal ---
+            _config.MiniModeLeft = this.Left;
+            _config.MiniModeTop = this.Top;
+            _configService.Save(_config);
+
+            this.SizeToContent = SizeToContent.Manual;
+
+            var helper = new WindowInteropHelper(this);
+            SetWindowRgn(helper.Handle, IntPtr.Zero, true);
+
+            this.Topmost = false;
+            this.Opacity = 1.0;
+            this.ResizeMode = ResizeMode.NoResize;
+
+            LogoPanel.Visibility = Visibility.Visible;
+            KeypadGrid.Visibility = Visibility.Visible;
+            RaquetteBackground.Visibility = Visibility.Visible;
+
+            MainRootGrid.Margin = new Thickness(20);
+
+            this.Width = _restoreWidth;
+            this.Height = _restoreHeight;
+            this.Left = _restoreLeft;
+            this.Top = _restoreTop;
+        }
+    }
+
+    private void UpdateMiniWindowRegion()
+    {
+        if (!_isMiniMode) return;
+
+        var source = PresentationSource.FromVisual(this);
+        if (source?.CompositionTarget == null) return;
+
+        double dpiX = source.CompositionTarget.TransformToDevice.M11;
+        double dpiY = source.CompositionTarget.TransformToDevice.M22;
+
+        int width = (int)(this.ActualWidth * dpiX);
+        int height = (int)(this.ActualHeight * dpiY);
+
+        int cornerRadius = (int)(15 * dpiX);
+
+        IntPtr hRgn = CreateRoundRectRgn(0, 0, width, height, cornerRadius, cornerRadius);
+
+        var helper = new WindowInteropHelper(this);
+        SetWindowRgn(helper.Handle, hRgn, true);
     }
 
     // --- GESTION HORLOGES & QUALITÉ (Step 24) ---
@@ -561,12 +683,32 @@ public partial class MainWindow : Window
 
         // Mise à jour immédiate lors du clic
         UpdateSystemClock();
+        UpdateGpsClockDisplay();
         UpdateUtcButtonAppearance();
+    }
+
+    private void UpdateGpsClockDisplay()
+    {
+        if (LblGpsTimeHeader == null || !_lastGpsUtcTime.HasValue) return;
+
+        DateTime timeToDisplay = _lastGpsUtcTime.Value;
+        if (!_config.UtcMode)
+        {
+            timeToDisplay = timeToDisplay.ToLocalTime();
+        }
+
+        LblGpsTimeHeader.Text = timeToDisplay.ToString("HH:mm:ss");
     }
 
     private void UpdateUtcButtonAppearance()
     {
         if (BtnUtc == null) return; // Sécurité pour l'initialisation
+        
+        if (LblTimeMode != null)
+        {
+            LblTimeMode.Text = _config.UtcMode ? "UTC" : "Locale";
+        }
+
         if (_config.UtcMode)
         {
             BtnUtc.Content = "UTC";
@@ -574,7 +716,7 @@ public partial class MainWindow : Window
         }
         else
         {
-            BtnUtc.Content = "LOCAL";
+            BtnUtc.Content = "Locale";
             BtnUtc.SetResourceReference(BackgroundProperty, "AccentColor");
         }
     }
@@ -823,6 +965,7 @@ public partial class MainWindow : Window
                     {
                         DateTime now = DateTime.UtcNow;
                         DateTime gpsTime = new DateTime(now.Year, now.Month, now.Day, t.Hour, t.Minute, t.Second, DateTimeKind.Utc);
+                        _lastGpsUtcTime = gpsTime;
 
                         bool isUtc = _config.UtcMode;
                         if (!isUtc) gpsTime = gpsTime.ToLocalTime();
@@ -915,6 +1058,7 @@ public partial class MainWindow : Window
             // FIX: On ne met à jour que si l'heure est valide (évite les 00:00:00 sur les trames GSV/GSA)
             if (data.UtcTime != DateTime.MinValue)
             {
+                _lastGpsUtcTime = data.UtcTime;
                 DateTime displayTime = data.UtcTime;
                 bool isUtc = _config.UtcMode;
                 if (!isUtc) displayTime = displayTime.ToLocalTime();
@@ -975,6 +1119,12 @@ public partial class MainWindow : Window
         _ntpClockVarTimer.Stop();
         
         // Sauvegarde de l'état (Santé) pour le prochain lancement
+        if (_isMiniMode)
+        {
+            _config.MiniModeLeft = this.Left;
+            _config.MiniModeTop = this.Top;
+            _configService.Save(_config);
+        }
         SaveAppState();
         
         Logger.Info("Fermeture de l'application.");
