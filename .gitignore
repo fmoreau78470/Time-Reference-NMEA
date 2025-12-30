@@ -1,10 +1,47 @@
+## --- [SECTION .NET / VISUAL STUDIO] ---
 bin/
 obj/
 .vs/
 *.user
 *.suo
 *.pdb
+*.sln.docstates
 
-# Python cache
+# Fichiers de build et cache
+[Dd]ebug/
+[Rr]elease/
+TestResults/
+.utest/
+
+## --- [SECTION PYTHON] ---
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+
+## --- [SECTION OS & EDITEURS] ---
+# Mac (Indispensable pour vos transferts vers PC)
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# VS Code (si vous l'utilisez sur l'une des machines)
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+## --- [SECTION PACKAGES] ---
+# NuGet packages (ne pas commiter les dépendances, elles se restaurent au build)
+*.nupkg
+**/packages/*
+!**/packages/repositories.config

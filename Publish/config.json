@@ -10,10 +10,10 @@
     "3.fr.pool.ntp.org"
   ],
   "server_options": "iburst",
-  "time2_value": 0.0011,
+  "time2_value": -0.0007,
   "utc_mode": false,
   "mini_mode_always_on_top": true,
-  "mini_mode_opacity": 0.6,
-  "mini_mode_left": 1666,
-  "mini_mode_top": 54
+  "mini_mode_opacity": 0.8,
+  "mini_mode_left": 503,
+  "mini_mode_top": 560
 }

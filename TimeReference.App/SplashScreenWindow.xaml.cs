@@ -7,7 +7,7 @@ namespace TimeReference.App
 {
     public partial class SplashScreenWindow : Window
     {
-        public SplashScreenWindow()
+        public SplashScreenWindow(bool autoClose = true)
         {
             InitializeComponent();
 
@@ -23,10 +23,22 @@ namespace TimeReference.App
             if (!string.IsNullOrEmpty(author)) TxtAuthor.Text = $"Auteur : {author}";
             if (!string.IsNullOrEmpty(company)) TxtCompany.Text = $"Compagnie : {company}";
 
-            // Timer pour fermer automatiquement après 3 secondes
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
-            timer.Tick += (s, e) => { timer.Stop(); Close(); };
-            timer.Start();
+            if (autoClose)
+            {
+                // Timer pour fermer automatiquement après 3 secondes
+                var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+                timer.Tick += (s, e) => { timer.Stop(); Close(); };
+                timer.Start();
+            }
+            else
+            {
+                TxtLoading.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void BtnOk_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

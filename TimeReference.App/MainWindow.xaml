@@ -111,10 +111,29 @@
             </Grid.RowDefinitions>
 
             <!-- Logo / Titre -->
-            <StackPanel x:Name="LogoPanel" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
-                <TextBlock Text="NMEA" FontWeight="Black" FontSize="16" Foreground="{DynamicResource PrimaryText}" Margin="0,0,5,0"/>
-                <TextBlock Text="CONTROLLER" FontWeight="Light" FontSize="16" Foreground="{DynamicResource SecondaryText}"/>
-            </StackPanel>
+            <Grid Grid.Row="0" Margin="0,0,0,15">
+                <StackPanel x:Name="LogoPanel" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="NMEA" FontWeight="Black" FontSize="16" Foreground="{DynamicResource PrimaryText}" Margin="0,0,5,0"/>
+                    <TextBlock Text="CONTROLLER" FontWeight="Light" FontSize="16" Foreground="{DynamicResource SecondaryText}"/>
+                </StackPanel>
+
+                <!-- Bouton Off (Header) -->
+                <Button x:Name="BtnHeaderOff" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" Click="BtnClose_Click" ToolTip="Fermer l'application" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Ellipse Fill="#FFCC0000">
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect ShadowDepth="2" BlurRadius="3" Opacity="0.5"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                                <!-- Symbole Power (Barre verticale dans un cercle) -->
+                                <Path Data="M 12,6 L 12,12 M 9,8 A 4,4 0 1 0 15,8" Stroke="White" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
 
             <!-- Écran LCD (Affichage des infos) -->
             <Border Grid.Row="1" x:Name="HeaderBorder" Background="#FF101010" CornerRadius="15" BorderBrush="#FF444444" BorderThickness="2" Padding="15">
@@ -194,26 +213,27 @@
 
             <!-- Clavier de commande -->
             <UniformGrid x:Name="KeypadGrid" Grid.Row="2" Columns="3" Rows="4" Margin="0,40,0,0" HorizontalAlignment="Center">
-                <!-- Rangée 3: NTP Control -->
-                <Button x:Name="BtnStartNtp" Content="START" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource SuccessColor}" Click="BtnStartNtp_Click"/>
-                <Button x:Name="BtnStopNtp" Content="STOP" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource ErrorColor}" Click="BtnStopNtp_Click"/>
-                <Button x:Name="BtnRestartNtp" Content="RESTART" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource WarningColor}" Click="BtnRestartNtp_Click"/>
+                <Button x:Name="BtnMenu" Content="Menu" Style="{StaticResource KeypadButtonStyle}" Click="BtnSettings_Click" ToolTip="Ouvre les paramètres"/>
+                <Button x:Name="BtnUtc" Content="UTC" Style="{StaticResource KeypadButtonStyle}" Click="ChkUtc_Click" ToolTip="Basculer UTC / Locale"/>
+                <Button x:Name="BtnLogs" Content="Logs" Style="{StaticResource KeypadButtonStyle}" Click="BtnLogs_Click" ToolTip="Voir les journaux"/>
 
-
-                <!-- Rangée 1: Modes -->
-                <Button x:Name="BtnMenu" Content="MENU" Style="{StaticResource KeypadButtonStyle}" Click="BtnSettings_Click" ToolTip="Ouvre les paramètres"/>
-                <Button x:Name="BtnUtc" Content="UTC" Style="{StaticResource KeypadButtonStyle}" Click="ChkUtc_Click"/>
-                <Button x:Name="BtnLogs" Content="LOGS" Style="{StaticResource KeypadButtonStyle}" Click="BtnLogs_Click"/>
-
-                <!-- Rangée 2: Outils -->
-                <Button x:Name="BtnCalibration" Content="Calibration" Style="{StaticResource KeypadButtonStyle}" Click="BtnCalibration_Click"/>
-                <Button x:Name="BtnIqt" Content="IQT" Style="{StaticResource KeypadButtonStyle}" Click="BtnIqt_Click"/>
+                <Button x:Name="BtnCalibration" Content="Calibration" Style="{StaticResource KeypadButtonStyle}" Click="BtnCalibration_Click" ToolTip="Assistant de calibration"/>
+                <Button x:Name="BtnIqt" Content="IQT" Style="{StaticResource KeypadButtonStyle}" Click="BtnIqt_Click" ToolTip="Test Qualité Signal"/>
                 <Button x:Name="BtnEnter" Content="" Style="{StaticResource KeypadButtonStyle}" IsEnabled="False" ToolTip="Non implémenté"/>
 
-                <!-- Rangée 4: Système & UTC -->
-                <Button x:Name="BtnBack" Content="Style" Style="{StaticResource KeypadButtonStyle}" Click="BtnBack_Click" ToolTip="Changer le thème"/>
-                <Button Content="_" Style="{StaticResource KeypadButtonStyle}" Click="BtnMinimize_Click" Background="#FF555555"/>
-                <Button Content="OFF" Style="{StaticResource KeypadButtonStyle}" Background="#FFCC0000" Click="BtnClose_Click" ToolTip="Fermer l'application"/>
+                <Button x:Name="BtnStartNtp" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource SuccessColor}" Click="BtnStartNtp_Click" ToolTip="Démarrer NTP">
+                    <Path Data="M8,5.14V19.14L19,12.14L8,5.14Z" Fill="White" Stretch="Uniform" Height="14" Width="14"/>
+                </Button>
+                <Button x:Name="BtnStopNtp" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource ErrorColor}" Click="BtnStopNtp_Click" ToolTip="Arrêter NTP">
+                    <Path Data="M6,6H18V18H6V6Z" Fill="White" Stretch="Uniform" Height="14" Width="14"/>
+                </Button>
+                <Button x:Name="BtnRestartNtp" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource WarningColor}" Click="BtnRestartNtp_Click" ToolTip="Redémarrer NTP">
+                    <Path Data="M12,5V1L7,6l5,5V7c3.31,0,6,2.69,6,6s-2.69,6-6,6-6-2.69-6-6H4c0,4.42,3.58,8,8,8s8-3.58,8-8-3.58-8-8-8z" Fill="White" Stretch="Uniform" Height="16" Width="16"/>
+                </Button>
+
+                <Button x:Name="BtnBack" Style="{StaticResource KeypadButtonStyle}" Click="BtnBack_Click" ToolTip="Changer le thème"/>
+                <Button Content="-" Style="{StaticResource KeypadButtonStyle}" Click="BtnMinimize_Click" Background="#FF555555" ToolTip="Minimiser la fenêtre"/>
+                <Button x:Name="BtnHelp" Content="?" Style="{StaticResource KeypadButtonStyle}" Background="#FF555555" Click="BtnHelp_Click" ToolTip="Aide / À propos" FontSize="18" FontWeight="Bold"/>
             </UniformGrid>
 
             <!-- Éléments cachés requis par le code -->

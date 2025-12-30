@@ -10,23 +10,22 @@
 *   [7. Firmware RP2040 (Stratum 0)](#7-firmware-rp2040-stratum-0)
 *   [8. Indice de Qualité Temporelle](#8-indice-de-qualité-temporelle)
 *   [9. Stratégie Multi-sites](#9-stratégie-multi-sites)
-*   [10. Algorithme de Calibration](#10-algorithme-de-calibration-dune-source-de-temps-gpsnmea)
-## Session du 25/12/2025
-### ❓ Question
-Je veux créer un programme en python qui fera l'interface entre un GPS NMEA (sur un port série) et le programme NTP de Meinberg. Ce programme devra pouvoir modifier un fichier qui nécessite des droits administrateurs. Un certain nombre d'informations seront stockées dans un fichier de config json
+*   [10. Algorithme de Calibration](#10-algorithme-de-calibration)
+*   [11. Algorithme de Santé NTP](#11-algorithme-de-santé-ntp)
 
 ---
+
+## Session du 25/12/2025
+
+### ❓ Question
+Je veux créer un programme en python qui fera l'interface entre un GPS NMEA (sur un port série) et le programme NTP de Meinberg. Ce programme devra pouvoir modifier un fichier qui nécessite des droits administrateurs. Un certain nombre d'informations seront stockées dans un fichier de config json.
+
 ### ✅ Réponse
 C'est un excellent projet. Interfacer un GPS matériel avec le service NTP de Meinberg sous Windows demande de la rigueur, notamment pour la gestion des privilèges et la précision temporelle.
 
+---
+
 ## 1. Présentation du Projet
-> **Solution technique :**
-> Voici une solution complète structurée en Python. Ce programme va :
-> - Vérifier s'il dispose des droits administrateur (nécessaire pour écrire dans les dossiers système comme Program Files).
-> - Charger la configuration depuis un fichier JSON.
-> - Lire le flux NMEA du port série.
-> - Extraire les données temporelles.
-> - Mettre à jour un fichier cible (simulant l'interface avec NTP ou un fichier de statut/drift).
 
 ### Objectif
 Créer une interface Python entre un GPS NMEA (port série) et le service NTP de Meinberg sous Windows.
@@ -36,41 +35,28 @@ Le programme doit :
 *   Stocker sa configuration dans un fichier JSON.
 *   Gérer le service NTP (Arrêt/Démarrage).
 *   Fournir une interface graphique pour la calibration et le monitoring.
-### ℹ️ Infos complémentaires
-*À remplir avec les infos collectées ailleurs...*
 
 ### Solution Technique
-*   **Langage** : Python.
+*   **Langage** : Python (puis C#).
 *   **OS** : Windows.
 *   **Fonctionnalités Clés** :
     *   Auto-élévation de privilèges (Admin).
     *   Lecture et visualisation du flux NMEA.
     *   Mise à jour intelligente de `ntp.conf` (comparaison avant écriture).
     *   Calibration automatique du "Fudge time" via analyse statistique.
-### ❓ Question
-Comment créer un environnement virtuel Python pour isoler ces dépendances ?
 
 ---
-### ✅ Réponse
-Pour isoler les bibliothèques du projet et éviter les conflits :
 
 ## 2. Environnement de Développement
-> **Commandes (Windows) :**
-> 1. Création : `python -m venv venv`
-> 2. Activation : `.\venv\Scripts\activate`
-> 3. Installation : `pip install -r requirements.txt`
 
 ### Création de l'environnement virtuel (venv)
 Pour isoler les dépendances :
 1.  Création : `python -m venv venv`
 2.  Activation : `.\venv\Scripts\activate`
 3.  Installation des paquets : `pip install -r requirements.txt`
-### ❓ Question
-Comment configurer VS Code pour qu'il utilise automatiquement cet environnement virtuel ?
 
 ### Configuration VS Code
-Pour utiliser automatiquement le `venv` :
-*Fichier `.vscode/settings.json`* :
+Pour utiliser automatiquement le `venv`, configurer `.vscode/settings.json` :
 ```json
 {
     "python.defaultInterpreterPath": "${workspaceFolder}\\venv\\Scripts\\python.exe"
@@ -859,3 +845,90 @@ Voici une proposition d'algorithme logique pour résoudre un écart important en
 
 > **Nouveau Fudge = Fudge Actuel + Offset constaté**
 > *(En faisant attention aux signes : ajouter un offset négatif revient à diminuer le fudge).*
+
+
+
+### Nouvel algoithme de calcul de l'indice de santé
+L'approche actuelle repose sur une logique de "punition/récompense" incrémentale qui crée naturellement une inertie (hystérésis). Pour obtenir un algorithme plus réactif sans sacrifier la stabilité, il faut passer d'un système de score cumulatif à un système d'**analyse d'état pondéré**.
+
+Voici une proposition pour optimiser votre surveillance NTP avec Meinberg.
+
+---
+
+## 1. Critères supplémentaires essentiels
+
+Pour que l'algorithme soit fiable, les compteurs d'erreurs ne suffisent pas. Vous devez interroger les variables de synchronisation réelle :
+
+* **Stratum** : Si le stratum passe à 16, le serveur n'est plus synchronisé.
+* **Root Dispersion** : Indique l'erreur maximale accumulée. Si elle dépasse 1s, la qualité est médiocre.
+* **Offset** : L'écart réel en millisecondes entre votre horloge et le GPS.
+* **Precision** : Pour détecter une dégradation matérielle.
+* **RefID** : Indique si la source est bien `.GPS.` ou `.PPS.`. S'il passe en `LOCAL` ou `STEP`, la santé chute.
+
+---
+
+## 2. Nouvel Algorithme : Le "Score de Confiance Instantané"
+
+Au lieu de faire varier un score de 5 en 5, nous allons classer l'état selon une **matrice de criticité**. Le score est recalculé à chaque échantillon (10s) mais lissé par une moyenne mobile courte pour éviter les micro-coupures.
+
+### Logique de calcul (Score )
+
+Le score part de 100 et on applique le **malus le plus sévère** détecté lors de l'échantillonnage, plutôt que de les additionner indéfiniment.
+
+| Paramètre | Condition de Dégradation | Malus de Santé | Criticité |
+| --- | --- | --- | --- |
+| **Timecode** | Statique (identique au précédent) | -100 (Score = 0) | Critique (Mort) |
+| **Stratum** |  (en config GPS normale) | -60 | Majeur |
+| **Offset** |  ms | -40 | Modéré |
+| **Badformat** | Delta  | -30 | Technique |
+| **Noreply** | Delta  | -20 | Réseau/Antenne |
+| **Reach** |  (octal) | -10 par bit manquant | Stabilité |
+
+### Algorithme de "Guérison Rapide"
+
+Pour résoudre votre problème de lenteur à revenir à 100% :
+
+1. **Vérification de conformité** : Si (Delta `noreply` == 0) ET (Delta `badformat` == 0) ET (Stratum < 3).
+2. **Saut de confiance** : Si ces conditions sont vraies pendant 2 cycles consécutifs (20s), le score remonte immédiatement à **100%**, au lieu de remonter péniblement de 5 en 5.
+
+---
+
+## 3. Implémentation suggérée (Logique Pseudo-code)
+
+```python
+# À chaque intervalle de 10s
+def calculate_health(current_data, previous_data):
+    if current_data.timecode == previous_data.timecode:
+        return 0, "ROUGE" # GPS Figé
+    
+    # Initialisation des malus pour ce cycle
+    malus = 0
+    
+    # 1. Analyse des erreurs protocolaires (Réactivité immédiate)
+    if current_data.badformat > previous_data.badformat: malus += 30
+    if current_data.noreply > previous_data.noreply: malus += 20
+    
+    # 2. Analyse de la qualité de synchro
+    if current_data.stratum >= 16: malus += 80
+    if abs(current_data.offset) > 128: malus += 40
+    
+    current_score = max(0, 100 - malus)
+    
+    # 3. Système de rétablissement rapide (Fast recovery)
+    if malus == 0 and current_data.stratum < 3:
+        # Si tout est vert, on force le retour au top
+        return 100, "VERT"
+        
+    return current_score, get_color(current_score)
+
+```
+
+---
+
+## 4. Pourquoi cette approche est meilleure ?
+
+1. **Réactivité** : Le passage de "Orange" à "Vert" est quasi instantané (20s max) si les indicateurs techniques sont bons.
+2. **Fiabilité** : En surveillant l'**Offset** et le **Stratum**, vous ne surveillez plus seulement si le service "parle" (`noreply`), mais s'il dit la vérité (précision horaire).
+3. **Transparence** : L'utilisation du `reach` (registre à décalage de 8 bits dans NTP) permet de voir si les 8 derniers échanges ont réussi. C'est l'indicateur natif le plus puissant de NTP.
+
+**Souhaitez-vous que je vous aide à extraire spécifiquement les valeurs d'Offset et de Stratum via une regex pour votre script de monitoring ?**

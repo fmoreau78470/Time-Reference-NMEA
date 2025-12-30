@@ -1,0 +1,46 @@
+2025-12-30 07:17:53 [INFO] ACTION UTILISATEUR : Demande d'ARRÊT du service NTP.
+2025-12-30 07:17:53 [INFO] Service NTP : Changement d'état détecté (Running -> Stopped) [Action utilisateur]
+2025-12-30 07:18:10 [INFO] ACTION UTILISATEUR : Demande de DÉMARRAGE du service NTP.
+2025-12-30 07:18:11 [INFO] Service NTP : Changement d'état détecté (Stopped -> Running) [Action utilisateur]
+2025-12-30 07:20:58 [INFO] Ouverture de la fenêtre Paramètres.
+2025-12-30 07:21:37 [INFO] Fermeture de la fenêtre Paramètres.
+2025-12-30 15:18:01 [INFO] Ouverture de la fenêtre Paramètres.
+2025-12-30 15:18:04 [INFO] Paramètres mis à jour (sans impact NTP).
+2025-12-30 15:18:04 [INFO] Fermeture de la fenêtre Paramètres.
+2025-12-30 15:18:31 [INFO] Fermeture de l'application.
+2025-12-30 15:18:36 [INFO] === OUVERTURE DE L'APPLICATION ===
+2025-12-30 15:18:36 [INFO] État santé restauré : 100,0%
+2025-12-30 15:18:36 [INFO] Thème restauré : Light
+2025-12-30 15:18:37 [INFO] Service NTP : Changement d'état détecté (Inconnu -> Running) [Cause EXTÉRIEURE]
+2025-12-30 15:18:40 [INFO] Ouverture de la fenêtre Paramètres.
+2025-12-30 15:18:43 [INFO] Paramètres mis à jour (sans impact NTP).
+2025-12-30 15:18:43 [INFO] Fermeture de la fenêtre Paramètres.
+2025-12-30 15:18:56 [INFO] Ouverture de la fenêtre Paramètres.
+2025-12-30 15:19:01 [INFO] Paramètres mis à jour (sans impact NTP).
+2025-12-30 15:19:01 [INFO] Fermeture de la fenêtre Paramètres.
+2025-12-30 15:21:03 [INFO] Ouverture de la fenêtre Paramètres.
+2025-12-30 15:21:06 [INFO] Paramètres mis à jour (sans impact NTP).
+2025-12-30 15:21:06 [INFO] Fermeture de la fenêtre Paramètres.
+2025-12-30 15:21:08 [INFO] Ouverture de la fenêtre Paramètres.
+2025-12-30 15:21:10 [INFO] Paramètres mis à jour (sans impact NTP).
+2025-12-30 15:21:10 [INFO] Fermeture de la fenêtre Paramètres.
+2025-12-30 15:21:38 [INFO] Fermeture de l'application.
+2025-12-30 15:23:47 [INFO] === OUVERTURE DE L'APPLICATION ===
+2025-12-30 15:23:47 [INFO] État santé restauré : 100,0%
+2025-12-30 15:23:47 [INFO] Thème restauré : Light
+2025-12-30 15:23:48 [INFO] Service NTP : Changement d'état détecté (Inconnu -> Running) [Cause EXTÉRIEURE]
+2025-12-30 18:08:08 [INFO] Fermeture de l'application.
+2025-12-30 22:54:16 [INFO] === OUVERTURE DE L'APPLICATION ===
+2025-12-30 22:54:16 [INFO] Thème restauré : Light
+2025-12-30 22:54:16 [INFO] Service NTP arrêté au démarrage. Tentative de lancement...
+2025-12-30 22:54:16 [INFO] Service NTP : Changement d'état détecté (Inconnu -> Running) [Action utilisateur]
+2025-12-30 22:54:22 [INFO] Fermeture de l'application.
+2025-12-30 22:55:17 [INFO] === OUVERTURE DE L'APPLICATION ===
+2025-12-30 22:55:17 [INFO] État santé restauré : 100,0%
+2025-12-30 22:55:17 [INFO] Thème restauré : Light
+2025-12-30 22:55:17 [INFO] Service NTP : Changement d'état détecté (Inconnu -> Running) [Cause EXTÉRIEURE]
+2025-12-30 22:55:34 [INFO] Service NTP : Changement d'état détecté (Running -> Stopped) [Cause EXTÉRIEURE]
+2025-12-30 22:55:54 [INFO] ACTION UTILISATEUR : Demande de DÉMARRAGE du service NTP.
+2025-12-30 22:55:54 [INFO] Service NTP : Changement d'état détecté (Stopped -> Running) [Action utilisateur]
+2025-12-30 22:56:10 [INFO] Ouverture de l'assistant de Calibration.
+2025-12-30 22:58:23 [INFO] Fermeture de l'assistant de Calibration.

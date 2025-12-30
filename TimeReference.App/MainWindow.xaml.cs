@@ -40,6 +40,7 @@ public partial class MainWindow : Window
     private double _restoreTop;
     private double _restoreWidth;
     private double _restoreHeight;
+    private DateTime _lastClockUpdate = DateTime.MinValue;
 
     [DllImport("gdi32.dll")]
     private static extern IntPtr CreateRoundRectRgn(int x1, int y1, int x2, int y2, int cx, int cy);
@@ -61,7 +62,7 @@ public partial class MainWindow : Window
         }
 
         // Splash Screen (Image fixe + Infos)
-        var splash = new SplashScreenWindow();
+        var splash = new SplashScreenWindow(true);
         splash.Show();
 
         InitializeComponent();
@@ -97,7 +98,15 @@ public partial class MainWindow : Window
         // Timer pour surveiller l'état du service NTP (Spec 5)
         _ntpStatusTimer = new DispatcherTimer();
         _ntpStatusTimer.Interval = TimeSpan.FromSeconds(0.5);
-        _ntpStatusTimer.Tick += (s, e) => UpdateNtpStatus();
+        _ntpStatusTimer.Tick += (s, e) => 
+        {
+            UpdateNtpStatus();
+            // Fallback : Si pas de mise à jour par GPS depuis > 1.2s, on met à jour l'horloge système
+            if ((DateTime.Now - _lastClockUpdate).TotalSeconds > 1.2)
+            {
+                UpdateSystemClock();
+            }
+        };
         _ntpStatusTimer.Start();
 
         // Timer pour la qualité NTP (Step 24) - Toutes les 2s car ntpq est lourd
@@ -490,6 +499,13 @@ public partial class MainWindow : Window
         Logger.Info("Fermeture de l'assistant de Calibration.");
     }
 
+    private void BtnHelp_Click(object sender, RoutedEventArgs e)
+    {
+        var aboutWindow = new SplashScreenWindow(false);
+        aboutWindow.Owner = this;
+        aboutWindow.ShowDialog();
+    }
+
     private void BtnBack_Click(object sender, RoutedEventArgs e)
     {
         string nextTheme = _currentTheme switch
@@ -543,8 +559,57 @@ public partial class MainWindow : Window
             var dict = new ResourceDictionary { Source = new Uri(uri, UriKind.Relative) };
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(dict);
+            
+            UpdateThemeButtonIcon();
         }
         catch (Exception ex) { Logger.Error($"Erreur chargement thème {theme}: {ex.Message}"); }
+    }
+
+    private void UpdateThemeButtonIcon()
+    {
+        if (BtnBack == null) return;
+
+        string pathData = "";
+        Brush fillBrush = Brushes.White;
+        Brush strokeBrush = Brushes.Transparent;
+        double strokeThickness = 0;
+
+        switch (_currentTheme)
+        {
+            case "Light": // Soleil
+                // Soleil jaune avec rayons
+                pathData = "M12,7A5,5 0 1,1 12,17A5,5 0 1,1 12,7 M12,1L12,4 M12,20L12,23 M4.22,4.22L6.34,6.34 M17.66,17.66L19.78,19.78 M1,12L4,12 M20,12L23,12 M4.22,19.78L6.34,17.66 M17.66,6.34L19.78,4.22";
+                fillBrush = Brushes.Gold;
+                strokeBrush = Brushes.Gold;
+                strokeThickness = 2;
+                break;
+            case "Dark": // Croissant de lune
+                // Croissant de lune simple
+                pathData = "M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z";
+                break;
+            case "Red": // Etoile
+                pathData = "M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z";
+                break;
+            default: // Soleil par défaut
+                pathData = "M12,7A5,5 0 1,1 12,17A5,5 0 1,1 12,7 M12,1L12,4 M12,20L12,23 M4.22,4.22L6.34,6.34 M17.66,17.66L19.78,19.78 M1,12L4,12 M20,12L23,12 M4.22,19.78L6.34,17.66 M17.66,6.34L19.78,4.22";
+                fillBrush = Brushes.Gold;
+                strokeBrush = Brushes.Gold;
+                strokeThickness = 2;
+                break;
+        }
+
+        var path = new System.Windows.Shapes.Path
+        {
+            Data = Geometry.Parse(pathData),
+            Fill = fillBrush,
+            Stroke = strokeBrush,
+            StrokeThickness = strokeThickness,
+            Stretch = Stretch.Uniform,
+            Width = 18,
+            Height = 18
+        };
+
+        BtnBack.Content = path;
     }
 
     private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -975,6 +1040,7 @@ public partial class MainWindow : Window
                         
                         // Mise à jour de l'horloge système synchronisée
                         UpdateSystemClock();
+                        _lastClockUpdate = DateTime.Now;
                     }
                 }
 
@@ -1067,6 +1133,7 @@ public partial class MainWindow : Window
                 
                 // Mise à jour de l'horloge système synchronisée
                 UpdateSystemClock();
+                _lastClockUpdate = DateTime.Now;
             }
 
             if (data.IsValid)
