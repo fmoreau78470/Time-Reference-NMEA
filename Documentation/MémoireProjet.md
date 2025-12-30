@@ -931,8 +931,50 @@ def calculate_health(current_data, previous_data):
 2. **Fiabilité** : En surveillant l'**Offset** et le **Stratum**, vous ne surveillez plus seulement si le service "parle" (`noreply`), mais s'il dit la vérité (précision horaire).
 3. **Transparence** : L'utilisation du `reach` (registre à décalage de 8 bits dans NTP) permet de voir si les 8 derniers échanges ont réussi. C'est l'indicateur natif le plus puissant de NTP.
 
-**Souhaitez-vous que je vous aide à extraire spécifiquement les valeurs d'Offset et de Stratum via une regex pour votre script de monitoring ?**
 
-[![](https://mermaid.ink/img/pako:eNqdlf9ymlgUx1_llE72j61a5IcK07hD1BhSlRQwbROZzA1cIlOE9AK7tUweoI-S5_DFegGh16zT2Vn_YOCe8_2ej-fcCznnxh7mVO6BoMc12ONVBPSn3Y53z_dZCl4G7tYNMaiwe3bXKEqDMIyjCD1g6PKJA-32EM5yO9jgwgiCqEh62D3_9VQ5VdczmgdGFpTpo1vLjQlWgT-Bd_fk7XD3w9ZsFUxjOZ1AG-aGaTuMbhFHpW6cm9jXx3B6Ch19odsdiLPKwMTIXcM7EPt9-AMM309wWqTxBUXlNGYJJjWB8ALhbDZZUgI9CtIAhUGC0iCOHMahZjnPrTgjLgbNTYO_8a8650WWHqWYRJShSJ3m0ysLKkTKRBnr3kxZpouaqSsfMmkjWzcWlOp8Oab9MScflrrlMA41k147iC_-lWFqi7KzFh1SRpKGzzmgLjALn8u86uCddp_A8JSqsiC8WyaYHA71ksV_XxeXjw_1IqZ17TjcPRMUudhhLGr-2e0IhW4WwhyFWdKwzcrgfA8Fw4oH_gS-03RyzqIsbksDeAMS7zDxuo7RxPmmiFFGrvLLIKWtaYq8BakuccWW-NBYCHWJK7aEeaSEWUasvNoJrw52gsWa2_82t1jz5RHzZRm5roYA50GEQjilJ5Qvph5vNrhp6q_5XZeaj3mlGYLC08NTzu4iSNKYBF8zXMyfutScH1nOTzndIHfzeIujCN8dGY8g17pPrO5zvVWUF3vlemLaBe9yOp1Y5aYfaTP9zNSKe4dxqjtx05wZnj9qtTDm-kKbOQx9o61bd3ICVrqlrzgPJ0DPR4jpEalCSbk-Ap--9NTXvi95ktdKUhJ_weprURT39-1_Ai9dq8LjN1Y22cskD_V8_z_LLppqitKkHpFJh7L3_w_y816mKEW938rqBQ8la0QI2tKzDjJrdrM343nXlaTfmnEt-sUJPE5NSYZb3AaTDSoeubwwXHHpGm_wilPprYfIlxW3ip6o5hFFN3G8qWUkzh7WnOqjMKFP2aOHUjwOEP2WbZpVgiMPk1GcRSmndrvdXunCqTn3jVPbXbHXGYgDvi_2RV7qDfpyi9sW6_xA6Mj0WZDlgayIffmpxX0vS8sdocf3la7Cy0KvL4g9-eknf_YhcQ?type=png)](https://mermaid.live/edit#pako:eNqdlf9ymlgUx1_llE72j61a5IcK07hD1BhSlRQwbROZzA1cIlOE9AK7tUweoI-S5_DFegGh16zT2Vn_YOCe8_2ej-fcCznnxh7mVO6BoMc12ONVBPSn3Y53z_dZCl4G7tYNMaiwe3bXKEqDMIyjCD1g6PKJA-32EM5yO9jgwgiCqEh62D3_9VQ5VdczmgdGFpTpo1vLjQlWgT-Bd_fk7XD3w9ZsFUxjOZ1AG-aGaTuMbhFHpW6cm9jXx3B6Ch19odsdiLPKwMTIXcM7EPt9-AMM309wWqTxBUXlNGYJJjWB8ALhbDZZUgI9CtIAhUGC0iCOHMahZjnPrTgjLgbNTYO_8a8650WWHqWYRJShSJ3m0ysLKkTKRBnr3kxZpouaqSsfMmkjWzcWlOp8Oab9MScflrrlMA41k147iC_-lWFqi7KzFh1SRpKGzzmgLjALn8u86uCddp_A8JSqsiC8WyaYHA71ksV_XxeXjw_1IqZ17TjcPRMUudhhLGr-2e0IhW4WwhyFWdKwzcrgfA8Fw4oH_gS-03RyzqIsbksDeAMS7zDxuo7RxPmmiFFGrvLLIKWtaYq8BakuccWW-NBYCHWJK7aEeaSEWUasvNoJrw52gsWa2_82t1jz5RHzZRm5roYA50GEQjilJ5Qvph5vNrhp6q_5XZeaj3mlGYLC08NTzu4iSNKYBF8zXMyfutScH1nOTzndIHfzeIujCN8dGY8g17pPrO5zvVWUF3vlemLaBe9yOp1Y5aYfaTP9zNSKe4dxqjtx05wZnj9qtTDm-kKbOQx9o61bd3ICVrqlrzgPJ0DPR4jpEalCSbk-Ap--9NTXvi95ktdKUhJ_weprURT39-1_Ai9dq8LjN1Y22cskD_V8_z_LLppqitKkHpFJh7L3_w_y816mKEW938rqBQ8la0QI2tKzDjJrdrM343nXlaTfmnEt-sUJPE5NSYZb3AaTDSoeubwwXHHpGm_wilPprYfIlxW3ip6o5hFFN3G8qWUkzh7WnOqjMKFP2aOHUjwOEP2WbZpVgiMPk1GcRSmndrvdXunCqTn3jVPbXbHXGYgDvi_2RV7qDfpyi9sW6_xA6Mj0WZDlgayIffmpxX0vS8sdocf3la7Cy0KvL4g9-eknf_YhcQ)
+Algorithme sous forme de mermaid
+graph TD
+    A[Début du cycle : échantillonnage 10s] --> B{Timecode inchangé?}
+    
+    B -- Oui --> C[Score: 0% <br/>ÉTAT: ROUGE - MORT]
+    B -- Non --> D{RefID == .INIT. ou <br/>Reach < 377 & Offset == 0?}
 
+    D -- Oui --> E[Score: 20% <br/>ÉTAT: BLEU - Initialisation]
+    D -- Non --> F{Source Active?}
 
+    F -- Internet --> G{GPS Reach == 377?}
+    G -- Oui --> H[Score: 15% <br/>ÉTAT: ACTION - FUDGE REQUIS]
+    G -- Non --> I[Score: 30% <br/>ÉTAT: ORANGE - Secours Internet]
+
+    F -- GPS --> J{Offset_Abs >= Seuil_User?}
+    
+    J -- Oui --> K[Score: 5% <br/>ÉTAT: ROUGE - Hors Tolérance]
+    J -- Non --> L[Calcul Malus]
+
+    L --> M{Offset > Seuil * 0.7?}
+    M -- Oui --> N[Malus + 40]
+    M -- Non --> O[Malus + 0]
+
+    O --> P{Jitter > Seuil / 4?}
+    P -- Oui --> Q[Malus + 20]
+    P -- Non --> R[Malus + 0]
+
+    R --> S{Reach != 377?}
+    S -- Oui --> T[Malus + 20]
+    S -- Non --> U[Malus + 0]
+
+    U --> V[Score Final = 100 - Somme Malus]
+    
+    V --> W{Score > 90 & <br/>Historique >= 100?}
+    W -- Oui --> X{Abs_Moyenne_Offset > Seuil * 0.25?}
+    X -- Oui --> Y[Score: 95% <br/>ÉTAT: VERT - SUGGESTION CALIBRATION]
+    X -- Non --> Z[Score: 100% <br/>ÉTAT: VERT - NOMINAL]
+    W -- Non --> Z
+
+    %% Style des couleurs
+    style C fill:#ff4d4d,stroke:#333,stroke-width:2px
+    style E fill:#4da6ff,stroke:#333,stroke-width:2px
+    style H fill:#ff9933,stroke:#333,stroke-width:4px
+    style K fill:#ff4d4d,stroke:#333,stroke-width:2px
+    style Y fill:#99ff99,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    style Z fill:#00cc44,stroke:#333,stroke-width:2px

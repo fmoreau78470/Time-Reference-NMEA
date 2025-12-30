@@ -4,6 +4,20 @@ Voici les meilleures pratiques adaptées à votre situation de développeur solo
 
 ---
 
+## 0. Installation et Prérequis
+
+Avant de commencer, assurez-vous d'avoir les outils nécessaires installés :
+
+1.  **Git :** Téléchargez et installez la version pour votre système (Windows/Mac) depuis [git-scm.com](https://git-scm.com/).
+2.  **Configuration de base :** Ouvrez un terminal et configurez votre identité (pour l'historique) :
+    ```bash
+    git config --global user.name "Votre Nom"
+    git config --global user.email "votre@email.com"
+    ```
+3.  **Git Graph (Extension VS Code) :** Installez cette extension pour visualiser vos branches et effectuer des actions (merge, checkout) via une interface graphique.
+
+---
+
 ## 1. Git Commit : La granularité est la clé
 
 L'erreur classique est de faire un énorme commit en fin de journée. Considérez le commit comme une "sauvegarde logique".
@@ -44,4 +58,23 @@ C'est ici que votre configuration PC/Mac devient centrale. Git devient votre "cl
 
 > **Astuce d'expert :** Si vous avez du travail en cours non terminé (non commité) et que vous devez changer de branche, utilisez `git stash`. Cela met vos modifs de côté temporairement sans créer de commit "sale".
 
-Souhaitez-vous que je vous aide à configurer un fichier `.gitignore` spécifique à votre langage de programmation pour éviter de polluer vos commits ?
+---
+
+## 4. Création de l'exécutable (Mise en production)
+
+Pour générer un fichier `.exe` autonome (qui fonctionne sur un PC sans avoir besoin d'installer .NET) :
+
+1.  Ouvrez le terminal dans le dossier de l'application :
+    ```bash
+    cd TimeReference.App
+    ```
+2.  Lancez la commande de publication :
+    ```bash
+    dotnet publish -c Release -r win-x64 --self-contained -p:PublishSingleFile=true
+    ```
+    *   **`-c Release`** : Version optimisée pour la performance.
+    *   **`--self-contained`** : Embarque le moteur .NET (l'exe sera plus gros, ~60Mo, mais universel).
+    *   **`-p:PublishSingleFile=true`** : Combine tous les fichiers en un seul `.exe`.
+
+3.  **Où est le fichier ?**
+    Il est généré dans : `bin\Release\net8.0-windows\win-x64\publish\`
