@@ -44,3 +44,4 @@
 2025-12-30 22:55:54 [INFO] Service NTP : Changement d'état détecté (Stopped -> Running) [Action utilisateur]
 2025-12-30 22:56:10 [INFO] Ouverture de l'assistant de Calibration.
 2025-12-30 22:58:23 [INFO] Fermeture de l'assistant de Calibration.
+2025-12-30 23:16:26 [INFO] Fermeture de l'application.
