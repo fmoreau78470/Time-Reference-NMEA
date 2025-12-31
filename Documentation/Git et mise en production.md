@@ -78,3 +78,52 @@ Pour générer un fichier `.exe` autonome (qui fonctionne sur un PC sans avoir b
 
 3.  **Où est le fichier ?**
     Il est généré dans : `bin\Release\net8.0-windows\win-x64\publish\`
+
+---
+
+## 5. Création de l'installateur (Setup)
+
+Pour distribuer votre application proprement, nous allons utiliser **Inno Setup** pour empaqueter les fichiers générés à l'étape 4.
+
+### Prérequis
+*   Téléchargez et installez **Inno Setup** (gratuit) : jrsoftware.org.
+
+### Procédure
+
+1.  Assurez-vous d'avoir exécuté la commande `dotnet publish` (étape 4).
+2.  Créez un fichier texte nommé `setup.iss` dans le dossier `TimeReference.App`.
+3.  Collez-y le contenu suivant :
+
+```iss
+; Script Inno Setup pour Time Reference NMEA
+
+[Setup]
+AppName=Time Reference NMEA
+AppVersion=1.0
+AppPublisher=Votre Nom
+DefaultDirName={autopf}\Time Reference NMEA
+DefaultGroupName=Time Reference NMEA
+OutputDir=Installer
+OutputBaseFilename=TimeReferenceNMEA_Setup
+Compression=lzma2
+SolidCompression=yes
+PrivilegesRequired=admin
+
+[Files]
+; Chemin vers les fichiers publiés (relatif à ce script)
+Source: "bin\Release\net8.0-windows\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+
+[Icons]
+Name: "{group}\Time Reference NMEA"; Filename: "{app}\TimeReference.App.exe"
+Name: "{autodesktop}\Time Reference NMEA"; Filename: "{app}\TimeReference.App.exe"; Tasks: desktopicon
+
+[Tasks]
+Name: "desktopicon"; Description: "Créer une icône sur le Bureau"; GroupDescription: "Icônes supplémentaires:"; Flags: unchecked
+
+[Run]
+Filename: "{app}\TimeReference.App.exe"; Description: "Lancer l'application"; Flags: nowait postinstall skipifsilent
+```
+
+4.  Double-cliquez sur `setup.iss` pour l'ouvrir dans Inno Setup.
+5.  Cliquez sur le bouton **Compile** (ou appuyez sur `Ctrl+F9`).
+6.  Votre installateur `TimeReferenceNMEA_Setup.exe` sera généré dans le dossier `TimeReference.App\Installer`.
