@@ -42,6 +42,7 @@ namespace TimeReference.App
                 }
                 
                 TxtServerOptions.Text = _config.ServerOptions;
+                TxtMeinbergUrl.Text = _config.MeinbergUrl;
 
                 // Chargement des paramètres du Mode Mini
                 ChkMiniTop.IsChecked = _config.MiniModeAlwaysOnTop;
@@ -79,6 +80,18 @@ namespace TimeReference.App
                     .ToList();
 
                 _config.ServerOptions = TxtServerOptions.Text;
+                
+                // Validation basique de l'URL
+                if (Uri.TryCreate(TxtMeinbergUrl.Text, UriKind.Absolute, out Uri? uriResult) 
+                    && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
+                {
+                    _config.MeinbergUrl = TxtMeinbergUrl.Text;
+                }
+                else
+                {
+                    // On sauvegarde quand même pour ne pas bloquer l'utilisateur, mais on pourrait ajouter un avertissement
+                    _config.MeinbergUrl = TxtMeinbergUrl.Text;
+                }
 
                 // Sauvegarde des paramètres du mode Mini
                 if (ChkMiniTop != null) _config.MiniModeAlwaysOnTop = ChkMiniTop.IsChecked == true;
@@ -113,6 +126,26 @@ namespace TimeReference.App
             monitorWindow.Owner = this;
             monitorWindow.Closed += (s, args) => Logger.Info("Fermeture du Moniteur NTP (ClockVar).");
             monitorWindow.Show();
+        }
+
+        private void BtnTestUrl_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (Uri.TryCreate(TxtMeinbergUrl.Text, UriKind.Absolute, out Uri? uriResult) 
+                    && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(uriResult.AbsoluteUri) { UseShellExecute = true });
+                }
+                else
+                {
+                    MessageBox.Show("L'URL n'est pas valide.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Impossible d'ouvrir le lien : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -14,9 +14,8 @@ public class NtpVersionService
     /// <summary>
     /// Récupère la dernière version disponible sur le site de Meinberg.
     /// </summary>
-    public async Task<string?> GetLatestMeinbergVersionAsync()
+    public async Task<string?> GetLatestMeinbergVersionAsync(string url)
     {
-        string url = "https://www.meinbergglobal.com/english/sw/ntp.htm";
         try
         {
             // Configuration pour ignorer les erreurs SSL (comme le script Python)

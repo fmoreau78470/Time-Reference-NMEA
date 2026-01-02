@@ -17,6 +17,10 @@ namespace TimeReference.App
         {
             InitializeComponent();
 
+            // Chargement de la configuration pour l'URL
+            var configService = new ConfigService();
+            var config = configService.Load();
+
             // Récupération dynamique de la version
             var assembly = Assembly.GetExecutingAssembly();
             var version = assembly.GetName().Version;
@@ -34,7 +38,19 @@ namespace TimeReference.App
             string? localNtp = ntpService.GetLocalNtpVersion();
             if (!string.IsNullOrEmpty(localNtp))
             {
-                TxtVersion.Text += $"\nNTP : {localNtp}";
+                TxtVersion.Inlines.Add(new LineBreak());
+                TxtVersion.Inlines.Add(new Run("NTP : "));
+                var link = new Hyperlink(new Run(localNtp))
+                {
+                    NavigateUri = new Uri(config.MeinbergUrl),
+                    ToolTip = "Site officiel Meinberg"
+                };
+                link.RequestNavigate += (s, e) => 
+                {
+                    try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true }); } catch { }
+                    e.Handled = true;
+                };
+                TxtVersion.Inlines.Add(link);
             }
 
             if (autoClose)
@@ -52,7 +68,7 @@ namespace TimeReference.App
             // Vérification mise à jour en arrière-plan
             Task.Run(async () => 
             {
-                string? remoteNtp = await ntpService.GetLatestMeinbergVersionAsync();
+                string? remoteNtp = await ntpService.GetLatestMeinbergVersionAsync(config.MeinbergUrl);
                 
                 Dispatcher.Invoke(() => 
                 {
@@ -61,14 +77,14 @@ namespace TimeReference.App
                         if (NtpVersionService.CompareNtpVersions(remoteNtp, localNtp) > 0)
                         {
                             // Mise à jour disponible
-                            TxtVersion.Text += $" (Dispo : {remoteNtp})";
+                            TxtVersion.Inlines.Add(new Run($" (Dispo : {remoteNtp})") { Foreground = Brushes.OrangeRed });
                             
                             // Message d'invitation et extension du délai
                             TxtLoading.Inlines.Clear();
                             TxtLoading.Inlines.Add(new Run("Mise à jour NTP recommandée ! "));
                             
                             var link = new Hyperlink(new Run("(Cliquer ici)"));
-                            link.NavigateUri = new Uri("https://www.meinbergglobal.com/english/sw/ntp.htm");
+                            link.NavigateUri = new Uri(config.MeinbergUrl);
                             link.RequestNavigate += (s, e) => 
                             {
                                 try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true }); } catch { }
@@ -90,7 +106,7 @@ namespace TimeReference.App
                         else
                         {
                             // À jour
-                            TxtVersion.Text += " (À jour)";
+                            TxtVersion.Inlines.Add(new Run(" (À jour)") { Foreground = Brushes.Green });
                         }
                     }
                 });

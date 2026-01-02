@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.ServiceProcess;
@@ -197,7 +197,7 @@ public partial class MainWindow : Window
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    Process.Start(new ProcessStartInfo("https://www.meinbergglobal.com/english/sw/ntp.htm") { UseShellExecute = true });
+                    Process.Start(new ProcessStartInfo(_config.MeinbergUrl) { UseShellExecute = true });
                 }
                 return false;
             }
@@ -218,7 +218,7 @@ public partial class MainWindow : Window
 
             if (result == MessageBoxResult.Yes)
             {
-                Process.Start(new ProcessStartInfo("https://www.meinbergglobal.com/english/sw/ntp.htm") { UseShellExecute = true });
+                Process.Start(new ProcessStartInfo(_config.MeinbergUrl) { UseShellExecute = true });
             }
             return false;
         }

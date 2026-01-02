@@ -46,5 +46,8 @@ namespace TimeReference.Core.Models
 
         [JsonPropertyName("peers_window_top")]
         public double PeersWindowTop { get; set; } = -1;
+
+        [JsonPropertyName("meinberg_url")]
+        public string MeinbergUrl { get; set; } = "https://www.meinbergglobal.com/english/sw/ntp.htm";
     }
 }
