@@ -124,9 +124,6 @@ public partial class SimpleCalibrationWindow : Window
         Log("Démarrage du monitoring NTP (ntpq -pn)...");
         LblStats.Text = "Attente stabilisation GPS & serveurs Web...";
         
-        PbProgress.Visibility = Visibility.Hidden;
-        PbProgress.Value = 0;
-        
         // Modification temporaire de ntp.conf
         await ModifyNtpConfigAsync(true);
 
@@ -150,9 +147,6 @@ public partial class SimpleCalibrationWindow : Window
         BtnClose.IsEnabled = true;
         LblStatus.Text = "Arrêté.";
         
-        PbProgress.Visibility = Visibility.Hidden;
-        PbProgress.Value = 0;
-        
         if (_isNtpModified)
         {
             await ModifyNtpConfigAsync(false);
@@ -169,9 +163,6 @@ public partial class SimpleCalibrationWindow : Window
         {
             // Measurement is running, update progress bar
             var elapsed = DateTime.Now - _measurementStartTime;
-            double progress = (elapsed.TotalSeconds / _targetDuration.TotalSeconds) * 100;
-            if (progress > 100) progress = 100;
-            PbProgress.Value = progress;
             
             var remaining = _targetDuration - elapsed;
             if (remaining < TimeSpan.Zero) remaining = TimeSpan.Zero;
@@ -195,7 +186,6 @@ public partial class SimpleCalibrationWindow : Window
                 LblStats.Text = "Mesure en cours...";
                 Log("GPS et serveurs Web stabilisés. Début de la mesure.");
                 LblCountdown.Text = "Mesure en cours...";
-                PbProgress.Visibility = Visibility.Visible;
             }
             else
             {
