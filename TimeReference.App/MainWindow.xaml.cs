@@ -557,9 +557,13 @@ public partial class MainWindow : Window
     private void BtnCalibration_Click(object sender, RoutedEventArgs e)
     {
         Logger.Info("Ouverture de l'assistant de Calibration.");
-        var choiceWindow = new CalibrationChoiceWindow(_config);
-        choiceWindow.Owner = this;
-        choiceWindow.ShowDialog();
+        var simpleWindow = new SimpleCalibrationWindow(_config);
+        simpleWindow.Owner = this;
+        simpleWindow.ShowDialog();
+
+        // Sauvegarde de la configuration car la calibration peut avoir modifié le Fudge
+        _configService.Save(_config);
+
         Logger.Info("Fermeture de l'assistant de Calibration.");
     }
 

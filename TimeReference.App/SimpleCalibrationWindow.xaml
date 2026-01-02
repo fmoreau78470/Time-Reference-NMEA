@@ -1,48 +1,108 @@
 <Window x:Class="TimeReference.App.SimpleCalibrationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Calibration Simple (Loopstats)" Height="550" Width="700" WindowStartupLocation="CenterOwner">
-    <Grid Margin="15">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Calibration Simple (GPS)" Height="500" Width="600"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="{DynamicResource WindowBackground}"
+        Foreground="{DynamicResource PrimaryText}">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Background" Value="{DynamicResource ControlBackground}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryText}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/> <!-- Titre -->
+            <RowDefinition Height="Auto"/> <!-- Description -->
+            <RowDefinition Height="Auto"/> <!-- Contrôles -->
+            <RowDefinition Height="Auto"/> <!-- Progression -->
+            <RowDefinition Height="*"/>    <!-- Logs -->
+            <RowDefinition Height="Auto"/> <!-- Stats -->
+            <RowDefinition Height="Auto"/> <!-- Boutons -->
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Calibration GPS vs Horloge Locale" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,5"/>
-        <TextBlock Text="Analyse de la stabilité via les fichiers loopstats" FontStyle="Italic" Foreground="Gray" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+        <!-- Titre -->
+        <TextBlock Grid.Row="0" Text="Calibration GPS (Loopstats)" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+        
+        <!-- Description -->
+        <TextBlock Grid.Row="1" Text="Alignement sur l'horloge système via analyse statistique" FontSize="12" Foreground="{DynamicResource SecondaryText}" HorizontalAlignment="Center" Margin="0,0,0,25"/>
 
-        <!-- Configuration -->
-        <GroupBox Grid.Row="1" Header="Paramètres de l'analyse" Margin="0,0,0,15">
-            <StackPanel Margin="10">
-                <TextBlock Text="Durée de l'analyse (Minutes) :" FontWeight="Bold"/>
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                    <Slider x:Name="SldDuration" Minimum="2" Maximum="20" Value="5" Width="300" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="TopLeft" ValueChanged="SldDuration_ValueChanged"/>
-                    <TextBlock x:Name="LblDuration" Text="5 min" VerticalAlignment="Center" Margin="10,0,0,0" FontWeight="Bold"/>
-                </StackPanel>
-                <TextBlock Text="Une durée plus longue offre une meilleure précision (lissage du Jitter)." FontSize="11" Foreground="Gray" Margin="0,5,0,0"/>
-            </StackPanel>
-        </GroupBox>
+        <!-- Contrôles (Slider) -->
+        <Grid Grid.Row="2" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Durée d'analyse :" VerticalAlignment="Center" Margin="0,0,15,0" FontSize="14"/>
+            <Slider Grid.Column="1" x:Name="SldDuration" Minimum="1" Maximum="60" Value="5" TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center" ValueChanged="SldDuration_ValueChanged"/>
+            <TextBlock Grid.Column="2" x:Name="LblDuration" Text="5 min" VerticalAlignment="Center" Margin="15,0,0,0" FontWeight="Bold" FontSize="14" Width="60" TextAlignment="Right"/>
+        </Grid>
 
-        <!-- Status Area -->
-        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" Padding="10" Margin="0,0,0,10" Background="#F0F0F0">
-            <StackPanel>
-                <TextBlock x:Name="LblStatus" Text="Prêt. Sélectionnez une durée et cliquez sur Démarrer." FontWeight="Bold"/>
-                <ProgressBar x:Name="PbProgress" Height="20" Margin="0,10,0,0" Minimum="0" Maximum="100"/>
-                <TextBlock x:Name="LblStats" Text="Moyenne Offset : -- ms | Échantillons : 0" Margin="0,5,0,0" FontSize="11"/>
-            </StackPanel>
-        </Border>
+        <!-- Progression -->
+        <StackPanel Grid.Row="3" Margin="0,0,0,15">
+            <ProgressBar x:Name="PbProgress" Height="18" Value="0" Maximum="100" Margin="0,0,0,8"/>
+            <TextBlock x:Name="LblStatus" Text="Prêt à démarrer" HorizontalAlignment="Center" FontStyle="Italic" Foreground="{DynamicResource SecondaryText}"/>
+        </StackPanel>
 
         <!-- Logs -->
-        <TextBox Grid.Row="3" x:Name="TxtLogs" IsReadOnly="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" FontSize="12" Background="Black" Foreground="LightGreen" TextWrapping="Wrap"/>
+        <Grid Grid.Row="4" Margin="0,0,0,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Journal d'analyse :" FontWeight="SemiBold" Margin="0,0,0,5"/>
+            <TextBox Grid.Row="1" x:Name="TxtLogs" IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                     FontFamily="Consolas" FontSize="12" Padding="5" TextWrapping="Wrap"
+                     Background="{DynamicResource ControlBackground}" 
+                     Foreground="{DynamicResource PrimaryText}" 
+                     BorderBrush="{DynamicResource BorderColor}"/>
+        </Grid>
+
+        <!-- Stats -->
+        <Border Grid.Row="5" BorderBrush="{DynamicResource BorderColor}" BorderThickness="1" CornerRadius="4" Padding="10" Margin="0,0,0,20" Background="{DynamicResource ControlBackground}">
+            <TextBlock x:Name="LblStats" Text="En attente de données..." HorizontalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+        </Border>
 
         <!-- Buttons -->
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button x:Name="BtnStart" Content="Démarrer" Width="100" Margin="5" Click="BtnStart_Click"/>
-            <Button x:Name="BtnApply" Content="Appliquer" Width="100" Margin="5" IsEnabled="False" Click="BtnApply_Click"/>
-            <Button x:Name="BtnClose" Content="Fermer" Width="100" Margin="5" Click="BtnClose_Click"/>
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="BtnStart" Content="Démarrer" Background="{DynamicResource SecondaryText}" Foreground="White" Click="BtnStart_Click" Width="130" FontWeight="Bold"/>
+            <Button x:Name="BtnApply" Background="{DynamicResource SecondaryText}" Foreground="White" Click="BtnApply_Click" IsEnabled="False" Margin="15,5" Height="Auto" MinHeight="30" MaxWidth="160">
+            <TextBlock Text="Appliquer Compensation" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button x:Name="BtnClose" Content="Fermer" Background="{DynamicResource SecondaryText}" Foreground="White" Click="BtnClose_Click" Width="100"/>
         </StackPanel>
     </Grid>
 </Window>
