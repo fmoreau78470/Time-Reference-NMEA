@@ -1,0 +1,17 @@
+<Window x:Class="TimeReference.App.PeersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NTP Peers" Height="Auto" Width="Auto"
+        WindowStyle="None" ResizeMode="NoResize"
+        AllowsTransparency="True" Background="#E6101010"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        MouseDoubleClick="Window_MouseDoubleClick"
+        SizeToContent="WidthAndHeight"
+        ShowInTaskbar="False">
+    <Border BorderBrush="#FF444444" BorderThickness="1" CornerRadius="8" Padding="15">
+        <StackPanel x:Name="PnlPeers">
+            <TextBlock Text="Interrogation NTP en cours..." Foreground="#AAAAAA" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+            <ProgressBar IsIndeterminate="True" Height="2" Width="150" />
+        </StackPanel>
+    </Border>
+</Window>

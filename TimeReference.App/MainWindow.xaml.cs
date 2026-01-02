@@ -25,9 +25,10 @@ public partial class MainWindow : Window
     private DispatcherTimer _ntpStatusTimer = null!;
     private DispatcherTimer _ntpQualityTimer = null!;
     private DispatcherTimer _ntpClockVarTimer = null!;
-    private int _lastNoreply = -1;
-    private int _lastBadformat = -1;
-    private string _lastTimecode = string.Empty;
+    private NtpStatusModel _ntpStatus = new NtpStatusModel();
+    private NtpStatusModel? _previousNtpStatus = null;
+    private int _consecutivePoorHealth = 0;
+    private DateTime _lastAutoRestart = DateTime.MinValue;
     private double _healthScore = 100;
     private int _healthCheckCounter = 0;
     private ServiceControllerStatus? _lastNtpStatus = null;
@@ -36,11 +37,15 @@ public partial class MainWindow : Window
     private static Mutex? _mutex = null;
     private DateTime? _lastGpsUtcTime;
     private bool _isMiniMode = false;
+    private bool _shouldStartInMiniMode = false;
+    private bool _isGpsActivePeer = false;
+    private bool _hasActivePeer = false;
     private double _restoreLeft;
     private double _restoreTop;
     private double _restoreWidth;
     private double _restoreHeight;
     private DateTime _lastClockUpdate = DateTime.MinValue;
+    private PeersWindow? _peersWindow = null;
 
     [DllImport("gdi32.dll")]
     private static extern IntPtr CreateRoundRectRgn(int x1, int y1, int x2, int y2, int cx, int cy);
@@ -136,6 +141,15 @@ public partial class MainWindow : Window
 
         // Tentative de démarrage automatique du service NTP s'il est arrêté
         await AutoStartNtpAsync();
+
+        // Restauration du mode Mini si nécessaire
+        if (_shouldStartInMiniMode)
+        {
+            ToggleMiniMode();
+        }
+
+        // Application du réglage "Toujours au premier plan" après le chargement
+        this.Topmost = _config.MiniModeAlwaysOnTop;
     }
 
     private async Task AutoStartNtpAsync()
@@ -377,6 +391,10 @@ public partial class MainWindow : Window
                     _config = newConfig;
                     Logger.Info("Paramètres mis à jour (sans impact NTP).");
                 }
+
+                // Application immédiate du paramètre "Toujours au premier plan"
+                this.Topmost = _config.MiniModeAlwaysOnTop;
+                if (_peersWindow != null) _peersWindow.Topmost = _config.MiniModeAlwaysOnTop;
             }
             Logger.Info("Fermeture de la fenêtre Paramètres.");
         }
@@ -490,6 +508,44 @@ public partial class MainWindow : Window
         }
     }
 
+    private async void BtnPeers_Click(object sender, RoutedEventArgs e)
+    {
+        if (_peersWindow == null)
+        {
+            _peersWindow = new PeersWindow(_config);
+            _peersWindow.Owner = this;
+            _peersWindow.Topmost = _config.MiniModeAlwaysOnTop;
+
+            // Restaurer la position si elle a été sauvegardée
+            if (_config.PeersWindowLeft != -1 && _config.PeersWindowTop != -1)
+            {
+                _peersWindow.Left = _config.PeersWindowLeft;
+                _peersWindow.Top = _config.PeersWindowTop;
+            }
+
+            _peersWindow.Closed += (s, args) =>
+            {
+                // Mémoriser la position à la fermeture
+                if (s is Window closedWindow)
+                {
+                    _config.PeersWindowLeft = closedWindow.Left;
+                    _config.PeersWindowTop = closedWindow.Top;
+                    _configService.Save(_config);
+                }
+                _peersWindow = null;
+            };
+            _peersWindow.Show();
+
+            // Forcer une mise à jour immédiate des données (évite d'attendre le timer)
+            await UpdateNtpQualityAsync();
+        }
+        else
+        {
+            _peersWindow.Close();
+            _peersWindow = null;
+        }
+    }
+
     private void BtnCalibration_Click(object sender, RoutedEventArgs e)
     {
         Logger.Info("Ouverture de l'assistant de Calibration.");
@@ -546,8 +602,20 @@ public partial class MainWindow : Window
             ApplyThemeResources(theme);
             var fadeIn = new DoubleAnimation(1.0, TimeSpan.FromMilliseconds(150));
             this.BeginAnimation(OpacityProperty, fadeIn);
+
+            // Synchronisation de la transition avec la fenêtre Peers
+            if (_peersWindow != null && _peersWindow.IsLoaded)
+            {
+                double targetOpacity = _config.MiniModeOpacity > 0.1 ? _config.MiniModeOpacity : 1.0;
+                var peerFadeIn = new DoubleAnimation(targetOpacity, TimeSpan.FromMilliseconds(200));
+                peerFadeIn.Completed += (s2, e2) => _peersWindow.BeginAnimation(OpacityProperty, null);
+                _peersWindow.BeginAnimation(OpacityProperty, peerFadeIn);
+            }
         };
         this.BeginAnimation(OpacityProperty, fadeOut);
+
+        if (_peersWindow != null && _peersWindow.IsLoaded)
+            _peersWindow.BeginAnimation(OpacityProperty, fadeOut);
     }
 
     private void ApplyThemeResources(string theme)
@@ -612,6 +680,15 @@ public partial class MainWindow : Window
         BtnBack.Content = path;
     }
 
+    private void HeaderBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ClickCount == 2)
+        {
+            ToggleMiniMode();
+            e.Handled = true;
+        }
+    }
+
     private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         // Gestion du double-clic pour sortir du mode mini
@@ -670,11 +747,12 @@ public partial class MainWindow : Window
             this.Topmost = _config.MiniModeAlwaysOnTop;
             this.Opacity = IsMouseOver ? 1.0 : (_config.MiniModeOpacity > 0.1 ? _config.MiniModeOpacity : 1.0);
             this.ResizeMode = ResizeMode.NoResize;
+            if (_peersWindow != null) _peersWindow.Topmost = _config.MiniModeAlwaysOnTop;
             
             this.Width = targetWidth;
             this.SizeToContent = SizeToContent.Height;
 
-            if (_config.MiniModeLeft > 0 && _config.MiniModeTop > 0)
+            if (_config.MiniModeLeft != -1 && _config.MiniModeTop != -1)
             {
                 this.Left = _config.MiniModeLeft;
                 this.Top = _config.MiniModeTop;
@@ -693,8 +771,11 @@ public partial class MainWindow : Window
             SetWindowRgn(helper.Handle, IntPtr.Zero, true);
 
             this.Topmost = false;
+            this.Topmost = _config.MiniModeAlwaysOnTop;
             this.Opacity = 1.0;
             this.ResizeMode = ResizeMode.NoResize;
+            if (_peersWindow != null) _peersWindow.Topmost = false;
+            if (_peersWindow != null) _peersWindow.Topmost = _config.MiniModeAlwaysOnTop;
 
             LogoPanel.Visibility = Visibility.Visible;
             KeypadGrid.Visibility = Visibility.Visible;
@@ -815,8 +896,15 @@ public partial class MainWindow : Window
 
             if (string.IsNullOrWhiteSpace(output)) return;
 
+            // Mise à jour de la fenêtre Peers si elle est ouverte
+            if (_peersWindow != null) _peersWindow.UpdatePeers(output);
+
             // Nettoyage de l'affichage précédent
             PnlNtpPeers.Children.Clear();
+
+            // Variables locales pour détection de la source active
+            bool foundGps = false;
+            bool foundAny = false;
 
             // Parsing simple : on cherche la ligne active (* ou o)
             var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
@@ -849,16 +937,36 @@ public partial class MainWindow : Window
                 // Extraction Offset/Jitter pour la barre de statut
                 if (line.StartsWith("*") || line.StartsWith("o"))
                 {
+                    foundAny = true;
+                    // Détection si c'est notre pilote GPS (127.127.20.x) ou le refid .GPS.
+                    if (line.Contains("127.127.20.") || line.Contains(".GPS."))
+                    {
+                        foundGps = true;
+                    }
+
                     var parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     // Format standard : remote refid st t when poll reach delay offset jitter
                     // Offset est souvent à l'index 8, Jitter à l'index 9
                     if (parts.Length >= 10)
                     {
+                        // Remplissage du modèle de données pour le futur algorithme
+                        _ntpStatus.PeerRefId = parts[1];
+                        if (int.TryParse(parts[2], out int st)) _ntpStatus.PeerStratum = st;
+                        
+                        // Conversion du Reach (Octal string -> Int) pour analyse des bits
+                        try { _ntpStatus.Reach = Convert.ToInt32(parts[6], 8); } catch { _ntpStatus.Reach = 0; }
+
+                        if (double.TryParse(parts[8], NumberStyles.Any, CultureInfo.InvariantCulture, out double off)) _ntpStatus.Offset = off;
+                        if (double.TryParse(parts[9], NumberStyles.Any, CultureInfo.InvariantCulture, out double jit)) _ntpStatus.Jitter = jit;
+
                         LblOffset.Text = parts[8] + " ms";
                         LblJitter.Text = parts[9] + " ms";
                     }
                 }
             }
+
+            _isGpsActivePeer = foundGps;
+            _hasActivePeer = foundAny;
         }
         catch { }
     }
@@ -907,69 +1015,117 @@ public partial class MainWindow : Window
                 }
             }
 
-            // --- Spec 30 : Indicateur de Santé (Health Check) ---
-            // On extrait les compteurs d'erreurs
-            int currentNoreply = ExtractNtpValue(output, "noreply=");
-            int currentBadformat = ExtractNtpValue(output, "badformat=");
-
-            // Initialisation au premier passage
-            if (_lastNoreply == -1)
-            {
-                _lastNoreply = currentNoreply;
-                _lastBadformat = currentBadformat;
-                _lastTimecode = currentTimecode;
-            }
+            // Remplissage du modèle de données (Driver)
+            _ntpStatus.Timecode = currentTimecode;
+            _ntpStatus.DriverStratum = ExtractNtpValue(output, "stratum=");
+            _ntpStatus.DriverRefId = ExtractNtpString(output, "refid=");
+            _ntpStatus.NoReply = ExtractNtpValue(output, "noreply=");
+            _ntpStatus.BadFormat = ExtractNtpValue(output, "badformat=");
+            _ntpStatus.Poll = ExtractNtpValue(output, "poll=");
 
             _healthCheckCounter++;
             if (_healthCheckCounter >= 10) // Analyse toutes les 10 secondes
             {
-                int dNoreply = currentNoreply - _lastNoreply;
-                int dBadformat = currentBadformat - _lastBadformat;
-                bool isTimecodeFrozen = (currentTimecode == _lastTimecode);
+                // Calcul du score basé sur la comparaison avec l'état précédent (il y a 10s)
+                _healthScore = _ntpStatus.CalculateHealthScore(_previousNtpStatus);
+                _ntpStatus.HealthScore = _healthScore;
+                
+                // Tentative de récupération automatique si le GPS est perdu puis rebranché
+                CheckAndRecoverNtp();
 
-                // Gestion du redémarrage du service (compteurs remis à zéro)
-                if (dNoreply < 0) dNoreply = 0;
-                if (dBadformat < 0) dBadformat = 0;
-
-                // Calcul du score
-                if (isTimecodeFrozen)
-                {
-                    Logger.Info("WARNING: Santé NTP : Timecode figé détecté (Signal GPS perdu ou pilote bloqué).");
-                    // ÉTAT : MORT (La trame NMEA ne change plus, le GPS ou le pilote est figé)
-                    _healthScore = 0;
-                }
-                else
-                {
-                    if (dNoreply == 0 && dBadformat == 0)
-                        _healthScore += 5; // Guérison
-                    else
-                    {
-                        Logger.Info($"WARNING: Santé NTP : Instabilité détectée. NoReply={dNoreply}, BadFormat={dBadformat}");
-                        _healthScore -= (dNoreply * 10);
-                        _healthScore -= (dBadformat * 25);
-                    }
-                }
-
-                // Bornage et Mise à jour
-                if (_healthScore > 100) _healthScore = 100;
-                if (_healthScore < 0) _healthScore = 0;
                 UpdateHealthUI();
 
                 // Mémorisation pour le prochain cycle
-                _lastNoreply = currentNoreply;
-                _lastBadformat = currentBadformat;
-                _lastTimecode = currentTimecode;
+                _previousNtpStatus = _ntpStatus.Clone();
                 _healthCheckCounter = 0;
             }
             // ----------------------------------------------------
 
             // Affichage (si on a trouvé un timecode)
+            bool isGpsFixOk = false;
             if (!string.IsNullOrEmpty(currentTimecode))
             {
-                ParseAndDisplayNmea(currentTimecode);
+                isGpsFixOk = ParseAndDisplayNmea(currentTimecode);
+            }
+
+            // Feedback visuel prioritaire (Surcharge "Fix GPS OK" si problème détecté)
+            if (LblStatus != null)
+            {
+                // 1. Câble débranché ? (Priorité absolue)
+                if (!IsSerialPortAvailable(_config.SerialPort))
+                {
+                    LblStatus.Text = "⚠️ Câble USB débranché ?";
+                    LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "ErrorColor");
+                }
+                // 2. Bascule sur Web ? (Le port est là, mais NTP utilise une autre source)
+                else if (_hasActivePeer && !_isGpsActivePeer)
+                {
+                    LblStatus.Text = "⚠️ Mode Web (GPS ignoré)";
+                    LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "WarningColor");
+                }
+                // 3. Suspicion blocage ? (GPS actif mais santé pourrie depuis > 20s)
+                else if (_consecutivePoorHealth >= 2)
+                {
+                    LblStatus.Text = "⚠️ Suspicion blocage";
+                    LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "WarningColor");
+                }
+                // 4. Tout va bien (ou recherche)
+                else
+                {
+                    if (isGpsFixOk)
+                    {
+                        LblStatus.Text = "Fix GPS OK";
+                        LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "SuccessColor");
+                    }
+                    else
+                    {
+                        LblStatus.Text = "Recherche de satellites...";
+                        LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "WarningColor");
+                    }
+                }
             }
         }
         catch { }
+    }
+
+    private void CheckAndRecoverNtp()
+    {
+        // Condition : Santé critique (< 20%) ou Stratum 16 (Non sync)
+        // Cela indique que NTP tourne mais ne reçoit rien de valide
+        if (_healthScore < 20 || _ntpStatus.PeerStratum >= 16)
+        {
+            _consecutivePoorHealth++;
+            
+            // 3 cycles = 30 secondes de panne confirmée
+            if (_consecutivePoorHealth >= 3)
+            {
+                // Vérification du Cooldown (5 minutes) pour éviter les boucles de redémarrage
+                if ((DateTime.Now - _lastAutoRestart).TotalMinutes > 5)
+                {
+                    // Vérification que le port COM est bien présent physiquement
+                    if (IsSerialPortAvailable(_config.SerialPort))
+                    {
+                        Logger.Info("AUTO-RECOVERY : Santé critique détectée avec port COM présent. Redémarrage préventif du service NTP...");
+                        _lastAutoRestart = DateTime.Now;
+                        _consecutivePoorHealth = 0;
+                        
+                        // Lancement asynchrone pour ne pas bloquer l'UI
+                        _expectingNtpStateChange = true;
+                        Task.Run(() => WindowsServiceHelper.RestartService("NTP"));
+                    }
+                }
+            }
+        }
+        else
+        {
+            _consecutivePoorHealth = 0;
+        }
+    }
+
+    private bool IsSerialPortAvailable(string portName)
+    {
+        try { return System.IO.Ports.SerialPort.GetPortNames().Any(p => p.Equals(portName, StringComparison.OrdinalIgnoreCase)); }
+        catch { return false; }
     }
 
     private int ExtractNtpValue(string output, string key)
@@ -998,6 +1154,23 @@ public partial class MainWindow : Window
         return 0;
     }
 
+    private string ExtractNtpString(string output, string key)
+    {
+        try
+        {
+            int idx = output.IndexOf(key);
+            if (idx != -1)
+            {
+                idx += key.Length;
+                int endIdx = output.IndexOf(",", idx);
+                if (endIdx == -1) endIdx = output.Length;
+                return output.Substring(idx, endIdx - idx).Trim().Trim('"');
+            }
+        }
+        catch { }
+        return string.Empty;
+    }
+
     private void UpdateHealthUI()
     {
         if (LblHealth == null) return;
@@ -1010,9 +1183,42 @@ public partial class MainWindow : Window
         LblHealth.SetResourceReference(TextBlock.ForegroundProperty, colorKey);
 
         // La bordure colorée du mode mini est obsolète.
+
+        // Mise à jour des barres de signal
+        UpdateSignalBar(Bar1, _healthScore >= 20, colorKey);
+        UpdateSignalBar(Bar2, _healthScore >= 40, colorKey);
+        UpdateSignalBar(Bar3, _healthScore >= 60, colorKey);
+        UpdateSignalBar(Bar4, _healthScore >= 80, colorKey);
+        UpdateSignalBar(Bar5, _healthScore >= 99, colorKey);
+
+        // Mise à jour de l'info-bulle détaillée
+        if (LblHealth.ToolTip is not ToolTip tt)
+        {
+            tt = new ToolTip();
+            LblHealth.ToolTip = tt;
+        }
+        ((ToolTip)LblHealth.ToolTip).Content = 
+            $"Santé: {_healthScore:F0}%\n" +
+            $"Stratum: {_ntpStatus.PeerStratum}\n" +
+            $"RefID: {_ntpStatus.PeerRefId}\n" +
+            $"Reach: {Convert.ToString(_ntpStatus.Reach, 8)} (Octal)\n" +
+            $"Offset: {_ntpStatus.Offset:F3} ms";
     }
 
-    private void ParseAndDisplayNmea(string nmea)
+    private void UpdateSignalBar(System.Windows.Shapes.Rectangle? bar, bool isActive, string colorKey)
+    {
+        if (bar == null) return;
+        if (isActive)
+        {
+            bar.SetResourceReference(System.Windows.Shapes.Shape.FillProperty, colorKey);
+        }
+        else
+        {
+            bar.SetResourceReference(System.Windows.Shapes.Shape.FillProperty, "BorderColor");
+        }
+    }
+
+    private bool ParseAndDisplayNmea(string nmea)
     {
         // Parsing manuel simplifié de GPRMC pour l'affichage
         // $GPRMC,HHMMSS.ss,Status,Lat,N/S,Lon,E/W,Spd,Cog,Date,...
@@ -1047,19 +1253,18 @@ public partial class MainWindow : Window
                 // Position (si valide)
                 if (parts[2] == "A")
                 {
-                    LblStatus.Text = "Fix GPS OK";
-                    LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "SuccessColor");
-
                     // Affichage brut des coordonnées (ou conversion si nécessaire)
                     // Correction Bug : Conversion NMEA (DDMM.MMMM) vers Degrés Décimaux (DD.dddd)
                     LblLat.Text = NmeaToDecimal(parts[3], parts[4]);
                     LblLon.Text = NmeaToDecimal(parts[5], parts[6]);
                     LblLatDms.Text = NmeaToDms(parts[3], parts[4]);
                     LblLonDms.Text = NmeaToDms(parts[5], parts[6]);
+                    return true;
                 }
             }
         }
         catch { }
+        return false;
     }
 
     private string NmeaToDecimal(string pos, string dir)
@@ -1223,6 +1428,13 @@ public partial class MainWindow : Window
                         _currentTheme = state.Theme;
                         Logger.Info($"Thème restauré : {_currentTheme}");
                     }
+
+                    // Restauration du mode Mini
+                    if (state.IsMiniMode)
+                    {
+                        _shouldStartInMiniMode = true;
+                        Logger.Info("Mode Mini restauré.");
+                    }
                 }
             }
         }
@@ -1233,7 +1445,13 @@ public partial class MainWindow : Window
     {
         try
         {
-            var state = new AppState { HealthScore = _healthScore, LastExitTime = DateTime.UtcNow, Theme = _currentTheme };
+            var state = new AppState 
+            { 
+                HealthScore = _healthScore, 
+                LastExitTime = DateTime.UtcNow, 
+                Theme = _currentTheme,
+                IsMiniMode = _isMiniMode
+            };
             string json = System.Text.Json.JsonSerializer.Serialize(state);
             string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appstate.json");
             System.IO.File.WriteAllText(path, json);
@@ -1253,4 +1471,5 @@ public class AppState
     public double HealthScore { get; set; }
     public DateTime LastExitTime { get; set; }
     public string? Theme { get; set; }
+    public bool IsMiniMode { get; set; }
 }

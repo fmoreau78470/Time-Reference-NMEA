@@ -1,7 +1,7 @@
 # To Do List
 
-- [ ] Vérifier la dernière version à jour de NTP --> `CompareVersions.py`
-- [ ] Afficher la version ntp dans le splash screen
+- [X] Vérifier la dernière version à jour de NTP --> S'inspirer de  `CompareVersions.py`
+- [X] Afficher la version ntp dans le splash screen
 - [X] Bouton help
 - [ ] Faire un ModOp pour la mise en production avec gestion des n° de versions, distribution ...
 - [ ] Mettre en place le Ko-Fi

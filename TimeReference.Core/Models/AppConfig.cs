@@ -40,5 +40,11 @@ namespace TimeReference.Core.Models
 
         [JsonPropertyName("mini_mode_top")]
         public double MiniModeTop { get; set; } = -1;
+
+        [JsonPropertyName("peers_window_left")]
+        public double PeersWindowLeft { get; set; } = -1;
+
+        [JsonPropertyName("peers_window_top")]
+        public double PeersWindowTop { get; set; } = -1;
     }
 }
