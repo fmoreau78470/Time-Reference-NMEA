@@ -127,3 +127,43 @@ Filename: "{app}\TimeReference.App.exe"; Description: "Lancer l'application"; Fl
 4.  Double-cliquez sur `setup.iss` pour l'ouvrir dans Inno Setup.
 5.  Cliquez sur le bouton **Compile** (ou appuyez sur `Ctrl+F9`).
 6.  Votre installateur `TimeReferenceNMEA_Setup.exe` sera généré dans le dossier `TimeReference.App\Installer`.
+
+---
+
+## 6. Gestion des Versions (Versioning)
+
+Avant de générer une nouvelle version pour la production, il est crucial de mettre à jour les numéros de version partout pour assurer la cohérence.
+
+### 1. Mettre à jour le projet .NET (.csproj)
+C'est ce numéro qui s'affiche dans le Splash Screen et les propriétés du fichier `.exe`.
+
+1.  Ouvrez `TimeReference.App\TimeReference.App.csproj`.
+2.  Modifiez (ou ajoutez) la balise `<Version>` :
+    ```xml
+    <PropertyGroup>
+      ...
+      <Version>1.1.0</Version>
+      <FileVersion>1.1.0.0</FileVersion>
+      <AssemblyVersion>1.1.0.0</AssemblyVersion>
+      ...
+    </PropertyGroup>
+    ```
+
+### 2. Mettre à jour l'installateur (Inno Setup)
+1.  Ouvrez `TimeReference.App\setup.iss`.
+2.  Modifiez la version et le nom du fichier de sortie :
+    ```ini
+    AppVersion=1.1.0
+    OutputBaseFilename=TimeReferenceNMEA_Setup_v1.1.0
+    ```
+
+### 3. Marquer le coup avec Git (Tag)
+Une fois la version validée et commitée :
+
+```bash
+# Créer une étiquette (Tag) pour figer cette version dans l'historique
+git tag v1.1.0
+
+# Envoyer le tag sur le serveur (GitHub/GitLab...)
+git push origin v1.1.0
+```
