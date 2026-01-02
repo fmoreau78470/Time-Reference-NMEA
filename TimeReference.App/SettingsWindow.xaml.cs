@@ -147,5 +147,24 @@ namespace TimeReference.App
                 MessageBox.Show($"Impossible d'ouvrir le lien : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void BtnBrowseNtp_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Fichiers de configuration (*.conf)|*.conf|Tous les fichiers (*.*)|*.*",
+                Title = "Sélectionner le fichier ntp.conf"
+            };
+
+            if (!string.IsNullOrWhiteSpace(TxtNtpPath.Text) && File.Exists(TxtNtpPath.Text))
+            {
+                openFileDialog.InitialDirectory = Path.GetDirectoryName(TxtNtpPath.Text);
+            }
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                TxtNtpPath.Text = openFileDialog.FileName;
+            }
+        }
     }
 }

@@ -1,88 +1,166 @@
 <Window x:Class="TimeReference.App.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Paramètres" Height="600" Width="451"
-        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
-    <Grid Margin="20">
+        Title="Paramètres" SizeToContent="Height" Width="480"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="{DynamicResource WindowBackground}">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryText}"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource CardBackground}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryText}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
+            <Setter Property="CaretBrush" Value="{DynamicResource PrimaryText}"/>
+            <Setter Property="Padding" Value="3"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource CardBackground}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryText}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource BorderColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{DynamicResource AccentColor}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryText}"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontWeight="Bold" Foreground="{DynamicResource AccentColor}"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryText}"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="Configuration GPS" FontWeight="Bold" Margin="0,0,0,10"/>
-            
-            <!-- Port COM -->
-            <DockPanel Margin="0,0,0,5">
-                <TextBlock Text="Port Série :" Width="120" />
-                <TextBox x:Name="TxtSerialPort" Width="143" HorizontalAlignment="Left"/>
-            </DockPanel>
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Padding="0,0,5,0">
+            <StackPanel>
+                <!-- Bloc GPS -->
+                <GroupBox Header="Configuration GPS">
+                    <StackPanel>
+                        <DockPanel Margin="0,0,0,5">
+                            <TextBlock Text="Port Série :" Width="120" VerticalAlignment="Center"/>
+                            <TextBox x:Name="TxtSerialPort"/>
+                        </DockPanel>
+                        <DockPanel Margin="0,0,0,5">
+                            <TextBlock Text="Vitesse (Bauds) :" Width="120" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="CmbBaudRate">
+                                <ComboBoxItem Content="4800"/>
+                                <ComboBoxItem Content="9600"/>
+                                <ComboBoxItem Content="19200"/>
+                                <ComboBoxItem Content="38400"/>
+                                <ComboBoxItem Content="57600"/>
+                                <ComboBoxItem Content="115200"/>
+                            </ComboBox>
+                        </DockPanel>
+                        <DockPanel>
+                            <TextBlock Text="Compensation (s) :" Width="120" VerticalAlignment="Center"/>
+                            <TextBox x:Name="TxtFudge"/>
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
 
-            <!-- Baud Rate -->
-            <DockPanel Margin="0,0,0,5">
-                <TextBlock Text="Vitesse (Bauds) :" Width="120" VerticalAlignment="Center"/>
-                <ComboBox x:Name="CmbBaudRate" Width="116" HorizontalAlignment="Left">
-                    <ComboBoxItem Content="4800"/>
-                    <ComboBoxItem Content="9600"/>
-                    <ComboBoxItem Content="19200"/>
-                    <ComboBoxItem Content="38400"/>
-                    <ComboBoxItem Content="57600"/>
-                    <ComboBoxItem Content="115200"/>
-                </ComboBox>
-            </DockPanel>
+                <!-- Bloc NTP -->
+                <GroupBox Header="Configuration NTP">
+                    <StackPanel>
+                        <TextBlock Text="Chemin fichier ntp.conf :" Margin="0,0,0,2"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TxtNtpPath" Grid.Column="0"/>
+                            <Button Grid.Column="1" Width="25" Height="20" Margin="5,0,0,0" Click="BtnBrowseNtp_Click" ToolTip="Parcourir...">
+                                <Path Data="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z" Fill="{DynamicResource PrimaryText}" Stretch="Uniform" Width="12" Height="12"/>
+                            </Button>
+                        </Grid>
 
-            <!-- Fudge Time -->
-            <DockPanel Margin="0,0,0,20">
-                <TextBlock Text="Fudge Time2 (s) :" Width="120" VerticalAlignment="Center"/>
-                <TextBox x:Name="TxtFudge" Width="115" HorizontalAlignment="Left"/>
-            </DockPanel>
+                        <TextBlock Text="Serveurs NTP (un par ligne) :" Margin="0,0,0,2"/>
+                        <TextBox x:Name="TxtServers" Height="100" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10"/>
 
-            <TextBlock Text="Configuration NTP" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <TextBlock Text="Options des serveurs (ex: iburst) :" Margin="0,0,0,2"/>
+                        <TextBox x:Name="TxtServerOptions" Margin="0,0,0,10"/>
 
-            <!-- Chemin ntp.conf -->
-            <TextBlock Text="Chemin fichier ntp.conf :" Margin="0,0,0,2"/>
-            <TextBox x:Name="TxtNtpPath" Margin="0,0,0,10"/>
+                        <TextBlock Text="URL Téléchargement Meinberg :" Margin="0,0,0,2"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TxtMeinbergUrl" Grid.Column="0"/>
+                            <Button Grid.Column="1" Width="25" Height="20" Margin="5,0,0,0" Click="BtnTestUrl_Click" ToolTip="Ouvrir le lien dans le navigateur">
+                                <Path Data="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z" Fill="{DynamicResource PrimaryText}" Stretch="Uniform" Width="12" Height="12"/>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
 
-            <!-- Serveurs NTP -->
-            <TextBlock Text="Serveurs NTP (un par ligne) :" Margin="0,0,0,2"/>
-            <TextBox x:Name="TxtServers" Height="100" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10"/>
-
-            <!-- Options Serveurs -->
-            <TextBlock Text="Options des serveurs (ex: iburst) :" Margin="0,0,0,2"/>
-            <TextBox x:Name="TxtServerOptions" Margin="0,0,0,10"/>
-
-            <!-- URL Meinberg -->
-            <TextBlock Text="URL Téléchargement Meinberg :" Margin="0,0,0,2"/>
-            <Grid Margin="0,0,0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBox x:Name="TxtMeinbergUrl" Grid.Column="0"/>
-                <Button Grid.Column="1" Width="25" Height="20" Margin="5,0,0,0" Click="BtnTestUrl_Click" ToolTip="Ouvrir le lien dans le navigateur">
-                    <Path Data="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z" Fill="#444444" Stretch="Uniform" Width="12" Height="12"/>
-                </Button>
-            </Grid>
-
-            <TextBlock Text="Affichage (Mode Mini)" FontWeight="Bold" Margin="0,10,0,10"/>
-            
-            <CheckBox x:Name="ChkMiniTop" Content="Toujours au premier plan" Margin="0,0,0,10"/>
-
-            <DockPanel Margin="0,0,0,5">
-                <TextBlock Text="Opacité :" Width="120" VerticalAlignment="Center"/>
-                <StackPanel Orientation="Horizontal">
-                    <Slider x:Name="SldMiniOpacity" Minimum="20" Maximum="100" Value="100" Width="150" TickFrequency="10" IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="LblOpacityValue" Text="100%" Margin="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold"/>
-                </StackPanel>
-            </DockPanel>
-
-        </StackPanel>
+                <!-- Bloc Affichage -->
+                <GroupBox Header="Affichage">
+                    <StackPanel>
+                        <CheckBox x:Name="ChkMiniTop" Content="Toujours au premier plan" Margin="0,0,0,10"/>
+                        <DockPanel>
+                            <TextBlock Text="Opacité :" Width="120" VerticalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Slider x:Name="SldMiniOpacity" Minimum="20" Maximum="100" Value="100" Width="150" TickFrequency="10" IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="LblOpacityValue" Text="100%" Margin="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold"/>
+                            </StackPanel>
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
 
         <!-- Boutons -->
-        <Button Grid.Row="1" Content="Moniteur NTP" Width="100" Height="30" Margin="0,15,0,0" HorizontalAlignment="Left" Click="BtnMonitor_Click"/>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button Content="Enregistrer" Width="100" Height="30" Margin="5" Click="BtnSave_Click"/>
-            <Button Content="Annuler" Width="100" Height="30" Margin="5" Click="BtnCancel_Click"/>
-        </StackPanel>
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0" Content="Moniteur NTP" Width="100" Height="30" Click="BtnMonitor_Click"/>
+            
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <Button Content="Enregistrer" Width="100" Height="30" Margin="5,0,0,0" Click="BtnSave_Click"/>
+                <Button Content="Annuler" Width="100" Height="30" Margin="5,0,0,0" Click="BtnCancel_Click"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

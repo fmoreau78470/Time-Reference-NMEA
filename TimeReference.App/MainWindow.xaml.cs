@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿﻿﻿﻿using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.ServiceProcess;
@@ -826,6 +826,14 @@ public partial class MainWindow : Window
         // Sauvegarde de la préférence
         _config.UtcMode = !_config.UtcMode; // Bascule de l'état
         _configService.Save(_config);
+
+        // Fix: Forcer la sauvegarde dans le fichier physique pour persistance entre sessions
+        try 
+        {
+            string json = System.Text.Json.JsonSerializer.Serialize(_config, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+            System.IO.File.WriteAllText("config.json", json);
+        }
+        catch (Exception ex) { Logger.Error($"Erreur sauvegarde config UTC: {ex.Message}"); }
 
         // Mise à jour immédiate lors du clic
         UpdateSystemClock();
