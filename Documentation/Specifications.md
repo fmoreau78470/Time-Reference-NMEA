@@ -53,33 +53,26 @@
 *   ✅ A la présentation du nouveau ntp.conf, présenter côte à côte le fichier ancien et le fichier nouveau.
 
 ### ℹ️ Spec 3
-*   ✅ Ajustement de la valeur de fudge time2
-*   ✅ Utilisation du fichier loopstats.<datecourante> ex: loopstats.20251225 pour le 25 décembre 2025
-*   ✅ Utilisation du résultat de la commande ntpq -pn
-*   ✅ Utilisation du résultat de la commande ntpq -c clockvar (Note: ntpq -pn suffit pour le reach)
-*   ✅ Dans une fenetre dédiée, proposer 3 durées de d'échantillonage (Rapide: 2 mn, Standardf: 5mn et Haute précision: 20 mn).
-*   ✅ L'ouverture et la fermeture de cette fenetre doit etre loggée
-*   ✅ Le bouton Démarrer étalonnage /arrêter étalonnage est un bouton toogle
-*   ✅ Le lancement de la calibration doit etre loggé
-*   ✅ Stopper le ntp (commande: net stop ntp)
-*   ✅ Effacer le fichier loopstats
-*   ✅ Démarrer le ntp (commande: net start ntp)
-*   ✅ Boucler la commande ntpq -pn tous les 5 s jusqu'à ce que la ligne contenant l'adresse du GPS (127.127.20.X) ait un reach de 377 ((voir spec de la commande dans MémoireProjet.md)). Attention, ne pas essayer de traduire la valeur du reach qui est en octal
-*   ✅ Afficher une indication d'avancement pour faire patienter l'utilisateur
-*   ✅ Lancer une tempo de la durée d'échantillonnage avec une indication d'avancement
-*   ✅ Lire le fichier loopstats et utiliser l'Algorithme de calcul du nouveau fudge décrit dans MémoireProjet.md pour calculer le nouveau fudge
-*   ✅ Prendre en compte les bonnes unités telles que décrite dans "Unités des temps dans NTP" dans MémoireProjet.md
-*   ✅ Faire valider le résultat par l'utilisateur et si ok. 
-*   ✅ modifier time2_value dans config.json
-*   ✅ regénérer un ntp.conf que l'on copiera dans le répertoire config_ntp sans oublier la copie locale
-*   ✅ redémarrer le ntp (stop puis start)
-*   ✅ Ajouter la possibilité d'arrêter la calibration
-*   ✅ La fin de la calibration doit etre loggé
-*   ✅ Ajouter un bouton Pause pour suspendre l'échantillonnage
-*   ✅ Ajouter le changement de valeur du fudge (ancien et nouveau) dans le log
-*   ✅ Ajouter un indicateur visuel pour le reach (Barre de LED). La barre de LED d'interpréter le nombre reçu comme de l'octal. Inverser l'ordre des bits afin que les leds vertes s'affichent de la gauche vers la droite
-*   ✅ Ajouter un indicateur visuel pour le temps restant (Compte à rebours circulaire)
-*   ✅ Empecher la sortie de la fenetre quand la calibration est lancée
+*   ✅ Ajustement de la valeur de fudge time2 (Compensation)
+*   ✅ Méthode : Monitoring temps réel via `ntpq -pn`
+*   ✅ Automatisation :
+    *   ✅ Au démarrage : Modification temporaire de `ntp.conf` (GPS en `noselect`, Web en `minpoll 4 maxpoll 4`) et redémarrage NTP.
+    *   ✅ À la fin : Restauration de la configuration d'origine et redémarrage NTP.
+*   ✅ Interface Graphique :
+    *   ✅ Graphique temps réel : Courbes GPS (Vert), Web (Cyan) et Médianes lissées.
+    *   ✅ Fonctionnalités Graphique : Zoom (Molette), Panoramique (Glisser), Auto-scroll, Grille temporelle.
+    *   ✅ Affichage brut de la console `ntpq -pn`.
+    *   ✅ Bouton Démarrer/Arrêter (Icône Play/Stop).
+    *   ✅ Sélecteur de durée (remplacé par un compte à rebours pendant la mesure).
+*   ✅ Algorithme de Calibration :
+    *   ✅ Phase 1 : Stabilisation (Attente `reach=377` pour GPS et Web).
+    *   ✅ Phase 2 : Mesure (Collecte des offsets pendant la durée définie).
+    *   ✅ Calcul : Médiane des offsets GPS vs Médiane des offsets Web.
+    *   ✅ Résultat : Proposition de la nouvelle compensation (Fudge).
+*   ✅ Validation :
+    *   ✅ Message de fin avec résumé (Ancien/Nouveau Fudge, Correction).
+    *   ✅ Si validé : Mise à jour de `config.json`, régénération de `ntp.conf` et redémarrage du service.
+*   ✅ Logs : Traçabilité complète des actions et des résultats.
 
 ### ℹ️ Spec 4
 *   ✅ Interface pour le test du bon fonctionnement du GPS
@@ -172,7 +165,7 @@
 ### ℹ️ Spec 14
 *   ✅ Unifier le lancement des calibrations.
     *   ✅ Au clic sur "Lancer une Calibration", proposer un dialogue de choix.
-    *   ✅ Option 1: "GPS Seul (via Loopstats)" lance la calibration simple (ancienne Spec 3).
+    *   ✅ Option 1: "GPS Seul (via ntpq -pn)" lance la calibration simple (ancienne Spec 3).
     *   ✅ Option 2: "GPS vs Serveurs Net (Assistant Expert)" lance l'assistant complet (Spec 13).
     *   ✅ Étape 2 : Vérification de la santé du GPS (Reach=377, Jitter < 100ms)
     *   ✅ Étape 3 : Mesure comparative des offsets (GPS vs Internet) sur 30s

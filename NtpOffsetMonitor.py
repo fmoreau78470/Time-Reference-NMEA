@@ -116,18 +116,24 @@ def monitor_ntp(duration_max_sec=600, interval_sec=10):
     # Initialisation du graphique en temps réel
     fig, ax = None, None
     lines = {}
+    ntpq_text_display = None
     buttons = [] # Références pour éviter le garbage collection
 
     if MATPLOTLIB_AVAILABLE:
         from matplotlib.widgets import Button
         plt.ion()  # Mode interactif
-        fig, ax = plt.subplots(figsize=(12, 7))
-        plt.subplots_adjust(bottom=0.2) # Espace pour les boutons
+        fig, ax = plt.subplots(figsize=(12, 9))
+        plt.subplots_adjust(bottom=0.35) # Espace pour les boutons et le texte
 
         ax.set_xlabel("Durée (s)")
         ax.set_ylabel("Offset (ms)")
         ax.set_title("Évolution des Offsets NTP en temps réel")
         ax.grid(True, which='both', linestyle='--', linewidth=0.5)
+
+        # Zone de texte pour la sortie de ntpq
+        ntpq_text_display = fig.text(0.05, 0.02, 'En attente de la sortie de ntpq...', 
+                                     fontfamily='monospace', fontsize=8, 
+                                     va='bottom', ha='left', wrap=True)
 
         # Fonctions de callback pour les boutons
         def start_ntp(event):
@@ -163,22 +169,23 @@ def monitor_ntp(duration_max_sec=600, interval_sec=10):
             plt.draw()
 
         # Création des boutons
-        ax_start = plt.axes([0.05, 0.05, 0.2, 0.075])
+        btn_y_pos = 0.22
+        ax_start = plt.axes([0.05, btn_y_pos, 0.2, 0.075])
         btn_start = Button(ax_start, 'Start NTP', color='lightgreen', hovercolor='0.9')
         btn_start.on_clicked(start_ntp)
         buttons.append(btn_start)
 
-        ax_stop = plt.axes([0.28, 0.05, 0.2, 0.075])
+        ax_stop = plt.axes([0.28, btn_y_pos, 0.2, 0.075])
         btn_stop = Button(ax_stop, 'Stop NTP', color='salmon', hovercolor='0.9')
         btn_stop.on_clicked(stop_ntp)
         buttons.append(btn_stop)
 
-        ax_restart = plt.axes([0.51, 0.05, 0.2, 0.075])
+        ax_restart = plt.axes([0.51, btn_y_pos, 0.2, 0.075])
         btn_restart = Button(ax_restart, 'Restart NTP', color='lightblue', hovercolor='0.9')
         btn_restart.on_clicked(restart_ntp)
         buttons.append(btn_restart)
 
-        ax_reset = plt.axes([0.74, 0.05, 0.2, 0.075])
+        ax_reset = plt.axes([0.74, btn_y_pos, 0.2, 0.075])
         btn_reset = Button(ax_reset, 'Reset', color='gold', hovercolor='0.9')
         btn_reset.on_clicked(reset_monitor)
         buttons.append(btn_reset)
@@ -193,6 +200,11 @@ def monitor_ntp(duration_max_sec=600, interval_sec=10):
             
             # 1. Lancer la commande
             output = get_ntpq_output()
+
+            # Afficher la sortie brute dans la zone de texte
+            if MATPLOTLIB_AVAILABLE and ntpq_text_display:
+                display_text = "--- Sortie ntpq -pn ---\n" + (output or "Aucune sortie reçue.")
+                ntpq_text_display.set_text(display_text)
             
             if output:
                 # 2. Parser et extraire les offsets de CETTE itération
@@ -229,31 +241,31 @@ def monitor_ntp(duration_max_sec=600, interval_sec=10):
                 gps_display = f"{med_gps:.3f} ms" if med_gps is not None else "N/A"
                 web_display = f"{med_web:.3f} ms" if med_web is not None else "N/A"
                 print(f"[{now.strftime('%H:%M:%S')}] Médiane GPS : {gps_display} | Médiane Web : {web_display}")
+            
+            # Mise à jour du graphique (toujours exécuté pour rafraîchir le texte et l'UI)
+            if MATPLOTLIB_AVAILABLE and fig:
+                for label, data in history.items():
+                    if not data: continue
+                    timestamps = [x[0] for x in data]
+                    values = [x[1] for x in data]
 
-                # Mise à jour du graphique
-                if MATPLOTLIB_AVAILABLE and fig:
-                    for label, data in history.items():
-                        if not data: continue
-                        timestamps = [x[0] for x in data]
-                        values = [x[1] for x in data]
-
-                        if label not in lines:
-                            # Création de la courbe
-                            style = '--' if "Médiane" in label else '-'
-                            marker = None if "Médiane" in label else '.'
-                            lw = 2.5 if "Médiane" in label else 1.0
-                            line, = ax.plot(timestamps, values, label=label, linestyle=style, marker=marker, linewidth=lw)
-                            lines[label] = line
-                            ax.legend(loc='upper left', fontsize='small')
-                        else:
-                            # Mise à jour des données
-                            lines[label].set_xdata(timestamps)
-                            lines[label].set_ydata(values)
-                    
-                    ax.relim()
-                    ax.autoscale_view()
-                    plt.draw()
-                    plt.pause(0.001)
+                    if label not in lines:
+                        # Création de la courbe
+                        style = '--' if "Médiane" in label else '-'
+                        marker = None if "Médiane" in label else '.'
+                        lw = 2.5 if "Médiane" in label else 1.0
+                        line, = ax.plot(timestamps, values, label=label, linestyle=style, marker=marker, linewidth=lw)
+                        lines[label] = line
+                        ax.legend(loc='upper left', fontsize='small')
+                    else:
+                        # Mise à jour des données
+                        lines[label].set_xdata(timestamps)
+                        lines[label].set_ydata(values)
+                
+                ax.relim()
+                ax.autoscale_view()
+                plt.draw()
+                plt.pause(0.001)
             
             # Gestion du temps de boucle
             elapsed = time.time() - loop_start_time
