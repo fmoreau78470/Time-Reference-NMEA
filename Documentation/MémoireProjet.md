@@ -978,3 +978,8 @@ graph TD
     style K fill:#ff4d4d,stroke:#333,stroke-width:2px
     style Y fill:#99ff99,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
     style Z fill:#00cc44,stroke:#333,stroke-width:2px
+
+
+
+
+    https://www.ntppool.org/fr/
