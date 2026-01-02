@@ -46,6 +46,7 @@ public partial class MainWindow : Window
     private double _restoreHeight;
     private DateTime _lastClockUpdate = DateTime.MinValue;
     private PeersWindow? _peersWindow = null;
+    private SplashScreenWindow? _splash = null;
 
     [DllImport("gdi32.dll")]
     private static extern IntPtr CreateRoundRectRgn(int x1, int y1, int x2, int y2, int cx, int cy);
@@ -67,8 +68,8 @@ public partial class MainWindow : Window
         }
 
         // Splash Screen (Image fixe + Infos)
-        var splash = new SplashScreenWindow(true);
-        splash.Show();
+        _splash = new SplashScreenWindow(true);
+        _splash.Show();
 
         InitializeComponent();
         this.Loaded += Window_Loaded;
@@ -150,6 +151,13 @@ public partial class MainWindow : Window
 
         // Application du réglage "Toujours au premier plan" après le chargement
         this.Topmost = _config.MiniModeAlwaysOnTop;
+
+        // S'assure que le splash screen reste au-dessus si la fenêtre principale passe en Topmost
+        if (_splash != null && _splash.IsVisible)
+        {
+            _splash.Topmost = true;
+            _splash.Activate();
+        }
     }
 
     private async Task AutoStartNtpAsync()
