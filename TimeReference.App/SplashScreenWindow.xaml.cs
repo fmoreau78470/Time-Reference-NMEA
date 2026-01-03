@@ -140,7 +140,7 @@ namespace TimeReference.App
 
         private void BtnDocWeb_Click(object sender, RoutedEventArgs e)
         {
-            string docUrl = "https://fmoreau78470.github.io/Time-reference-NMEA/";
+            string docUrl = "https://fmoreau78470.github.io/Time-Reference-NMEA/";
             try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(docUrl) { UseShellExecute = true }); } catch { }
         }
     }

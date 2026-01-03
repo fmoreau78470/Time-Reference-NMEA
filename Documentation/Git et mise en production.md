@@ -320,9 +320,36 @@ La documentation fait partie intégrante du produit. Voici les standards adopté
 *   **Format :** Markdown (dans le dossier `/docs`).
 *   **Moteur :** **MkDocs** (Thème Material).
 *   **Publication :** GitHub Pages (automatisé via GitHub Actions).
-*   **Offline :** PDF généré et inclus dans l'installateur (Inno Setup).
+*   **Offline :** Site HTML statique généré localement et inclus dans l'installateur (Inno Setup).
 
 ### Bonnes Pratiques
 *   **Tooltips :** L'aide de premier niveau est intégrée directement dans l'UI (infobulles).
 *   **Bouton Aide :** Redirige vers le site de documentation en ligne.
 *   **Versionning :** La documentation évolue dans le même dépôt que le code.
+
+### Procédure de mise à jour (Commandes)
+
+Voici les commandes à exécuter lorsque vous modifiez la documentation (fichiers `.md` dans le dossier `docs/`).
+
+#### 1. Prévisualisation (Optionnel)
+Pour vérifier le rendu en temps réel pendant que vous rédigez :
+```bash
+mkdocs serve
+```
+Ouvrez `http://127.0.0.1:8000` dans votre navigateur.
+
+#### 2. Génération pour l'installateur (Offline)
+Pour que la documentation soit incluse dans le prochain installateur (`setup.exe`), vous devez régénérer le site statique localement avant de compiler le setup :
+```bash
+mkdocs build
+```
+*Cette commande met à jour le dossier `site/` qui est embarqué par Inno Setup.*
+
+#### 3. Publication sur le Web (GitHub Pages)
+Pour mettre à jour le site en ligne, il suffit de pousser vos modifications sur GitHub. Le workflow automatique s'occupe du reste.
+```bash
+git add .
+git commit -m "Mise à jour documentation"
+git push
+```
+*Après quelques minutes, le site web sera à jour.*
