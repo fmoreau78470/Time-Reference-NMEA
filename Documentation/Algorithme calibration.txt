@@ -1,0 +1,35 @@
+Procédure pour un réglage parfait
+
+Pour éviter que le GPS ne "tire" l'horloge pendant que vous mesurez, la méthode la plus rigoureuse est la suivante :
+    Désactivez temporairement le GPS (commentez la ligne server 127.127... dans ntp.conf).
+    Redémarrez NTP et laissez la machine se synchroniser uniquement sur le Web pendant 30 minutes.
+    Réactivez le GPS mais SANS le mot-clé prefer.
+    Observez l'offset du GPS dans ntpq -p. S'il affiche -45 ms, c'est la preuve qu'il est en avance. S'il affiche +45 ms, il est en retard.
+    Appliquez cette valeur dans le fudge :
+        Si le GPS affiche +45 ms, mettez fudge ... time1 -0.045.
+        Si le GPS affiche -45 ms, mettez fudge ... time1 0.045.
+4. Pourquoi le signe s'inverse parfois ?
+
+NTP est subtil : le paramètre time1 est ajouté à l'heure du serveur.
+    Si votre GPS est "lent" (retard de transmission série), il envoie une heure qui appartient déjà au passé. Il faut donc lui ajouter une correction positive pour le ramener au présent.
+    Note : Une fois le fudge appliqué et NTP redémarré, toutes vos sources (Web et GPS) devraient idéalement afficher un offset proche de 0 en même temps. C'est le signe que votre "vérité locale" (GPS) est enfin alignée sur la "vérité globale" (Web).
+=============================================
+
+graph TD
+    A[DÉBUT : Calibration du GPS] --> B[Éditer ntp.conf : <br/>Commenter la ligne 'server 127.127...']
+    B --> C[Redémarrer NTP : <br/>'sudo systemctl restart ntp']
+    C --> D[Attendre 30 min : <br/>Stabilisation sur les sources Web]
+    D --> E[Réactiver le GPS dans ntp.conf : <br/>SANS l'option 'prefer']
+    E --> F[Relancer NTP et attendre 5-10 min]
+    F --> G[Lancer 'ntpq -p' : <br/>Lire l'offset du GPS]
+    
+    G --> H{L'offset GPS est...}
+    
+    H -- "Positif (+) ex: +45ms" --> I[Le GPS est en RETARD : <br/>Fudge time1 -0.045]
+    H -- "Négatif (-) ex: -45ms" --> J[Le GPS est en AVANCE : <br/>Fudge time1 0.045]
+    
+    I --> K[Appliquer dans ntp.conf]
+    J --> K[Appliquer dans ntp.conf]
+    
+    K --> L[Redémarrer NTP final]
+    L --> M[Vérifier : Tous les offsets <br/>doivent être proches de 0]

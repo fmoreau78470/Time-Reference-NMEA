@@ -45,12 +45,4 @@ desktop.ini
 *.nupkg
 **/packages/*
 !**/packages/repositories.config
-Documentation/
 
-Archives/
-
-Documentation/
-
-Archives/
-
-Documentation_et_Archives.7z
