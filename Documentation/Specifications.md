@@ -64,10 +64,11 @@
     *   ✅ Affichage brut de la console `ntpq -pn`.
     *   ✅ Bouton Démarrer/Arrêter (Icône Play/Stop).
     *   ✅ Sélecteur de durée (remplacé par un compte à rebours pendant la mesure).
+    *   ✅ Suppression des éléments superflus (Boutons Reset/NTP, Barre de progression).
 *   ✅ Algorithme de Calibration :
     *   ✅ Phase 1 : Stabilisation (Attente `reach=377` pour GPS et Web).
     *   ✅ Phase 2 : Mesure (Collecte des offsets pendant la durée définie).
-    *   ✅ Calcul : Médiane des offsets GPS vs Médiane des offsets Web.
+    *   ✅ Calcul : `Nouveau Fudge = Ancien Fudge + (Médiane Web - Médiane GPS)`.
     *   ✅ Résultat : Proposition de la nouvelle compensation (Fudge).
 *   ✅ Validation :
     *   ✅ Message de fin avec résumé (Ancien/Nouveau Fudge, Correction).

@@ -368,17 +368,20 @@ public partial class SimpleCalibrationWindow : Window
         Log($"Médiane Web (vs Local) : {medianWeb:F3} ms");
 
         // Calcul de la nouvelle Compensation (anciennement Fudge)
-        // Logique : Nouvelle Compensation = Ancienne Compensation - Offset Médian GPS
+        // Logique : On aligne le GPS sur la référence Internet (Web).
+        // Ecart = Offset Web - Offset GPS.
+        // Nouveau Fudge = Ancien Fudge + Ecart.
         // Attention aux unités : ntpq renvoie des ms, Time2Value est en secondes.
         
         double currentFudgeSec = _config.Time2Value;
-        double correctionSec = medianGps / 1000.0;
-        double newFudgeSec = currentFudgeSec - correctionSec;
+        double gapMs = medianWeb - medianGps;
+        double gapSec = gapMs / 1000.0;
+        double newFudgeSec = currentFudgeSec + gapSec;
 
         _calculatedFudge = newFudgeSec;
 
         Log($"Compensation Actuelle : {currentFudgeSec:F4} s");
-        Log($"Correction : {-correctionSec:F4} s");
+        Log($"Ecart constaté (Web - GPS) : {gapSec:F4} s ({gapMs:F3} ms)");
         Log($"Nouvelle Compensation Suggérée : {newFudgeSec:F4} s");
         Log("------------------------------------------------");
 
@@ -386,7 +389,7 @@ public partial class SimpleCalibrationWindow : Window
             this,
             $"Résultat de la calibration :\n\n" +
             $"Compensation actuelle : {currentFudgeSec:F4} s\n" +
-            $"Correction mesurée : {-correctionSec:F4} s\n" +
+            $"Ecart constaté (Web - GPS) : {gapSec:F4} s\n" +
             $"Nouvelle compensation : {newFudgeSec:F4} s\n\n" +
             "Voulez-vous appliquer cette compensation ?",
             "Validation de la compensation",
