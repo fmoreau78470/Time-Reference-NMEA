@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Documents;
+using System.IO;
 using TimeReference.Core.Services;
 
 namespace TimeReference.App
@@ -116,6 +117,31 @@ namespace TimeReference.App
         private void BtnOk_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void BtnDocLocal_Click(object sender, RoutedEventArgs e)
+        {
+            // Stratégie Offline : On cherche le site statique local (index.html)
+            string localDoc = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Documentation", "index.html");
+            
+            if (File.Exists(localDoc))
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(localDoc) { UseShellExecute = true });
+                }
+                catch (Exception ex) { MessageBox.Show("Erreur lors de l'ouverture de la documentation locale : " + ex.Message); }
+            }
+            else
+            {
+                MessageBox.Show("La documentation locale n'est pas trouvée.\n(Elle est incluse uniquement via l'installateur)", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void BtnDocWeb_Click(object sender, RoutedEventArgs e)
+        {
+            string docUrl = "https://fmoreau78470.github.io/Time-reference-NMEA/";
+            try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(docUrl) { UseShellExecute = true }); } catch { }
         }
     }
 }

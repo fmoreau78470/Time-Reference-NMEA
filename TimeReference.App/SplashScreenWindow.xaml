@@ -32,7 +32,11 @@
             <TextBlock x:Name="TxtLoading" Grid.Row="2" Text="Chargement en cours..." FontStyle="Italic" HorizontalAlignment="Center" Margin="0,15,0,0" Foreground="#888888"/>
 
             <!-- Bouton OK -->
-            <Button Grid.Row="3" Content="OK" Width="80" Height="25" Margin="0,15,0,0" Click="BtnOk_Click" HorizontalAlignment="Center"/>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                <Button Content="Doc Web" Width="80" Height="25" Margin="0,0,10,0" Click="BtnDocWeb_Click" ToolTip="Documentation en ligne (GitHub)"/>
+                <Button Content="Doc Locale" Width="80" Height="25" Margin="0,0,10,0" Click="BtnDocLocal_Click" ToolTip="Documentation hors-ligne (si installée)"/>
+                <Button Content="OK" Width="80" Height="25" Click="BtnOk_Click"/>
+            </StackPanel>
         </Grid>
     </Border>
 </Window>

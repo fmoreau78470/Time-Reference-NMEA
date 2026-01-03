@@ -15,6 +15,8 @@ PrivilegesRequired=admin
 [Files]
 ; Chemin vers les fichiers publiés (relatif à ce script)
 Source: "bin\Release\net8.0-windows\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+; Documentation HTML statique (Le dossier 'site' doit être généré au préalable via 'mkdocs build')
+Source: "..\site\*"; DestDir: "{app}\Documentation"; Flags: ignoreversion recursesubdirs createallsubdirs skipifsourcedoesntexist
 
 [Icons]
 Name: "{group}\Time Reference NMEA"; Filename: "{app}\TimeReference.App.exe"
