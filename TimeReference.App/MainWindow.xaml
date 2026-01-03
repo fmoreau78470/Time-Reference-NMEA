@@ -244,9 +244,9 @@
                     <Path Data="M14,17H7V15H14M17,13H7V11H17M17,9H7V7H17M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z" Fill="White" Stretch="Uniform" Height="16" Width="16"/>
                 </Button>
 
-                <Button x:Name="BtnCalibration" Content="Calibration" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource SecondaryText}" Click="BtnCalibration_Click" ToolTip="Assistant de calibration"/>
-                <Button x:Name="BtnIqt" Content="IQT" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource SecondaryText}" Click="BtnIqt_Click" ToolTip="Test Qualité Signal"/>
-                <Button x:Name="BtnPeers" Content="Peers" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource SecondaryText}" Click="BtnPeers_Click" ToolTip="Afficher les pairs NTP"/>
+                <Button x:Name="BtnCalibration" Content="Calibration" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource SecondaryText}" Click="BtnCalibration_Click" ToolTip="Assistant d'étalonnage"/>
+                <Button x:Name="BtnIqt" Content="Signal GPS" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource SecondaryText}" Click="BtnIqt_Click" ToolTip="Test Qualité Réception GPS"/>
+                <Button x:Name="BtnPeers" Content="Sources" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource SecondaryText}" Click="BtnPeers_Click" ToolTip="Afficher les sources NTP"/>
 
                 <Button x:Name="BtnStartNtp" Style="{StaticResource KeypadButtonStyle}" Background="{DynamicResource SuccessColor}" Click="BtnStartNtp_Click" ToolTip="Démarrer NTP">
                     <Path Data="M8,5.14V19.14L19,12.14L8,5.14Z" Fill="White" Stretch="Uniform" Height="14" Width="14"/>
