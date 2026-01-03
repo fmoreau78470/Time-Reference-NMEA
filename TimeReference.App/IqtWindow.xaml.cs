@@ -1,5 +1,6 @@
 using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 using System.Threading.Tasks;
 using TimeReference.Core.Models;
@@ -44,17 +45,25 @@ namespace TimeReference.App
             // Sécurité : on s'assure que c'est fermé avant de tenter
             _gpsReader.Stop();
 
-            // Tentative directe (sans boucle de retry)
-            _gpsReader.Start(_config.SerialPort, _config.BaudRate);
+            try
+            {
+                // Tentative directe (sans boucle de retry)
+                _gpsReader.Start(_config.SerialPort, _config.BaudRate);
 
-            if (_gpsReader.IsConnected)
-            {
-                TxtStatus.Text = $"Connecté à {_config.SerialPort}. Analyse en cours...";
-                _uiTimer.Start();
+                if (_gpsReader.IsConnected)
+                {
+                    TxtStatus.Text = $"Connecté à {_config.SerialPort}. Analyse en cours...";
+                    _uiTimer.Start();
+                }
+                else
+                {
+                    TxtStatus.Text = "Erreur : Impossible d'ouvrir le port COM (Occupé ?).";
+                    if (BtnRetry != null) BtnRetry.IsEnabled = true;
+                }
             }
-            else if (!TxtStatus.Text.StartsWith("Erreur GPS"))
+            catch (Exception ex)
             {
-                TxtStatus.Text = "Erreur : Impossible d'ouvrir le port COM (Occupé ?).";
+                TxtStatus.Text = $"Erreur connexion : {ex.Message}";
                 if (BtnRetry != null) BtnRetry.IsEnabled = true;
             }
             
@@ -72,7 +81,11 @@ namespace TimeReference.App
 
         private void OnGpsError(string error)
         {
-            Dispatcher.Invoke(() => TxtStatus.Text = $"Erreur GPS : {error}");
+            Dispatcher.Invoke(() => 
+            {
+                TxtStatus.Text = $"Erreur GPS : {error}";
+                if (BtnRetry != null) BtnRetry.IsEnabled = true;
+            });
         }
 
         private void UiTimer_Tick(object? sender, EventArgs e)
@@ -82,20 +95,28 @@ namespace TimeReference.App
 
             // Mise à jour de l'UI
             UpdateValues(result);
+            
+            AnimateLed(_gpsReader.IsConnected);
         }
 
         private void UpdateValues(IqtResult result)
         {
-            TxtTotalScore.Text = $"{result.TotalScore:F1} %";
+            GaugeScore.Value = result.TotalScore;
 
-            // Couleur dynamique du score
-            if (result.TotalScore > 80) TxtTotalScore.Foreground = System.Windows.Media.Brushes.LimeGreen;
-            else if (result.TotalScore > 50) TxtTotalScore.Foreground = System.Windows.Media.Brushes.Orange;
-            else TxtTotalScore.Foreground = System.Windows.Media.Brushes.Red;
+            GaugeSnr.Value = result.RawAvgSnr;
+            GaugeHdop.Value = result.RawHdop;
+            GaugeSat.Value = result.RawSatCount;
+        }
 
-            TxtSnrVal.Text = $"{result.RawAvgSnr:F1} dB";
-            TxtHdopVal.Text = $"{result.RawHdop:F1}";
-            TxtSatVal.Text = $"{result.RawSatCount}";
+        private void AnimateLed(bool isConnected)
+        {
+            if (LedIndicator == null) return;
+
+            LedIndicator.Fill = isConnected ? System.Windows.Media.Brushes.LimeGreen : System.Windows.Media.Brushes.Red;
+
+            // Effet Flash : On part de 1.0 (Allumé) vers 0.2 (Dim)
+            var anim = new System.Windows.Media.Animation.DoubleAnimation(1.0, 0.2, TimeSpan.FromMilliseconds(400));
+            LedIndicator.BeginAnimation(UIElement.OpacityProperty, anim);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -112,6 +133,12 @@ namespace TimeReference.App
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
     }
 }

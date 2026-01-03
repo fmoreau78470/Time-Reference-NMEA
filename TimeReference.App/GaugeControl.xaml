@@ -1,0 +1,41 @@
+<UserControl x:Class="TimeReference.App.GaugeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="150">
+    <Grid Background="Transparent">
+        <Viewbox>
+            <Grid Width="200" Height="200">
+                <!-- Background Arcs (Zones) -->
+                <Canvas x:Name="ArcCanvas" Width="200" Height="200"/>
+
+                <!-- Ticks / Decorations -->
+                <Path Stroke="#FF444444" StrokeThickness="2" Data="M 100,180 A 80,80 0 1 1 180,100" Visibility="Collapsed"/>
+
+                <!-- Value Text -->
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,60,0,0">
+                    <TextBlock x:Name="TxtValue" Text="--" Foreground="White" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="TxtUnit" Text="UNIT" Foreground="#FF888888" FontSize="12" HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Title -->
+                <TextBlock x:Name="TxtTitle" Text="TITLE" Foreground="#FFCCCCCC" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,140,0,0"/>
+
+                <!-- Needle -->
+                <Path x:Name="Needle" Fill="White" Stroke="Black" StrokeThickness="1" Data="M 100,95 L 100,105 L 185,100 Z">
+                    <Path.RenderTransform>
+                        <RotateTransform x:Name="NeedleRotate" Angle="-135" CenterX="100" CenterY="100"/>
+                    </Path.RenderTransform>
+                    <Path.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="2" Opacity="0.5"/>
+                    </Path.Effect>
+                </Path>
+                
+                <!-- Center Cap -->
+                <Ellipse Width="16" Height="16" Fill="#FF444444" Stroke="#FF222222" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</UserControl>
