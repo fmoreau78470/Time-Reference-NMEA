@@ -633,16 +633,18 @@ public partial class MainWindow : Window
     private void ApplyThemeResources(string theme)
     {
         _currentTheme = theme;
-        string uri = $"Themes/{theme}Theme.xaml";
+        // FIX: Utilisation d'une URI Pack absolue pour garantir le chargement des ressources embarquées dans l'exe
+        string uri = $"pack://application:,,,/TimeReference.App;component/Themes/{theme}Theme.xaml";
         try
         {
-            var dict = new ResourceDictionary { Source = new Uri(uri, UriKind.Relative) };
+            var dict = new ResourceDictionary { Source = new Uri(uri, UriKind.Absolute) };
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(dict);
             
             UpdateThemeButtonIcon();
+            Logger.Info($"Thème '{theme}' chargé avec succès.");
         }
-        catch (Exception ex) { Logger.Error($"Erreur chargement thème {theme}: {ex.Message}"); }
+        catch (Exception ex) { Logger.Error($"Erreur chargement thème {theme} ({uri}): {ex.Message}"); }
     }
 
     private void UpdateThemeButtonIcon()
@@ -746,6 +748,7 @@ public partial class MainWindow : Window
 
             // On capture la largeur actuelle de l'écran LCD pour la conserver
             double targetWidth = HeaderBorder.ActualWidth;
+            if (targetWidth < 50) targetWidth = 300; // Sécurité si l'interface n'est pas encore rendue
 
             _config = _configService.Load();
 

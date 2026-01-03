@@ -180,13 +180,16 @@ Pour créer un fichier `.exe` autonome (qui n'a pas besoin d'installer .NET sur 
   <None Include="config.json">
     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
   </None>
+  <!-- Fix pour SingleFile : Force l'inclusion des Assets et Thèmes -->
+  <Resource Include="Assets\**\*.ico" />
+  <Resource Include="Assets\**\*.png" />
 </ItemGroup>
 ```
 
 2.  **Commande de publication** :
 ```powershell
 cd ..\TimeReference.App
-dotnet publish -c Release -r win-x64 --self-contained -p:PublishSingleFile=true
+dotnet publish -c Release
 ```
 
 L'application finale se trouvera dans `TimeReference.App\bin\Release\net8.0-windows\win-x64\publish\`.

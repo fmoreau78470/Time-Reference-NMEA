@@ -136,8 +136,10 @@
     *   ✅ Puisque cela lit le COM, il faut arrêter NTP
     *   ✅ Afficher le résultat global sous forme d'un grand compteur rotatif.
     *   ✅ Afficher les 3 sous-indicateurs (SNR, HDOP, Qté) sous forme de petits compteurs rotatifs sous le principal.
+    *   ✅ Utilisation de contrôles de jauge personnalisés (`GaugeControl`) avec zones de couleur (Vert/Orange/Rouge).
+    *   ✅ Ajout d'une LED d'activité (Flash) pour visualiser la lecture du port série.
     *   ✅ Conserver les bulles d'aide explicatives pour chaque indicateur.
-    *   ✅ Adopter le style Vintage (Fond noir, cadran beige) pour harmoniser avec le Vu-mètre d'offset.
+    *   ✅ Adopter le thème sombre moderne de l'application.
 
 ### ℹ️ Spec 10
 *   ✅ Mise en place de la stratégie Multi-sites (Hybride Terrain/Maison).
@@ -174,6 +176,18 @@
     *   ✅ Étape 5 : Validation et sauvegarde
     *   ✅ Affichage des logs détaillés dans la fenêtre
     *   ✅ Bouton Pause pour suspendre le processus sans arrêter NTP
+
+### ℹ️ Spec 15 (Versioning & CI/CD)
+*   ✅ Mise en place d'une stratégie de versionning SemVer (Majeur.Mineur.Patch).
+*   ✅ Création d'un script PowerShell (`Set-Version.ps1`) pour automatiser la mise à jour des fichiers `.csproj` et `setup.iss`.
+*   ✅ Configuration d'un workflow GitHub Actions (`release.yml`) pour :
+    *   ✅ Compiler l'application (.NET) et l'installateur (Inno Setup) automatiquement.
+    *   ✅ Créer une Release GitHub avec les binaires attachés lors d'un push de tag (`v*`).
+
+### ℹ️ Spec 16 (Améliorations UI & Tooltips)
+*   ✅ Harmonisation des textes d'aide (Tooltips) entre la fenêtre principale et la fenêtre IQT.
+*   ✅ Correction de la persistance de l'infobulle de l'Indicateur de Santé (déplacement sur le conteneur parent pour éviter l'écrasement par le code-behind).
+*   ✅ Utilisation de textes riches avec sauts de ligne pour une meilleure pédagogie.
 
 ### ℹ️ Documentation du fichier de configuration (config.json)
 Le fichier `config.json` stocke les paramètres persistants de l'application :

@@ -76,19 +76,23 @@ C'est ici que votre configuration PC/Mac devient centrale. Git devient votre "cl
 
 ## 4. Création de l'exécutable (Mise en production)
 
+### ⚠️ Note importante sur la méthode de publication
+Le mode de publication en **fichier unique (`PublishSingleFile`) a été désactivé** dans le fichier `.csproj`.
+
+**Raison :** Ce mode est connu pour être incompatible avec le système de thèmes dynamiques de WPF (ce qui rendait la fenêtre invisible) et il ne copiait pas les fichiers `config.json` et `ntp.template` dans le dossier final.
+
+La méthode de publication actuelle (`--self-contained`) est la plus robuste. Elle génère un dossier `publish` complet avec l'exécutable, toutes ses dépendances (.dll) et les fichiers de configuration. Pour distribuer l'application, vous utiliserez **Inno Setup** (voir étape 5) pour créer un installateur unique à partir de ce dossier.
+
 Pour générer un fichier `.exe` autonome (qui fonctionne sur un PC sans avoir besoin d'installer .NET) :
 
 1.  Ouvrez le terminal dans le dossier de l'application :
     ```bash
     cd TimeReference.App
     ```
-2.  Lancez la commande de publication :
+2.  Lancez la commande de publication (les paramètres SingleFile sont désormais dans le .csproj) :
     ```bash
-    dotnet publish -c Release -r win-x64 --self-contained -p:PublishSingleFile=true
+    dotnet publish -c Release
     ```
-    *   **`-c Release`** : Version optimisée pour la performance.
-    *   **`--self-contained`** : Embarque le moteur .NET (l'exe sera plus gros, ~60Mo, mais universel).
-    *   **`-p:PublishSingleFile=true`** : Combine tous les fichiers en un seul `.exe`.
 
 3.  **Où est le fichier ?**
     Il est généré dans : `bin\Release\net8.0-windows\win-x64\publish\`

@@ -16,6 +16,14 @@
     <Copyright>Francis Moreau</Copyright>
   </PropertyGroup>
 
+  <!-- Configuration de publication (Release) -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <!-- PublishSingleFile est désactivé. Il est incompatible avec le système de thèmes WPF (fenêtre invisible) et la copie des fichiers de configuration. -->
+    <PublishSingleFile>false</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\TimeReference.Core\TimeReference.Core.csproj" />
   </ItemGroup>
@@ -27,11 +35,9 @@
     <None Include="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Assets\Icone-Time-Reference.ico" />
-    <Resource Include="Assets\splash.png" />
+    <!-- Fix pour SingleFile : Force l'inclusion des Assets et Thèmes -->
+    <Resource Include="Assets\**\*.ico" />
+    <Resource Include="Assets\**\*.png" />
   </ItemGroup>
 
 </Project>
