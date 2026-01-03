@@ -13,7 +13,7 @@ La documentation est écrite en Markdown et transformée en site web par Python.
 Ouvrez un terminal à la racine du projet et installez MkDocs, le thème "Material" (standard industriel actuel) et le plugin PDF :
 
 ```bash
-pip install mkdocs mkdocs-material mkdocs-with-pdf
+pip3 install mkdocs mkdocs-material mkdocs-with-pdf
 ```
 
 ## 2. Initialisation de la structure
@@ -21,7 +21,7 @@ pip install mkdocs mkdocs-material mkdocs-with-pdf
 À la racine du projet (`Time reference NMEA`), lancez :
 
 ```bash
-mkdocs new .
+python3 -m mkdocs new .
 ```
 *Cela va créer un fichier `mkdocs.yml` (configuration) et un dossier `docs/` (contenu).*
 
@@ -77,6 +77,7 @@ Créez les fichiers Markdown correspondants dans le dossier `docs/`.
 
 ### A. `index.md` (Accueil)
 *   **Contenu :** Présentation du projet ("Transformer un PC Windows en serveur de temps Stratum 1").
+*   **Contexte :** Mentionner l'origine astronomique (courbes de lumière, occultations) et le fonctionnement **hors ligne**.
 *   **Liens :** Boutons de téléchargement vers la dernière Release GitHub.
 
 ### B. `theorie.md` (Comprendre NTP)
@@ -98,7 +99,7 @@ Créez les fichiers Markdown correspondants dans le dossier `docs/`.
 ### Mode Développement (Temps réel)
 Pour voir le site pendant que vous écrivez :
 ```bash
-mkdocs serve
+python3 -m mkdocs serve
 ```
 Ouvrez `http://127.0.0.1:8000` dans votre navigateur.
 
