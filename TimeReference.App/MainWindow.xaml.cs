@@ -1210,19 +1210,6 @@ public partial class MainWindow : Window
         UpdateSignalBar(Bar3, _healthScore >= 60, colorKey);
         UpdateSignalBar(Bar4, _healthScore >= 80, colorKey);
         UpdateSignalBar(Bar5, _healthScore >= 99, colorKey);
-
-        // Mise à jour de l'info-bulle détaillée
-        if (LblHealth.ToolTip is not ToolTip tt)
-        {
-            tt = new ToolTip();
-            LblHealth.ToolTip = tt;
-        }
-        ((ToolTip)LblHealth.ToolTip).Content = 
-            $"Santé: {_healthScore:F0}%\n" +
-            $"Stratum: {_ntpStatus.PeerStratum}\n" +
-            $"RefID: {_ntpStatus.PeerRefId}\n" +
-            $"Reach: {Convert.ToString(_ntpStatus.Reach, 8)} (Octal)\n" +
-            $"Offset: {_ntpStatus.Offset:F3} ms";
     }
 
     private void UpdateSignalBar(System.Windows.Shapes.Rectangle? bar, bool isActive, string colorKey)

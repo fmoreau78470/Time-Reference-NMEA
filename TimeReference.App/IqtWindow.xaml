@@ -61,7 +61,7 @@
                                         Minimum="0" Maximum="100" 
                                         Limit1="50" Limit2="80" 
                                         IsInverted="False"
-                                        ToolTip="Indice global de qualité (0-100%) calculé à partir du SNR, HDOP et nombre de satellites."/>
+                                        ToolTip="Indice de Qualité du Signal (IQT) (0-100%)&#x0a;&#x0a;Cet indicateur évalue la qualité de réception du signal GPS.&#x0a;&#x0a;Il prend en compte :&#x0a;• Le SNR : Puissance du signal.&#x0a;• Le HDOP : Précision géométrique.&#x0a;• Les Satellites : Nombre de sources.&#x0a;&#x0a;100% = Réception optimale."/>
                 </StackPanel>
 
                 <!-- Metrics -->
