@@ -15,6 +15,7 @@ Voici les meilleures pratiques adaptées à votre situation de développeur solo
 *   [8. Automatisation du Versionning (Script)](#8-automatisation-du-versionning-script)
 *   [9. Processus de Release Complet](#9-processus-de-release-complet)
 *   [10. Configuration GitHub Actions (CI/CD)](#10-configuration-github-actions-cicd)
+*   [11. Documentation Utilisateur](#11-documentation-utilisateur)
 
 ---
 
@@ -303,3 +304,25 @@ Pour que l'étape 4 ci-dessus fonctionne, un fichier de workflow a été ajouté
 4.  **Release :** Utilise `softprops/action-gh-release` pour publier les fichiers générés.
 
 **Note :** Vous n'avez rien à faire de plus que de pousser vos tags (`git push --tags`). Vous pouvez suivre l'avancement dans l'onglet **Actions** de votre dépôt GitHub.
+
+---
+
+## 11. Documentation Utilisateur
+
+La documentation fait partie intégrante du produit. Voici les standards adoptés pour ce projet :
+
+### Structure
+1.  **Théorie NTP :** Vulgarisation des concepts (Jitter, Offset, Stratum) et justification du GPS.
+2.  **Matériel :** Guide d'assemblage du module GPS (BOM, câblage, configuration u-blox).
+3.  **Logiciel :** Mode d'emploi de l'application WPF (Installation, Calibration Expert, Interprétation des graphiques).
+
+### Outils & Workflow
+*   **Format :** Markdown (dans le dossier `/docs`).
+*   **Moteur :** **MkDocs** (Thème Material).
+*   **Publication :** GitHub Pages (automatisé via GitHub Actions).
+*   **Offline :** PDF généré et inclus dans l'installateur (Inno Setup).
+
+### Bonnes Pratiques
+*   **Tooltips :** L'aide de premier niveau est intégrée directement dans l'UI (infobulles).
+*   **Bouton Aide :** Redirige vers le site de documentation en ligne.
+*   **Versionning :** La documentation évolue dans le même dépôt que le code.
