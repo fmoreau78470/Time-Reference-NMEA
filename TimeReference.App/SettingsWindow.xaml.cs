@@ -40,8 +40,6 @@ namespace TimeReference.App
                 {
                     TxtServers.Text = string.Join(Environment.NewLine, _config.Servers);
                 }
-                
-                TxtServerOptions.Text = _config.ServerOptions;
                 TxtMeinbergUrl.Text = _config.MeinbergUrl;
 
                 // Chargement des paramètres du Mode Mini
@@ -79,7 +77,7 @@ namespace TimeReference.App
                     .Where(s => !string.IsNullOrWhiteSpace(s))
                     .ToList();
 
-                _config.ServerOptions = TxtServerOptions.Text;
+                _config.ServerOptions = "iburst";
                 
                 // Validation basique de l'URL
                 if (Uri.TryCreate(TxtMeinbergUrl.Text, UriKind.Absolute, out Uri? uriResult) 
@@ -164,6 +162,18 @@ namespace TimeReference.App
             if (openFileDialog.ShowDialog() == true)
             {
                 TxtNtpPath.Text = openFileDialog.FileName;
+            }
+        }
+
+        private void BtnFindServers_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://www.ntppool.org") { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Impossible d'ouvrir le lien : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

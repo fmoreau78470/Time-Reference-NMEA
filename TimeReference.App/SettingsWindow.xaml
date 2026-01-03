@@ -112,10 +112,14 @@
                         </Grid>
 
                         <TextBlock Text="Serveurs NTP (un par ligne) :" Margin="0,0,0,2"/>
-                        <TextBox x:Name="TxtServers" Height="100" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10"/>
-
-                        <TextBlock Text="Options des serveurs (ex: iburst) :" Margin="0,0,0,2"/>
-                        <TextBox x:Name="TxtServerOptions" Margin="0,0,0,10"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TxtServers" Grid.Column="0" Height="100" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                            <Button Grid.Column="1" Content="Trouver vos serveurs NTP" VerticalAlignment="Top" Margin="5,0,0,0" Click="BtnFindServers_Click"/>
+                        </Grid>
 
                         <TextBlock Text="URL Téléchargement Meinberg :" Margin="0,0,0,2"/>
                         <Grid>

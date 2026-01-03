@@ -26,11 +26,11 @@ theme:
 
 plugins:
   - search
-  - with-pdf:
-      author: Francis Moreau
-      title: Manuel d'utilisation de Time Reference NMEA
-      copyright: "© 2026 Time Reference NMEA"
-      output_path: pdf/manuel-utilisateur.pdf
+  # - with-pdf:
+  #     author: Francis Moreau
+  #     title: Manuel d'utilisation de Time Reference NMEA
+  #     copyright: "© 2026 Time Reference NMEA"
+  #     output_path: pdf/manuel-utilisateur.pdf
 
 nav:
   - Accueil: index.md
