@@ -18,8 +18,7 @@
 
   <!-- Configuration de publication (Release) -->
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <!-- PublishSingleFile est désactivé. Il est incompatible avec le système de thèmes WPF (fenêtre invisible) et la copie des fichiers de configuration. -->
-    <PublishSingleFile>false</PublishSingleFile>
+    <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>

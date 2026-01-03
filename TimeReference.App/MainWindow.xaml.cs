@@ -158,6 +158,9 @@ public partial class MainWindow : Window
             _splash.Topmost = true;
             _splash.Activate();
         }
+
+            // Vérification de la position pour éviter que la fenêtre soit hors écran
+            EnsureWindowVisible();
     }
 
     private async Task AutoStartNtpAsync()
@@ -185,6 +188,29 @@ public partial class MainWindow : Window
             });
         }
     }
+
+        private void EnsureWindowVisible()
+        {
+            // Récupération des limites de l'écran virtuel (englobe tous les moniteurs)
+            double virtualScreenLeft = SystemParameters.VirtualScreenLeft;
+            double virtualScreenTop = SystemParameters.VirtualScreenTop;
+            double virtualScreenWidth = SystemParameters.VirtualScreenWidth;
+            double virtualScreenHeight = SystemParameters.VirtualScreenHeight;
+
+            // On vérifie si la fenêtre est "perdue" (complètement hors de la zone visible)
+            bool isOffScreen = (this.Left + this.Width < virtualScreenLeft) || 
+                               (this.Left > virtualScreenLeft + virtualScreenWidth) ||
+                               (this.Top + this.Height < virtualScreenTop) || 
+                               (this.Top > virtualScreenTop + virtualScreenHeight);
+
+            if (isOffScreen)
+            {
+                // Si hors écran, on recentre sur l'écran principal
+                this.Left = SystemParameters.WorkArea.Left + (SystemParameters.WorkArea.Width - this.Width) / 2;
+                this.Top = SystemParameters.WorkArea.Top + (SystemParameters.WorkArea.Height - this.Height) / 2;
+                Logger.Info("Fenêtre détectée hors écran. Repositionnement sur l'écran principal.");
+            }
+        }
 
     private bool CheckPrerequisites()
     {

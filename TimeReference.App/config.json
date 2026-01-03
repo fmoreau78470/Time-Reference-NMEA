@@ -14,8 +14,8 @@
   "utc_mode": true,
   "mini_mode_always_on_top": true,
   "mini_mode_opacity": 1,
-  "mini_mode_left": 1656,
-  "mini_mode_top": 795,
+  "mini_mode_left": 800,
+  "mini_mode_top": 400,
   "peers_window_left": 1102,
   "peers_window_top": 872,
   "meinberg_url": "https://www.meinbergglobal.com/english/sw/ntp.htm"

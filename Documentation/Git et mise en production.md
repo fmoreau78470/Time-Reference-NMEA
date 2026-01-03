@@ -77,11 +77,11 @@ C'est ici que votre configuration PC/Mac devient centrale. Git devient votre "cl
 ## 4. Création de l'exécutable (Mise en production)
 
 ### ⚠️ Note importante sur la méthode de publication
-Le mode de publication en **fichier unique (`PublishSingleFile`) a été désactivé** dans le fichier `.csproj`.
+Le mode de publication en **fichier unique (`PublishSingleFile`) est activé** dans le fichier `.csproj`.
 
-**Raison :** Ce mode est connu pour être incompatible avec le système de thèmes dynamiques de WPF (ce qui rendait la fenêtre invisible) et il ne copiait pas les fichiers `config.json` et `ntp.template` dans le dossier final.
+Cela permet de générer un exécutable unique contenant toutes les dépendances .NET, ce qui simplifie la distribution. Les problèmes liés aux thèmes WPF et aux fichiers de configuration ont été résolus.
 
-La méthode de publication actuelle (`--self-contained`) est la plus robuste. Elle génère un dossier `publish` complet avec l'exécutable, toutes ses dépendances (.dll) et les fichiers de configuration. Pour distribuer l'application, vous utiliserez **Inno Setup** (voir étape 5) pour créer un installateur unique à partir de ce dossier.
+La publication génère un dossier `publish` contenant l'exécutable principal et les fichiers de configuration externes (`config.json`, `ntp.template`). Pour distribuer l'application, vous utiliserez **Inno Setup** (voir étape 5) pour créer un installateur à partir de ce dossier.
 
 Pour générer un fichier `.exe` autonome (qui fonctionne sur un PC sans avoir besoin d'installer .NET) :
 
