@@ -2,6 +2,20 @@ Même en travaillant seul, adopter les bonnes pratiques Git est un investissemen
 
 Voici les meilleures pratiques adaptées à votre situation de développeur solo multi-plateforme :
 
+## 📑 Table des matières
+*   [0. Installation et Prérequis](#0-installation-et-prérequis)
+*   [1. Git Commit : La granularité est la clé](#1-git-commit--la-granularité-est-la-clé)
+*   [2. Git Branch : Isoler pour ne pas casser](#2-git-branch--isoler-pour-ne-pas-casser)
+*   [3. Git Push & Pull : La synchronisation multi-postes](#3-git-push--pull--la-synchronisation-multi-postes)
+*   [Résumé du flux de travail idéal](#résumé-du-flux-de-travail-idéal)
+*   [4. Création de l'exécutable (Mise en production)](#4-création-de-lexécutable-mise-en-production)
+*   [5. Création de l'installateur (Setup)](#5-création-de-linstallateur-setup)
+*   [6. Stratégie de Versionning (SemVer)](#6-stratégie-de-versionning-semver)
+*   [7. Cycle de Vie : Correctifs et Nouvelles Fonctionnalités](#7-cycle-de-vie--correctifs-et-nouvelles-fonctionnalités)
+*   [8. Automatisation du Versionning (Script)](#8-automatisation-du-versionning-script)
+*   [9. Processus de Release Complet](#9-processus-de-release-complet)
+*   [10. Configuration GitHub Actions (CI/CD)](#10-configuration-github-actions-cicd)
+
 ---
 
 ## 0. Installation et Prérequis
@@ -130,40 +144,158 @@ Filename: "{app}\TimeReference.App.exe"; Description: "Lancer l'application"; Fl
 
 ---
 
-## 6. Gestion des Versions (Versioning)
+## 6. Stratégie de Versionning (SemVer)
 
-Avant de générer une nouvelle version pour la production, il est crucial de mettre à jour les numéros de version partout pour assurer la cohérence.
+Pour s'y retrouver dans le temps, adoptez la norme **Semantic Versioning** (X.Y.Z) :
 
-### 1. Mettre à jour le projet .NET (.csproj)
-C'est ce numéro qui s'affiche dans le Splash Screen et les propriétés du fichier `.exe`.
+*   **MAJOR (X.0.0)** : Changements majeurs, refonte totale, incompatibilité (ex: Passage de Python à C#).
+*   **MINOR (1.Y.0)** : Nouvelles fonctionnalités rétro-compatibles (ex: Ajout du mode Expert, nouvelle fenêtre).
+*   **PATCH (1.1.Z)** : Corrections de bugs uniquement (ex: Fix crash au démarrage, faute de frappe).
 
-1.  Ouvrez `TimeReference.App\TimeReference.App.csproj`.
-2.  Modifiez (ou ajoutez) la balise `<Version>` :
-    ```xml
-    <PropertyGroup>
-      ...
-      <Version>1.1.0</Version>
-      <FileVersion>1.1.0.0</FileVersion>
-      <AssemblyVersion>1.1.0.0</AssemblyVersion>
-      ...
-    </PropertyGroup>
-    ```
+---
 
-### 2. Mettre à jour l'installateur (Inno Setup)
-1.  Ouvrez `TimeReference.App\setup.iss`.
-2.  Modifiez la version et le nom du fichier de sortie :
-    ```ini
-    AppVersion=1.1.0
-    OutputBaseFilename=TimeReferenceNMEA_Setup_v1.1.0
-    ```
+## 7. Cycle de Vie : Correctifs et Nouvelles Fonctionnalités
 
-### 3. Marquer le coup avec Git (Tag)
-Une fois la version validée et commitée :
+L'objectif est de pouvoir développer le futur (v1.2) tout en étant capable de corriger le présent (v1.1) si un bug est découvert.
 
-```bash
-# Créer une étiquette (Tag) pour figer cette version dans l'historique
-git tag v1.1.0
+### Cas A : Nouvelle Fonctionnalité (Feature)
+C'est le flux standard.
+1.  Partir de `main` : `git checkout main`
+2.  Créer une branche : `git checkout -b feature/ma-super-idee`
+3.  Développer, tester, commiter.
+4.  Fusionner dans `main` : `git checkout main` puis `git merge feature/ma-super-idee`
+5.  Incrémenter **MINOR** (ex: 1.1.0 -> 1.2.0).
 
-# Envoyer le tag sur le serveur (GitHub/GitLab...)
-git push origin v1.1.0
+### Cas B : Correctif Urgent (Hotfix)
+Un bug critique est trouvé en production sur la v1.2.0.
+1.  Retrouver l'état exact de la prod (grâce au tag) : `git checkout v1.2.0`
+2.  Créer une branche de secours : `git checkout -b hotfix/correction-urgente`
+3.  Corriger et tester.
+4.  Incrémenter **PATCH** (ex: 1.2.0 -> 1.2.1).
+5.  Fusionner dans `main` (pour que le futur l'ait aussi) : `git checkout main` puis `git merge hotfix/correction-urgente`
+6.  Créer le tag correctif : `git tag v1.2.1`
+
+### Comment "garder" les anciennes versions ?
+C'est le rôle des **Tags**. Un tag est une étiquette indélébile posée sur un commit précis.
+
+*   **Créer un tag :** `git tag v1.0.0`
+*   **Envoyer les tags sur le serveur :** `git push --tags`
+*   **Revenir voir une vieille version :** `git checkout v1.0.0` (Vous serez en mode "détaché", parfait pour consulter ou recompiler une vieille version).
+*   **Revenir au présent :** `git checkout main`
+
+---
+
+## 8. Automatisation du Versionning (Script)
+
+Modifier manuellement les numéros de version dans plusieurs fichiers est une source d'erreurs. On peut automatiser cette tâche avec un simple script PowerShell.
+
+1.  Créez un fichier `Set-Version.ps1` à la racine de votre projet.
+2.  Copiez-y le code suivant :
+
+```powershell
+# Script pour définir la version du projet Time Reference NMEA
+# Utilisation : 
+#   .\Set-Version.ps1 -Version 1.2.0  (Force une version)
+#   .\Set-Version.ps1                 (Incrémente le Patch automatiquement)
+
+param(
+    [Parameter(Mandatory=$false)]
+    [string]$Version
+)
+
+# --- Chemins des fichiers ---
+$csprojPath = ".\TimeReference.App\TimeReference.App.csproj"
+$issPath = ".\TimeReference.App\setup.iss"
+
+# --- Logique d'auto-incrémentation ---
+if ([string]::IsNullOrWhiteSpace($Version)) {
+    $xml = xml
+    $currentVersion = $xml.Project.PropertyGroup.Version
+    if ($currentVersion -match '^(\d+)\.(\d+)\.(\d+)$') {
+        $newPatch = [int]$matches[3] + 1
+        $Version = "$($matches[1]).$($matches[2]).$newPatch"
+        Write-Host "Auto-incrémentation : $currentVersion -> $Version" -ForegroundColor Yellow
+    } else {
+        Write-Error "Impossible de lire la version actuelle pour l'incrémenter."
+        return
+    }
+}
+
+if ($Version -notmatch '^\d+\.\d+\.\d+$') {
+    Write-Error "Le format de la version doit être X.Y.Z (ex: 1.2.0). Fourni : $Version"
+    return
+}
+
+Write-Host "Mise à jour du projet vers la version $Version..." -ForegroundColor Cyan
+
+# --- 1. Mise à jour du fichier .csproj ---
+Write-Host "Modification de $csprojPath..."
+$xml = xml
+$xml.Project.PropertyGroup.Version = $Version
+$xml.Project.PropertyGroup.FileVersion = "$Version.0"
+$xml.Project.PropertyGroup.AssemblyVersion = "$Version.0"
+$xml.Save($csprojPath)
+Write-Host ".csproj mis à jour." -ForegroundColor Green
+
+# --- 2. Mise à jour du script Inno Setup ---
+Write-Host "Modification de $issPath..."
+$issContent = (Get-Content $issPath -Raw) -replace '(?m)^(AppVersion=).*', "AppVersion=$Version"
+$issContent = $issContent -replace '(?m)^(OutputBaseFilename=).*', "OutputBaseFilename=TimeReferenceNMEA_Setup_v$Version"
+Set-Content -Path $issPath -Value $issContent
+Write-Host "setup.iss mis à jour." -ForegroundColor Green
+
+Write-Host "Versionning terminé pour v$Version." -ForegroundColor Cyan
 ```
+
+### Utilisation
+Avant de créer une nouvelle release, ouvrez un terminal PowerShell et lancez :
+```powershell
+.\Set-Version.ps1 -Version 1.2.1
+```
+Le script mettra à jour automatiquement les fichiers `.csproj` et `.iss`.
+
+---
+
+## 9. Processus de Release Complet
+
+Voici le workflow complet pour publier une nouvelle version (ex: 1.2.1) :
+
+1.  **Mettre à jour les numéros de version :**
+    ```powershell
+    .\Set-Version.ps1 -Version 1.2.1
+    ```
+
+2.  **Valider les changements avec Git :**
+    ```bash
+    git add .
+    git commit -m "Bump version to 1.2.1"
+    ```
+
+3.  **Créer le tag Git et le pousser :**
+    ```bash
+    git tag v1.2.1
+    git push origin main --tags
+    ```
+
+4.  **Laisser GitHub travailler :**
+    Grâce au fichier `.github/workflows/release.yml`, GitHub va automatiquement :
+    *   Détecter le nouveau tag.
+    *   Lancer une machine virtuelle Windows.
+    *   Compiler le projet .NET.
+    *   Générer l'installateur avec Inno Setup.
+    *   Créer une "Release" dans l'onglet **Releases** de votre dépôt GitHub.
+    *   Y attacher l'exécutable et l'installateur.
+
+---
+
+## 10. Configuration GitHub Actions (CI/CD)
+
+Pour que l'étape 4 ci-dessus fonctionne, un fichier de workflow a été ajouté au projet dans `.github/workflows/release.yml`.
+
+**Ce qu'il fait :**
+1.  **Trigger :** Se déclenche uniquement sur les tags (`v*`).
+2.  **Build :** Utilise `dotnet publish` pour créer l'exe autonome.
+3.  **Setup :** Utilise une action tierce pour compiler le script `setup.iss` d'Inno Setup.
+4.  **Release :** Utilise `softprops/action-gh-release` pour publier les fichiers générés.
+
+**Note :** Vous n'avez rien à faire de plus que de pousser vos tags (`git push --tags`). Vous pouvez suivre l'avancement dans l'onglet **Actions** de votre dépôt GitHub.

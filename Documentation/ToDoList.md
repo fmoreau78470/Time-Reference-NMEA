@@ -3,7 +3,7 @@
 - [X] Vérifier la dernière version à jour de NTP --> S'inspirer de  `CompareVersions.py`
 - [X] Afficher la version ntp dans le splash screen
 - [X] Bouton help
-- [] Faire un ModOp pour la mise en production avec gestion des n° de versions, distribution ...
+- [ ] Faire un ModOp pour la mise en production avec gestion des n° de versions, distribution ...
 - [ ] Mettre en place le Ko-Fi
 - [ ] Page d'aide
 - [X] Bouton Off en haut 
