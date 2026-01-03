@@ -45,3 +45,6 @@ desktop.ini
 *.nupkg
 **/packages/*
 !**/packages/repositories.config
+Documentation/
+
+Archives/
