@@ -118,7 +118,9 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="TxtServers" Grid.Column="0" Height="100" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-                            <Button Grid.Column="1" Content="Trouver vos serveurs NTP" VerticalAlignment="Top" Margin="5,0,0,0" Click="BtnFindServers_Click"/>
+                            <Button Grid.Column="1" Width="75" Height="75" VerticalAlignment="Top" Margin="5,0,0,0" Click="BtnFindServers_Click" ToolTip="Trouver des serveurs NTP sur ntppool.org">
+                                <Path Data="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.79 4.21,10.21L9,15V16C9,17.1 9.9,18 11,18V19.93M17.9,17.39C17.64,16.8 16.9,16.5 16.5,16.5C15.67,16.5 15,15.83 15,15V14C15,13.45 14.55,13 14,13H11V11H13C14.1,11 15,10.1 15,9V7H17V9H19V10.2C19.62,10.74 20,11.53 20,12C20,14.08 19.2,15.97 17.9,17.39Z" Fill="{DynamicResource PrimaryText}" Stretch="Uniform" Width="32" Height="32"/>
+                            </Button>
                         </Grid>
 
                         <TextBlock Text="URL Téléchargement Meinberg :" Margin="0,0,0,2"/>
@@ -128,7 +130,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="TxtMeinbergUrl" Grid.Column="0"/>
-                            <Button Grid.Column="1" Width="25" Height="20" Margin="5,0,0,0" Click="BtnTestUrl_Click" ToolTip="Ouvrir le lien dans le navigateur">
+                            <Button Grid.Column="1" Width="50" Height="50" Margin="5,0,0,0" Click="BtnTestUrl_Click" ToolTip="Ouvrir le lien dans le navigateur">
                                 <Path Data="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z" Fill="{DynamicResource PrimaryText}" Stretch="Uniform" Width="12" Height="12"/>
                             </Button>
                         </Grid>

@@ -518,22 +518,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-premier-demarrage-configuration" class="md-nav__link">
+  <a href="#2-interface-principale" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Premier Démarrage &amp; Configuration
+        2. Interface Principale
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Premier Démarrage &amp; Configuration">
+    <nav class="md-nav" aria-label="2. Interface Principale">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuration-initiale" class="md-nav__link">
+  <a href="#a-zone-daffichage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration Initiale
+        A. Zone d'Affichage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-zone-des-boutons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Zone des Boutons
       
     </span>
   </a>
@@ -546,44 +557,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-interface-principale" class="md-nav__link">
+  <a href="#3-premier-demarrage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Interface Principale
+        3. Premier Démarrage
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Interface Principale">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-premiere-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Première Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-etalonnage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Etalonnage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Etalonnage">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a-zone-horloges" class="md-nav__link">
+  <a href="#algorithme-de-letalonnage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A. Zone Horloges
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#b-indicateur-de-sante" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        B. Indicateur de Santé
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#c-liste-des-sources" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        C. Liste des sources
+        Algorithme de l'étalonnage
       
     </span>
   </a>
@@ -596,10 +607,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-calibration" class="md-nav__link">
+  <a href="#6-outils-avances" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Calibration
+        6. Outils Avancés
       
     </span>
   </a>
@@ -607,21 +618,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-outils-avances" class="md-nav__link">
+  <a href="#7-mode-mini-widget" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Outils Avancés
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-mode-mini-widget" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Mode Mini (Widget)
+        7. Mode Mini (Widget)
       
     </span>
   </a>
@@ -685,17 +685,6 @@
 
 <h1 id="manuel-logiciel">Manuel Logiciel</h1>
 <p>Ce guide détaille l'installation, la configuration et l'utilisation de l'application <strong>Time Reference NMEA</strong>.</p>
-<blockquote>
-<p><strong>⚠️ Prérequis Absolu</strong></p>
-<p><strong>Ce logiciel ne fonctionne PAS avec le service de temps Windows standard (W32Time).</strong></p>
-<p>Pour atteindre une précision de l'ordre de la milliseconde (Stratum 1), vous <strong>DEVEZ</strong> installer le service NTP officiel maintenu par Meinberg.</p>
-<ol>
-<li>Téléchargez l'installateur <strong>"NTP for Windows"</strong> sur le site officiel : <a href="https://www.meinbergglobal.com/english/sw/ntp.htm">https://www.meinbergglobal.com/english/sw/ntp.htm</a></li>
-<li>Durant l'installation, conservez les options par défaut.</li>
-<li>Une fois installé, le service "Network Time Protocol Daemon" sera actif sur votre machine.</li>
-</ol>
-<p><strong>Pourquoi ?</strong> W32Time est conçu pour la synchronisation de domaine (Kerberos) avec une tolérance de 5 minutes. Meinberg NTP utilise des algorithmes complexes pour discipliner l'horloge avec une précision microseconde et gérer les sources matérielles comme notre GPS.</p>
-</blockquote>
 <h2 id="1-installation-de-lapplication">1. Installation de l'Application</h2>
 <ol>
 <li>Rendez-vous dans la section <strong>Releases</strong> du projet GitHub.</li>
@@ -703,68 +692,234 @@
 <li>Lancez l'installation (des droits administrateur seront demandés pour pouvoir gérer le service NTP).</li>
 <li>Une icône est créée sur votre bureau.</li>
 </ol>
-<h2 id="2-premier-demarrage-configuration">2. Premier Démarrage &amp; Configuration</h2>
-<p>Au lancement, l'application vérifie la présence du service NTP. Si le service est arrêté, elle tentera de le démarrer.</p>
-<h3 id="configuration-initiale">Configuration Initiale</h3>
+<h2 id="2-interface-principale">2. Interface Principale</h2>
+<p>L'interface est conçue pour surveiller la précision en un coup d'œil. Elle se compose d'une zone d'affichage principale et d'une barre d'outils.</p>
+<p><img alt="Capture d'écran de l'interface principale de l'application Time Reference NMEA, montrant des indicateurs de performance en temps réel tels que l'heure système, l'heure GPS, la position géographique, le statut du service NTP, et la santé du système. La fenêtre est organisée avec des graphiques et des boutons d'accès rapide en bas, dans un environnement de bureau. L'image transmet une impression de fonctionnalité et de précision." src="PrintScreen/Fenetre_principale.png" /></p>
+<h3 id="a-zone-daffichage">A. Zone d'Affichage</h3>
+<p>Cette zone regroupe les indicateurs de performance en temps réel :</p>
+<ul>
+<li><strong>Horloges :</strong> Compare l'heure système (Windows) et l'heure GPS. Un bouton permet de basculer entre UTC et Heure Locale.</li>
+<li><strong>Position :</strong> Latitude et Longitude.</li>
+<li><strong>Statut :</strong> Message d'état (ex: "Fix GPS OK", "Recherche de satellites...").</li>
+<li><strong>Santé (Score) :</strong> Un indicateur global de fiabilité (0-100%).<ul>
+<li>🟢 <strong>Vert (&gt; 90%) :</strong> Système stable.</li>
+<li>🟠 <strong>Orange (50-90%) :</strong> Perturbations légères.</li>
+<li>🔴 <strong>Rouge (&lt; 50%) :</strong> Problème critique.</li>
+</ul>
+</li>
+<li><strong>Métriques NTP :</strong><ul>
+<li><strong>Offset :</strong> L'écart résiduel avec la référence (idéalement &lt; 2ms).</li>
+<li><strong>Jitter :</strong> La stabilité du signal.</li>
+</ul>
+</li>
+<li><strong>Etat du service NTP :</strong> Affiche l'état technique des serveurs NTP.</li>
+</ul>
+<h3 id="b-zone-des-boutons">B. Zone des Boutons</h3>
+<p>La barre d'outils située au bas de la fenêtre permet d'accéder aux fonctionnalités :</p>
+<ul>
+<li>⚙️ <strong>Paramètres :</strong> Configuration du matériel et du service NTP.</li>
+<li>📄 <strong>Logs :</strong> Journal des événements.</li>
+<li>📡 <strong>Qualité Signal (IQT) :</strong> Analyseur de réception satellite (SNR, HDOP).</li>
+<li>🌐 <strong>Pairs :</strong> Affiche ou masque le détail des sources NTP.</li>
+<li>🎯 <strong>Etalonnage :</strong> Assistant pour compenser le délai matériel.</li>
+<li>🔽 <strong>Mode Mini :</strong> Bascule en mode widget transparent "Toujours visible".</li>
+<li>🎨 <strong>Thème :</strong> Change l'apparence (Clair, Sombre, Rouge/Nuit).</li>
+</ul>
+<h2 id="3-premier-demarrage">3. Premier Démarrage</h2>
+<p>Au lancement, l'application vérifie la présence du service NTP.</p>
+<blockquote>
+<p><strong>⚠️ Prérequis Absolu : Service NTP</strong></p>
+<p><strong>Ce logiciel ne fonctionne PAS avec le service de temps Windows standard (W32Time).</strong></p>
+<p>Pour atteindre une précision de l'ordre de la milliseconde (Stratum 1), vous <strong>DEVEZ</strong> installer le service NTP officiel maintenu par Meinberg.</p>
 <ol>
-<li>Cliquez sur le bouton <strong>Paramètres</strong> (icône d'engrenage).</li>
-<li><strong>Port Série :</strong> Indiquez le port COM de votre RP2040 (ex: <code>COM3</code>). Vous pouvez le trouver dans le Gestionnaire de Périphériques Windows sous "Ports (COM &amp; LPT)".</li>
-<li><strong>Vitesse :</strong> Laissez <code>9600</code> (sauf si vous avez modifié le firmware du RP2040).</li>
-<li><strong>Chemin ntp.conf :</strong> Indiquez l'emplacement du fichier de configuration du service NTP (généralement <code>C:\Program Files (x86)\NTP\etc\ntp.conf</code>).</li>
-<li><strong>Compensation (Fudge) :</strong> Valeur par défaut <code>0.000</code>. C'est le délai matériel (Time2) qui sera affiné automatiquement lors de la calibration, mais que vous pouvez ajuster manuellement ici.</li>
-<li>Cliquez sur <strong>Enregistrer</strong>.<ul>
+<li>Téléchargez l'installateur <strong>"NTP for Windows"</strong> sur le site officiel : https://www.meinbergglobal.com/english/sw/ntp.htm</li>
+<li>Durant l'installation, conservez les options par défaut.</li>
+<li>Une fois installé, le service "Network Time Protocol Daemon" sera actif sur votre machine.</li>
+</ol>
+<p><strong>Pourquoi ?</strong> W32Time est conçu pour la synchronisation de domaine (Kerberos) avec une tolérance de 5 minutes. Meinberg NTP utilise des algorithmes complexes pour discipliner l'horloge avec une précision microseconde et gérer les sources matérielles comme notre GPS.</p>
+</blockquote>
+<p>Si le service est installé mais arrêté, l'application tentera de le démarrer automatiquement.</p>
+<h2 id="4-premiere-configuration">4. Première Configuration</h2>
+<ol>
+<li>
+<p>Cliquez sur le bouton <strong>Paramètres</strong> (icône d'engrenage).</p>
+<p><img alt="Ma photo" src="PrintScreen/Parametres.png" /></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Champ</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Valeur recommandée</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Port Série</strong></td>
+<td style="text-align: left;">Le port COM virtuel du RP2040 (voir Gestionnaire de Périphériques).</td>
+<td style="text-align: left;"><code>COMx</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Vitesse</strong></td>
+<td style="text-align: left;">La vitesse de communication série du module GPS.</td>
+<td style="text-align: left;"><code>9600</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Serveur</strong></td>
+<td style="text-align: left;">Le pool NTP Internet utilisé pour l'étalonnage et le repli.</td>
+<td style="text-align: left;"><code>fr.pool.ntp.org</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Trouver vos serveurs NTP</strong></td>
+<td style="text-align: left;">Ouvre <code>ntppool.org</code> pour trouver les serveurs de votre région.</td>
+<td style="text-align: left;">Copier la liste de serveurs qui correspond à votre pays (sans le mot-clé "server")</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Chemin ntp.conf</strong></td>
+<td style="text-align: left;">Le chemin complet vers le fichier de configuration du service NTP.</td>
+<td style="text-align: left;"><code>C:\Program Files (x86)\NTP\etc\ntp.conf</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Compensation</strong></td>
+<td style="text-align: left;">Le délai matériel à compenser. Cette valeur est ajustée automatiquement par l'assistant détalonnage.</td>
+<td style="text-align: left;"><code>0.000</code> (Initialement)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Toujours visible</strong></td>
+<td style="text-align: left;">Maintient la fenêtre au premier plan (Always on Top).</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Opacité</strong></td>
+<td style="text-align: left;">Ajuste la transparence de la fenêtre.</td>
+<td style="text-align: left;">100%</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Cliquez sur <strong>Enregistrer</strong>.</p>
+<ul>
 <li>L'application va générer un fichier <code>ntp.conf</code> optimisé pour votre matériel.</li>
 <li>Elle va redémarrer le service NTP pour appliquer les changements.</li>
 </ul>
 </li>
 </ol>
-<h2 id="3-interface-principale">3. Interface Principale</h2>
-<p>L'interface est conçue pour surveiller la précision en un coup d'œil.</p>
-<h3 id="a-zone-horloges">A. Zone Horloges</h3>
-<ul>
-<li><strong>Système :</strong> L'heure actuelle de votre PC.</li>
-<li><strong>GPS :</strong> L'heure reçue du satellite (via le port série).</li>
-<li><strong>Indicateurs :</strong><ul>
-<li><strong>Offset :</strong> L'écart entre votre PC et la référence. Doit être proche de 0 ms.</li>
-<li><strong>Jitter :</strong> La stabilité du signal. Plus c'est bas, mieux c'est.</li>
+<h2 id="4-etalonnage">4. Etalonnage</h2>
+<p>La compensation est le délai de transmission matériel (câble USB, traitement série). Il faut le compenser pour être parfaitement à l'heure. Cliquez sur <strong>Etalonnage</strong> pour lancer l'assistant.</p>
+<blockquote>
+<p><strong>ℹ️ Quand étalonner ?</strong></p>
+<p>Cette opération doit être effectuée <strong>une seule fois</strong> pour tout nouvel assemblage (PC - Câble USB - GPS). La compensation est sauvegardée.</p>
+<p>Il est préférable de faire l'étalonnage sur un réseau stable de type <strong>Fibre</strong> plutôt que sur un réseau mobile (3G/4G/5G).</p>
+</blockquote>
+<p>L'assistant compare votre GPS avec des serveurs de temps Internet (Stratum 1/2) pendant une période donnée.</p>
+<blockquote>
+<p>Choisissez une durée d'étalonnage (entre 1 min et 60 min). Plus la durée est longue, meilleure sera la précision de l'étalonnage.</p>
+</blockquote>
+<p>Le graphique affiche en gras la médiane des offset (en ms) calculée au fil de la mesure. Les lignes fines correspondent à l'offset mesuré de chaque source.</p>
+<p>L'assistant attend que le GPS soit stable (Reach = 377) et qu'au moins une source Internet soit stable (Reach = 377) pour commencer à calculer la médiane.
+    <img alt="Ma photo" src="PrintScreen/Etalonnage.png" /></p>
+<h3 id="algorithme-de-letalonnage">Algorithme de l'étalonnage</h3>
+<ol>
+<li><strong>Isolation (Mode Observation) :</strong><ul>
+<li>Le pilote GPS est configuré en mode <code>noselect</code> dans NTP.</li>
+<li>Il continue d'envoyer des données pour analyse, mais <strong>ne discipline plus</strong> l'horloge locale.</li>
 </ul>
 </li>
+<li><strong>Référence Absolue :</strong><ul>
+<li>Le service NTP est forcé de se synchroniser uniquement sur les serveurs Internet (Stratum 2).</li>
+<li>L'horloge système du PC s'aligne donc sur le temps UTC Internet.</li>
 </ul>
-<h3 id="b-indicateur-de-sante">B. Indicateur de Santé</h3>
-<p>Un score de 0 à 100% calculé en temps réel par un algorithme de surveillance :
-*   🟢 <strong>Vert (&gt; 90%) :</strong> Système stable, précision optimale.
-*   🟠 <strong>Orange (50-90%) :</strong> En cours de stabilisation ou perturbations légères.
-*   🔴 <strong>Rouge (&lt; 50%) :</strong> Problème critique (GPS débranché, pas de satellites, service arrêté).</p>
-<h3 id="c-liste-des-sources">C. Liste des sources</h3>
-<p>Affiche les sources de temps utilisées par NTP (commande <code>ntpq -p</code>).
-*   <code>*</code> (Astérisque) : La source actuelle de synchronisation (devrait être votre GPS <code>127.127.20.x</code>).
-*   <code>+</code> (Plus) : Sources candidates (Internet) prêtes à prendre le relais.
-*   <code>x</code> (Croix) : Sources rejetées (trop d'écart ou instables).</p>
-<h2 id="4-calibration">4. Calibration</h2>
-<p>La compensation est le délai de transmission matériel (câble USB, traitement série). Il faut le compenser pour être parfaitement à l'heure. Cliquez sur <strong>Calibration</strong> pour lancer l'assistant.</p>
-<blockquote>
-<p><strong>ℹ️ Quand calibrer ?</strong></p>
-<p>Cette opération doit être effectuée <strong>une seule fois</strong> pour tout nouvel assemblage (PC - Câble USB - GPS). La compensation est sauvegardée.
-Il est préférable de faire la calibration sur un réseau stable de type <strong>Fibre</strong> plutôt que sur un réseau mobile (3G/4G/5G).</p>
-</blockquote>
-<p>L'application compare votre GPS avec des serveurs de temps Internet (Stratum 1/2) pendant une période donnée.
-1.  L'assistant coupe la priorité du GPS.
-2.  Il laisse le PC se caler sur Internet (référence fiable).
-3.  Il mesure l'écart moyen du GPS par rapport à cette référence.
-4.  Il calcule et applique la correction idéale.</p>
-<h2 id="5-outils-avances">5. Outils Avancés</h2>
+</li>
+<li><strong>Échantillonnage :</strong><ul>
+<li>L'application mesure en continu l'écart (<code>offset</code>) rapporté par le pilote GPS par rapport à cette horloge système synchronisée.</li>
+<li>Une série de mesures est effectuée pour lisser le "bruit" réseau (Jitter).</li>
+</ul>
+</li>
+<li><strong>Calcul et Application :</strong><ul>
+<li>L'algorithme extrait la <strong>médiane</strong> des écarts pour éliminer les valeurs aberrantes.</li>
+<li>Il calcule la correction nécessaire pour aligner le GPS sur Internet et met à jour le paramètre Compensation <code>time2</code> (fudge) dans <code>ntp.conf</code>.</li>
+<li>La valeur <code>Compensation</code> est sauvegardée et visible dans les paramètres</li>
+</ul>
+</li>
+</ol>
+<h2 id="6-outils-avances">6. Outils Avancés</h2>
 <ul>
-<li><strong>Qualité Signal (IQT) :</strong> Analyse la puissance (SNR) et la géométrie (HDOP) des satellites.<ul>
+<li>
+<p><strong>Sources NTP (Peers) :</strong> Affiche le détail des serveurs de temps configurés (commande <code>ntpq -p</code>).</p>
+<p>Cette fenêtre permet de diagnostiquer pourquoi NTP choisit ou rejette une source.</p>
+<p>La source GPS_NMEA(x) est votre récepteur GPS. x correspond au port COMx utilisé.</p>
+<p><img alt="Ma photo" src="PrintScreen/Sources.png" />    </p>
+<blockquote>
+<p><strong>Note :</strong> Pour fermer cette fenêtre, double-cliquez dessus.</p>
+</blockquote>
+<p><strong>Légende des symboles:</strong>
+*   <code>*</code> (Astérisque) : La source actuelle de synchronisation (System Peer).
+*   <code>+</code> (Plus) : Source candidate de bonne qualité, prête à prendre le relais.
+*   <code>-</code> (Moins) : Source écartée par l'algorithme de sélection (Outlier).
+*   <code>x</code> (Croix) : Source rejetée (Faux ticker, trop d'écart ou inaccessible).</p>
+<p><strong>Colonnes principales :</strong>
+*   <strong>remote :</strong> Adresse du serveur ou du pilote (ex: <code>127.127.20.x</code> pour le GPS).
+*   <strong>refid :</strong> La source de référence de ce serveur (ex: <code>.GPS.</code>, <code>.PPS.</code>).
+*   <strong>st :</strong> Stratum (Distance par rapport à la source atomique).
+*   <strong>reach :</strong> Registre de disponibilité (377 = 100% de succès sur les 8 derniers essais).
+*   <strong>offset :</strong> L'écart temporel en millisecondes.
+*   <strong>jitter :</strong> La stabilité du signal en millisecondes.</p>
+</li>
+<li>
+<p><strong>Qualité Signal :</strong> Analyse la puissance (SNR) et la géométrie (HDOP) des satellites.</p>
+<ul>
 <li><em>Note : Cette fonction nécessite l'arrêt temporaire de NTP pour accéder directement au port série.</em></li>
 </ul>
-</li>
-<li><strong>Logs :</strong> Historique des événements pour le dépannage.</li>
+<p>Cette fenêtre permet de diagnostiquer la qualité de votre installation d'antenne.</p>
+<p><img alt="Ma photo" src="PrintScreen/Qualit%C3%A9SignalGPS.png" /></p>
+<p><strong>Détail des indicateurs :</strong></p>
+<ul>
+<li>
+<p><strong>SCORE:</strong> Indice de Qualité du Signal (0 à 100%).
+    C'est une note globale pondérée calculée à partir des trois paramètres ci-dessous.</p>
+<ul>
+<li><strong>100% :</strong> Réception optimale.</li>
+<li><strong>&lt; 50% :</strong> Réception dégradée, risque de perte de synchronisation.</li>
 </ul>
-<h2 id="6-mode-mini-widget">6. Mode Mini (Widget)</h2>
+</li>
+<li>
+<p><strong>SNR (Signal Noise Ratio) :</strong> Rapport Signal/Bruit moyen (en dB).</p>
+<ul>
+<li><strong>&gt; 30 dB (Vert) :</strong> Signal fort et clair.</li>
+<li><strong>20 - 30 dB (Orange) :</strong> Signal moyen.</li>
+<li><strong>&lt; 20 dB (Rouge) :</strong> Signal faible, risque de décrochage.</li>
+</ul>
+</li>
+<li>
+<p><strong>HDOP (Horizontal Dilution of Precision) :</strong> Précision géométrique.</p>
+<ul>
+<li>Indique la dispersion des satellites dans le ciel. Plus la valeur est basse, meilleure est la précision.</li>
+<li><strong>&lt; 2.0 (Vert) :</strong> Idéal.</li>
+<li><strong>2.0 - 5.0 (Orange) :</strong> Acceptable.</li>
+<li><strong>&gt; 5.0 (Rouge) :</strong> Mauvais (Ciel obstrué, canyon urbain).</li>
+</ul>
+</li>
+<li>
+<p><strong>SATS :</strong> Nombre de satellites utilisés.</p>
+<ul>
+<li><strong>&gt; 8 (Vert) :</strong> Confortable.</li>
+<li><strong>4 - 8 (Orange) :</strong> Minimum vital.</li>
+<li><strong>&lt; 4 (Rouge) :</strong> Insuffisant pour une triangulation fiable.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Logs :</strong> Historique des événements pour le dépannage.</p>
+</li>
+</ul>
+<h2 id="7-mode-mini-widget">7. Mode Mini (Widget)</h2>
 <p>Pour surveiller votre serveur de temps sans encombrer l'écran :
 1.  Cliquez sur le bouton <strong>Mode Mini</strong> ou double-cliquer sur l'afficheur
 2.  L'application devient une petite fenêtre transparente qui reste au premier plan ("Always on top").
 3.  Double-cliquez dessus pour revenir au mode normal.</p>
+<pre><code>![Ma photo](PrintScreen/Fenetre_mini.png)
+</code></pre>
 
 
 
