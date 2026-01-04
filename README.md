@@ -2,7 +2,7 @@
 
 **Transformez votre PC Windows en serveur de temps Stratum 1 de haute précision.**
 
-[![Documentation](https://img.shields.io/badge/docs-online-blue?style=for-the-badge&logo=read-the-docs)](https://fmoreau78470.github.io/Time-reference-NMEA/)
+[![Documentation](https://img.shields.io/badge/docs-online-blue?style=for-the-badge&logo=read-the-docs)](https://fmoreau78470.github.io/Time-Reference-NMEA/)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
 [![Release](https://img.shields.io/badge/release-latest-orange?style=for-the-badge)](https://github.com/fmoreau78470/Time-reference-NMEA/releases)
 

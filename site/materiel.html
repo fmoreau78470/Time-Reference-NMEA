@@ -559,10 +559,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#eviter-les-interferences-emi" class="md-nav__link">
+  <a href="#eviter-les-interferences" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Éviter les interférences (EMI)
+        Éviter les interférences
       
     </span>
   </a>
@@ -605,56 +605,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#methode-b-compilation-avec-arduino-ide-avance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Méthode B : Compilation avec Arduino IDE (Avancé)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Méthode B : Compilation avec Arduino IDE (Avancé)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-prerequis-logiciels" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Prérequis Logiciels
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-configuration-de-lide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Configuration de l'IDE
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-televersement" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Téléversement
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -855,23 +805,27 @@
 <tr>
 <td style="text-align: left;"><strong>RX</strong></td>
 <td style="text-align: left;"><strong>GP0</strong> (TX)</td>
-<td style="text-align: left;">Réception des commandes de configuration (Optionnel).</td>
+<td style="text-align: left;">Réception des commandes de configuration .</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PPS</strong></td>
+<td style="text-align: left;"><strong>GP2</strong></td>
+<td style="text-align: left;">Signal PPS (Pulse per Second) .</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p><strong>⚠️ Important :</strong> Le câblage série est croisé. Le <strong>TX</strong> (Transmit) du GPS doit aller sur le <strong>RX</strong> (Receive) du microcontrôleur.</p>
-</blockquote>
 <h2 id="3-cablage-du-signal-pps">3. Câblage du Signal PPS</h2>
 <p>C'est la connexion la plus critique pour la précision temporelle de ce projet.</p>
+<p>Tous les modules GPS ne disposent pas de broche PPS.</p>
+<p>C'est le cas du NEO-6M (voir photo). Dans ce cas, il faut se connecter à la sortie du circuit qui alimente la led. C'est le fil orange.</p>
+<p>Le NEO-8M dispose d'une broche appelée PPS.</p>
 <ul>
-<li><strong>Source :</strong> Pin <strong>PPS</strong> du module GPS. (fil orange sur la photo)</li>
-<li><strong>Destination :</strong> Pin <strong>GP2</strong> du RP2040-Zero.
-<img alt="Ma photo" src="Photos/PPS.jpg" /></li>
+<li><strong>Destination :</strong> Pin <strong>GP2</strong> du RP2040-Zero.</li>
 </ul>
+<p><img alt="Ma photo" src="Photos/PPS.jpg" /></p>
 <p><strong>Pourquoi est-ce indispensable ?</strong>
-Les données NMEA (envoyées via TX/RX) fournissent la date et l'heure, mais avec une latence variable (Jitter) de plusieurs centaines de millisecondes due au traitement série.
-Le signal <strong>PPS (Pulse Per Second)</strong> est une impulsion électrique envoyée physiquement au début exact de chaque seconde atomique. Le RP2040 utilise ce signal pour aligner l'envoi des données au PC avec une précision microseconde.</p>
+Les données NMEA (envoyées via TX/RX) fournissent la date et l'heure, mais avec une latence variable (Jitter) de plusieurs centaines de millisecondes due au traitement série.</p>
+<p>Le signal <strong>PPS (Pulse Per Second)</strong> est une impulsion électrique envoyée physiquement au début exact de chaque seconde atomique. Le RP2040 utilise ce signal pour aligner l'envoi des données au PC avec une précision microseconde.</p>
 <h3 id="indicateur-visuel-led-pps">Indicateur Visuel (LED PPS)</h3>
 <p>La plupart des modules GPS (u-blox NEO-6M/8M) possèdent une petite LED intégrée reliée au signal PPS.</p>
 <ul>
@@ -882,8 +836,8 @@ Le signal <strong>PPS (Pulse Per Second)</strong> est une impulsion électrique 
 </li>
 </ul>
 <h2 id="4-positionnement-et-perturbations">4. Positionnement et Perturbations</h2>
-<p>Les signaux GNSS sont des ondes radio extrêmement faibles (-125 dBm à -160 dBm). L'environnement physique du montage impacte directement la qualité de réception (SNR).</p>
-<h3 id="eviter-les-interferences-emi">Éviter les interférences (EMI)</h3>
+<p>Les signaux GPS/GNSS sont des ondes radio extrêmement faibles (-125 dBm à -160 dBm). L'environnement physique du montage impacte directement la qualité de réception (SNR).</p>
+<h3 id="eviter-les-interferences">Éviter les interférences</h3>
 <p>L'électronique numérique rapide (le processeur du RP2040, le port USB, le PC) génère du "bruit" radiofréquence qui peut brouiller l'antenne GPS.</p>
 <ul>
 <li><strong>Distance :</strong> Ne collez pas l'antenne GPS directement sur le RP2040. Laissez au moins 5 à 10 cm de câble entre les deux.</li>
@@ -899,33 +853,15 @@ Le signal <strong>PPS (Pulse Per Second)</strong> est une impulsion électrique 
 <p>Une fois le matériel assemblé, vous devez flasher le RP2040 pour qu'il agisse comme une interface intelligente.</p>
 <h3 id="methode-a-fichier-pret-a-lemploi-recommande">Méthode A : Fichier prêt à l'emploi (Recommandé)</h3>
 <ol>
-<li>Téléchargez le fichier <code>.uf2</code> depuis la section <strong>Releases</strong> du projet GitHub.</li>
+<li>Téléchargez le fichier <code>Stratum0.uf2</code> depuis la section <strong>Releases</strong> du projet GitHub.</li>
 <li>Débranchez le RP2040 du PC.</li>
 <li>Maintenez le bouton <strong>BOOT</strong> du RP2040 enfoncé et branchez-le au PC.</li>
 <li>Un disque <code>RPI-RP2</code> apparaît dans l'explorateur de fichiers.</li>
-<li>Copiez le fichier <code>.uf2</code> dans ce disque.</li>
+<li>Copiez le fichier <code>Stratum0.uf2</code> dans ce disque.</li>
 <li>Le RP2040 redémarre automatiquement : votre matériel est prêt.</li>
 </ol>
-<h3 id="methode-b-compilation-avec-arduino-ide-avance">Méthode B : Compilation avec Arduino IDE (Avancé)</h3>
-<p>Si vous souhaitez modifier le code ou compiler vous-même, voici la procédure détaillée.</p>
-<h4 id="1-prerequis-logiciels">1. Prérequis Logiciels</h4>
-<ul>
-<li>Installez l'<strong>Arduino IDE</strong> (v2.x).</li>
-<li>Ajoutez l'URL suivante dans <strong>Fichier &gt; Préférences &gt; URL de gestionnaire de cartes supplémentaires</strong> :
-    <code>https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json</code></li>
-<li>Dans <strong>Outils &gt; Carte &gt; Gestionnaire de cartes</strong>, installez le core <strong>"Raspberry Pi Pico/RP2040"</strong> (par Earle F. Philhower).</li>
-</ul>
-<h4 id="2-configuration-de-lide">2. Configuration de l'IDE</h4>
-<p>Dans le menu <strong>Outils</strong>, sélectionnez :
-*   <strong>Carte :</strong> Waveshare RP2040-Zero
-*   <strong>USB Stack :</strong> <strong>Adafruit TinyUSB</strong> (⚠️ Indispensable : ne pas installer la librairie manuellement, utiliser celle du Core).
-*   <strong>CPU Speed :</strong> 133 MHz</p>
-<h4 id="3-televersement">3. Téléversement</h4>
-<ol>
-<li>Ouvrez le code source (<code>.ino</code>) disponible dans le dépôt.</li>
-<li>Branchez le RP2040 en maintenant le bouton <strong>BOOT</strong> enfoncé.</li>
-<li>Cliquez sur <strong>Téléverser</strong> dans l'IDE.</li>
-</ol>
+<p>Vous pouvez vérifier que votre GPS émet les trames NMEA grâce à l'analyse du port série à l'aide d'un logiciel de type <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">Putty</a></p>
+<p><img alt="Ma photo" src="PrintScreen/Putty.png" /></p>
 <h2 id="6-fonctionnement-du-firmware-pour-aller-plus-loin">6. Fonctionnement du Firmware (Pour aller plus loin)</h2>
 <p>Le code du RP2040 ne se contente pas de relayer les données. Il transforme le module GPS grand public en une horloge de référence scientifique.</p>
 <h3 id="le-defi-technique">Le défi technique</h3>

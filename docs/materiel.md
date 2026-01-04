@@ -28,20 +28,27 @@ Le montage relie le module GPS au microcontrôleur via une liaison série (UART)
 | **VCC** | **5V** (ou VBUS) | Alimentation du module GPS. |
 | **GND** | **GND** | Masse commune (Référence électrique). |
 | **TX** | **GP1** (RX) | Transmission des données NMEA du GPS vers le RP2040. |
-| **RX** | **GP0** (TX) | Réception des commandes de configuration (Optionnel). |
+| **RX** | **GP0** (TX) | Réception des commandes de configuration . |
+| **PPS** | **GP2** | Signal PPS (Pulse per Second) . |
 
-> **⚠️ Important :** Le câblage série est croisé. Le **TX** (Transmit) du GPS doit aller sur le **RX** (Receive) du microcontrôleur.
 
 ## 3. Câblage du Signal PPS
 
 C'est la connexion la plus critique pour la précision temporelle de ce projet.
 
-*   **Source :** Pin **PPS** du module GPS. (fil orange sur la photo)
+Tous les modules GPS ne disposent pas de broche PPS.
+
+C'est le cas du NEO-6M (voir photo). Dans ce cas, il faut se connecter à la sortie du circuit qui alimente la led. C'est le fil orange.
+
+Le NEO-8M dispose d'une broche appelée PPS.
+
 *   **Destination :** Pin **GP2** du RP2040-Zero.
+
 ![Ma photo](Photos/PPS.jpg)
 
 **Pourquoi est-ce indispensable ?**
 Les données NMEA (envoyées via TX/RX) fournissent la date et l'heure, mais avec une latence variable (Jitter) de plusieurs centaines de millisecondes due au traitement série.
+
 Le signal **PPS (Pulse Per Second)** est une impulsion électrique envoyée physiquement au début exact de chaque seconde atomique. Le RP2040 utilise ce signal pour aligner l'envoi des données au PC avec une précision microseconde.
 
 ### Indicateur Visuel (LED PPS)
@@ -54,9 +61,9 @@ La plupart des modules GPS (u-blox NEO-6M/8M) possèdent une petite LED intégr�
 
 ## 4. Positionnement et Perturbations
 
-Les signaux GNSS sont des ondes radio extrêmement faibles (-125 dBm à -160 dBm). L'environnement physique du montage impacte directement la qualité de réception (SNR).
+Les signaux GPS/GNSS sont des ondes radio extrêmement faibles (-125 dBm à -160 dBm). L'environnement physique du montage impacte directement la qualité de réception (SNR).
 
-### Éviter les interférences (EMI)
+### Éviter les interférences
 L'électronique numérique rapide (le processeur du RP2040, le port USB, le PC) génère du "bruit" radiofréquence qui peut brouiller l'antenne GPS.
 
 *   **Distance :** Ne collez pas l'antenne GPS directement sur le RP2040. Laissez au moins 5 à 10 cm de câble entre les deux.
@@ -74,33 +81,17 @@ Une fois le matériel assemblé, vous devez flasher le RP2040 pour qu'il agisse 
 
 ### Méthode A : Fichier prêt à l'emploi (Recommandé)
 
-1.  Téléchargez le fichier `.uf2` depuis la section **Releases** du projet GitHub.
+1.  Téléchargez le fichier `Stratum0.uf2` depuis la section **Releases** du projet GitHub.
 2.  Débranchez le RP2040 du PC.
 3.  Maintenez le bouton **BOOT** du RP2040 enfoncé et branchez-le au PC.
 4.  Un disque `RPI-RP2` apparaît dans l'explorateur de fichiers.
-5.  Copiez le fichier `.uf2` dans ce disque.
+5.  Copiez le fichier `Stratum0.uf2` dans ce disque.
 6.  Le RP2040 redémarre automatiquement : votre matériel est prêt.
 
-### Méthode B : Compilation avec Arduino IDE (Avancé)
+Vous pouvez vérifier que votre GPS émet les trames NMEA grâce à l'analyse du port série à l'aide d'un logiciel de type [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
 
-Si vous souhaitez modifier le code ou compiler vous-même, voici la procédure détaillée.
+![Ma photo](PrintScreen/Putty.png)
 
-#### 1. Prérequis Logiciels
-*   Installez l'**Arduino IDE** (v2.x).
-*   Ajoutez l'URL suivante dans **Fichier > Préférences > URL de gestionnaire de cartes supplémentaires** :
-    `https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json`
-*   Dans **Outils > Carte > Gestionnaire de cartes**, installez le core **"Raspberry Pi Pico/RP2040"** (par Earle F. Philhower).
-
-#### 2. Configuration de l'IDE
-Dans le menu **Outils**, sélectionnez :
-*   **Carte :** Waveshare RP2040-Zero
-*   **USB Stack :** **Adafruit TinyUSB** (⚠️ Indispensable : ne pas installer la librairie manuellement, utiliser celle du Core).
-*   **CPU Speed :** 133 MHz
-
-#### 3. Téléversement
-1.  Ouvrez le code source (`.ino`) disponible dans le dépôt.
-2.  Branchez le RP2040 en maintenant le bouton **BOOT** enfoncé.
-3.  Cliquez sur **Téléverser** dans l'IDE.
 
 ## 6. Fonctionnement du Firmware (Pour aller plus loin)
 

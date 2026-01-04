@@ -16,6 +16,7 @@ Voici les meilleures pratiques adaptées à votre situation de développeur solo
 *   [9. Processus de Release Complet](#9-processus-de-release-complet)
 *   [10. Configuration GitHub Actions (CI/CD)](#10-configuration-github-actions-cicd)
 *   [11. Documentation Utilisateur](#11-documentation-utilisateur)
+*   [12. Publication manuelle du Firmware (Stratum0.uf2)](#12-publication-manuelle-du-firmware-stratum0uf2)
 
 ---
 
@@ -353,3 +354,31 @@ git commit -m "Mise à jour documentation"
 git push
 ```
 *Après quelques minutes, le site web sera à jour.*
+
+## 12. Publication manuelle du Firmware (Stratum0.uf2)
+
+Pour rendre le fichier `Stratum0.uf2` disponible au téléchargement dans la section **Releases** de votre dépôt GitHub, vous devez créer une "Release" manuellement et y attacher le fichier compilé.
+
+Voici la procédure étape par étape à réaliser sur le site web de GitHub :
+
+1.  **Accéder à la section Releases :**
+    *   Allez sur la page d'accueil de votre dépôt GitHub.
+    *   Dans la colonne de droite, cliquez sur le lien **Releases** (ou "Create a new release" s'il n'y en a aucune).
+
+2.  **Créer une nouvelle version :**
+    *   Cliquez sur le bouton **Draft a new release**.
+
+3.  **Remplir les informations de version :**
+    *   **Choose a tag :** Cliquez sur ce bouton et tapez un numéro de version (par exemple `v1.0.0`), puis cliquez sur "Create new tag".
+    *   **Release title :** Donnez un titre à votre version (ex: "Firmware Initial").
+    *   **Describe this release :** Vous pouvez ajouter une description des changements.
+
+4.  **Ajouter le fichier (Important) :**
+    *   En bas de la page, repérez la zone encadrée avec le texte **Attach binaries by dropping them here or selecting them**.
+    *   Glissez et déposez votre fichier `Stratum0.uf2` dans cette zone (ou cliquez pour le sélectionner sur votre disque).
+    *   Attendez que la barre de chargement soit terminée.
+
+5.  **Publier :**
+    *   Cliquez sur le bouton vert **Publish release**.
+
+Une fois publié, le fichier `Stratum0.uf2` apparaîtra dans la section "Assets" de cette release, et les utilisateurs pourront le télécharger comme indiqué dans votre documentation.
