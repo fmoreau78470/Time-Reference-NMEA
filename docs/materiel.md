@@ -10,12 +10,16 @@ Le projet est conçu pour être accessible et peu coûteux. Voici la liste des c
 | :--- | :--- | :--- |
 | **Microcontrôleur** | **Waveshare RP2040-Zero** | Interface USB et traitement du signal. Choisi pour sa taille compacte et sa compatibilité Arduino. |
 | **Module GPS** | **u-blox NEO-6M** ou **NEO-8M** | Réception satellite. Souvent vendu sous la référence `GY-GPS6MV2` ou `GY-NEO6MV2`. |
-| **Câblage** | Fils Dupont (Femelle-Femelle) | Connexion rapide sans soudure pour le prototypage. |
 | **Câble USB** | USB Type-C (Data) | Liaison vers le PC. Assurez-vous qu'il transmet bien les données (pas seulement la charge). |
+![Ma photo](Photos/RP2040.jpg)
+![Ma photo](Photos/NEO-6M.jpg)
+
+
 
 ## 2. Câblage Inter-modules
 
 Le montage relie le module GPS au microcontrôleur via une liaison série (UART).
+![Ma photo](Photos/Montage.jpg)
 
 ### Schéma de connexion
 
@@ -32,8 +36,9 @@ Le montage relie le module GPS au microcontrôleur via une liaison série (UART)
 
 C'est la connexion la plus critique pour la précision temporelle de ce projet.
 
-*   **Source :** Pin **PPS** du module GPS.
+*   **Source :** Pin **PPS** du module GPS. (fil orange sur la photo)
 *   **Destination :** Pin **GP2** du RP2040-Zero.
+![Ma photo](Photos/PPS.jpg)
 
 **Pourquoi est-ce indispensable ?**
 Les données NMEA (envoyées via TX/RX) fournissent la date et l'heure, mais avec une latence variable (Jitter) de plusieurs centaines de millisecondes due au traitement série.
@@ -42,7 +47,9 @@ Le signal **PPS (Pulse Per Second)** est une impulsion électrique envoyée phys
 ### Indicateur Visuel (LED PPS)
 La plupart des modules GPS (u-blox NEO-6M/8M) possèdent une petite LED intégrée reliée au signal PPS.
 *   **Comportement :** Elle reste éteinte (ou fixe selon le modèle) tant que le GPS cherche les satellites. Elle se met à clignoter dès que le "Fix" est acquis (3D Fix).
-*   **Caractéristiques du signal :** L'impulsion électrique dure exactement **100 ms** par défaut. C'est le front montant (le début de l'allumage) qui marque la seconde précise.
+*   **Caractéristiques du signal :** C'est le front montant (le début de l'allumage) qui marque la seconde précise.
+> **Note :** L'impulsion électrique dure exactement 100 ms.
+
 
 ## 4. Positionnement et Perturbations
 
@@ -57,6 +64,7 @@ L'électronique numérique rapide (le processeur du RP2040, le port USB, le PC) 
 *   L'antenne céramique (le carré plat) doit avoir une **vue dégagée vers le ciel**.
 *   Elle fonctionne à travers le plastique, le verre ou le bois, mais pas à travers le métal ou la fibre de carbone.
 *   Pour une utilisation en intérieur (proche d'une fenêtre), la précision sera moindre (Stratum 1 dégradé) par rapport à une antenne extérieure active.
+
 
 ## 5. Installation du Firmware (Stratum 0)
 
