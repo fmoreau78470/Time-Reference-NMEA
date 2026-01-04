@@ -79,8 +79,6 @@ L'électronique numérique rapide (le processeur du RP2040, le port USB, le PC) 
 
 Une fois le matériel assemblé, vous devez flasher le RP2040 pour qu'il agisse comme une interface intelligente.
 
-### Méthode A : Fichier prêt à l'emploi (Recommandé)
-
 1.  Téléchargez le fichier `Stratum0.uf2` depuis la section **Releases** du projet GitHub.
 2.  Débranchez le RP2040 du PC.
 3.  Maintenez le bouton **BOOT** du RP2040 enfoncé et branchez-le au PC.
