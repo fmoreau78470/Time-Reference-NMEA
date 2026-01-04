@@ -56,6 +56,11 @@ theme:
     - navigation.sections
     - toc.integrate
 
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
 plugins:
   - search
   - with-pdf:

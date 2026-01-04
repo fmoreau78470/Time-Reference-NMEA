@@ -2,16 +2,17 @@
 
 Ce guide détaille l'installation, la configuration et l'utilisation de l'application **Time Reference NMEA**.
 
-!!! "⚠️ Prérequis Absolu : NTP by Meinberg"
-    **Ce logiciel ne fonctionne PAS avec le service de temps Windows standard (W32Time).**
-    
-    Pour atteindre une précision de l'ordre de la milliseconde (Stratum 1), vous **DEVEZ** installer le service NTP officiel maintenu par Meinberg.
-    
-    1.  Téléchargez l'installateur **"NTP for Windows"** sur le site officiel : [https://www.meinbergglobal.com/english/sw/ntp.htm](https://www.meinbergglobal.com/english/sw/ntp.htm)
-    2.  Durant l'installation, conservez les options par défaut.
-    3.  Une fois installé, le service "Network Time Protocol Daemon" sera actif sur votre machine.
-    
-    **Pourquoi ?** W32Time est conçu pour la synchronisation de domaine (Kerberos) avec une tolérance de 5 minutes. Meinberg NTP utilise des algorithmes complexes pour discipliner l'horloge avec une précision microseconde et gérer les sources matérielles comme notre GPS.
+> **⚠️ Prérequis Absolu**
+>
+> **Ce logiciel ne fonctionne PAS avec le service de temps Windows standard (W32Time).**
+>
+> Pour atteindre une précision de l'ordre de la milliseconde (Stratum 1), vous **DEVEZ** installer le service NTP officiel maintenu par Meinberg.
+>
+> 1.  Téléchargez l'installateur **"NTP for Windows"** sur le site officiel : [https://www.meinbergglobal.com/english/sw/ntp.htm](https://www.meinbergglobal.com/english/sw/ntp.htm)
+> 2.  Durant l'installation, conservez les options par défaut.
+> 3.  Une fois installé, le service "Network Time Protocol Daemon" sera actif sur votre machine.
+>
+> **Pourquoi ?** W32Time est conçu pour la synchronisation de domaine (Kerberos) avec une tolérance de 5 minutes. Meinberg NTP utilise des algorithmes complexes pour discipliner l'horloge avec une précision microseconde et gérer les sources matérielles comme notre GPS.
 
 ## 1. Installation de l'Application
 
@@ -61,9 +62,10 @@ Affiche les sources de temps utilisées par NTP (commande `ntpq -p`).
 
 La compensation est le délai de transmission matériel (câble USB, traitement série). Il faut le compenser pour être parfaitement à l'heure. Cliquez sur **Calibration** pour lancer l'assistant.
 
-!!! info "Quand calibrer ?"
-    Cette opération doit être effectuée **une seule fois** pour tout nouvel assemblage (PC - Câble USB - GPS). La compensation est sauvegardée.
-    Il est préférable de faire la calibration sur un réseau stable de type **Fibre** plutôt que sur un réseau mobile (3G/4G/5G).
+> **ℹ️ Quand calibrer ?**
+>
+> Cette opération doit être effectuée **une seule fois** pour tout nouvel assemblage (PC - Câble USB - GPS). La compensation est sauvegardée.
+> Il est préférable de faire la calibration sur un réseau stable de type **Fibre** plutôt que sur un réseau mobile (3G/4G/5G).
 
 L'application compare votre GPS avec des serveurs de temps Internet (Stratum 1/2) pendant une période donnée.
 1.  L'assistant coupe la priorité du GPS.

@@ -685,16 +685,17 @@
 
 <h1 id="manuel-logiciel">Manuel Logiciel</h1>
 <p>Ce guide détaille l'installation, la configuration et l'utilisation de l'application <strong>Time Reference NMEA</strong>.</p>
-<p>!!! "⚠️ Prérequis Absolu : NTP by Meinberg"
-    <strong>Ce logiciel ne fonctionne PAS avec le service de temps Windows standard (W32Time).</strong></p>
-<pre><code>Pour atteindre une précision de l'ordre de la milliseconde (Stratum 1), vous **DEVEZ** installer le service NTP officiel maintenu par Meinberg.
-
-1.  Téléchargez l'installateur **"NTP for Windows"** sur le site officiel : [https://www.meinbergglobal.com/english/sw/ntp.htm](https://www.meinbergglobal.com/english/sw/ntp.htm)
-2.  Durant l'installation, conservez les options par défaut.
-3.  Une fois installé, le service "Network Time Protocol Daemon" sera actif sur votre machine.
-
-**Pourquoi ?** W32Time est conçu pour la synchronisation de domaine (Kerberos) avec une tolérance de 5 minutes. Meinberg NTP utilise des algorithmes complexes pour discipliner l'horloge avec une précision microseconde et gérer les sources matérielles comme notre GPS.
-</code></pre>
+<blockquote>
+<p><strong>⚠️ Prérequis Absolu</strong></p>
+<p><strong>Ce logiciel ne fonctionne PAS avec le service de temps Windows standard (W32Time).</strong></p>
+<p>Pour atteindre une précision de l'ordre de la milliseconde (Stratum 1), vous <strong>DEVEZ</strong> installer le service NTP officiel maintenu par Meinberg.</p>
+<ol>
+<li>Téléchargez l'installateur <strong>"NTP for Windows"</strong> sur le site officiel : <a href="https://www.meinbergglobal.com/english/sw/ntp.htm">https://www.meinbergglobal.com/english/sw/ntp.htm</a></li>
+<li>Durant l'installation, conservez les options par défaut.</li>
+<li>Une fois installé, le service "Network Time Protocol Daemon" sera actif sur votre machine.</li>
+</ol>
+<p><strong>Pourquoi ?</strong> W32Time est conçu pour la synchronisation de domaine (Kerberos) avec une tolérance de 5 minutes. Meinberg NTP utilise des algorithmes complexes pour discipliner l'horloge avec une précision microseconde et gérer les sources matérielles comme notre GPS.</p>
+</blockquote>
 <h2 id="1-installation-de-lapplication">1. Installation de l'Application</h2>
 <ol>
 <li>Rendez-vous dans la section <strong>Releases</strong> du projet GitHub.</li>
@@ -741,9 +742,11 @@
 *   <code>x</code> (Croix) : Sources rejetées (trop d'écart ou instables).</p>
 <h2 id="4-calibration">4. Calibration</h2>
 <p>La compensation est le délai de transmission matériel (câble USB, traitement série). Il faut le compenser pour être parfaitement à l'heure. Cliquez sur <strong>Calibration</strong> pour lancer l'assistant.</p>
-<p>!!! info "Quand calibrer ?"
-    Cette opération doit être effectuée <strong>une seule fois</strong> pour tout nouvel assemblage (PC - Câble USB - GPS). La compensation est sauvegardée.
-    Il est préférable de faire la calibration sur un réseau stable de type <strong>Fibre</strong> plutôt que sur un réseau mobile (3G/4G/5G).</p>
+<blockquote>
+<p><strong>ℹ️ Quand calibrer ?</strong></p>
+<p>Cette opération doit être effectuée <strong>une seule fois</strong> pour tout nouvel assemblage (PC - Câble USB - GPS). La compensation est sauvegardée.
+Il est préférable de faire la calibration sur un réseau stable de type <strong>Fibre</strong> plutôt que sur un réseau mobile (3G/4G/5G).</p>
+</blockquote>
 <p>L'application compare votre GPS avec des serveurs de temps Internet (Stratum 1/2) pendant une période donnée.
 1.  L'assistant coupe la priorité du GPS.
 2.  Il laisse le PC se caler sur Internet (référence fiable).
