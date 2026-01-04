@@ -46,6 +46,7 @@ Le signal **PPS (Pulse Per Second)** est une impulsion électrique envoyée phys
 
 ### Indicateur Visuel (LED PPS)
 La plupart des modules GPS (u-blox NEO-6M/8M) possèdent une petite LED intégrée reliée au signal PPS.
+
 *   **Comportement :** Elle reste éteinte (ou fixe selon le modèle) tant que le GPS cherche les satellites. Elle se met à clignoter dès que le "Fix" est acquis (3D Fix).
 *   **Caractéristiques du signal :** C'est le front montant (le début de l'allumage) qui marque la seconde précise.
 > **Note :** L'impulsion électrique dure exactement 100 ms.
@@ -57,6 +58,7 @@ Les signaux GNSS sont des ondes radio extrêmement faibles (-125 dBm à -160 dBm
 
 ### Éviter les interférences (EMI)
 L'électronique numérique rapide (le processeur du RP2040, le port USB, le PC) génère du "bruit" radiofréquence qui peut brouiller l'antenne GPS.
+
 *   **Distance :** Ne collez pas l'antenne GPS directement sur le RP2040. Laissez au moins 5 à 10 cm de câble entre les deux.
 *   **Boîtier :** Si vous utilisez un boîtier métallique, l'antenne doit impérativement être à l'extérieur.
 
@@ -106,6 +108,7 @@ Le code du RP2040 ne se contente pas de relayer les données. Il transforme le m
 
 ### Le défi technique
 Un module GPS émet deux informations :
+
 1.  Le signal **PPS** : Une impulsion électrique ultra-précise au début de la seconde.
 2.  La trame **NMEA** : Un message texte ("Il est 12h00m00s") envoyé via le port série.
 
@@ -113,6 +116,7 @@ Le problème est que le message texte arrive **après** l'impulsion (environ 100
 
 ### La solution logicielle
 Le firmware utilise un algorithme de "Time Adder" :
+
 1.  Il lit la trame NMEA dès qu'elle arrive.
 2.  Il **ajoute 1 seconde** à l'heure reçue (gestion des changements de minute, heure, jour, année incluse).
 3.  Il stocke cette trame "futuriste" en mémoire.

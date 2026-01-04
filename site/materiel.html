@@ -873,18 +873,22 @@
 Les données NMEA (envoyées via TX/RX) fournissent la date et l'heure, mais avec une latence variable (Jitter) de plusieurs centaines de millisecondes due au traitement série.
 Le signal <strong>PPS (Pulse Per Second)</strong> est une impulsion électrique envoyée physiquement au début exact de chaque seconde atomique. Le RP2040 utilise ce signal pour aligner l'envoi des données au PC avec une précision microseconde.</p>
 <h3 id="indicateur-visuel-led-pps">Indicateur Visuel (LED PPS)</h3>
-<p>La plupart des modules GPS (u-blox NEO-6M/8M) possèdent une petite LED intégrée reliée au signal PPS.
-*   <strong>Comportement :</strong> Elle reste éteinte (ou fixe selon le modèle) tant que le GPS cherche les satellites. Elle se met à clignoter dès que le "Fix" est acquis (3D Fix).
-*   <strong>Caractéristiques du signal :</strong> C'est le front montant (le début de l'allumage) qui marque la seconde précise.</p>
-<blockquote>
+<p>La plupart des modules GPS (u-blox NEO-6M/8M) possèdent une petite LED intégrée reliée au signal PPS.</p>
+<ul>
+<li><strong>Comportement :</strong> Elle reste éteinte (ou fixe selon le modèle) tant que le GPS cherche les satellites. Elle se met à clignoter dès que le "Fix" est acquis (3D Fix).</li>
+<li><strong>Caractéristiques du signal :</strong> C'est le front montant (le début de l'allumage) qui marque la seconde précise.<blockquote>
 <p><strong>Note :</strong> L'impulsion électrique dure exactement 100 ms.</p>
 </blockquote>
+</li>
+</ul>
 <h2 id="4-positionnement-et-perturbations">4. Positionnement et Perturbations</h2>
 <p>Les signaux GNSS sont des ondes radio extrêmement faibles (-125 dBm à -160 dBm). L'environnement physique du montage impacte directement la qualité de réception (SNR).</p>
 <h3 id="eviter-les-interferences-emi">Éviter les interférences (EMI)</h3>
-<p>L'électronique numérique rapide (le processeur du RP2040, le port USB, le PC) génère du "bruit" radiofréquence qui peut brouiller l'antenne GPS.
-*   <strong>Distance :</strong> Ne collez pas l'antenne GPS directement sur le RP2040. Laissez au moins 5 à 10 cm de câble entre les deux.
-*   <strong>Boîtier :</strong> Si vous utilisez un boîtier métallique, l'antenne doit impérativement être à l'extérieur.</p>
+<p>L'électronique numérique rapide (le processeur du RP2040, le port USB, le PC) génère du "bruit" radiofréquence qui peut brouiller l'antenne GPS.</p>
+<ul>
+<li><strong>Distance :</strong> Ne collez pas l'antenne GPS directement sur le RP2040. Laissez au moins 5 à 10 cm de câble entre les deux.</li>
+<li><strong>Boîtier :</strong> Si vous utilisez un boîtier métallique, l'antenne doit impérativement être à l'extérieur.</li>
+</ul>
 <h3 id="orientation-de-lantenne">Orientation de l'antenne</h3>
 <ul>
 <li>L'antenne céramique (le carré plat) doit avoir une <strong>vue dégagée vers le ciel</strong>.</li>
@@ -925,17 +929,21 @@ Le signal <strong>PPS (Pulse Per Second)</strong> est une impulsion électrique 
 <h2 id="6-fonctionnement-du-firmware-pour-aller-plus-loin">6. Fonctionnement du Firmware (Pour aller plus loin)</h2>
 <p>Le code du RP2040 ne se contente pas de relayer les données. Il transforme le module GPS grand public en une horloge de référence scientifique.</p>
 <h3 id="le-defi-technique">Le défi technique</h3>
-<p>Un module GPS émet deux informations :
-1.  Le signal <strong>PPS</strong> : Une impulsion électrique ultra-précise au début de la seconde.
-2.  La trame <strong>NMEA</strong> : Un message texte ("Il est 12h00m00s") envoyé via le port série.</p>
+<p>Un module GPS émet deux informations :</p>
+<ol>
+<li>Le signal <strong>PPS</strong> : Une impulsion électrique ultra-précise au début de la seconde.</li>
+<li>La trame <strong>NMEA</strong> : Un message texte ("Il est 12h00m00s") envoyé via le port série.</li>
+</ol>
 <p>Le problème est que le message texte arrive <strong>après</strong> l'impulsion (environ 100 à 500ms plus tard). Si l'ordinateur attend le message pour se caler sur le <em>prochain</em> PPS, il sera en retard d'une seconde.</p>
 <h3 id="la-solution-logicielle">La solution logicielle</h3>
-<p>Le firmware utilise un algorithme de "Time Adder" :
-1.  Il lit la trame NMEA dès qu'elle arrive.
-2.  Il <strong>ajoute 1 seconde</strong> à l'heure reçue (gestion des changements de minute, heure, jour, année incluse).
-3.  Il stocke cette trame "futuriste" en mémoire.
-4.  Il attend le prochain signal PPS.
-5.  Dès que le PPS claque, il envoie immédiatement la trame modifiée via USB.</p>
+<p>Le firmware utilise un algorithme de "Time Adder" :</p>
+<ol>
+<li>Il lit la trame NMEA dès qu'elle arrive.</li>
+<li>Il <strong>ajoute 1 seconde</strong> à l'heure reçue (gestion des changements de minute, heure, jour, année incluse).</li>
+<li>Il stocke cette trame "futuriste" en mémoire.</li>
+<li>Il attend le prochain signal PPS.</li>
+<li>Dès que le PPS claque, il envoie immédiatement la trame modifiée via USB.</li>
+</ol>
 <p>Résultat : Windows reçoit l'heure "12:00:01" à la microseconde exacte où la seconde 12:00:01 commence.</p>
 
 
