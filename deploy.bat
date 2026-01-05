@@ -114,7 +114,7 @@ echo [SUCCES] Le code et le tag v%VERSION% ont ete pousses sur GitHub.
 echo.
 echo Prochaine etape : Publier la release manuellement sur GitHub.
 echo   1. Allez sur la page "Releases" de votre depot.
-echo   2. Cliquez sur "Draft a new release".
-echo   3. Choisissez le tag "v%VERSION%".
-echo   4. Uploadez le fichier : TimeReference.App\Installer\TimeReferenceNMEA_Setup_v%VERSION%.exe
+echo   2. Reperez la version v%VERSION% (probablement en "Draft" creee par l'Action).
+echo   3. Cliquez sur le bouton "Edit" (crayon).
+echo   4. Verifiez les fichiers, ajoutez l'installateur si besoin, et cliquez sur "Publish release".
 pause
