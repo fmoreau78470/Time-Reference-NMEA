@@ -32,8 +32,16 @@
     <None Include="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <!-- Fix pour SingleFile : Force l'inclusion des Assets et ThÃ¨mes -->
+    <!-- Fix pour SingleFile : Force l'inclusion des Assets et ThÃƒÂ¨mes -->
     <Resource Include="Assets\**\*.ico" />
     <Resource Include="Assets\**\*.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Inclusion de la documentation locale (dossier site) -->
+    <Content Include="..\site\**">
+      <Link>site\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 </Project>

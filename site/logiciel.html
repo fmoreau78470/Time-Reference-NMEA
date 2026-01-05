@@ -732,8 +732,13 @@
 <p><strong>Ce logiciel ne fonctionne PAS avec le service de temps Windows standard (W32Time).</strong></p>
 <p>Pour atteindre une précision de l'ordre de la milliseconde (Stratum 1), vous <strong>DEVEZ</strong> installer le service NTP officiel maintenu par Meinberg.</p>
 <ol>
-<li>Téléchargez l'installateur <strong>"NTP for Windows"</strong> sur le site officiel : https://www.meinbergglobal.com/english/sw/ntp.htm</li>
-<li>Durant l'installation, conservez les options par défaut.</li>
+<li>
+<p>Téléchargez l'installateur <strong>"NTP for Windows"</strong> sur le site officiel : https://www.meinbergglobal.com/english/sw/ntp.htm</p>
+<p><strong>⚠️ Attention :</strong> L'installation doit être effectuée en <strong>mode administrateur</strong> (Clic droit &gt; Exécuter en tant qu'administrateur) pour que le service puisse s'enregistrer correctement.</p>
+</li>
+<li>
+<p>Durant l'installation, conservez les options par défaut.</p>
+</li>
 <li>Une fois installé, le service "Network Time Protocol Daemon" sera actif sur votre machine.</li>
 </ol>
 <p><strong>Pourquoi ?</strong> W32Time est conçu pour la synchronisation de domaine (Kerberos) avec une tolérance de 5 minutes. Meinberg NTP utilise des algorithmes complexes pour discipliner l'horloge avec une précision microseconde et gérer les sources matérielles comme notre GPS.</p>

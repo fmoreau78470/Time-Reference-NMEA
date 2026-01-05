@@ -11,6 +11,7 @@ OutputBaseFilename=TimeReferenceNMEA_Setup_v1.0.0
 Compression=lzma2
 SolidCompression=yes
 PrivilegesRequired=admin
+SetupIconFile=Assets\Icone-Time-Reference.ico
 
 [Files]
 ; Chemin vers les fichiers publiés (relatif à ce script)
@@ -25,6 +26,3 @@ Name: "desktopicon"; Description: "Créer une icône sur le Bureau"; GroupDescri
 
 [Run]
 Filename: "{app}\TimeReference.App.exe"; Description: "Lancer l'application"; Flags: nowait postinstall skipifsilent
-
-
-

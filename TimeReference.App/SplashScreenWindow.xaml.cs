@@ -112,6 +112,8 @@ namespace TimeReference.App
                     }
                 });
             });
+
+        this.Loaded += (s, e) => EnsureVisible();
         }
 
         private void BtnOk_Click(object sender, RoutedEventArgs e)
@@ -122,7 +124,7 @@ namespace TimeReference.App
         private void BtnDocLocal_Click(object sender, RoutedEventArgs e)
         {
             // Stratégie Offline : On cherche le site statique local (index.html)
-            string localDoc = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Documentation", "index.html");
+            string localDoc = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "site", "index.html");
             
             if (File.Exists(localDoc))
             {
@@ -134,7 +136,7 @@ namespace TimeReference.App
             }
             else
             {
-                MessageBox.Show("La documentation locale n'est pas trouvée.\n(Elle est incluse uniquement via l'installateur)", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"La documentation locale n'est pas trouvée.\nChemin recherché : {localDoc}\n(Elle est incluse uniquement via l'installateur)", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -143,5 +145,24 @@ namespace TimeReference.App
             string docUrl = "https://fmoreau78470.github.io/Time-Reference-NMEA/";
             try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(docUrl) { UseShellExecute = true }); } catch { }
         }
+
+    private void EnsureVisible()
+    {
+        double virtualScreenLeft = SystemParameters.VirtualScreenLeft;
+        double virtualScreenTop = SystemParameters.VirtualScreenTop;
+        double virtualScreenWidth = SystemParameters.VirtualScreenWidth;
+        double virtualScreenHeight = SystemParameters.VirtualScreenHeight;
+
+        bool isOffScreen = (this.Left + this.Width < virtualScreenLeft) ||
+                           (this.Left > virtualScreenLeft + virtualScreenWidth) ||
+                           (this.Top + this.Height < virtualScreenTop) ||
+                           (this.Top > virtualScreenTop + virtualScreenHeight);
+
+        if (isOffScreen)
+        {
+            this.Left = SystemParameters.WorkArea.Left + (SystemParameters.WorkArea.Width - this.Width) / 2;
+            this.Top = SystemParameters.WorkArea.Top + (SystemParameters.WorkArea.Height - this.Height) / 2;
+        }
+    }
     }
 }

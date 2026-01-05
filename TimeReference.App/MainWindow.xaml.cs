@@ -1,4 +1,4 @@
-﻿﻿﻿﻿using System;
+﻿﻿using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.ServiceProcess;
@@ -143,6 +143,9 @@ public partial class MainWindow : Window
         // Tentative de démarrage automatique du service NTP s'il est arrêté
         await AutoStartNtpAsync();
 
+        // Stratégie de configuration initiale (Détection PC Vierge / Incohérence)
+        await CheckAndEnforceNtpConfigAsync();
+
         // Restauration du mode Mini si nécessaire
         if (_shouldStartInMiniMode)
         {
@@ -186,6 +189,104 @@ public partial class MainWindow : Window
                 Logger.Error($"Impossible de démarrer le service NTP au lancement : {ex.Message}");
                 MessageBox.Show($"Le service NTP est arrêté et le démarrage automatique a échoué.\n\nErreur : {ex.Message}", "Avertissement NTP", MessageBoxButton.OK, MessageBoxImage.Warning);
             });
+        }
+    }
+
+    private async Task CheckAndEnforceNtpConfigAsync()
+    {
+        try
+        {
+            string ntpConfPath = _config.NtpConfPath;
+            if (!System.IO.File.Exists(ntpConfPath))
+            {
+                // Cas A (Fichier manquant) : On génère
+                await ForceNtpConfigAsync("Fichier ntp.conf introuvable.");
+                return;
+            }
+
+            string[] lines = await System.IO.File.ReadAllLinesAsync(ntpConfPath);
+            bool hasGpsDriver = false;
+            int confPort = -1;
+
+            foreach (var line in lines)
+            {
+                string l = line.Trim();
+                if (l.StartsWith("#") || string.IsNullOrWhiteSpace(l)) continue;
+
+                if (l.StartsWith("server") && l.Contains("127.127.20."))
+                {
+                    hasGpsDriver = true;
+                    // Extraction du port (127.127.20.X)
+                    int idx = l.IndexOf("127.127.20.");
+                    if (idx != -1)
+                    {
+                        string sub = l.Substring(idx + 11);
+                        string num = new string(sub.TakeWhile(char.IsDigit).ToArray());
+                        int.TryParse(num, out confPort);
+                    }
+                    break;
+                }
+            }
+
+            if (!hasGpsDriver)
+            {
+                // Cas A (Installation Vierge Meinberg) : Pas de pilote GPS configuré
+                await ForceNtpConfigAsync("Configuration initiale (Ajout du pilote GPS).");
+            }
+            else
+            {
+                // Cas B (Déjà configuré) : Vérification de cohérence du port COM
+                int appPort = -1;
+                string portStr = _config.SerialPort.ToUpper().Replace("COM", "");
+                int.TryParse(portStr, out appPort);
+
+                if (confPort != -1 && appPort != -1 && confPort != appPort)
+                {
+                    // Sous-cas B2 : Incohérence
+                    var result = MessageBox.Show(
+                        $"Le fichier de configuration NTP utilise le port COM{confPort},\n" +
+                        $"mais l'application est réglée sur COM{appPort}.\n\n" +
+                        $"Voulez-vous mettre à jour NTP pour utiliser COM{appPort} ?",
+                        "Synchronisation Configuration",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        await ForceNtpConfigAsync($"Correction du port COM (COM{confPort} -> COM{appPort}).");
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($"Erreur lors de la vérification initiale NTP : {ex.Message}");
+        }
+    }
+
+    private async Task ForceNtpConfigAsync(string reason)
+    {
+        Logger.Info($"AUTO-CONFIG : {reason}");
+        
+        try
+        {
+            // Génération du fichier
+            await Task.Run(() => 
+            {
+                var ntpService = new NtpService();
+                ntpService.GenerateConfFile(_config);
+            });
+
+            // Redémarrage du service
+            _expectingNtpStateChange = true;
+            await Task.Run(() => WindowsServiceHelper.RestartService("NTP"));
+            
+            Logger.Info("Configuration NTP appliquée et service redémarré avec succès.");
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($"Echec de la configuration automatique : {ex.Message}");
+            MessageBox.Show($"Impossible d'appliquer la configuration NTP :\n{ex.Message}", "Erreur Auto-Config", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -380,15 +481,21 @@ public partial class MainWindow : Window
         try
         {
             Logger.Info("Ouverture de la fenêtre Paramètres.");
-            // Sauvegarde de l'état actuel pour comparaison/restauration
-            var oldConfig = _configService.Load();
+            // Sauvegarde de l'état actuel par copie pour comparaison.
+            // On sérialise/désérialise pour obtenir une copie profonde (clone) et éviter
+            // que 'oldConfig' soit une référence qui serait modifiée par la fenêtre de paramètres.
+            string oldConfigJson = System.Text.Json.JsonSerializer.Serialize(_config);
+            var oldConfig = System.Text.Json.JsonSerializer.Deserialize<AppConfig>(oldConfigJson) ?? new AppConfig();
 
             var settingsWindow = new SettingsWindow();
             settingsWindow.Owner = this;
             
             if (settingsWindow.ShowDialog() == true)
             {
-                var newConfig = _configService.Load();
+                // The settings window has saved a new config.json.
+                // We must force our local service to reload it from disk, bypassing any cache.
+                // The simplest way is to create a new service instance that will read the file.
+                var newConfig = new ConfigService().Load();
 
                 // Détection des changements critiques nécessitant un redémarrage NTP
                 if (IsNtpConfigChanged(oldConfig, newConfig))

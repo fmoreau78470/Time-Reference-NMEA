@@ -26,6 +26,7 @@ namespace TimeReference.App
             _uiTimer = new DispatcherTimer();
             _uiTimer.Interval = TimeSpan.FromSeconds(1);
             _uiTimer.Tick += UiTimer_Tick;
+        this.Loaded += (s, e) => EnsureVisible();
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -140,5 +141,24 @@ namespace TimeReference.App
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
+
+    private void EnsureVisible()
+    {
+        double virtualScreenLeft = SystemParameters.VirtualScreenLeft;
+        double virtualScreenTop = SystemParameters.VirtualScreenTop;
+        double virtualScreenWidth = SystemParameters.VirtualScreenWidth;
+        double virtualScreenHeight = SystemParameters.VirtualScreenHeight;
+
+        bool isOffScreen = (this.Left + this.Width < virtualScreenLeft) ||
+                           (this.Left > virtualScreenLeft + virtualScreenWidth) ||
+                           (this.Top + this.Height < virtualScreenTop) ||
+                           (this.Top > virtualScreenTop + virtualScreenHeight);
+
+        if (isOffScreen)
+        {
+            this.Left = SystemParameters.WorkArea.Left + (SystemParameters.WorkArea.Width - this.Width) / 2;
+            this.Top = SystemParameters.WorkArea.Top + (SystemParameters.WorkArea.Height - this.Height) / 2;
+        }
+    }
     }
 }

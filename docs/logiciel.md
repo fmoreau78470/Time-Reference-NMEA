@@ -53,6 +53,9 @@ Au lancement, l'application vérifie la présence du service NTP.
 > Pour atteindre une précision de l'ordre de la milliseconde (Stratum 1), vous **DEVEZ** installer le service NTP officiel maintenu par Meinberg.
 >
 > 1.  Téléchargez l'installateur **"NTP for Windows"** sur le site officiel : https://www.meinbergglobal.com/english/sw/ntp.htm
+>
+>     **⚠️ Attention :** L'installation doit être effectuée en **mode administrateur** (Clic droit > Exécuter en tant qu'administrateur) pour que le service puisse s'enregistrer correctement.
+>
 > 2.  Durant l'installation, conservez les options par défaut.
 > 3.  Une fois installé, le service "Network Time Protocol Daemon" sera actif sur votre machine.
 >

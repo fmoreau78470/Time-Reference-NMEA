@@ -61,6 +61,7 @@ namespace TimeReference.App
 
             // Premier chargement immédiat
             RefreshData();
+        this.Loaded += (s, e) => EnsureVisible();
         }
 
         private void RefreshData()
@@ -245,6 +246,25 @@ namespace TimeReference.App
         {
             Close();
         }
+
+    private void EnsureVisible()
+    {
+        double virtualScreenLeft = SystemParameters.VirtualScreenLeft;
+        double virtualScreenTop = SystemParameters.VirtualScreenTop;
+        double virtualScreenWidth = SystemParameters.VirtualScreenWidth;
+        double virtualScreenHeight = SystemParameters.VirtualScreenHeight;
+
+        bool isOffScreen = (this.Left + this.Width < virtualScreenLeft) ||
+                           (this.Left > virtualScreenLeft + virtualScreenWidth) ||
+                           (this.Top + this.Height < virtualScreenTop) ||
+                           (this.Top > virtualScreenTop + virtualScreenHeight);
+
+        if (isOffScreen)
+        {
+            this.Left = SystemParameters.WorkArea.Left + (SystemParameters.WorkArea.Width - this.Width) / 2;
+            this.Top = SystemParameters.WorkArea.Top + (SystemParameters.WorkArea.Height - this.Height) / 2;
+        }
+    }
     }
 
     // Classe simple pour l'affichage dans la DataGrid

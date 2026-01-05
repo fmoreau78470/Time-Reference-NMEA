@@ -17,6 +17,7 @@ Voici les meilleures pratiques adaptées à votre situation de développeur solo
 *   [10. Configuration GitHub Actions (CI/CD)](#10-configuration-github-actions-cicd)
 *   [11. Documentation Utilisateur](#11-documentation-utilisateur)
 *   [12. Publication manuelle du Firmware (Stratum0.uf2)](#12-publication-manuelle-du-firmware-stratum0uf2)
+*   [13. Mise en production rapide (Cheatsheet)](#13-mise-en-production-rapide-cheatsheet)
 
 ---
 
@@ -98,6 +99,8 @@ Pour générer un fichier `.exe` autonome (qui fonctionne sur un PC sans avoir b
 
 3.  **Où est le fichier ?**
     Il est généré dans : `bin\Release\net8.0-windows\win-x64\publish\`
+
+> **Erreur fréquente :** Si vous obtenez une erreur `Access to the path ... is denied` ou `Échec inattendu de la tâche "GenerateBundle"`, c'est que l'application est encore en cours d'exécution (ou bloquée en arrière-plan). Assurez-vous de bien fermer `TimeReference.App.exe` avant de relancer la commande.
 
 ---
 
@@ -385,3 +388,31 @@ Voici la procédure étape par étape à réaliser sur le site web de GitHub :
     *   Cliquez sur le bouton vert **Publish release**.
 
 Une fois publié, le fichier `Stratum0.uf2` apparaîtra dans la section "Assets" de cette release, et les utilisateurs pourront le télécharger comme indiqué dans votre documentation.
+
+---
+
+## 13. Mise en production rapide (Cheatsheet)
+
+Si tout est configuré, voici la séquence de commandes à exécuter dans le terminal (PowerShell) pour déployer une nouvelle version (exemple : `1.2.3`).
+
+1.  **Incrémenter la version :**
+    ```powershell
+    .\Set-Version.ps1 -Version 1.2.3
+    ```
+
+2.  **Valider et Tagger :**
+    ```bash
+    git add .
+    git commit -m "Release v1.2.3"
+    git tag v1.2.3
+    ```
+
+3.  **Déployer (Push) :**
+    ```bash
+    git push origin main --tags
+    ```
+
+**Résultat :**
+*   Le workflow GitHub Actions se déclenche automatiquement.
+*   Il compile le code et l'installateur.
+*   Il crée une **Release** sur GitHub et y dépose (upload) automatiquement les fichiers binaires (`.exe` et `setup.exe`).

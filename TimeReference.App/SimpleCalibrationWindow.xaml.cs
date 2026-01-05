@@ -73,6 +73,7 @@ public partial class SimpleCalibrationWindow : Window
         CnvGraph.Children.Add(_lineMedianWeb);
         CnvGraph.Children.Add(_labelMedianGps);
         CnvGraph.Children.Add(_labelMedianWeb);
+        this.Loaded += (s, e) => EnsureVisible();
     }
 
     private void Log(string message)
@@ -832,6 +833,25 @@ public partial class SimpleCalibrationWindow : Window
             // Icône Stop (Rouge)
             BtnStart.Content = new System.Windows.Shapes.Path { Data = Geometry.Parse("M6,6H18V18H6V6Z"), Fill = Brushes.White, Stretch = Stretch.Uniform, Height = 16, Width = 16 };
             BtnStart.Background = new SolidColorBrush(Color.FromRgb(198, 40, 40)); // #FFC62828
+        }
+    }
+
+    private void EnsureVisible()
+    {
+        double virtualScreenLeft = SystemParameters.VirtualScreenLeft;
+        double virtualScreenTop = SystemParameters.VirtualScreenTop;
+        double virtualScreenWidth = SystemParameters.VirtualScreenWidth;
+        double virtualScreenHeight = SystemParameters.VirtualScreenHeight;
+
+        bool isOffScreen = (this.Left + this.Width < virtualScreenLeft) ||
+                           (this.Left > virtualScreenLeft + virtualScreenWidth) ||
+                           (this.Top + this.Height < virtualScreenTop) ||
+                           (this.Top > virtualScreenTop + virtualScreenHeight);
+
+        if (isOffScreen)
+        {
+            this.Left = SystemParameters.WorkArea.Left + (SystemParameters.WorkArea.Width - this.Width) / 2;
+            this.Top = SystemParameters.WorkArea.Top + (SystemParameters.WorkArea.Height - this.Height) / 2;
         }
     }
 }

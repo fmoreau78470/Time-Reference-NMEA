@@ -11,6 +11,7 @@ public partial class CalibrationChoiceWindow : Window
     {
         InitializeComponent();
         _config = config;
+        this.Loaded += (s, e) => EnsureVisible();
     }
 
     private void BtnSimple_Click(object sender, RoutedEventArgs e)
@@ -28,5 +29,24 @@ public partial class CalibrationChoiceWindow : Window
         expertWin.Owner = this.Owner; // Le propriétaire devient MainWindow
         this.Close();
         expertWin.ShowDialog();
+    }
+
+    private void EnsureVisible()
+    {
+        double virtualScreenLeft = SystemParameters.VirtualScreenLeft;
+        double virtualScreenTop = SystemParameters.VirtualScreenTop;
+        double virtualScreenWidth = SystemParameters.VirtualScreenWidth;
+        double virtualScreenHeight = SystemParameters.VirtualScreenHeight;
+
+        bool isOffScreen = (this.Left + this.Width < virtualScreenLeft) ||
+                           (this.Left > virtualScreenLeft + virtualScreenWidth) ||
+                           (this.Top + this.Height < virtualScreenTop) ||
+                           (this.Top > virtualScreenTop + virtualScreenHeight);
+
+        if (isOffScreen)
+        {
+            this.Left = SystemParameters.WorkArea.Left + (SystemParameters.WorkArea.Width - this.Width) / 2;
+            this.Top = SystemParameters.WorkArea.Top + (SystemParameters.WorkArea.Height - this.Height) / 2;
+        }
     }
 }

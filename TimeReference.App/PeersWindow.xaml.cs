@@ -20,6 +20,8 @@ public partial class PeersWindow : Window
 
         this.MouseEnter += (s, e) => this.Opacity = 1.0;
         this.MouseLeave += (s, e) => this.Opacity = _opacityValue;
+
+        this.Loaded += (s, e) => EnsureVisible();
     }
 
     private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -32,6 +34,25 @@ public partial class PeersWindow : Window
     {
         // Fermeture par double clic
         this.Close();
+    }
+
+    private void EnsureVisible()
+    {
+        double virtualScreenLeft = SystemParameters.VirtualScreenLeft;
+        double virtualScreenTop = SystemParameters.VirtualScreenTop;
+        double virtualScreenWidth = SystemParameters.VirtualScreenWidth;
+        double virtualScreenHeight = SystemParameters.VirtualScreenHeight;
+
+        bool isOffScreen = (this.Left + this.Width < virtualScreenLeft) ||
+                           (this.Left > virtualScreenLeft + virtualScreenWidth) ||
+                           (this.Top + this.Height < virtualScreenTop) ||
+                           (this.Top > virtualScreenTop + virtualScreenHeight);
+
+        if (isOffScreen)
+        {
+            this.Left = SystemParameters.WorkArea.Left + (SystemParameters.WorkArea.Width - this.Width) / 2;
+            this.Top = SystemParameters.WorkArea.Top + (SystemParameters.WorkArea.Height - this.Height) / 2;
+        }
     }
 
     public void UpdatePeers(string output)
