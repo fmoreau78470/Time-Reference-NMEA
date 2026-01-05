@@ -29,10 +29,10 @@ namespace TimeReference.App
 
             // Récupération dynamique de l'auteur et de la compagnie
             var author = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright;
-            var company = assembly.GetCustomAttribute<AssemblyCompanyAttribute>()?.Company;
+            // var company = assembly.GetCustomAttribute<AssemblyCompanyAttribute>()?.Company;
 
             if (!string.IsNullOrEmpty(author)) TxtAuthor.Text = $"Auteur : {author}";
-            if (!string.IsNullOrEmpty(company)) TxtCompany.Text = $"Compagnie : {company}";
+            // if (!string.IsNullOrEmpty(company)) TxtCompany.Text = $"Compagnie : {company}";
 
             // --- Affichage Version NTP ---
             var ntpService = new NtpVersionService();
@@ -69,10 +69,49 @@ namespace TimeReference.App
             // Vérification mise à jour en arrière-plan
             Task.Run(async () => 
             {
+                // Vérification mise à jour Application (GitHub)
+                string? latestAppTag = await GetLatestAppVersionAsync();
+
                 string? remoteNtp = await ntpService.GetLatestMeinbergVersionAsync(config.MeinbergUrl);
                 
                 Dispatcher.Invoke(() => 
                 {
+                    // 1. Mise à jour Application
+                    if (!string.IsNullOrEmpty(latestAppTag))
+                    {
+                        var currentVersion = assembly.GetName().Version;
+                        string cleanTag = latestAppTag.TrimStart('v');
+                        if (Version.TryParse(cleanTag, out Version? remoteVersion) && currentVersion != null)
+                        {
+                            if (remoteVersion > currentVersion)
+                            {
+                                TxtVersion.Inlines.Add(new LineBreak());
+                                TxtVersion.Inlines.Add(new Run($"Update dispo : {latestAppTag}") { Foreground = Brushes.Magenta, FontWeight = FontWeights.Bold });
+                                
+                                var link = new Hyperlink(new Run(" (Télécharger)"))
+                                {
+                                    NavigateUri = new Uri("https://github.com/fmoreau78470/Time-Reference-NMEA/releases/latest"),
+                                    ToolTip = "Télécharger la nouvelle version"
+                                };
+                                link.RequestNavigate += (s, e) => 
+                                {
+                                    try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true }); } catch { }
+                                    e.Handled = true;
+                                };
+                                TxtVersion.Inlines.Add(link);
+
+                                // On arrête le timer pour laisser l'utilisateur voir
+                                if (_autoCloseTimer != null && _autoCloseTimer.IsEnabled)
+                                {
+                                    _autoCloseTimer.Stop();
+                                    TxtLoading.Text = "Nouvelle version détectée !";
+                                    TxtLoading.Foreground = Brushes.Magenta;
+                                    TxtLoading.Visibility = Visibility.Visible;
+                                }
+                            }
+                        }
+                    }
+
                     if (!string.IsNullOrEmpty(remoteNtp) && !string.IsNullOrEmpty(localNtp))
                     {
                         if (NtpVersionService.CompareNtpVersions(remoteNtp, localNtp) > 0)
@@ -176,6 +215,26 @@ namespace TimeReference.App
             this.Left = SystemParameters.WorkArea.Left + (SystemParameters.WorkArea.Width - this.Width) / 2;
             this.Top = SystemParameters.WorkArea.Top + (SystemParameters.WorkArea.Height - this.Height) / 2;
         }
+    }
+
+    private async Task<string?> GetLatestAppVersionAsync()
+    {
+        try
+        {
+            using var client = new System.Net.Http.HttpClient();
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("TimeReferenceNMEA");
+            client.Timeout = TimeSpan.FromSeconds(3);
+            
+            var response = await client.GetStringAsync("https://api.github.com/repos/fmoreau78470/Time-Reference-NMEA/releases/latest");
+            
+            using var doc = System.Text.Json.JsonDocument.Parse(response);
+            if (doc.RootElement.TryGetProperty("tag_name", out var tagElement))
+            {
+                return tagElement.GetString();
+            }
+        }
+        catch { }
+        return null;
     }
     }
 }

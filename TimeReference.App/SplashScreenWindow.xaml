@@ -26,7 +26,7 @@
                     <TextBlock Text="Time Reference NMEA" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#333333"/>
                     <TextBlock x:Name="TxtVersion" Text="Version 1.0" FontSize="14" HorizontalAlignment="Center" Foreground="Gray" Margin="0,5,0,0"/>
                     <TextBlock x:Name="TxtAuthor" Text="Auteur : ..." FontSize="12" HorizontalAlignment="Center" Foreground="Gray" Margin="0,5,0,0"/>
-                    <TextBlock x:Name="TxtCompany" Text="Compagnie : ..." FontSize="12" HorizontalAlignment="Center" Foreground="Gray" Margin="0,2,0,0"/>
+                    <!-- <TextBlock x:Name="TxtCompany" Text="Compagnie : ..." FontSize="12" HorizontalAlignment="Center" Foreground="Gray" Margin="0,2,0,0"/> -->
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
                     <Button Width="40" Height="40" Click="BtnKofi_Click" ToolTip="Soutenir le projet" Background="#FF29ABE0" BorderThickness="0" HorizontalAlignment="Center">
