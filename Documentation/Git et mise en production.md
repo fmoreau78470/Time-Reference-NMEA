@@ -391,15 +391,15 @@ Une fois publié, le fichier `Stratum0.uf2` apparaîtra dans la section "Assets"
 
 ---
 
-## 13. Mise en production rapide (Cheatsheet)
+## 13. Mise en production rapide (Cheatsheet) - Processus Local
 
-Un script batch `deploy.bat` a été créé à la racine du projet pour automatiser l'ensemble du processus de déploiement. Il exécute toutes les étapes nécessaires, avec une pause de confirmation entre chacune.
+Un script batch `deploy.bat` a été créé à la racine du projet pour automatiser l'ensemble du processus de build et de déploiement sur Git.
 
 > **Note :** La commande ci-dessous doit être exécutée depuis la **racine du projet** dans un terminal (cmd ou PowerShell).
 
-### Lancement du déploiement
+### 1. Lancement du déploiement local
 
-Pour déployer une nouvelle version (exemple : `1.2.3`), exécutez simplement :
+Pour compiler et déployer une nouvelle version (exemple : `1.2.3`), exécutez simplement :
 
 ```cmd
 .\deploy.bat 1.2.3

@@ -8,6 +8,14 @@ if "%~1"=="" (
 )
 
 set VERSION=%~1
+set ISCC="C:\Program Files (x86)\Inno Setup 6\iscc.exe"
+
+if not exist %ISCC% (
+    echo [ERREUR] Inno Setup Compiler non trouve a l'emplacement par defaut.
+    echo Verifiez que Inno Setup 6 est installe dans "C:\Program Files (x86)\Inno Setup 6"
+    pause
+    exit /b 1
+)
 
 echo.
 echo ==========================================
@@ -19,6 +27,8 @@ if %ERRORLEVEL% NEQ 0 (
     pause
     exit /b %ERRORLEVEL%
 )
+echo.
+echo Appuyez sur une touche pour passer a l'etape 2 : Generer la documentation locale.
 pause
 
 echo.
@@ -31,6 +41,8 @@ if %ERRORLEVEL% NEQ 0 (
     pause
     exit /b %ERRORLEVEL%
 )
+echo.
+echo Appuyez sur une touche pour passer a l'etape 3 : Generer l'executable.
 pause
 
 echo.
@@ -43,11 +55,27 @@ if %ERRORLEVEL% NEQ 0 (
     pause
     exit /b %ERRORLEVEL%
 )
+echo.
+echo Appuyez sur une touche pour passer a l'etape 4 : Compiler l'installateur.
+pause
+
+echo.
+echo ==========================================
+echo Etape 4 : Compiler l'installateur (Inno Setup)
+echo ==========================================
+%ISCC% "TimeReference.App\setup.iss"
+if %ERRORLEVEL% NEQ 0 (
+    echo [ERREUR] Echec de la compilation Inno Setup.
+    pause
+    exit /b %ERRORLEVEL%
+)
+echo.
+echo Appuyez sur une touche pour passer a l'etape 5 : Validation Git (Commit et Tag).
 pause
 
 echo.
 echo =================================================================
-echo Etape 4 : Git Commit et Tag v%VERSION%
+echo Etape 5 : Validation Git (Commit, Tag)
 echo =================================================================
 git add .
 git commit -m "Release v%VERSION%" || echo "Pas de nouveaux changements a commiter."
@@ -62,17 +90,31 @@ if %ERRORLEVEL% NEQ 0 (
     pause
     exit /b %ERRORLEVEL%
 )
+echo Tag v%VERSION% cree avec succes.
+echo.
+echo Appuyez sur une touche pour passer a l'etape 6 : Push vers GitHub.
 pause
 
 echo.
 echo =========================================================
-echo Etape 5 : Deploiement (Push vers GitHub)
+echo Etape 6 : Push vers GitHub
 echo =========================================================
 git push origin main --tags
+if %ERRORLEVEL% NEQ 0 (
+    echo [ERREUR] Echec du push vers GitHub.
+    pause
+    exit /b %ERRORLEVEL%
+)
+echo.
+echo Le script est termine. Appuyez sur une touche pour voir les instructions finales.
+pause
 
 echo.
-echo [SUCCES] Deploiement termine !
+echo [SUCCES] Le code et le tag v%VERSION% ont ete pousses sur GitHub.
 echo.
-echo Le workflow GitHub Actions a ete declenche.
-echo La release sera disponible dans environ 2 a 5 minutes sur GitHub.
+echo Prochaine etape : Publier la release manuellement sur GitHub.
+echo   1. Allez sur la page "Releases" de votre depot.
+echo   2. Cliquez sur "Draft a new release".
+echo   3. Choisissez le tag "v%VERSION%".
+echo   4. Uploadez le fichier : TimeReference.App\Installer\TimeReferenceNMEA_Setup_v%VERSION%.exe
 pause
