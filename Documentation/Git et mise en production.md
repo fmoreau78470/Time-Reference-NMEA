@@ -393,11 +393,11 @@ Une fois publié, le fichier `Stratum0.uf2` apparaîtra dans la section "Assets"
 
 ## 13. Mise en production rapide (Cheatsheet) - Processus Local
 
-Un script batch `deploy.bat` a été créé à la racine du projet pour automatiser l'ensemble du processus de build et de déploiement sur Git.
+Un script batch `deploy.bat` a été créé à la racine du projet pour automatiser l'ensemble du processus de build local et de déploiement sur Git. Il exécute toutes les étapes nécessaires, avec une pause de confirmation entre chacune.
 
 > **Note :** La commande ci-dessous doit être exécutée depuis la **racine du projet** dans un terminal (cmd ou PowerShell).
 
-### 1. Lancement du déploiement local
+### 1. Lancement du build et déploiement Git
 
 Pour compiler et déployer une nouvelle version (exemple : `1.2.3`), exécutez simplement :
 
@@ -408,12 +408,20 @@ Pour compiler et déployer une nouvelle version (exemple : `1.2.3`), exécutez s
 Le script se chargera de :
 1.  Mettre à jour les numéros de version dans les fichiers du projet.
 2.  Générer la documentation locale (`mkdocs build`).
-3.  Compiler l'application en mode `Release`.
-4.  Créer un commit et un tag Git pour la version.
-5.  Pousser les changements et le tag sur GitHub pour déclencher la release.
+3.  Compiler l'application en mode `Release` (`dotnet publish`).
+4.  **Compiler l'installateur localement** avec Inno Setup.
+5.  Créer un commit et un tag Git pour la version.
+6.  Pousser les changements et le tag sur GitHub.
 
-**Résultat :**
-*   Le workflow GitHub Actions se déclenche automatiquement.
-*   Il compile le code et l'installateur.
-*   Il crée une **Release** sur GitHub et y dépose (upload) automatiquement les fichiers binaires (`setup.exe`).
-*   **Délai :** Comptez environ **2 à 5 minutes** pour que le processus se termine et que les fichiers soient disponibles.
+L'installateur `TimeReferenceNMEA_Setup_v1.2.3.exe` sera disponible dans le dossier `TimeReference.App\Installer\`.
+
+### 2. Publication de la Release sur GitHub (Manuelle)
+
+Une fois le script terminé, il ne reste plus qu'à publier la release manuellement sur GitHub.
+
+1.  Allez sur la page des **Releases** de votre dépôt GitHub.
+2.  Cliquez sur **"Draft a new release"**.
+3.  Dans le champ "Choose a tag", sélectionnez le tag que vous venez de pousser (ex: `v1.2.3`).
+4.  **Titre de la release :** Laissez le titre pré-rempli par GitHub (ex: `v1.2.3`). C'est la convention standard. Vous pouvez cliquer sur **"Generate release notes"** pour ajouter une description automatique des changements.
+5.  Dans la section **"Attach binaries"**, glissez-déposez le fichier `TimeReferenceNMEA_Setup_v1.2.3.exe` depuis votre dossier local `TimeReference.App\Installer\`.
+6.  Cliquez sur **"Publish release"**.

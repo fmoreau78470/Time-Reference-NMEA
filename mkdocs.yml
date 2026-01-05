@@ -24,6 +24,11 @@ theme:
     - navigation.tabs
     - navigation.sections
     - toc.integrate
+  extra:
+    social:
+      - icon: fontawesome/solid/hand-holding-heart
+        link: https://ko-fi.com/francismoreau
+        name: Soutenir le projet sur Ko-fi
 
   markdown_extensions:
     - admonition

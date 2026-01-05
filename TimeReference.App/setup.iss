@@ -2,12 +2,12 @@
 
 [Setup]
 AppName=Time Reference NMEA
-AppVersion=1.0.0
+AppVersion=1.1.0
 AppPublisher=Votre Nom
 DefaultDirName={autopf}\Time Reference NMEA
 DefaultGroupName=Time Reference NMEA
 OutputDir=Installer
-OutputBaseFilename=TimeReferenceNMEA_Setup_v1.0.0
+OutputBaseFilename=TimeReferenceNMEA_Setup_v1.1.0
 Compression=lzma2
 SolidCompression=yes
 PrivilegesRequired=admin
@@ -26,6 +26,7 @@ Name: "desktopicon"; Description: "Créer une icône sur le Bureau"; GroupDescri
 
 [Run]
 Filename: "{app}\TimeReference.App.exe"; Description: "Lancer l'application"; Flags: nowait postinstall skipifsilent
+
 
 
 

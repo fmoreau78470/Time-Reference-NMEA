@@ -18,6 +18,9 @@
     *   [ℹ️ Spec 12](#ℹ️-spec-12)
     *   [ℹ️ Spec 13](#ℹ️-spec-13)
     *   [ℹ️ Spec 14](#ℹ️-spec-14)
+    *   [ℹ️ Spec 15](#ℹ️-spec-15)
+    *   [ℹ️ Spec 16](#ℹ️-spec-16)
+    *   [ℹ️ Spec 17](#ℹ️-spec-17)
     *   [ℹ️ Documentation du fichier de configuration (config.json)](#ℹ️-documentation-du-fichier-de-configuration-configjson)
 
 ## 25/12/2025
@@ -188,6 +191,13 @@
 *   ✅ Harmonisation des textes d'aide (Tooltips) entre la fenêtre principale et la fenêtre IQT.
 *   ✅ Correction de la persistance de l'infobulle de l'Indicateur de Santé (déplacement sur le conteneur parent pour éviter l'écrasement par le code-behind).
 *   ✅ Utilisation de textes riches avec sauts de ligne pour une meilleure pédagogie.
+
+### ℹ️ Spec 17 (Splash Screen & Ko-fi)
+*   ✅ Création d'un écran de démarrage (Splash Screen) transparent et informatif.
+*   ✅ Affichage dynamique de la version et vérification de la version NTP (Locale vs Distante).
+*   ✅ Intégration d'un bouton "Ko-fi" stylisé (Icône tasse fumante) pour le soutien au projet.
+*   ✅ Ajout de raccourcis vers la documentation (Web et Locale) dès le démarrage.
+*   ✅ Fermeture automatique ou manuelle (Bouton OK).
 
 ### ℹ️ Documentation du fichier de configuration (config.json)
 Le fichier `config.json` stocke les paramètres persistants de l'application :

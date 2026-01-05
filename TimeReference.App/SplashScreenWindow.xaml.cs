@@ -146,6 +146,19 @@ namespace TimeReference.App
             try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(docUrl) { UseShellExecute = true }); } catch { }
         }
 
+        private void BtnKofi_Click(object sender, RoutedEventArgs e)
+        {
+            string supportUrl = "https://ko-fi.com/francismoreau";
+            try
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(supportUrl) { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Impossible d'ouvrir le lien : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
     private void EnsureVisible()
     {
         double virtualScreenLeft = SystemParameters.VirtualScreenLeft;

@@ -12,7 +12,7 @@
   "server_options": "iburst",
   "time2_value": 0.0004,
   "utc_mode": true,
-  "mini_mode_always_on_top": true,
+  "mini_mode_always_on_top": false,
   "mini_mode_opacity": 1,
   "mini_mode_left": 800,
   "mini_mode_top": 400,

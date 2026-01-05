@@ -4,7 +4,7 @@
 - [X] Afficher la version ntp dans le splash screen
 - [X] Bouton help
 - [X] Faire un ModOp pour la mise en production avec gestion des n° de versions, distribution ...
-- [ ] Mettre en place le Ko-Fi
+- [X] Mettre en place le Ko-Fi
 - [X] Page d'aide
 - [X] Bouton Off en haut 
 - [X] Retrouver l'affichage des pairs. Afficher dans une fenetre flottante sans barre de Windows. Fermeture de la fenetre par double clic dans la zone

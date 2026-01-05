@@ -46,3 +46,11 @@ Le système repose sur la synergie entre trois composants :
 *   **Guide Matériel :** Liste des composants et instructions d'assemblage.
 *   **Manuel Logiciel :** Installation, configuration et utilisation de l'application.
 *   **FAQ & Dépannage :** Solutions aux problèmes courants.
+
+---
+
+## ❤️ Soutenir le projet
+
+Si ce projet vous est utile, vous pouvez m'offrir un café pour soutenir son développement !
+
+<a href='https://ko-fi.com/francismoreau ' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>

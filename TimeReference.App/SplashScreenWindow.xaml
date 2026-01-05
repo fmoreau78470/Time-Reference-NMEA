@@ -21,12 +21,26 @@
             <Image Grid.Row="0" Source="Assets/splash.png" Stretch="Uniform" Margin="0,0,0,20"/>
 
             <!-- Infos -->
-            <StackPanel Grid.Row="1" HorizontalAlignment="Center">
-                <TextBlock Text="Time Reference NMEA" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#333333"/>
-                <TextBlock x:Name="TxtVersion" Text="Version 1.0" FontSize="14" HorizontalAlignment="Center" Foreground="Gray" Margin="0,5,0,0"/>
-                <TextBlock x:Name="TxtAuthor" Text="Auteur : ..." FontSize="12" HorizontalAlignment="Center" Foreground="Gray" Margin="0,5,0,0"/>
-                <TextBlock x:Name="TxtCompany" Text="Compagnie : ..." FontSize="12" HorizontalAlignment="Center" Foreground="Gray" Margin="0,2,0,0"/>
-            </StackPanel>
+            <Grid Grid.Row="1">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock Text="Time Reference NMEA" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#333333"/>
+                    <TextBlock x:Name="TxtVersion" Text="Version 1.0" FontSize="14" HorizontalAlignment="Center" Foreground="Gray" Margin="0,5,0,0"/>
+                    <TextBlock x:Name="TxtAuthor" Text="Auteur : ..." FontSize="12" HorizontalAlignment="Center" Foreground="Gray" Margin="0,5,0,0"/>
+                    <TextBlock x:Name="TxtCompany" Text="Compagnie : ..." FontSize="12" HorizontalAlignment="Center" Foreground="Gray" Margin="0,2,0,0"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Width="40" Height="40" Click="BtnKofi_Click" ToolTip="Soutenir le projet" Background="#FF29ABE0" BorderThickness="0" HorizontalAlignment="Center">
+                        <Viewbox Width="24" Height="24">
+                            <Canvas Width="24" Height="24">
+                                <Path Fill="White" Data="M5,9 L19,9 C19.5,9 20,9.5 20,10 L19,16 C18.5,19 16,21 12,21 C8,21 5.5,19 5,16 L4,10 C4,9.5 4.5,9 5,9 Z" />
+                                <Path Stroke="White" StrokeThickness="2" Data="M20,11 C23,11 23,15 20,16" />
+                                <Path Stroke="White" StrokeThickness="1.5" StrokeStartLineCap="Round" Data="M8,5 Q9,2 10,5 M12,4 Q13,1 14,4 M16,5 Q17,2 18,5" />
+                            </Canvas>
+                        </Viewbox>
+                    </Button>
+                    <TextBlock Text="Payez-moi un café" FontSize="10" Foreground="#FF29ABE0" HorizontalAlignment="Center" Margin="0,2,0,0" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
             
             <!-- Loading -->
             <TextBlock x:Name="TxtLoading" Grid.Row="2" Text="Chargement en cours..." FontStyle="Italic" HorizontalAlignment="Center" Margin="0,15,0,0" Foreground="#888888"/>
