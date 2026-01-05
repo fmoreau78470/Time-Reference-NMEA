@@ -67,4 +67,7 @@ git push origin main --tags
 
 echo.
 echo [SUCCES] Deploiement termine !
+echo.
+echo Le workflow GitHub Actions a ete declenche.
+echo La release sera disponible dans environ 2 a 5 minutes sur GitHub.
 pause

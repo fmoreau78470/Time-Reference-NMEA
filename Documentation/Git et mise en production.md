@@ -428,3 +428,4 @@ Si tout est configuré, voici la séquence de commandes à exécuter dans le ter
 *   Le workflow GitHub Actions se déclenche automatiquement.
 *   Il compile le code et l'installateur.
 *   Il crée une **Release** sur GitHub et y dépose (upload) automatiquement les fichiers binaires (`.exe` et `setup.exe`).
+*   **Délai :** Comptez environ **2 à 5 minutes** pour que le processus se termine et que les fichiers soient disponibles.
