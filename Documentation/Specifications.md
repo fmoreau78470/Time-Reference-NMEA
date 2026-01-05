@@ -198,6 +198,7 @@
 *   ✅ Intégration d'un bouton "Ko-fi" stylisé (Icône tasse fumante) pour le soutien au projet.
 *   ✅ Ajout de raccourcis vers la documentation (Web et Locale) dès le démarrage.
 *   ✅ Fermeture automatique ou manuelle (Bouton OK).
+*   ✅ Vérification automatique d'une nouvelle version de l'application sur GitHub et proposition de téléchargement.
 
 ### ℹ️ Documentation du fichier de configuration (config.json)
 Le fichier `config.json` stocke les paramètres persistants de l'application :
