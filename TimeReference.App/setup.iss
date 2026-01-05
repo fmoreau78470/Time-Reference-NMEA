@@ -28,3 +28,4 @@ Name: "desktopicon"; Description: "Créer une icône sur le Bureau"; GroupDescri
 Filename: "{app}\TimeReference.App.exe"; Description: "Lancer l'application"; Flags: nowait postinstall skipifsilent
 
 
+

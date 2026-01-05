@@ -393,39 +393,27 @@ Une fois publié, le fichier `Stratum0.uf2` apparaîtra dans la section "Assets"
 
 ## 13. Mise en production rapide (Cheatsheet)
 
-Si tout est configuré, voici la séquence de commandes à exécuter dans le terminal (PowerShell) pour déployer une nouvelle version (exemple : `1.2.3`).
+Un script batch `deploy.bat` a été créé à la racine du projet pour automatiser l'ensemble du processus de déploiement. Il exécute toutes les étapes nécessaires, avec une pause de confirmation entre chacune.
 
-> **Note :** Toutes les commandes ci-dessous doivent être exécutées depuis la **racine du projet** (le dossier contenant le fichier `Set-Version.ps1`).
+> **Note :** La commande ci-dessous doit être exécutée depuis la **racine du projet** dans un terminal (cmd ou PowerShell).
 
-1.  **Incrémenter la version :**
-    ```powershell
-    .\Set-Version.ps1 -Version 1.2.3
-    ```
+### Lancement du déploiement
 
-2.  **Générer la documentation locale :**
-    ```bash
-    mkdocs build
-    ```
+Pour déployer une nouvelle version (exemple : `1.2.3`), exécutez simplement :
 
-3.  **Générer l'exécutable (Publication) :**
-    ```bash
-    dotnet publish TimeReference.App -c Release
-    ```
+```cmd
+.\deploy.bat 1.2.3
+```
 
-4.  **Valider et Tagger :**
-    ```bash
-    git add .
-    git commit -m "Release v1.2.3"
-    git tag v1.2.3
-    ```
-
-5.  **Déployer (Push) :**
-    ```bash
-    git push origin main --tags
-    ```
+Le script se chargera de :
+1.  Mettre à jour les numéros de version dans les fichiers du projet.
+2.  Générer la documentation locale (`mkdocs build`).
+3.  Compiler l'application en mode `Release`.
+4.  Créer un commit et un tag Git pour la version.
+5.  Pousser les changements et le tag sur GitHub pour déclencher la release.
 
 **Résultat :**
 *   Le workflow GitHub Actions se déclenche automatiquement.
 *   Il compile le code et l'installateur.
-*   Il crée une **Release** sur GitHub et y dépose (upload) automatiquement les fichiers binaires (`.exe` et `setup.exe`).
+*   Il crée une **Release** sur GitHub et y dépose (upload) automatiquement les fichiers binaires (`setup.exe`).
 *   **Délai :** Comptez environ **2 à 5 minutes** pour que le processus se termine et que les fichiers soient disponibles.
