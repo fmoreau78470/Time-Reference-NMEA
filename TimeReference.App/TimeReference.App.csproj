@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -14,19 +13,18 @@
     <Company>After Midnight</Company>
     <Product>Time Reference NMEA</Product>
     <Copyright>Francis Moreau</Copyright>
+    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
   </PropertyGroup>
-
   <!-- Configuration de publication (Release) -->
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TimeReference.Core\TimeReference.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="..\ntp.template" Link="ntp.template">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -34,9 +32,8 @@
     <None Include="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <!-- Fix pour SingleFile : Force l'inclusion des Assets et Thèmes -->
+    <!-- Fix pour SingleFile : Force l'inclusion des Assets et ThÃ¨mes -->
     <Resource Include="Assets\**\*.ico" />
     <Resource Include="Assets\**\*.png" />
   </ItemGroup>
-
 </Project>

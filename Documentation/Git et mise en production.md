@@ -124,6 +124,7 @@ AppPublisher=Votre Nom
 DefaultDirName={autopf}\Time Reference NMEA
 DefaultGroupName=Time Reference NMEA
 OutputDir=Installer
+; Le nom de base est mis à jour automatiquement par le script Set-Version.ps1 pour inclure la version (ex: _v1.2.0)
 OutputBaseFilename=TimeReferenceNMEA_Setup
 Compression=lzma2
 SolidCompression=yes
@@ -132,6 +133,8 @@ PrivilegesRequired=admin
 [Files]
 ; Chemin vers les fichiers publiés (relatif à ce script)
 Source: "bin\Release\net8.0-windows\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+; Documentation locale (générée par mkdocs build dans le dossier site à la racine)
+Source: "..\site\*"; DestDir: "{app}\Documentation"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\Time Reference NMEA"; Filename: "{app}\TimeReference.App.exe"
