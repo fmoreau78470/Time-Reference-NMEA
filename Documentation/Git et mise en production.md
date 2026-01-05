@@ -395,19 +395,31 @@ Une fois publié, le fichier `Stratum0.uf2` apparaîtra dans la section "Assets"
 
 Si tout est configuré, voici la séquence de commandes à exécuter dans le terminal (PowerShell) pour déployer une nouvelle version (exemple : `1.2.3`).
 
+> **Note :** Toutes les commandes ci-dessous doivent être exécutées depuis la **racine du projet** (le dossier contenant le fichier `Set-Version.ps1`).
+
 1.  **Incrémenter la version :**
     ```powershell
     .\Set-Version.ps1 -Version 1.2.3
     ```
 
-2.  **Valider et Tagger :**
+2.  **Générer la documentation locale :**
+    ```bash
+    mkdocs build
+    ```
+
+3.  **Générer l'exécutable (Publication) :**
+    ```bash
+    dotnet publish TimeReference.App -c Release
+    ```
+
+4.  **Valider et Tagger :**
     ```bash
     git add .
     git commit -m "Release v1.2.3"
     git tag v1.2.3
     ```
 
-3.  **Déployer (Push) :**
+5.  **Déployer (Push) :**
     ```bash
     git push origin main --tags
     ```

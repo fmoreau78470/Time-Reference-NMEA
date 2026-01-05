@@ -32,7 +32,7 @@
     <None Include="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <!-- Fix pour SingleFile : Force l'inclusion des Assets et ThÃƒÂ¨mes -->
+    <!-- Fix pour SingleFile : Force l'inclusion des Assets et ThÃƒÆ’Ã‚Â¨mes -->
     <Resource Include="Assets\**\*.ico" />
     <Resource Include="Assets\**\*.png" />
   </ItemGroup>
