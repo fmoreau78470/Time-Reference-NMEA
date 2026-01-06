@@ -7,12 +7,14 @@ using System.Windows.Media;
 using System.Windows.Documents;
 using System.IO;
 using TimeReference.Core.Services;
+using TimeReference.Core.Models;
 
 namespace TimeReference.App
 {
     public partial class SplashScreenWindow : Window
     {
         private DispatcherTimer? _autoCloseTimer;
+        private AppConfig _config;
 
         public SplashScreenWindow(bool autoClose = true)
         {
@@ -20,7 +22,8 @@ namespace TimeReference.App
 
             // Chargement de la configuration pour l'URL
             var configService = new ConfigService();
-            var config = configService.Load();
+            _config = configService.Load();
+            var config = _config;
 
             // Récupération dynamique de la version
             var assembly = Assembly.GetExecutingAssembly();
@@ -163,7 +166,8 @@ namespace TimeReference.App
         private void BtnDocLocal_Click(object sender, RoutedEventArgs e)
         {
             // Stratégie Offline : On cherche le site statique local (index.html)
-            string localDoc = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "site", "index.html");
+            string subFolder = (_config != null && _config.Language == "en") ? "en" : "";
+            string localDoc = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "site", subFolder, "index.html");
             
             if (File.Exists(localDoc))
             {
@@ -182,6 +186,7 @@ namespace TimeReference.App
         private void BtnDocWeb_Click(object sender, RoutedEventArgs e)
         {
             string docUrl = "https://fmoreau78470.github.io/Time-Reference-NMEA/";
+            if (_config != null && _config.Language == "en") docUrl += "en/";
             try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(docUrl) { UseShellExecute = true }); } catch { }
         }
 

@@ -25,6 +25,8 @@ Source: "..\site\*"; DestDir: "{app}\site"; Flags: ignoreversion recursesubdirs 
 [Icons]
 Name: "{group}\Time Reference NMEA"; Filename: "{app}\TimeReference.App.exe"
 Name: "{autodesktop}\Time Reference NMEA"; Filename: "{app}\TimeReference.App.exe"; Tasks: desktopicon
+Name: "{group}\Documentation (FR)"; Filename: "{app}\site\index.html"
+Name: "{group}\Documentation (EN)"; Filename: "{app}\site\en\index.html"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked

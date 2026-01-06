@@ -124,7 +124,7 @@ echo.
 echo =========================================================
 echo Etape 6 : Push vers GitHub
 echo =========================================================
-git push origin main --tags
+git push origin main --tags --force
 if %ERRORLEVEL% NEQ 0 (
     echo [ERREUR] Echec du push vers GitHub.
     pause
