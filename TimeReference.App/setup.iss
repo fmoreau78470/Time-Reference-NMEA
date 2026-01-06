@@ -14,8 +14,8 @@ PrivilegesRequired=admin
 SetupIconFile=Assets\Icone-Time-Reference.ico
 
 [Languages]
-Name: "fr"; MessagesFile: "compiler:Languages\French.isl"
 Name: "en"; MessagesFile: "compiler:Default.isl"
+Name: "fr"; MessagesFile: "compiler:Languages\French.isl"
 
 [Files]
 ; Chemin vers les fichiers publiés (relatif à ce script)
@@ -27,6 +27,9 @@ Name: "{group}\Time Reference NMEA"; Filename: "{app}\TimeReference.App.exe"
 Name: "{autodesktop}\Time Reference NMEA"; Filename: "{app}\TimeReference.App.exe"; Tasks: desktopicon
 Name: "{group}\Documentation (FR)"; Filename: "{app}\site\index.html"
 Name: "{group}\Documentation (EN)"; Filename: "{app}\site\en\index.html"
+
+[Registry]
+Root: HKCU; Subkey: "Software\Time Reference NMEA"; ValueType: string; ValueName: "InstallLanguage"; ValueData: "{language}"; Flags: uninsdeletevalue
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
