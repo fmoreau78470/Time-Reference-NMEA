@@ -49,7 +49,7 @@ echo.
 echo ==========================================
 echo Etape 3 : Generer l'executable (dotnet publish)
 echo ==========================================
-dotnet publish TimeReference.App -c Release
+dotnet publish TimeReference.App -c Release -r win-x64 --self-contained false
 if %ERRORLEVEL% NEQ 0 (
     echo [ERREUR] Echec de la compilation dotnet.
     pause

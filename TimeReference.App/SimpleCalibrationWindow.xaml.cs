@@ -63,8 +63,8 @@ public partial class SimpleCalibrationWindow : Window
         InitializeComponent();
         _config = config;
         _configService = new ConfigService();
-        Log("Mode Simple (NTPQ Monitor) initialisé.");
-        Log("Ce mode analyse les offsets via 'ntpq -pn' (Algorithme Python transposé).");
+        Log(TranslationManager.Instance["LOG_CALIB_INIT"]);
+        Log(TranslationManager.Instance["LOG_CALIB_DESC"]);
         Closing += Window_Closing;
 
         // Initialisation du graphique
@@ -105,7 +105,7 @@ public partial class SimpleCalibrationWindow : Window
         BtnClose.IsEnabled = false;
         PnlDurationSettings.Visibility = Visibility.Collapsed;
         LblCountdown.Visibility = Visibility.Visible;
-        LblCountdown.Text = "Stabilisation...";
+        LblCountdown.Text = TranslationManager.Instance["STATUS_STABILIZATION"];
         _isMeasuring = false;
         _isGpsStabilized = false;
         
@@ -122,8 +122,8 @@ public partial class SimpleCalibrationWindow : Window
         _targetDuration = TimeSpan.FromMinutes(SldDuration.Value);
         _analysisStartTime = DateTime.Now;
 
-        Log("Démarrage du monitoring NTP (ntpq -pn)...");
-        LblStats.Text = "Attente stabilisation GPS & serveurs Web...";
+        Log(TranslationManager.Instance["LOG_START_MONITOR"]);
+        LblStats.Text = TranslationManager.Instance["STATUS_WAITING_STABILIZATION"];
         
         // Modification temporaire de ntp.conf
         await ModifyNtpConfigAsync(true);
@@ -134,7 +134,7 @@ public partial class SimpleCalibrationWindow : Window
         _timer.Tick += async (s, args) => await Timer_TickAsync();
         _timer.Start();
 
-        LblStatus.Text = "Analyse en cours...";
+        LblStatus.Text = TranslationManager.Instance["STATUS_ANALYSIS_RUNNING"];
     }
 
     private async Task StopAnalysisAsync(bool userRequested)
@@ -146,7 +146,7 @@ public partial class SimpleCalibrationWindow : Window
         PnlDurationSettings.Visibility = Visibility.Visible;
         LblCountdown.Visibility = Visibility.Collapsed;
         BtnClose.IsEnabled = true;
-        LblStatus.Text = "Arrêté.";
+        LblStatus.Text = TranslationManager.Instance["STATUS_STOPPED"];
         
         if (_isNtpModified)
         {
@@ -167,7 +167,7 @@ public partial class SimpleCalibrationWindow : Window
             
             var remaining = _targetDuration - elapsed;
             if (remaining < TimeSpan.Zero) remaining = TimeSpan.Zero;
-            LblCountdown.Text = $"Temps restant : {(int)remaining.TotalMinutes:00}:{remaining.Seconds:00}";
+            LblCountdown.Text = string.Format(TranslationManager.Instance["STATUS_TIME_REMAINING"], $"{(int)remaining.TotalMinutes:00}:{remaining.Seconds:00}");
 
             // Check for end of measurement
             if (elapsed >= _targetDuration)
@@ -183,10 +183,10 @@ public partial class SimpleCalibrationWindow : Window
             {
                 _isMeasuring = true;
                 _measurementStartTime = DateTime.Now; // Start the measurement clock!
-                LblStatus.Text = "Mesure en cours...";
-                LblStats.Text = "Mesure en cours...";
-                Log("GPS et serveurs Web stabilisés. Début de la mesure.");
-                LblCountdown.Text = "Mesure en cours...";
+                LblStatus.Text = TranslationManager.Instance["STATUS_MEASURING"];
+                LblStats.Text = TranslationManager.Instance["STATUS_MEASURING"];
+                Log(TranslationManager.Instance["LOG_MEASURE_START"]);
+                LblCountdown.Text = TranslationManager.Instance["STATUS_MEASURING"];
             }
             else
             {
@@ -194,8 +194,8 @@ public partial class SimpleCalibrationWindow : Window
                 var statusParts = new List<string>();
                 if (!_isGpsStabilized) statusParts.Add("GPS");
                 if (!_isWebStabilized) statusParts.Add("serveurs Internet");
-                LblStats.Text = $"Attente stabilisation {string.Join(" & ", statusParts)}...";
-                LblCountdown.Text = "Stabilisation...";
+                LblStats.Text = string.Format(TranslationManager.Instance["STATUS_WAITING_SPECIFIC"], string.Join(" & ", statusParts));
+                LblCountdown.Text = TranslationManager.Instance["STATUS_STABILIZATION"];
             }
         }
     }
@@ -343,7 +343,7 @@ public partial class SimpleCalibrationWindow : Window
     {
         _isRunning = false;
         SetStartButtonState(true); // Affiche l'icône Start
-        LblStatus.Text = "Analyse terminée.";
+        LblStatus.Text = TranslationManager.Instance["STATUS_ANALYSIS_DONE"];
         BtnClose.IsEnabled = true;
         
         if (_isNtpModified)
@@ -353,8 +353,8 @@ public partial class SimpleCalibrationWindow : Window
 
         if (_gpsOffsets.Count == 0)
         {
-            Log("ERREUR : Aucune donnée GPS valide (Reach=377) collectée.");
-            MessageBox.Show(this, "Aucune donnée GPS stable (Reach=377) n'a été trouvée.\nAttendez que le GPS se stabilise.", "Échec", MessageBoxButton.OK, MessageBoxImage.Warning);
+            Log(TranslationManager.Instance["LOG_ERR_NO_GPS_DATA"]);
+            MessageBox.Show(this, TranslationManager.Instance["MSG_NO_STABLE_GPS"], TranslationManager.Instance["TITLE_FAILURE"], MessageBoxButton.OK, MessageBoxImage.Warning);
             
             PnlDurationSettings.Visibility = Visibility.Visible;
             LblCountdown.Visibility = Visibility.Collapsed;
@@ -365,8 +365,8 @@ public partial class SimpleCalibrationWindow : Window
         double medianWeb = GetMedian(_webOffsets);
 
         Log("------------------------------------------------");
-        Log($"Médiane GPS (vs Local) : {medianGps:F3} ms");
-        Log($"Médiane Web (vs Local) : {medianWeb:F3} ms");
+        Log(string.Format(TranslationManager.Instance["LOG_MEDIAN_GPS"], medianGps));
+        Log(string.Format(TranslationManager.Instance["LOG_MEDIAN_WEB"], medianWeb));
 
         // Calcul de la nouvelle Compensation (anciennement Fudge)
         // Logique : On aligne le GPS sur la référence Internet (Web).
@@ -381,19 +381,15 @@ public partial class SimpleCalibrationWindow : Window
 
         _calculatedFudge = newFudgeSec;
 
-        Log($"Compensation Actuelle : {currentFudgeSec:F4} s");
-        Log($"Ecart constaté (Web - GPS) : {gapSec:F4} s ({gapMs:F3} ms)");
-        Log($"Nouvelle Compensation Suggérée : {newFudgeSec:F4} s");
+        Log(string.Format(TranslationManager.Instance["LOG_CURRENT_FUDGE"], currentFudgeSec));
+        Log(string.Format(TranslationManager.Instance["LOG_GAP_DETECTED"], gapSec, gapMs));
+        Log(string.Format(TranslationManager.Instance["LOG_NEW_FUDGE"], newFudgeSec));
         Log("------------------------------------------------");
 
         var result = MessageBox.Show(
             this,
-            $"Résultat de la calibration :\n\n" +
-            $"Compensation actuelle : {currentFudgeSec:F4} s\n" +
-            $"Ecart constaté (Web - GPS) : {gapSec:F4} s\n" +
-            $"Nouvelle compensation : {newFudgeSec:F4} s\n\n" +
-            "Voulez-vous appliquer cette compensation ?",
-            "Validation de la compensation",
+            string.Format(TranslationManager.Instance["MSG_CALIB_RESULT"], currentFudgeSec, gapSec, newFudgeSec),
+            TranslationManager.Instance["TITLE_CALIB_VALIDATION"],
             MessageBoxButton.YesNo,
             MessageBoxImage.Question);
 
@@ -412,24 +408,24 @@ public partial class SimpleCalibrationWindow : Window
         {
             _config.Time2Value = Math.Round(_calculatedFudge, 4);
             _configService.Save(_config);
-            Log("Configuration sauvegardée.");
+            Log(TranslationManager.Instance["LOG_CONFIG_SAVED"]);
 
             await Task.Run(() => 
             {
                 var ntpService = new NtpService();
                 ntpService.GenerateConfFile(_config);
             });
-            Log("Fichier ntp.conf régénéré.");
+            Log(TranslationManager.Instance["LOG_NTP_REGEN"]);
 
             await Task.Run(() => WindowsServiceHelper.RestartService("NTP"));
-            Log("Service NTP redémarré.");
+            Log(TranslationManager.Instance["LOG_NTP_RESTARTED"]);
             _isNtpModified = false; // La config a été écrasée par la nouvelle version propre
 
-            MessageBox.Show(this, "Compensation appliquée !", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(this, TranslationManager.Instance["MSG_COMPENSATION_APPLIED"], TranslationManager.Instance["TITLE_SUCCESS"], MessageBoxButton.OK, MessageBoxImage.Information);
         }
         catch (Exception ex)
         {
-            MessageBox.Show(this, $"Erreur : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(this, string.Format(TranslationManager.Instance["MSG_ERROR_GENERIC"], ex.Message), TranslationManager.Instance["TITLE_ERROR"], MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -689,7 +685,7 @@ public partial class SimpleCalibrationWindow : Window
         string ntpConfPath = _config.NtpConfPath;
         if (!File.Exists(ntpConfPath)) return;
 
-        string action = enable ? "Configuration Mode Calibration" : "Restauration Mode Normal";
+        string action = enable ? TranslationManager.Instance["LOG_CONFIG_CALIB_MODE"] : TranslationManager.Instance["LOG_RESTORE_NORMAL_MODE"];
         Log($"{action}...");
 
         await Task.Run(() =>
@@ -746,15 +742,15 @@ public partial class SimpleCalibrationWindow : Window
                 if (modified)
                 {
                     File.WriteAllLines(ntpConfPath, lines);
-                    Dispatcher.Invoke(() => Log("ntp.conf mis à jour. Redémarrage NTP..."));
+                    Dispatcher.Invoke(() => Log(TranslationManager.Instance["LOG_NTP_UPDATE_RESTART"]));
                     WindowsServiceHelper.RestartService("NTP");
-                    Dispatcher.Invoke(() => Log("NTP Redémarré."));
+                    Dispatcher.Invoke(() => Log(TranslationManager.Instance["LOG_NTP_RESTARTED_SHORT"]));
                 }
                 _isNtpModified = enable;
             }
             catch (Exception ex)
             {
-                Dispatcher.Invoke(() => Log($"Erreur modif ntp.conf: {ex.Message}"));
+                Dispatcher.Invoke(() => Log(string.Format(TranslationManager.Instance["LOG_ERR_NTP_MODIF"], ex.Message)));
             }
         });
     }

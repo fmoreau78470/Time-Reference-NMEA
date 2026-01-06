@@ -2,37 +2,42 @@
 
 [Setup]
 AppName=Time Reference NMEA
-AppVersion=1.1.0
+AppVersion=1.2.0
 AppPublisher=Votre Nom
 DefaultDirName={autopf}\Time Reference NMEA
 DefaultGroupName=Time Reference NMEA
 OutputDir=Installer
-OutputBaseFilename=TimeReferenceNMEA_Setup_v1.1.0
+OutputBaseFilename=TimeReferenceNMEA_Setup_v1.2.0
 Compression=lzma2
 SolidCompression=yes
 PrivilegesRequired=admin
 SetupIconFile=Assets\Icone-Time-Reference.ico
 
+[Languages]
+Name: "fr"; MessagesFile: "compiler:Languages\French.isl"
+Name: "en"; MessagesFile: "compiler:Languages\English.isl"
+
 [Files]
 ; Chemin vers les fichiers publiés (relatif à ce script)
 Source: "bin\Release\net8.0-windows\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\site\*"; DestDir: "{app}\site"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\Time Reference NMEA"; Filename: "{app}\TimeReference.App.exe"
 Name: "{autodesktop}\Time Reference NMEA"; Filename: "{app}\TimeReference.App.exe"; Tasks: desktopicon
 
 [Tasks]
-Name: "desktopicon"; Description: "Créer une icône sur le Bureau"; GroupDescription: "Icônes supplémentaires:"; Flags: unchecked
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Run]
-Filename: "{app}\TimeReference.App.exe"; Description: "Lancer l'application"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\TimeReference.App.exe"; Description: "{cm:LaunchApp}"; Flags: nowait postinstall skipifsilent
 
+[CustomMessages]
+fr.CreateDesktopIcon=Créer une icône sur le Bureau
+en.CreateDesktopIcon=Create a desktop icon
 
+fr.AdditionalIcons=Icônes supplémentaires :
+en.AdditionalIcons=Additional icons:
 
-
-
-
-
-
-
-
+fr.LaunchApp=Lancer l'application
+en.LaunchApp=Launch the application

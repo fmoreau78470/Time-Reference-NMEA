@@ -20,21 +20,21 @@ namespace TimeReference.App
         private bool _isPaused = false;
         
         // Dictionnaire des descriptions pour les tooltips
-        private readonly Dictionary<string, string> _descriptions = new()
+        private readonly Dictionary<string, string> _descriptionKeys = new()
         {
-            { "associd", "Identifiant d'association NTP interne." },
-            { "status", "Statut hexadécimal du pilote." },
-            { "device", "Nom du périphérique (ex: NMEA GPS Clock)." },
-            { "timecode", "Dernière trame NMEA brute reçue par le pilote." },
-            { "poll", "Nombre total de requêtes envoyées au pilote." },
-            { "noreply", "Nombre de fois où le pilote n'a pas répondu (Perte de signal ?)." },
-            { "badformat", "Nombre de trames NMEA mal formées ou corrompues." },
-            { "baddata", "Nombre de données invalides reçues." },
-            { "fudgetime1", "Correction de temps 1 (Interne)." },
-            { "fudgetime2", "Correction de temps 2 (Fudge Time utilisateur)." },
-            { "stratum", "Strate NTP (1 = Source primaire comme GPS)." },
-            { "refid", "Identifiant de référence (ex: GPS, PPS)." },
-            { "flags", "Drapeaux de configuration du pilote." }
+            { "associd", "DESC_ASSOCID" },
+            { "status", "DESC_STATUS" },
+            { "device", "DESC_DEVICE" },
+            { "timecode", "DESC_TIMECODE" },
+            { "poll", "DESC_POLL" },
+            { "noreply", "DESC_NOREPLY" },
+            { "badformat", "DESC_BADFORMAT" },
+            { "baddata", "DESC_BADDATA" },
+            { "fudgetime1", "DESC_FUDGETIME1" },
+            { "fudgetime2", "DESC_FUDGETIME2" },
+            { "stratum", "DESC_STRATUM" },
+            { "refid", "DESC_REFID" },
+            { "flags", "DESC_FLAGS" }
         };
 
         public ClockVarWindow()
@@ -44,14 +44,14 @@ namespace TimeReference.App
             DgVars.ItemsSource = _items;
 
             // Ajout des descriptions pour les champs décodés
-            _descriptions.Add("GPS_Time", "Heure UTC extraite de la trame GPRMC.");
-            _descriptions.Add("GPS_Pos", "Position Latitude / Longitude décodée.");
-            _descriptions.Add("GPS_Status", "Statut du Fix GPS (A=Valide, V=Alerte).");
-            _descriptions.Add("GPS_Date", "Date UTC extraite de la trame GPRMC.");
-            _descriptions.Add("GPS_Speed", "Vitesse sol en nœuds.");
-            _descriptions.Add("GPS_Course", "Route fond (Cap) en degrés.");
-            _descriptions.Add("GPS_MagVar", "Déclinaison magnétique.");
-            _descriptions.Add("GPS_Mode", "Indicateur de mode (A=Auto, D=Diff).");
+            _descriptionKeys.Add("GPS_Time", "DESC_GPS_TIME");
+            _descriptionKeys.Add("GPS_Pos", "DESC_GPS_POS");
+            _descriptionKeys.Add("GPS_Status", "DESC_GPS_STATUS");
+            _descriptionKeys.Add("GPS_Date", "DESC_GPS_DATE");
+            _descriptionKeys.Add("GPS_Speed", "DESC_GPS_SPEED");
+            _descriptionKeys.Add("GPS_Course", "DESC_GPS_COURSE");
+            _descriptionKeys.Add("GPS_MagVar", "DESC_GPS_MAGVAR");
+            _descriptionKeys.Add("GPS_Mode", "DESC_GPS_MODE");
 
             // Timer pour rafraîchir toutes les secondes
             _timer = new DispatcherTimer();
@@ -118,14 +118,17 @@ namespace TimeReference.App
             // 1. Mise à jour ou Ajout
             foreach (var kvp in newData)
             {
+                string descKey = _descriptionKeys.ContainsKey(kvp.Key) ? _descriptionKeys[kvp.Key] : "DESC_DEFAULT";
+                string desc = TranslationManager.Instance[descKey];
+
                 var existingItem = _items.FirstOrDefault(i => i.Key == kvp.Key);
                 if (existingItem != null)
                 {
                     if (existingItem.Value != kvp.Value) existingItem.Value = kvp.Value;
+                    if (existingItem.Description != desc) existingItem.Description = desc;
                 }
                 else
                 {
-                    string desc = _descriptions.ContainsKey(kvp.Key) ? _descriptions[kvp.Key] : "Paramètre interne NTP.";
                     _items.Add(new NtpVarItem { Key = kvp.Key, Value = kvp.Value, Description = desc });
                 }
             }
@@ -155,7 +158,7 @@ namespace TimeReference.App
                 }
 
                 // Status
-                data["GPS_Status"] = parts[2] == "A" ? "Valide (A)" : "Invalide (V)";
+                data["GPS_Status"] = parts[2] == "A" ? TranslationManager.Instance["VAL_VALID"] : TranslationManager.Instance["VAL_INVALID"];
 
                 // Position
                 string lat = parts[3];
@@ -230,7 +233,7 @@ namespace TimeReference.App
         private void BtnPause_Click(object sender, RoutedEventArgs e)
         {
             _isPaused = !_isPaused;
-            BtnPause.Content = _isPaused ? "Reprendre" : "Pause";
+            BtnPause.Content = _isPaused ? TranslationManager.Instance["BTN_RESUME"] : TranslationManager.Instance["BTN_PAUSE"];
         }
 
         private void BtnCopy_Click(object sender, RoutedEventArgs e)
@@ -238,7 +241,7 @@ namespace TimeReference.App
             if (TxtRaw != null && !string.IsNullOrEmpty(TxtRaw.Text))
             {
                 Clipboard.SetText(TxtRaw.Text);
-                MessageBox.Show("Réponse brute copiée dans le presse-papier.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(TranslationManager.Instance["MSG_COPY_SUCCESS"], TranslationManager.Instance["TITLE_SUCCESS"], MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 

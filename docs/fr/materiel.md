@@ -11,15 +11,15 @@ Le projet est conçu pour être accessible et peu coûteux. Voici la liste des c
 | **Microcontrôleur** | **Waveshare RP2040-Zero** | Interface USB et traitement du signal. Choisi pour sa taille compacte et sa compatibilité Arduino. |
 | **Module GPS** | **u-blox NEO-6M** ou **NEO-8M** | Réception satellite. Souvent vendu sous la référence `GY-GPS6MV2` ou `GY-NEO6MV2`. |
 | **Câble USB** | USB Type-C (Data) | Liaison vers le PC. Assurez-vous qu'il transmet bien les données (pas seulement la charge). |
-![Ma photo](Photos/RP2040.jpg)
-![Ma photo](Photos/NEO-6M.jpg)
+![Ma photo](../Photos/RP2040.jpg)
+![Ma photo](../Photos/NEO-6M.jpg)
 
 
 
 ## 2. Câblage Inter-modules
 
 Le montage relie le module GPS au microcontrôleur via une liaison série (UART).
-![Ma photo](Photos/Montage.jpg)
+![Ma photo](../Photos/Montage.jpg)
 
 ### Schéma de connexion
 
@@ -44,7 +44,7 @@ Le NEO-8M dispose d'une broche appelée PPS.
 
 *   **Destination :** Pin **GP2** du RP2040-Zero.
 
-![Ma photo](Photos/PPS.jpg)
+![Ma photo](../Photos/PPS.jpg)
 
 **Pourquoi est-ce indispensable ?**
 Les données NMEA (envoyées via TX/RX) fournissent la date et l'heure, mais avec une latence variable (Jitter) de plusieurs centaines de millisecondes due au traitement série.
@@ -88,7 +88,7 @@ Une fois le matériel assemblé, vous devez flasher le RP2040 pour qu'il agisse 
 
 Vous pouvez vérifier que votre GPS émet les trames NMEA grâce à l'analyse du port série à l'aide d'un logiciel de type [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
 
-![Ma photo](PrintScreen/Putty.png)
+![Ma photo](../PrintScreen/Putty.png)
 
 
 ## 6. Fonctionnement du Firmware (Pour aller plus loin)

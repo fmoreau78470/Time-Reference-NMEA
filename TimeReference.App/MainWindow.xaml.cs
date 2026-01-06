@@ -62,7 +62,7 @@ public partial class MainWindow : Window
         _mutex = new Mutex(true, appName, out createdNew);
         if (!createdNew)
         {
-            MessageBox.Show("L'application est déjà en cours d'exécution.", "Instance unique", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(TranslationManager.Instance["MSG_ALREADY_RUNNING"], TranslationManager.Instance["TITLE_SINGLE_INSTANCE"], MessageBoxButton.OK, MessageBoxImage.Warning);
             Application.Current.Shutdown();
             return;
         }
@@ -187,7 +187,7 @@ public partial class MainWindow : Window
             Dispatcher.Invoke(() => 
             {
                 Logger.Error($"Impossible de démarrer le service NTP au lancement : {ex.Message}");
-                MessageBox.Show($"Le service NTP est arrêté et le démarrage automatique a échoué.\n\nErreur : {ex.Message}", "Avertissement NTP", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(string.Format(TranslationManager.Instance["MSG_NTP_AUTOSTART_FAILED"], ex.Message), TranslationManager.Instance["TITLE_NTP_WARNING"], MessageBoxButton.OK, MessageBoxImage.Warning);
             });
         }
     }
@@ -244,10 +244,8 @@ public partial class MainWindow : Window
                 {
                     // Sous-cas B2 : Incohérence
                     var result = MessageBox.Show(
-                        $"Le fichier de configuration NTP utilise le port COM{confPort},\n" +
-                        $"mais l'application est réglée sur COM{appPort}.\n\n" +
-                        $"Voulez-vous mettre à jour NTP pour utiliser COM{appPort} ?",
-                        "Synchronisation Configuration",
+                        string.Format(TranslationManager.Instance["MSG_NTP_PORT_MISMATCH"], confPort, appPort),
+                        TranslationManager.Instance["TITLE_CONFIG_SYNC"],
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Question);
 
@@ -286,7 +284,7 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             Logger.Error($"Echec de la configuration automatique : {ex.Message}");
-            MessageBox.Show($"Impossible d'appliquer la configuration NTP :\n{ex.Message}", "Erreur Auto-Config", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(string.Format(TranslationManager.Instance["MSG_AUTO_CONFIG_FAILED"], ex.Message), TranslationManager.Instance["TITLE_AUTO_CONFIG_ERROR"], MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -322,11 +320,8 @@ public partial class MainWindow : Window
             if (w32Status == ServiceControllerStatus.Running)
             {
                 var result = MessageBox.Show(
-                    "Le service Windows Time (W32Time) est actif.\n" +
-                    "Cela indique que NTP by Meinberg n'est probablement pas installé ou configuré correctement.\n\n" +
-                    "Ce logiciel nécessite NTP by Meinberg.\n" +
-                    "Voulez-vous télécharger NTP maintenant ?",
-                    "Conflit de Service de Temps",
+                    TranslationManager.Instance["MSG_W32TIME_ACTIVE"],
+                    TranslationManager.Instance["TITLE_TIME_SERVICE_CONFLICT"],
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Error);
 
@@ -344,10 +339,8 @@ public partial class MainWindow : Window
         if (ntpStatus == null)
         {
             var result = MessageBox.Show(
-                "Le service 'NTP' est introuvable.\n" +
-                "Ce logiciel nécessite l'installation de NTP by Meinberg.\n\n" +
-                "Voulez-vous télécharger NTP maintenant ?",
-                "Service NTP Manquant",
+                TranslationManager.Instance["MSG_NTP_MISSING"],
+                TranslationManager.Instance["TITLE_NTP_MISSING"],
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Error);
 
@@ -381,24 +374,24 @@ public partial class MainWindow : Window
 
         if (status == ServiceControllerStatus.Running)
         {
-            LblNtpStatus.Text = "Service NTP : Démarré";
+            LblNtpStatus.Text = TranslationManager.Instance["STATUS_NTP_STARTED"];
             LblNtpStatus.SetResourceReference(TextBlock.ForegroundProperty, "SuccessColor");
         }
         else if (status == ServiceControllerStatus.Stopped)
         {
-            LblNtpStatus.Text = "Service NTP : Arrêté";
+            LblNtpStatus.Text = TranslationManager.Instance["STATUS_NTP_STOPPED"];
             LblNtpStatus.SetResourceReference(TextBlock.ForegroundProperty, "ErrorColor");
             InvalidateNtpData();
         }
         else if (status == null)
         {
-            LblNtpStatus.Text = "Service NTP : Non trouvé";
+            LblNtpStatus.Text = TranslationManager.Instance["STATUS_NTP_NOT_FOUND"];
             LblNtpStatus.SetResourceReference(TextBlock.ForegroundProperty, "SecondaryText");
             InvalidateNtpData();
         }
         else
         {
-            LblNtpStatus.Text = $"Service NTP : {status}";
+            LblNtpStatus.Text = string.Format(TranslationManager.Instance["STATUS_NTP_UNKNOWN"], status);
             LblNtpStatus.SetResourceReference(TextBlock.ForegroundProperty, "WarningColor");
         }
     }
@@ -420,7 +413,7 @@ public partial class MainWindow : Window
             if (!alreadyInvalid)
             {
                 PnlNtpPeers.Children.Clear();
-                PnlNtpPeers.Children.Add(new TextBlock { Text = "Service arrêté (pas de données)", Foreground = Brushes.Gray, FontStyle = FontStyles.Italic });
+                PnlNtpPeers.Children.Add(new TextBlock { Text = TranslationManager.Instance["STATUS_SERVICE_STOPPED_NO_DATA"], Foreground = Brushes.Gray, FontStyle = FontStyles.Italic });
             }
         }
 
@@ -432,7 +425,7 @@ public partial class MainWindow : Window
             if (LblLon != null) LblLon.Text = "--";
             if (LblLatDms != null) LblLatDms.Text = "--";
             if (LblLonDms != null) LblLonDms.Text = "--";
-            if (LblStatus != null) { LblStatus.Text = "Service NTP arrêté"; LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "ErrorColor"); }
+            if (LblStatus != null) { LblStatus.Text = TranslationManager.Instance["STATUS_NTP_STOPPED"]; LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "ErrorColor"); }
         }
     }
 
@@ -444,7 +437,7 @@ public partial class MainWindow : Window
             Logger.Info("ACTION UTILISATEUR : Demande de DÉMARRAGE du service NTP.");
             WindowsServiceHelper.StartService("NTP"); 
         }
-        catch (Exception ex) { _expectingNtpStateChange = false; MessageBox.Show(ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error); Logger.Error(ex.Message); }
+        catch (Exception ex) { _expectingNtpStateChange = false; MessageBox.Show(ex.Message, TranslationManager.Instance["TITLE_ERROR"], MessageBoxButton.OK, MessageBoxImage.Error); Logger.Error(ex.Message); }
     }
 
     private void BtnStopNtp_Click(object sender, RoutedEventArgs e)
@@ -455,7 +448,7 @@ public partial class MainWindow : Window
             Logger.Info("ACTION UTILISATEUR : Demande d'ARRÊT du service NTP.");
             WindowsServiceHelper.StopService("NTP"); 
         }
-        catch (Exception ex) { _expectingNtpStateChange = false; MessageBox.Show(ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error); Logger.Error(ex.Message); }
+        catch (Exception ex) { _expectingNtpStateChange = false; MessageBox.Show(ex.Message, TranslationManager.Instance["TITLE_ERROR"], MessageBoxButton.OK, MessageBoxImage.Error); Logger.Error(ex.Message); }
     }
 
     private async void BtnRestartNtp_Click(object sender, RoutedEventArgs e)
@@ -469,7 +462,7 @@ public partial class MainWindow : Window
 
             await Task.Run(() => WindowsServiceHelper.RestartService("NTP")); 
         }
-        catch (Exception ex) { _expectingNtpStateChange = false; MessageBox.Show(ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error); Logger.Error(ex.Message); }
+        catch (Exception ex) { _expectingNtpStateChange = false; MessageBox.Show(ex.Message, TranslationManager.Instance["TITLE_ERROR"], MessageBoxButton.OK, MessageBoxImage.Error); Logger.Error(ex.Message); }
         finally
         {
             BtnRestartNtp.IsEnabled = true;
@@ -501,8 +494,8 @@ public partial class MainWindow : Window
                 if (IsNtpConfigChanged(oldConfig, newConfig))
                 {
                     var result = MessageBox.Show(
-                        "Des paramètres influençant le service NTP ont été modifiés.\nLe service doit être redémarré pour prendre en compte ces changements.\n\nConfirmer le redémarrage ?",
-                        "Redémarrage requis",
+                        TranslationManager.Instance["MSG_RESTART_REQUIRED"],
+                        TranslationManager.Instance["TITLE_RESTART_REQUIRED"],
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Question);
 
@@ -524,7 +517,7 @@ public partial class MainWindow : Window
                         _configService.Save(oldConfig);
                         _config = oldConfig;
                         Logger.Info("Modification des paramètres annulée par l'utilisateur (Refus de redémarrage).");
-                        MessageBox.Show("Les modifications ont été annulées car le service n'a pas été redémarré.", "Annulation", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show(TranslationManager.Instance["MSG_CHANGES_CANCELLED"], TranslationManager.Instance["TITLE_CANCELLED"], MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 else
@@ -541,7 +534,7 @@ public partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Impossible d'ouvrir les paramètres :\n{ex.Message}\n\nDétail : {ex.InnerException?.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(string.Format(TranslationManager.Instance["MSG_SETTINGS_OPEN_ERROR"], ex.Message, ex.InnerException?.Message), TranslationManager.Instance["TITLE_ERROR"], MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -591,7 +584,7 @@ public partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Impossible d'ouvrir les logs :\n{ex.Message}\n\nDétail : {ex.InnerException?.Message}", "Erreur Critique", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(string.Format(TranslationManager.Instance["MSG_LOGS_OPEN_ERROR"], ex.Message, ex.InnerException?.Message), TranslationManager.Instance["TITLE_CRITICAL_ERROR"], MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -606,8 +599,8 @@ public partial class MainWindow : Window
         if (status != ServiceControllerStatus.Stopped && status != null)
         {
             var result = MessageBox.Show(
-                "L'analyse de qualité signal nécessite l'accès exclusif au port série.\nLe service NTP doit être arrêté temporairement.\n\nVoulez-vous arrêter le service NTP et continuer ?",
-                "Confirmation requise",
+                TranslationManager.Instance["MSG_IQT_STOP_NTP_CONFIRM"],
+                TranslationManager.Instance["TITLE_CONFIRMATION"],
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning);
 
@@ -626,7 +619,7 @@ public partial class MainWindow : Window
         if (_gpsReader.IsConnected)
         {
             _gpsReader.Stop();
-            LblStatus.Text = "Déconnecté (Requis pour IQT)";
+            LblStatus.Text = TranslationManager.Instance["STATUS_DISCONNECTED_IQT"];
             LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "SecondaryText");
         }
 
@@ -1008,17 +1001,17 @@ public partial class MainWindow : Window
         
         if (LblTimeMode != null)
         {
-            LblTimeMode.Text = _config.UtcMode ? "UTC" : "Locale";
+            LblTimeMode.Text = _config.UtcMode ? TranslationManager.Instance["MODE_UTC"] : TranslationManager.Instance["MODE_LOCAL"];
         }
 
         if (_config.UtcMode)
         {
-            BtnUtc.Content = "UTC";
+            BtnUtc.Content = TranslationManager.Instance["MODE_UTC"];
             BtnUtc.SetResourceReference(BackgroundProperty, "SuccessColor");
         }
         else
         {
-            BtnUtc.Content = "Locale";
+            BtnUtc.Content = TranslationManager.Instance["MODE_LOCAL"];
             BtnUtc.SetResourceReference(BackgroundProperty, "AccentColor");
         }
     }
@@ -1210,19 +1203,19 @@ public partial class MainWindow : Window
                 // 1. Câble débranché ? (Priorité absolue)
                 if (!IsSerialPortAvailable(_config.SerialPort))
                 {
-                    LblStatus.Text = "⚠️ Câble USB débranché ?";
+                    LblStatus.Text = TranslationManager.Instance["STATUS_CABLE_UNPLUGGED"];
                     LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "ErrorColor");
                 }
                 // 2. Bascule sur Web ? (Le port est là, mais NTP utilise une autre source)
                 else if (_hasActivePeer && !_isGpsActivePeer)
                 {
-                    LblStatus.Text = "⚠️ Mode Web (GPS ignoré)";
+                    LblStatus.Text = TranslationManager.Instance["STATUS_WEB_MODE"];
                     LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "WarningColor");
                 }
                 // 3. Suspicion blocage ? (GPS actif mais santé pourrie depuis > 20s)
                 else if (_consecutivePoorHealth >= 2)
                 {
-                    LblStatus.Text = "⚠️ Suspicion blocage";
+                    LblStatus.Text = TranslationManager.Instance["STATUS_BLOCKAGE_SUSPECTED"];
                     LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "WarningColor");
                 }
                 // 4. Tout va bien (ou recherche)
@@ -1230,12 +1223,12 @@ public partial class MainWindow : Window
                 {
                     if (isGpsFixOk)
                     {
-                        LblStatus.Text = "Fix GPS OK";
+                        LblStatus.Text = TranslationManager.Instance["STATUS_GPS_OK"];
                         LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "SuccessColor");
                     }
                     else
                     {
-                        LblStatus.Text = "Recherche de satellites...";
+                        LblStatus.Text = TranslationManager.Instance["STATUS_SEARCHING_SATELLITES"];
                         LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "WarningColor");
                     }
                 }
@@ -1486,7 +1479,7 @@ public partial class MainWindow : Window
 
             if (data.IsValid)
             {
-                LblStatus.Text = "Fix GPS OK";
+                LblStatus.Text = TranslationManager.Instance["STATUS_GPS_OK"];
                 LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "SuccessColor");
                 
                 // FIX: Idem pour l'heure dans le panneau de détails
@@ -1503,7 +1496,7 @@ public partial class MainWindow : Window
             }
             else
             {
-                LblStatus.Text = "Recherche de satellites...";
+                LblStatus.Text = TranslationManager.Instance["STATUS_SEARCHING_SATELLITES"];
                 LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "WarningColor");
             }
         });
@@ -1514,12 +1507,12 @@ public partial class MainWindow : Window
         Dispatcher.Invoke(() =>
         {
             Logger.Error($"Erreur GPS : {message}");
-            MessageBox.Show(message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(message, TranslationManager.Instance["TITLE_ERROR"], MessageBoxButton.OK, MessageBoxImage.Error);
             
             // Si l'erreur a coupé la connexion, on met à jour l'interface
             if (!_gpsReader.IsConnected)
             {
-                LblStatus.Text = "Erreur";
+                LblStatus.Text = TranslationManager.Instance["STATUS_ERROR"];
                 LblStatus.SetResourceReference(TextBlock.ForegroundProperty, "ErrorColor");
             }
         });

@@ -40,7 +40,7 @@ namespace TimeReference.App
 
         private Task TryConnectAsync()
         {
-            TxtStatus.Text = "Connexion au GPS...";
+            TxtStatus.Text = TranslationManager.Instance["STATUS_CONNECTING"];
             if (BtnRetry != null) BtnRetry.IsEnabled = false;
 
             // Sécurité : on s'assure que c'est fermé avant de tenter
@@ -53,18 +53,18 @@ namespace TimeReference.App
 
                 if (_gpsReader.IsConnected)
                 {
-                    TxtStatus.Text = $"Connecté à {_config.SerialPort}. Analyse en cours...";
+                    TxtStatus.Text = string.Format(TranslationManager.Instance["STATUS_CONNECTED_ANALYZING"], _config.SerialPort);
                     _uiTimer.Start();
                 }
                 else
                 {
-                    TxtStatus.Text = "Erreur : Impossible d'ouvrir le port COM (Occupé ?).";
+                    TxtStatus.Text = TranslationManager.Instance["ERR_COM_BUSY"];
                     if (BtnRetry != null) BtnRetry.IsEnabled = true;
                 }
             }
             catch (Exception ex)
             {
-                TxtStatus.Text = $"Erreur connexion : {ex.Message}";
+                TxtStatus.Text = string.Format(TranslationManager.Instance["ERR_CONNECTION"], ex.Message);
                 if (BtnRetry != null) BtnRetry.IsEnabled = true;
             }
             
@@ -84,7 +84,7 @@ namespace TimeReference.App
         {
             Dispatcher.Invoke(() => 
             {
-                TxtStatus.Text = $"Erreur GPS : {error}";
+                TxtStatus.Text = string.Format(TranslationManager.Instance["ERR_GPS_GENERIC"], error);
                 if (BtnRetry != null) BtnRetry.IsEnabled = true;
             });
         }

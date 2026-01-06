@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:TimeReference.App"
+        xmlns:ext="clr-namespace:TimeReference.App.MarkupExtensions"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Qualité Signal GPS" Height="450" Width="350"
+        Title="{ext:Lang IQT_TITLE}" Height="450" Width="350"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -27,7 +28,7 @@
 
             <!-- Header -->
             <Grid Grid.Row="0" Margin="0,0,0,20">
-                <TextBlock Text="Qualité Signal GPS" Foreground="{DynamicResource PrimaryText}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Text="{ext:Lang IQT_HEADER}" Foreground="{DynamicResource PrimaryText}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <Button x:Name="BtnClose" HorizontalAlignment="Right" VerticalAlignment="Center" Width="24" Height="24" Click="BtnClose_Click" Cursor="Hand" Background="Transparent" BorderThickness="0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -56,39 +57,39 @@
                         </Ellipse.Effect>
                     </Ellipse>
                     
-                    <local:GaugeControl x:Name="GaugeScore" Title="SCORE" Unit="%" 
+                    <local:GaugeControl x:Name="GaugeScore" Title="{ext:Lang IQT_SCORE_TITLE}" Unit="%" 
                                         Width="140" Height="140"
                                         Minimum="0" Maximum="100" 
                                         Limit1="50" Limit2="80" 
                                         IsInverted="False"
-                                        ToolTip="Indice de Qualité du Signal (IQT) (0-100%)&#x0a;&#x0a;Cet indicateur évalue la qualité de réception du signal GPS.&#x0a;&#x0a;Il prend en compte :&#x0a;• Le SNR : Puissance du signal.&#x0a;• Le HDOP : Précision géométrique.&#x0a;• Les Satellites : Nombre de sources.&#x0a;&#x0a;100% = Réception optimale."/>
+                                        ToolTip="{ext:Lang IQT_SCORE_TOOLTIP}"/>
                 </StackPanel>
 
                 <!-- Metrics -->
                 <UniformGrid Columns="3" Margin="0,0,0,25">
                     <!-- SNR Gauge: 0-50. Red < 20, Orange 20-30, Green > 30 -->
-                    <local:GaugeControl x:Name="GaugeSnr" Title="SNR" Unit="dB" 
+                    <local:GaugeControl x:Name="GaugeSnr" Title="{ext:Lang IQT_SNR_TITLE}" Unit="dB" 
                                         Minimum="0" Maximum="50" 
                                         Limit1="20" Limit2="30" 
                                         IsInverted="False"
-                                        ToolTip="Rapport Signal/Bruit: > 30dB est excellent."/>
+                                        ToolTip="{ext:Lang IQT_SNR_TOOLTIP}"/>
 
                     <!-- HDOP Gauge: 0-10. Green < 2, Orange 2-5, Red > 5 (Inverted) -->
-                    <local:GaugeControl x:Name="GaugeHdop" Title="HDOP" Unit="" 
+                    <local:GaugeControl x:Name="GaugeHdop" Title="{ext:Lang IQT_HDOP_TITLE}" Unit="" 
                                         Minimum="0" Maximum="10" 
                                         Limit1="2" Limit2="5" 
                                         IsInverted="True"
-                                        ToolTip="Il s'agit d'un indicateur de la précision géométrique de votre positionnement.&#x0a;Plus simplement, il vous dit si la disposition des satellites dans le ciel est favorable ou non&#x0a;pour calculer votre position à la surface de la Terre (latitude et longitude).&#x0a;Plus c'est bas, mieux c'est."/>
+                                        ToolTip="{ext:Lang IQT_HDOP_TOOLTIP}"/>
 
                     <!-- SATS Gauge: 0-20. Red < 4, Orange 4-8, Green > 8 -->
-                    <local:GaugeControl x:Name="GaugeSat" Title="SATS" Unit="#" 
+                    <local:GaugeControl x:Name="GaugeSat" Title="{ext:Lang IQT_SATS_TITLE}" Unit="#" 
                                         Minimum="0" Maximum="20" 
                                         Limit1="4" Limit2="8" 
                                         IsInverted="False"
-                                        ToolTip="Nombre de satellites utilisés."/>
+                                        ToolTip="{ext:Lang IQT_SATS_TOOLTIP}"/>
                 </UniformGrid>
 
-                <Button x:Name="BtnRetry" Content="Réessayer connexion" Height="35" Background="{DynamicResource SecondaryText}" Foreground="{DynamicResource PrimaryText}" BorderThickness="0" Click="BtnRetry_Click" Cursor="Hand" Margin="20,0">
+                <Button x:Name="BtnRetry" Content="{ext:Lang BTN_RETRY_CONNECT}" Height="35" Background="{DynamicResource SecondaryText}" Foreground="{DynamicResource PrimaryText}" BorderThickness="0" Click="BtnRetry_Click" Cursor="Hand" Margin="20,0">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -113,7 +114,7 @@
             </StackPanel>
 
             <!-- Footer Status -->
-            <TextBlock x:Name="TxtStatus" Grid.Row="2" Text="Initialisation..." Foreground="{DynamicResource SecondaryText}" FontSize="11" TextTrimming="CharacterEllipsis" Margin="0,15,0,0" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="TxtStatus" Grid.Row="2" Text="{ext:Lang STATUS_INIT}" Foreground="{DynamicResource SecondaryText}" FontSize="11" TextTrimming="CharacterEllipsis" Margin="0,15,0,0" HorizontalAlignment="Center"/>
         </Grid>
     </Border>
 </Window>

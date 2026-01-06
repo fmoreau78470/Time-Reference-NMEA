@@ -13,7 +13,7 @@ Ce guide détaille l'installation, la configuration et l'utilisation de l'applic
 
 L'interface est conçue pour surveiller la précision en un coup d'œil. Elle se compose d'une zone d'affichage principale et d'une barre d'outils.
 
-![Capture d'écran de l'interface principale de l'application Time Reference NMEA, montrant des indicateurs de performance en temps réel tels que l'heure système, l'heure GPS, la position géographique, le statut du service NTP, et la santé du système. La fenêtre est organisée avec des graphiques et des boutons d'accès rapide en bas, dans un environnement de bureau. L'image transmet une impression de fonctionnalité et de précision.](PrintScreen/Fenetre_principale.png)
+![Capture d'écran de l'interface principale de l'application Time Reference NMEA, montrant des indicateurs de performance en temps réel tels que l'heure système, l'heure GPS, la position géographique, le statut du service NTP, et la santé du système. La fenêtre est organisée avec des graphiques et des boutons d'accès rapide en bas, dans un environnement de bureau. L'image transmet une impression de fonctionnalité et de précision.](../PrintScreen/Fenetre_principale.png)
     
 
 ### A. Zone d'Affichage
@@ -67,7 +67,7 @@ Si le service est installé mais arrêté, l'application tentera de le démarrer
 
 1.  Cliquez sur le bouton **Paramètres** (icône d'engrenage).
 
-    ![Ma photo](PrintScreen/Parametres.png)
+    ![Ma photo](../PrintScreen/Parametres.png)
 
     | Champ | Description | Valeur recommandée |
     | :--- | :--- | :--- |
@@ -103,7 +103,7 @@ L'assistant compare votre GPS avec des serveurs de temps Internet (Stratum 1/2) 
 Le graphique affiche en gras la médiane des offset (en ms) calculée au fil de la mesure. Les lignes fines correspondent à l'offset mesuré de chaque source.
 
 L'assistant attend que le GPS soit stable (Reach = 377) et qu'au moins une source Internet soit stable (Reach = 377) pour commencer à calculer la médiane.
-    ![Ma photo](PrintScreen/Etalonnage.png)
+    ![Ma photo](../PrintScreen/Etalonnage.png)
 
 ### Algorithme de l'étalonnage
 
@@ -132,7 +132,7 @@ L'assistant attend que le GPS soit stable (Reach = 377) et qu'au moins une sourc
 
     La source GPS_NMEA(x) est votre récepteur GPS. x correspond au port COMx utilisé.
 
-       ![Ma photo](PrintScreen/Sources.png)    
+       ![Ma photo](../PrintScreen/Sources.png)    
        
        > **Note :** Pour fermer cette fenêtre, double-cliquez dessus.
        
@@ -155,7 +155,7 @@ L'assistant attend que le GPS soit stable (Reach = 377) et qu'au moins une sourc
 
     Cette fenêtre permet de diagnostiquer la qualité de votre installation d'antenne.
     
-       ![Ma photo](PrintScreen/QualitéSignalGPS.png)
+       ![Ma photo](../PrintScreen/QualitéSignalGPS.png)
 
     **Détail des indicateurs :**
 
@@ -189,4 +189,4 @@ Pour surveiller votre serveur de temps sans encombrer l'écran :
 2.  L'application devient une petite fenêtre transparente qui reste au premier plan ("Always on top").
 3.  Double-cliquez dessus pour revenir au mode normal.
 
-    ![Ma photo](PrintScreen/Fenetre_mini.png)
+    ![Ma photo](../PrintScreen/Fenetre_mini.png)

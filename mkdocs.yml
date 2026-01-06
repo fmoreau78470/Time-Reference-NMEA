@@ -6,7 +6,6 @@ use_directory_urls: false
 
 theme:
   name: material
-  language: fr
   palette: 
     - scheme: default
       primary: indigo
@@ -37,6 +36,21 @@ theme:
 
 plugins:
   - search
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: fr
+          name: Français
+          default: true
+        - locale: en
+          name: English
+      nav_translations:
+        en:
+          "Accueil": "Home"
+          "Théorie NTP": "NTP Theory"
+          "Guide Matériel": "Hardware Guide"
+          "Manuel Logiciel": "Software Manual"
+          "FAQ & Dépannage": "FAQ & Troubleshooting"
   # - with-pdf:
   #     author: Francis Moreau
   #     title: Manuel d'utilisation de Time Reference NMEA

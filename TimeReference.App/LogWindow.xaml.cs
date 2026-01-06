@@ -49,11 +49,11 @@ namespace TimeReference.App
                 // Protection : ne pas effacer le log d'aujourd'hui
                 if (filename.Contains(DateTime.Now.ToString("yyyyMMdd")))
                 {
-                    MessageBox.Show("Impossible de supprimer le log courant.", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(TranslationManager.Instance["MSG_DELETE_CURRENT_LOG_ERROR"], TranslationManager.Instance["TITLE_WARNING"], MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                if (MessageBox.Show($"Supprimer {filename} ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (MessageBox.Show(string.Format(TranslationManager.Instance["MSG_CONFIRM_DELETE"], filename), TranslationManager.Instance["TITLE_CONFIRMATION"], MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     _logService.DeleteLog(filename);
                     LoadFileList();
@@ -74,7 +74,7 @@ namespace TimeReference.App
             var filtered = _allEntries.AsEnumerable();
 
             // Filtre Niveau
-            if (CmbLevel.SelectedItem is ComboBoxItem item && item.Content.ToString() != "Tous")
+            if (CmbLevel.SelectedItem is ComboBoxItem item && CmbLevel.SelectedIndex > 0)
             {
                 filtered = filtered.Where(x => x.Level == item.Content.ToString());
             }

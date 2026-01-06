@@ -49,5 +49,8 @@ namespace TimeReference.Core.Models
 
         [JsonPropertyName("meinberg_url")]
         public string MeinbergUrl { get; set; } = "https://www.meinbergglobal.com/english/sw/ntp.htm";
+
+        [JsonPropertyName("language")]
+        public string Language { get; set; } = "fr";
     }
 }

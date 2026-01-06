@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Collections.Generic;
+using System.Windows.Controls;
 using TimeReference.Core.Models;
 using TimeReference.Core.Services;
 
@@ -46,6 +47,9 @@ namespace TimeReference.App
                 // Chargement des paramètres du Mode Mini
                 ChkMiniTop.IsChecked = _config.MiniModeAlwaysOnTop;
 
+                // Chargement de la langue
+                UpdateLanguageSelectionUI();
+
                 // Assure que l'opacité est dans les bornes du slider et convertit en pourcentage
                 double opacityPercent = (_config.MiniModeOpacity >= 0.2 && _config.MiniModeOpacity <= 1.0) ? _config.MiniModeOpacity * 100 : 100;
                 SldMiniOpacity.Value = opacityPercent;
@@ -53,7 +57,7 @@ namespace TimeReference.App
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erreur chargement config : {ex.Message}");
+                MessageBox.Show(string.Format(TranslationManager.Instance["MSG_CONFIG_LOAD_ERROR"], ex.Message));
             }
         }
 
@@ -108,7 +112,7 @@ namespace TimeReference.App
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erreur sauvegarde : {ex.Message}");
+                MessageBox.Show(string.Format(TranslationManager.Instance["MSG_SAVE_ERROR"], ex.Message));
             }
         }
 
@@ -116,6 +120,22 @@ namespace TimeReference.App
         {
             DialogResult = false;
             Close();
+        }
+
+        private void BtnLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is string lang)
+            {
+                _config.Language = lang;
+                TranslationManager.Instance.LoadLanguage(lang);
+                UpdateLanguageSelectionUI();
+            }
+        }
+
+        private void UpdateLanguageSelectionUI()
+        {
+            if (BtnLangFr != null) BtnLangFr.Opacity = _config.Language == "fr" ? 1.0 : 0.3;
+            if (BtnLangEn != null) BtnLangEn.Opacity = _config.Language == "en" ? 1.0 : 0.3;
         }
 
         private void BtnMonitor_Click(object sender, RoutedEventArgs e)
@@ -138,12 +158,12 @@ namespace TimeReference.App
                 }
                 else
                 {
-                    MessageBox.Show("L'URL n'est pas valide.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(TranslationManager.Instance["MSG_INVALID_URL"], TranslationManager.Instance["TITLE_ERROR"], MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Impossible d'ouvrir le lien : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(TranslationManager.Instance["MSG_LINK_ERROR"], ex.Message), TranslationManager.Instance["TITLE_ERROR"], MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -152,7 +172,7 @@ namespace TimeReference.App
             var openFileDialog = new Microsoft.Win32.OpenFileDialog
             {
                 Filter = "Fichiers de configuration (*.conf)|*.conf|Tous les fichiers (*.*)|*.*",
-                Title = "Sélectionner le fichier ntp.conf"
+                Title = TranslationManager.Instance["DLG_NTP_FILE_TITLE"]
             };
 
             if (!string.IsNullOrWhiteSpace(TxtNtpPath.Text) && File.Exists(TxtNtpPath.Text))
@@ -174,7 +194,7 @@ namespace TimeReference.App
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Impossible d'ouvrir le lien : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(TranslationManager.Instance["MSG_LINK_ERROR"], ex.Message), TranslationManager.Instance["TITLE_ERROR"], MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

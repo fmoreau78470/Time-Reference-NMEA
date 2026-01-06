@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using TimeReference.Core.Models;
+using TimeReference.Core.Services;
 
 namespace TimeReference.App;
 
@@ -61,7 +62,7 @@ public partial class PeersWindow : Window
 
         if (string.IsNullOrWhiteSpace(output))
         {
-            PnlPeers.Children.Add(new TextBlock { Text = "Pas de données NTP", Foreground = Brushes.Gray, FontStyle = FontStyles.Italic });
+            PnlPeers.Children.Add(new TextBlock { Text = TranslationManager.Instance["STATUS_NO_NTP_DATA"], Foreground = Brushes.Gray, FontStyle = FontStyles.Italic });
             return;
         }
 

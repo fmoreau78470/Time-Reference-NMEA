@@ -25,13 +25,13 @@ namespace TimeReference.App
             // Récupération dynamique de la version
             var assembly = Assembly.GetExecutingAssembly();
             var version = assembly.GetName().Version;
-            TxtVersion.Text = $"Version {version?.Major}.{version?.Minor}.{version?.Build}";
+            TxtVersion.Text = string.Format(TranslationManager.Instance["SPLASH_VERSION"], $"{version?.Major}.{version?.Minor}.{version?.Build}");
 
             // Récupération dynamique de l'auteur et de la compagnie
             var author = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright;
             // var company = assembly.GetCustomAttribute<AssemblyCompanyAttribute>()?.Company;
 
-            if (!string.IsNullOrEmpty(author)) TxtAuthor.Text = $"Auteur : {author}";
+            if (!string.IsNullOrEmpty(author)) TxtAuthor.Text = string.Format(TranslationManager.Instance["SPLASH_AUTHOR"], author);
             // if (!string.IsNullOrEmpty(company)) TxtCompany.Text = $"Compagnie : {company}";
 
             // --- Affichage Version NTP ---
@@ -40,11 +40,11 @@ namespace TimeReference.App
             if (!string.IsNullOrEmpty(localNtp))
             {
                 TxtVersion.Inlines.Add(new LineBreak());
-                TxtVersion.Inlines.Add(new Run("NTP : "));
+                TxtVersion.Inlines.Add(new Run(TranslationManager.Instance["SPLASH_NTP_VERSION"]));
                 var link = new Hyperlink(new Run(localNtp))
                 {
                     NavigateUri = new Uri(config.MeinbergUrl),
-                    ToolTip = "Site officiel Meinberg"
+                    ToolTip = TranslationManager.Instance["TIP_MEINBERG_SITE"]
                 };
                 link.RequestNavigate += (s, e) => 
                 {
@@ -86,12 +86,12 @@ namespace TimeReference.App
                             if (remoteVersion > currentVersion)
                             {
                                 TxtVersion.Inlines.Add(new LineBreak());
-                                TxtVersion.Inlines.Add(new Run($"Update dispo : {latestAppTag}") { Foreground = Brushes.Magenta, FontWeight = FontWeights.Bold });
+                                TxtVersion.Inlines.Add(new Run(string.Format(TranslationManager.Instance["SPLASH_UPDATE_AVAILABLE"], latestAppTag)) { Foreground = Brushes.Magenta, FontWeight = FontWeights.Bold });
                                 
-                                var link = new Hyperlink(new Run(" (Télécharger)"))
+                                var link = new Hyperlink(new Run(TranslationManager.Instance["SPLASH_DOWNLOAD_LINK"]))
                                 {
                                     NavigateUri = new Uri("https://github.com/fmoreau78470/Time-Reference-NMEA/releases/latest"),
-                                    ToolTip = "Télécharger la nouvelle version"
+                                    ToolTip = TranslationManager.Instance["TIP_DOWNLOAD_UPDATE"]
                                 };
                                 link.RequestNavigate += (s, e) => 
                                 {
@@ -104,7 +104,7 @@ namespace TimeReference.App
                                 if (_autoCloseTimer != null && _autoCloseTimer.IsEnabled)
                                 {
                                     _autoCloseTimer.Stop();
-                                    TxtLoading.Text = "Nouvelle version détectée !";
+                                    TxtLoading.Text = TranslationManager.Instance["SPLASH_NEW_VERSION_DETECTED"];
                                     TxtLoading.Foreground = Brushes.Magenta;
                                     TxtLoading.Visibility = Visibility.Visible;
                                 }
@@ -117,13 +117,13 @@ namespace TimeReference.App
                         if (NtpVersionService.CompareNtpVersions(remoteNtp, localNtp) > 0)
                         {
                             // Mise à jour disponible
-                            TxtVersion.Inlines.Add(new Run($" (Dispo : {remoteNtp})") { Foreground = Brushes.OrangeRed });
+                            TxtVersion.Inlines.Add(new Run(string.Format(TranslationManager.Instance["SPLASH_NTP_UPDATE_AVAILABLE"], remoteNtp)) { Foreground = Brushes.OrangeRed });
                             
                             // Message d'invitation et extension du délai
                             TxtLoading.Inlines.Clear();
-                            TxtLoading.Inlines.Add(new Run("Mise à jour NTP recommandée ! "));
+                            TxtLoading.Inlines.Add(new Run(TranslationManager.Instance["SPLASH_NTP_UPDATE_RECOMMENDED"]));
                             
-                            var link = new Hyperlink(new Run("(Cliquer ici)"));
+                            var link = new Hyperlink(new Run(TranslationManager.Instance["SPLASH_CLICK_HERE"]));
                             link.NavigateUri = new Uri(config.MeinbergUrl);
                             link.RequestNavigate += (s, e) => 
                             {
@@ -146,7 +146,7 @@ namespace TimeReference.App
                         else
                         {
                             // À jour
-                            TxtVersion.Inlines.Add(new Run(" (À jour)") { Foreground = Brushes.Green });
+                            TxtVersion.Inlines.Add(new Run(TranslationManager.Instance["SPLASH_UP_TO_DATE"]) { Foreground = Brushes.Green });
                         }
                     }
                 });
@@ -171,11 +171,11 @@ namespace TimeReference.App
                 {
                     System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(localDoc) { UseShellExecute = true });
                 }
-                catch (Exception ex) { MessageBox.Show("Erreur lors de l'ouverture de la documentation locale : " + ex.Message); }
+                catch (Exception ex) { MessageBox.Show(string.Format(TranslationManager.Instance["MSG_DOC_LOCAL_ERROR"], ex.Message)); }
             }
             else
             {
-                MessageBox.Show($"La documentation locale n'est pas trouvée.\nChemin recherché : {localDoc}\n(Elle est incluse uniquement via l'installateur)", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(string.Format(TranslationManager.Instance["MSG_DOC_LOCAL_NOT_FOUND"], localDoc), TranslationManager.Instance["TITLE_INFORMATION"], MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -194,7 +194,7 @@ namespace TimeReference.App
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Impossible d'ouvrir le lien : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(TranslationManager.Instance["MSG_LINK_ERROR"], ex.Message), TranslationManager.Instance["TITLE_ERROR"], MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
