@@ -32,7 +32,7 @@ Name: "{group}\Documentation (EN)"; Filename: "{app}\site\en\index.html"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Run]
-Filename: "{app}\TimeReference.App.exe"; Description: "{cm:LaunchApp}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\TimeReference.App.exe"; Description: "{cm:LaunchApp}"; Flags: nowait postinstall skipifsilent runascurrentuser
 
 [CustomMessages]
 fr.CreateDesktopIcon=Créer une icône sur le Bureau
