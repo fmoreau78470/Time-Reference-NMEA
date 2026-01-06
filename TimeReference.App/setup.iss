@@ -49,3 +49,4 @@ en.AdditionalIcons=Additional icons:
 fr.LaunchApp=Lancer l'application
 en.LaunchApp=Launch the application
 
+

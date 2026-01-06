@@ -19,17 +19,17 @@ public partial class App : Application
         var configService = new ConfigService();
         var config = configService.Load();
 
-        // Détection d'une nouvelle installation (fichier config.json absent)
-        bool isFreshInstall = !File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.json"));
         string? language = config.Language;
 
-        // Si c'est une nouvelle installation OU si la langue n'est pas définie, on regarde le registre
-        if (isFreshInstall || string.IsNullOrEmpty(language))
+        // On vérifie le registre pour voir si une langue a été choisie lors de l'installation.
+        // Cette clé agit comme un "override" unique au premier lancement après une installation/mise à jour.
+        try
         {
-            try
+            // 'true' pour avoir les droits d'écriture (nécessaire pour DeleteValue)
+            using var key = Registry.CurrentUser.OpenSubKey(@"Software\Time Reference NMEA", true);
+            if (key != null)
             {
-                using var key = Registry.CurrentUser.OpenSubKey(@"Software\Time Reference NMEA");
-                var installLang = key?.GetValue("InstallLanguage") as string;
+                var installLang = key.GetValue("InstallLanguage") as string;
                 
                 if (!string.IsNullOrEmpty(installLang))
                 {
@@ -37,10 +37,13 @@ public partial class App : Application
                     // IMPORTANT : On sauvegarde cette préférence dans la config pour que MainWindow l'utilise
                     config.Language = language;
                     configService.Save(config);
+
+                    // On supprime la valeur du registre pour ne pas écraser les futurs choix de l'utilisateur
+                    key.DeleteValue("InstallLanguage", false);
                 }
             }
-            catch { }
         }
+        catch { }
 
         // Initialisation de la langue (anglais par défaut si toujours null)
         TranslationManager.Instance.LoadLanguage(language ?? "en");
