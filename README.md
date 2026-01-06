@@ -1,11 +1,18 @@
 # Time Reference NMEA
 
+<div align="center">
+
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/fmoreau78470/Time-Reference-NMEA/blob/main/README.en.md)
+[![fr](https://img.shields.io/badge/lang-fr-blue.svg)](https://github.com/fmoreau78470/Time-Reference-NMEA/blob/main/README.md)
+
 **Transformez votre PC Windows en serveur de temps Stratum 1 de haute précision.**
 
 [![Soutenir sur Ko-fi](https://img.shields.io/badge/Ko--fi-Soutenir%20le%20projet-blue?style=for-the-badge&logo=kofi)](https://ko-fi.com/francismoreau)
 [![Documentation](https://img.shields.io/badge/docs-online-blue?style=for-the-badge&logo=read-the-docs)](https://fmoreau78470.github.io/Time-Reference-NMEA/)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
 [![Release](https://img.shields.io/badge/release-latest-orange?style=for-the-badge)](https://github.com/fmoreau78470/Time-reference-NMEA/releases)
+
+</div>
 
 ## 🔭 Pourquoi ce projet ?
 
