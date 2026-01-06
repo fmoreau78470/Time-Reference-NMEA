@@ -19,6 +19,31 @@ if not exist %ISCC% (
 
 echo.
 echo ==========================================
+echo Verification de l'etat du depot
+echo ==========================================
+REM git diff-index --quiet HEAD --
+REM if %ERRORLEVEL% NEQ 0 (
+REM     echo [ATTENTION] Des modifications locales ont ete detectees.
+REM     echo Cela risque de creer des conflits lors de la synchronisation (Etape 0).
+REM     echo Il est recommande d'avoir un depot propre ^(git stash ou git reset^) avant de deployer.
+REM     echo.
+REM     pause
+REM     exit /b 1
+REM )
+
+echo.
+echo ==========================================
+echo Etape 0 : Synchronisation avec GitHub
+echo ==========================================
+REM git pull --rebase origin main
+REM if %ERRORLEVEL% NEQ 0 (
+REM     echo [ERREUR] Echec de la synchronisation avec GitHub. Resoudre les conflits manuellement puis relancer.
+REM     pause
+REM     exit /b %ERRORLEVEL%
+REM )
+
+echo.
+echo ==========================================
 echo Etape 1 : Incrementer la version a %VERSION%
 echo ==========================================
 powershell -ExecutionPolicy Bypass -File ".\Set-Version.ps1" -Version %VERSION%
@@ -107,8 +132,22 @@ if %ERRORLEVEL% NEQ 0 (
 )
 echo.
 echo Le script est termine. Appuyez sur une touche pour voir les instructions finales.
+echo Appuyez sur une touche pour passer a l'etape 7 : Deploiement Doc Web.
 pause
 
+echo.
+echo =========================================================
+echo Etape 7 : Deploiement de la documentation sur GitHub Pages
+echo =========================================================
+mkdocs gh-deploy --force
+if %ERRORLEVEL% NEQ 0 (
+    echo [ERREUR] Echec du deploiement de la documentation.
+    pause
+    exit /b %ERRORLEVEL%
+)
+echo.
+echo Le script est termine. Appuyez sur une touche pour voir les instructions finales.
+pause
 echo.
 echo [SUCCES] Le code et le tag v%VERSION% ont ete pousses sur GitHub.
 echo.

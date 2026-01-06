@@ -15,7 +15,7 @@ SetupIconFile=Assets\Icone-Time-Reference.ico
 
 [Languages]
 Name: "fr"; MessagesFile: "compiler:Languages\French.isl"
-Name: "en"; MessagesFile: "compiler:Languages\English.isl"
+Name: "en"; MessagesFile: "compiler:Default.isl"
 
 [Files]
 ; Chemin vers les fichiers publiés (relatif à ce script)
@@ -41,3 +41,4 @@ en.AdditionalIcons=Additional icons:
 
 fr.LaunchApp=Lancer l'application
 en.LaunchApp=Launch the application
+
