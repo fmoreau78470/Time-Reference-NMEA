@@ -12,6 +12,7 @@ Compression=lzma2
 SolidCompression=yes
 PrivilegesRequired=admin
 SetupIconFile=Assets\Icone-Time-Reference.ico
+LanguageDetectionMethod=none
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"

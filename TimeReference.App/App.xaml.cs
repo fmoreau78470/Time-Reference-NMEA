@@ -14,8 +14,6 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        base.OnStartup(e);
-
         // Chargement de la configuration pour récupérer la langue
         var configService = new ConfigService();
         var config = configService.Load();
@@ -35,5 +33,7 @@ public partial class App : Application
 
         // Initialisation de la langue (anglais par défaut si toujours null)
         TranslationManager.Instance.LoadLanguage(language ?? "en");
+
+        base.OnStartup(e);
     }
 }
