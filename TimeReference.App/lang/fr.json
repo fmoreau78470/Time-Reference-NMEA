@@ -222,5 +222,14 @@
   "MSG_DELETE_CURRENT_LOG_ERROR": "Impossible de supprimer le log courant.",
   "TITLE_WARNING": "Attention",
   "MSG_CONFIRM_DELETE": "Supprimer {0} ?",
-  "TITLE_CONFIRMATION": "Confirmation"
+  "TITLE_CONFIRMATION": "Confirmation",
+  "BTN_LOOPSTATS": "Statistiques",
+  "TITLE_LOOPSTATS": "Statistiques",
+  "LBL_OPEN_FILE": "Ouvrir Fichier",
+  "LBL_FILE_STATS": "Statistiques du fichier",
+  "LBL_NB_SAMPLES": "Échantillons : {0}",
+  "LBL_OFFSET_MIN": "Min : {0:F6} s",
+  "LBL_OFFSET_MAX": "Max : {0:F6} s",
+  "LBL_OFFSET_AVG": "Moy : {0:F6} s",
+  "LBL_OFFSET_MED": "Méd : {0:F6} s"
 }
