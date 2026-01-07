@@ -1,0 +1,11 @@
+Date: 07/01/2026 14:00:09
+Message: 'La valeur fournie sur 'System.Windows.Baml2006.TypeConverterMarkupExtension' a levé une exception.' numéro de ligne '10' et position de ligne '9'.
+
+Stack Trace:
+   at System.Windows.Markup.XamlReader.RewrapException(Exception e, IXamlLineInfo lineInfo, Uri baseUri)
+   at System.Windows.Markup.WpfXamlLoader.Load(XamlReader xamlReader, IXamlObjectWriterFactory writerFactory, Boolean skipJournaledProperties, Object rootObject, XamlObjectWriterSettings settings, Uri baseUri)
+   at System.Windows.Markup.WpfXamlLoader.LoadBaml(XamlReader xamlReader, Boolean skipJournaledProperties, Object rootObject, XamlAccessLevel accessLevel, Uri baseUri)
+   at System.Windows.Markup.XamlReader.LoadBaml(Stream stream, ParserContext parserContext, Object parent, Boolean closeStream)
+   at System.Windows.Application.LoadComponent(Object component, Uri resourceLocator)
+   at TimeReference.App.MainWindow.InitializeComponent() in D:\Francis\Documents\code\Time reference NMEA\TimeReference.App\MainWindow.xaml:line 1
+   at TimeReference.App.MainWindow..ctor() in D:\Francis\Documents\code\Time reference NMEA\TimeReference.App\MainWindow.xaml.cs:line 76

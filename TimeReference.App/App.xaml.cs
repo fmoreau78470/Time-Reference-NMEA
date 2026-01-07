@@ -13,6 +13,33 @@ namespace TimeReference.App;
 /// </summary>
 public partial class App : Application
 {
+    public App()
+    {
+        // Intercepte toutes les erreurs non gérées (UI et non-UI)
+        this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+        AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+    }
+
+    private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+    {
+        LogFatalError(e.Exception, "Dispatcher");
+        e.Handled = true; // Tente d'empêcher le crash immédiat pour laisser le temps de voir le message
+        Shutdown();
+    }
+
+    private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    {
+        LogFatalError(e.ExceptionObject as Exception, "AppDomain");
+    }
+
+    private void LogFatalError(Exception? ex, string source)
+    {
+        if (ex == null) return;
+        string msg = $"[{DateTime.Now}] CRITICAL ERROR ({source}): {ex.Message}\n{ex.StackTrace}";
+        try { File.WriteAllText("fatal_error.txt", msg); } catch { }
+        MessageBox.Show(msg, "Fatal Error", MessageBoxButton.OK, MessageBoxImage.Error);
+    }
+
     protected override void OnStartup(StartupEventArgs e)
     {
         // Chargement de la configuration pour récupérer la langue

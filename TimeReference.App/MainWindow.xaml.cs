@@ -56,114 +56,147 @@ public partial class MainWindow : Window
     
     public MainWindow()
     {
-        // Spec 1 : Instance unique
-        const string appName = "TimeReferenceNMEA_SingleInstance";
-        bool createdNew;
-        _mutex = new Mutex(true, appName, out createdNew);
-        if (!createdNew)
+        try
         {
-            MessageBox.Show(TranslationManager.Instance["MSG_ALREADY_RUNNING"], TranslationManager.Instance["TITLE_SINGLE_INSTANCE"], MessageBoxButton.OK, MessageBoxImage.Warning);
-            Application.Current.Shutdown();
-            return;
-        }
-
-        // Splash Screen (Image fixe + Infos)
-        _splash = new SplashScreenWindow(true);
-        _splash.Show();
-
-        InitializeComponent();
-        this.Loaded += Window_Loaded;
-        this.SizeChanged += MainWindow_SizeChanged;
-
-        // Gestion de la transparence pour le mode mini
-        this.MouseEnter += (s, e) => { if (_isMiniMode) this.Opacity = 1.0; };
-        this.MouseLeave += (s, e) => { if (_isMiniMode) this.Opacity = _config.MiniModeOpacity > 0.1 ? _config.MiniModeOpacity : 1.0; };
-
-        // Chargement de la configuration
-        _configService = new ConfigService();
-        _config = _configService.Load();
-
-        Logger.Info("=== OUVERTURE DE L'APPLICATION ===");
-
-        // Restauration de l'état (santé et thème)
-        LoadAppState();
-        // Applique le thème chargé (ou le thème par défaut "Light")
-        ChangeTheme(_currentTheme);
-        UpdateHealthUI();
-
-        // Initialisation de l'interface (remplit le champ texte avec le port sauvegardé)
-        UpdateUtcButtonAppearance();
-
-        // On instancie notre lecteur GPS
-        _gpsReader = new SerialGpsReader();
-        
-        // On s'abonne aux événements (quand une donnée arrive ou une erreur survient)
-        _gpsReader.GpsDataReceived += OnGpsDataReceived;
-        _gpsReader.ErrorOccurred += OnErrorOccurred;
-
-        // Timer pour surveiller l'état du service NTP (Spec 5)
-        _ntpStatusTimer = new DispatcherTimer();
-        _ntpStatusTimer.Interval = TimeSpan.FromSeconds(0.5);
-        _ntpStatusTimer.Tick += (s, e) => 
-        {
-            UpdateNtpStatus();
-            // Fallback : Si pas de mise à jour par GPS depuis > 1.2s, on met à jour l'horloge système
-            if ((DateTime.Now - _lastClockUpdate).TotalSeconds > 1.2)
+            // Spec 1 : Instance unique
+            const string appName = "TimeReferenceNMEA_SingleInstance";
+            bool createdNew;
+            _mutex = new Mutex(true, appName, out createdNew);
+            if (!createdNew)
             {
-                UpdateSystemClock();
+                MessageBox.Show(TranslationManager.Instance["MSG_ALREADY_RUNNING"], TranslationManager.Instance["TITLE_SINGLE_INSTANCE"], MessageBoxButton.OK, MessageBoxImage.Warning);
+                Application.Current.Shutdown();
+                return;
             }
-        };
-        _ntpStatusTimer.Start();
 
-        // Timer pour la qualité NTP (Step 24) - Toutes les 2s car ntpq est lourd
-        _ntpQualityTimer = new DispatcherTimer();
-        _ntpQualityTimer.Interval = TimeSpan.FromSeconds(1);
-        _ntpQualityTimer.Tick += async (s, e) => await UpdateNtpQualityAsync();
-        _ntpQualityTimer.Start();
+            // Splash Screen (Image fixe + Infos)
+            _splash = new SplashScreenWindow(true);
+            _splash.Show();
 
-        // Timer pour récupérer les données GPS via NTP (clockvar) quand le port COM est occupé
-        _ntpClockVarTimer = new DispatcherTimer();
-        _ntpClockVarTimer.Interval = TimeSpan.FromSeconds(1);
-        _ntpClockVarTimer.Tick += async (s, e) => await UpdateGpsFromNtpqAsync();
-        _ntpClockVarTimer.Start();
+            InitializeComponent();
+            this.Loaded += Window_Loaded;
+            this.SizeChanged += MainWindow_SizeChanged;
+
+            // Gestion de la transparence pour le mode mini
+            this.MouseEnter += (s, e) => { if (_isMiniMode) this.Opacity = 1.0; };
+            this.MouseLeave += (s, e) => { if (_isMiniMode) this.Opacity = _config.MiniModeOpacity > 0.1 ? _config.MiniModeOpacity : 1.0; };
+
+            // Chargement de la configuration
+            _configService = new ConfigService();
+            _config = _configService.Load();
+
+            Logger.Info("=== OUVERTURE DE L'APPLICATION ===");
+
+            // Restauration de l'état (santé et thème)
+            LoadAppState();
+            // Applique le thème chargé (ou le thème par défaut "Light")
+            ChangeTheme(_currentTheme);
+            UpdateHealthUI();
+
+            // Initialisation de l'interface (remplit le champ texte avec le port sauvegardé)
+            UpdateUtcButtonAppearance();
+
+            // On instancie notre lecteur GPS
+            _gpsReader = new SerialGpsReader();
+            
+            // On s'abonne aux événements (quand une donnée arrive ou une erreur survient)
+            _gpsReader.GpsDataReceived += OnGpsDataReceived;
+            _gpsReader.ErrorOccurred += OnErrorOccurred;
+
+            // Timer pour surveiller l'état du service NTP (Spec 5)
+            _ntpStatusTimer = new DispatcherTimer();
+            _ntpStatusTimer.Interval = TimeSpan.FromSeconds(0.5);
+            _ntpStatusTimer.Tick += (s, e) => 
+            {
+                UpdateNtpStatus();
+                // Fallback : Si pas de mise à jour par GPS depuis > 1.2s, on met à jour l'horloge système
+                if ((DateTime.Now - _lastClockUpdate).TotalSeconds > 1.2)
+                {
+                    UpdateSystemClock();
+                }
+            };
+            _ntpStatusTimer.Start();
+
+            // Timer pour la qualité NTP (Step 24) - Toutes les 2s car ntpq est lourd
+            _ntpQualityTimer = new DispatcherTimer();
+            _ntpQualityTimer.Interval = TimeSpan.FromSeconds(1);
+            _ntpQualityTimer.Tick += async (s, e) => await UpdateNtpQualityAsync();
+            _ntpQualityTimer.Start();
+
+            // Timer pour récupérer les données GPS via NTP (clockvar) quand le port COM est occupé
+            _ntpClockVarTimer = new DispatcherTimer();
+            _ntpClockVarTimer.Interval = TimeSpan.FromSeconds(1);
+            _ntpClockVarTimer.Tick += async (s, e) => await UpdateGpsFromNtpqAsync();
+            _ntpClockVarTimer.Start();
+        }
+        catch (Exception ex)
+        {
+            // FIX: Empêcher la fermeture automatique de l'application par le timer du splash screen
+            Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+            if (_splash != null)
+            {
+                _splash.Close();
+                _splash = null;
+            }
+
+            // AJOUT : Sauvegarde de l'erreur dans un fichier texte pour diagnostic
+            try 
+            {
+                System.IO.File.WriteAllText("startup_error.txt", $"Date: {DateTime.Now}\nMessage: {ex.Message}\n\nStack Trace:\n{ex.StackTrace}");
+            }
+            catch { }
+
+            MessageBox.Show($"Erreur fatale au démarrage (Constructeur) : {ex.Message}\n{ex.StackTrace}", "Erreur Critique", MessageBoxButton.OK, MessageBoxImage.Error);
+            Application.Current.Shutdown();
+        }
     }
 
     private async void Window_Loaded(object sender, RoutedEventArgs e)
     {
-        // Spec 1 : Vérification des prérequis (W32Time vs NTP)
-        // Déplacé ici pour permettre l'affichage immédiat de la fenêtre
-        await Task.Yield();
-
-        if (!CheckPrerequisites())
+        try
         {
-            Application.Current.Shutdown();
-            return;
-        }
+            // Spec 1 : Vérification des prérequis (W32Time vs NTP)
+            // Déplacé ici pour permettre l'affichage immédiat de la fenêtre
+            await Task.Yield();
 
-        // Tentative de démarrage automatique du service NTP s'il est arrêté
-        await AutoStartNtpAsync();
+            // FIX: Fermer le splash screen avant les opérations bloquantes pour éviter de masquer les dialogues
+            if (_splash != null && _splash.IsVisible)
+            {
+                _splash.Close();
+                _splash = null;
+            }
 
-        // Stratégie de configuration initiale (Détection PC Vierge / Incohérence)
-        await CheckAndEnforceNtpConfigAsync();
-
-        // Restauration du mode Mini si nécessaire
-        if (_shouldStartInMiniMode)
-        {
-            ToggleMiniMode();
-        }
-
-        // Application du réglage "Toujours au premier plan" après le chargement
-        this.Topmost = _config.MiniModeAlwaysOnTop;
-
-        // S'assure que le splash screen reste au-dessus si la fenêtre principale passe en Topmost
-        if (_splash != null && _splash.IsVisible)
-        {
-            _splash.Topmost = true;
-            _splash.Activate();
-        }
-
-            // Vérification de la position pour éviter que la fenêtre soit hors écran
+            // S'assurer que la fenêtre est visible sur l'écran (cas des changements de résolution/écrans)
             EnsureWindowVisible();
+            this.Activate();
+
+            if (!CheckPrerequisites())
+            {
+                Application.Current.Shutdown();
+                return;
+            }
+
+            // Tentative de démarrage automatique du service NTP s'il est arrêté
+            await AutoStartNtpAsync();
+
+            // Stratégie de configuration initiale (Détection PC Vierge / Incohérence)
+            await CheckAndEnforceNtpConfigAsync();
+
+            // Restauration du mode Mini si nécessaire
+            if (_shouldStartInMiniMode)
+            {
+                ToggleMiniMode();
+            }
+
+            // Application du réglage "Toujours au premier plan" après le chargement
+            this.Topmost = _config.MiniModeAlwaysOnTop;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Erreur critique au démarrage : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            Application.Current.Shutdown();
+        }
     }
 
     private async Task AutoStartNtpAsync()
@@ -296,17 +329,20 @@ public partial class MainWindow : Window
             double virtualScreenWidth = SystemParameters.VirtualScreenWidth;
             double virtualScreenHeight = SystemParameters.VirtualScreenHeight;
 
+            double w = double.IsNaN(this.Width) ? this.ActualWidth : this.Width;
+            double h = double.IsNaN(this.Height) ? this.ActualHeight : this.Height;
+
             // On vérifie si la fenêtre est "perdue" (complètement hors de la zone visible)
-            bool isOffScreen = (this.Left + this.Width < virtualScreenLeft) || 
+            bool isOffScreen = (this.Left + w < virtualScreenLeft) || 
                                (this.Left > virtualScreenLeft + virtualScreenWidth) ||
-                               (this.Top + this.Height < virtualScreenTop) || 
+                               (this.Top + h < virtualScreenTop) || 
                                (this.Top > virtualScreenTop + virtualScreenHeight);
 
             if (isOffScreen)
             {
                 // Si hors écran, on recentre sur l'écran principal
-                this.Left = SystemParameters.WorkArea.Left + (SystemParameters.WorkArea.Width - this.Width) / 2;
-                this.Top = SystemParameters.WorkArea.Top + (SystemParameters.WorkArea.Height - this.Height) / 2;
+                this.Left = SystemParameters.WorkArea.Left + (SystemParameters.WorkArea.Width - w) / 2;
+                this.Top = SystemParameters.WorkArea.Top + (SystemParameters.WorkArea.Height - h) / 2;
                 Logger.Info("Fenêtre détectée hors écran. Repositionnement sur l'écran principal.");
             }
         }
@@ -1521,13 +1557,13 @@ public partial class MainWindow : Window
     // Nettoyage propre à la fermeture de la fenêtre
     protected override void OnClosed(EventArgs e)
     {
-        _gpsReader.Stop();
-        _ntpStatusTimer.Stop();
-        _ntpQualityTimer.Stop();
-        _ntpClockVarTimer.Stop();
+        _gpsReader?.Stop();
+        _ntpStatusTimer?.Stop();
+        _ntpQualityTimer?.Stop();
+        _ntpClockVarTimer?.Stop();
         
         // Sauvegarde de l'état (Santé) pour le prochain lancement
-        if (_isMiniMode)
+        if (_isMiniMode && _config != null && _configService != null)
         {
             _config.MiniModeLeft = this.Left;
             _config.MiniModeTop = this.Top;
