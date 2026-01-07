@@ -156,12 +156,21 @@ public partial class MainWindow : Window
     {
         try
         {
+            // S'assurer que la fenêtre est visible sur l'écran (cas des changements de résolution/écrans)
+            EnsureWindowVisible();
+
+            // Restauration du mode Mini si nécessaire (AVANT le yield pour éviter le flash visuel)
+            if (_shouldStartInMiniMode)
+            {
+                ToggleMiniMode();
+                // On revérifie la visibilité car la position/taille a changé
+                EnsureWindowVisible();
+            }
+
             // Spec 1 : Vérification des prérequis (W32Time vs NTP)
             // Déplacé ici pour permettre l'affichage immédiat de la fenêtre
             await Task.Yield();
 
-            // S'assurer que la fenêtre est visible sur l'écran (cas des changements de résolution/écrans)
-            EnsureWindowVisible();
             this.Activate();
 
             if (!CheckPrerequisites())
@@ -175,12 +184,6 @@ public partial class MainWindow : Window
 
             // Stratégie de configuration initiale (Détection PC Vierge / Incohérence)
             await CheckAndEnforceNtpConfigAsync();
-
-            // Restauration du mode Mini si nécessaire
-            if (_shouldStartInMiniMode)
-            {
-                ToggleMiniMode();
-            }
 
             // Application du réglage "Toujours au premier plan" après le chargement
             this.Topmost = _config.MiniModeAlwaysOnTop;
@@ -693,7 +696,14 @@ public partial class MainWindow : Window
                 {
                     _config.PeersWindowLeft = closedWindow.Left;
                     _config.PeersWindowTop = closedWindow.Top;
-                    _configService.Save(_config);
+                    try
+                    {
+                        _configService.Save(_config);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error($"Erreur sauvegarde config (PeersWindow): {ex.Message}");
+                    }
                 }
                 _peersWindow = null;
             };
@@ -717,7 +727,14 @@ public partial class MainWindow : Window
         simpleWindow.ShowDialog();
 
         // Sauvegarde de la configuration car la calibration peut avoir modifié le Fudge
-        _configService.Save(_config);
+        try
+        {
+            _configService.Save(_config);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($"Erreur sauvegarde config (BtnCalibration_Click): {ex.Message}");
+        }
 
         Logger.Info("Fermeture de l'assistant de Calibration.");
     }
@@ -933,7 +950,14 @@ public partial class MainWindow : Window
             // --- Retour au Mode Normal ---
             _config.MiniModeLeft = this.Left;
             _config.MiniModeTop = this.Top;
-            _configService.Save(_config);
+            try
+            {
+                _configService.Save(_config);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Erreur sauvegarde config (ToggleMiniMode): {ex.Message}");
+            }
 
             this.SizeToContent = SizeToContent.Manual;
 
@@ -995,7 +1019,14 @@ public partial class MainWindow : Window
     {
         // Sauvegarde de la préférence
         _config.UtcMode = !_config.UtcMode; // Bascule de l'état
-        _configService.Save(_config);
+        try
+        {
+            _configService.Save(_config);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($"Erreur sauvegarde config (ChkUtc_Click): {ex.Message}");
+        }
 
         // Fix: Forcer la sauvegarde dans le fichier physique pour persistance entre sessions
         try 
@@ -1560,7 +1591,14 @@ public partial class MainWindow : Window
         {
             _config.MiniModeLeft = this.Left;
             _config.MiniModeTop = this.Top;
-            _configService.Save(_config);
+            try
+            {
+                _configService.Save(_config);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Erreur sauvegarde config (OnClosed): {ex.Message}");
+            }
         }
         SaveAppState();
         
