@@ -693,7 +693,14 @@ public partial class MainWindow : Window
                 {
                     _config.PeersWindowLeft = closedWindow.Left;
                     _config.PeersWindowTop = closedWindow.Top;
-                    _configService.Save(_config);
+                    try
+                    {
+                        _configService.Save(_config);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error($"Erreur sauvegarde config (PeersWindow): {ex.Message}");
+                    }
                 }
                 _peersWindow = null;
             };
@@ -717,7 +724,14 @@ public partial class MainWindow : Window
         simpleWindow.ShowDialog();
 
         // Sauvegarde de la configuration car la calibration peut avoir modifié le Fudge
-        _configService.Save(_config);
+        try
+        {
+            _configService.Save(_config);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($"Erreur sauvegarde config (BtnCalibration_Click): {ex.Message}");
+        }
 
         Logger.Info("Fermeture de l'assistant de Calibration.");
     }
@@ -933,7 +947,14 @@ public partial class MainWindow : Window
             // --- Retour au Mode Normal ---
             _config.MiniModeLeft = this.Left;
             _config.MiniModeTop = this.Top;
-            _configService.Save(_config);
+            try
+            {
+                _configService.Save(_config);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Erreur sauvegarde config (ToggleMiniMode): {ex.Message}");
+            }
 
             this.SizeToContent = SizeToContent.Manual;
 
@@ -995,7 +1016,14 @@ public partial class MainWindow : Window
     {
         // Sauvegarde de la préférence
         _config.UtcMode = !_config.UtcMode; // Bascule de l'état
-        _configService.Save(_config);
+        try
+        {
+            _configService.Save(_config);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($"Erreur sauvegarde config (ChkUtc_Click): {ex.Message}");
+        }
 
         // Fix: Forcer la sauvegarde dans le fichier physique pour persistance entre sessions
         try 
@@ -1560,7 +1588,14 @@ public partial class MainWindow : Window
         {
             _config.MiniModeLeft = this.Left;
             _config.MiniModeTop = this.Top;
-            _configService.Save(_config);
+            try
+            {
+                _configService.Save(_config);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Erreur sauvegarde config (OnClosed): {ex.Message}");
+            }
         }
         SaveAppState();
         

@@ -1,7 +1,0 @@
-[07/01/2026 14:00:15] CRITICAL ERROR (Dispatcher): Object reference not set to an instance of an object.
-   at TimeReference.App.MainWindow.OnClosed(EventArgs e) in D:\Francis\Documents\code\Time reference NMEA\TimeReference.App\MainWindow.xaml.cs:line 1560
-   at System.Windows.Application.DoShutdown()
-   at System.Windows.Application.ShutdownImpl()
-   at System.Windows.Application.ShutdownCallback(Object arg)
-   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
-   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
