@@ -156,12 +156,21 @@ public partial class MainWindow : Window
     {
         try
         {
+            // S'assurer que la fenêtre est visible sur l'écran (cas des changements de résolution/écrans)
+            EnsureWindowVisible();
+
+            // Restauration du mode Mini si nécessaire (AVANT le yield pour éviter le flash visuel)
+            if (_shouldStartInMiniMode)
+            {
+                ToggleMiniMode();
+                // On revérifie la visibilité car la position/taille a changé
+                EnsureWindowVisible();
+            }
+
             // Spec 1 : Vérification des prérequis (W32Time vs NTP)
             // Déplacé ici pour permettre l'affichage immédiat de la fenêtre
             await Task.Yield();
 
-            // S'assurer que la fenêtre est visible sur l'écran (cas des changements de résolution/écrans)
-            EnsureWindowVisible();
             this.Activate();
 
             if (!CheckPrerequisites())
@@ -175,12 +184,6 @@ public partial class MainWindow : Window
 
             // Stratégie de configuration initiale (Détection PC Vierge / Incohérence)
             await CheckAndEnforceNtpConfigAsync();
-
-            // Restauration du mode Mini si nécessaire
-            if (_shouldStartInMiniMode)
-            {
-                ToggleMiniMode();
-            }
 
             // Application du réglage "Toujours au premier plan" après le chargement
             this.Topmost = _config.MiniModeAlwaysOnTop;
