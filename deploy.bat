@@ -1,12 +1,6 @@
 @echo off
 setlocal
 
-if "%~1"=="" (
-    echo Usage: %0 ^<Version^>
-    echo Exemple: %0 1.2.3
-    exit /b 1
-)
-
 set VERSION=%~1
 set ISCC="C:\Program Files (x86)\Inno Setup 6\iscc.exe"
 
@@ -17,139 +11,124 @@ if not exist %ISCC% (
     exit /b 1
 )
 
-echo.
+:MENU
+cls
 echo ==========================================
-echo Verification de l'etat du depot
+echo    MENU DE DEPLOIEMENT - Time Reference NMEA
+if not "%VERSION%"=="" echo    Version cible : %VERSION%
 echo ==========================================
-REM git diff-index --quiet HEAD --
-REM if %ERRORLEVEL% NEQ 0 (
-REM     echo [ATTENTION] Des modifications locales ont ete detectees.
-REM     echo Cela risque de creer des conflits lors de la synchronisation (Etape 0).
-REM     echo Il est recommande d'avoir un depot propre ^(git stash ou git reset^) avant de deployer.
-REM     echo.
-REM     pause
-REM     exit /b 1
-REM )
+echo 1 : Incrementer la version
+echo 2 : Generer l'executable
+echo 3 : Compiler l'installateur
+echo 4 : Generer la documentation locale
+echo 5 : Validation Git (Commit, Tag)
+echo 6 : Push vers GitHub
+echo 7 : Deploiement de la documentation sur GitHub Pages
+echo 8 : Deploiement complet
+echo 0 : Sortir sans rien faire
+echo ==========================================
+set /p CHOICE="Votre choix : "
+
+if "%CHOICE%"=="1" goto DO_VERSION
+if "%CHOICE%"=="2" goto DO_EXE
+if "%CHOICE%"=="3" goto DO_INSTALLER
+if "%CHOICE%"=="4" goto DO_DOC_LOCAL
+if "%CHOICE%"=="5" goto DO_GIT
+if "%CHOICE%"=="6" goto DO_PUSH
+if "%CHOICE%"=="7" goto DO_DOC_WEB
+if "%CHOICE%"=="8" goto DO_FULL
+if "%CHOICE%"=="0" goto END
+goto MENU
+
+:DO_VERSION
+call :CHECK_VERSION
+if errorlevel 1 goto MENU
+call :STEP_VERSION
+pause
+goto MENU
+
+:DO_EXE
+call :STEP_EXE
+pause
+goto MENU
+
+:DO_INSTALLER
+call :STEP_INSTALLER
+pause
+goto MENU
+
+:DO_DOC_LOCAL
+call :STEP_DOC_LOCAL
+pause
+goto MENU
+
+:DO_GIT
+call :CHECK_VERSION
+if errorlevel 1 goto MENU
+call :STEP_GIT
+pause
+goto MENU
+
+:DO_PUSH
+call :STEP_PUSH
+pause
+goto MENU
+
+:DO_DOC_WEB
+call :STEP_DOC_WEB
+pause
+goto MENU
+
+:DO_FULL
+call :CHECK_VERSION
+if errorlevel 1 goto MENU
 
 echo.
 echo ==========================================
-echo Etape 0 : Synchronisation avec GitHub
+echo DEMARRAGE DU DEPLOIEMENT COMPLET v%VERSION%
 echo ==========================================
-REM git pull --rebase origin main
-REM if %ERRORLEVEL% NEQ 0 (
-REM     echo [ERREUR] Echec de la synchronisation avec GitHub. Resoudre les conflits manuellement puis relancer.
-REM     pause
-REM     exit /b %ERRORLEVEL%
-REM )
 
+call :STEP_VERSION
+if errorlevel 1 goto FULL_FAIL
 echo.
-echo ==========================================
-echo Etape 1 : Incrementer la version a %VERSION%
-echo ==========================================
-powershell -ExecutionPolicy Bypass -File ".\Set-Version.ps1" -Version %VERSION%
-if %ERRORLEVEL% NEQ 0 (
-    echo [ERREUR] Echec du script de versionning.
-    pause
-    exit /b %ERRORLEVEL%
-)
-echo.
-echo Appuyez sur une touche pour passer a l'etape 2 : Generer la documentation locale.
+echo Appuyez sur une touche pour passer a l'etape suivante...
 pause
 
+call :STEP_DOC_LOCAL
+if errorlevel 1 goto FULL_FAIL
 echo.
-echo ==========================================
-echo Etape 2 : Generer la documentation locale
-echo ==========================================
-mkdocs build
-if %ERRORLEVEL% NEQ 0 (
-    echo [ERREUR] Echec de mkdocs build.
-    pause
-    exit /b %ERRORLEVEL%
-)
-echo.
-echo Appuyez sur une touche pour passer a l'etape 3 : Generer l'executable.
+echo Appuyez sur une touche pour passer a l'etape suivante...
 pause
 
+call :STEP_EXE
+if errorlevel 1 goto FULL_FAIL
 echo.
-echo ==========================================
-echo Etape 3 : Generer l'executable (dotnet publish)
-echo ==========================================
-dotnet publish TimeReference.App -c Release -r win-x64 --self-contained true
-if %ERRORLEVEL% NEQ 0 (
-    echo [ERREUR] Echec de la compilation dotnet.
-    pause
-    exit /b %ERRORLEVEL%
-)
-echo.
-echo Appuyez sur une touche pour passer a l'etape 4 : Compiler l'installateur.
+echo Appuyez sur une touche pour passer a l'etape suivante...
 pause
 
+call :STEP_INSTALLER
+if errorlevel 1 goto FULL_FAIL
 echo.
-echo ==========================================
-echo Etape 4 : Compiler l'installateur (Inno Setup)
-echo ==========================================
-%ISCC% "TimeReference.App\setup.iss"
-if %ERRORLEVEL% NEQ 0 (
-    echo [ERREUR] Echec de la compilation Inno Setup.
-    pause
-    exit /b %ERRORLEVEL%
-)
-echo.
-echo Appuyez sur une touche pour passer a l'etape 5 : Validation Git (Commit et Tag).
+echo Appuyez sur une touche pour passer a l'etape suivante...
 pause
 
+call :STEP_GIT
+if errorlevel 1 goto FULL_FAIL
 echo.
-echo =================================================================
-echo Etape 5 : Validation Git (Commit, Tag)
-echo =================================================================
-git add .
-git commit -m "Release v%VERSION%" || echo "Pas de nouveaux changements a commiter."
-
-echo.
-echo Nettoyage et (re)creation du tag v%VERSION%...
-git tag -d v%VERSION% >nul 2>&1
-git push origin --delete v%VERSION% >nul 2>&1
-git tag v%VERSION%
-if %ERRORLEVEL% NEQ 0 (
-    echo [ERREUR] Echec de la creation du tag v%VERSION%.
-    pause
-    exit /b %ERRORLEVEL%
-)
-echo Tag v%VERSION% cree avec succes.
-echo.
-echo Appuyez sur une touche pour passer a l'etape 6 : Push vers GitHub.
+echo Appuyez sur une touche pour passer a l'etape suivante...
 pause
 
+call :STEP_PUSH
+if errorlevel 1 goto FULL_FAIL
 echo.
-echo =========================================================
-echo Etape 6 : Push vers GitHub
-echo =========================================================
-git push origin main --tags --force
-if %ERRORLEVEL% NEQ 0 (
-    echo [ERREUR] Echec du push vers GitHub.
-    pause
-    exit /b %ERRORLEVEL%
-)
-echo.
-echo Le script est termine. Appuyez sur une touche pour voir les instructions finales.
-echo Appuyez sur une touche pour passer a l'etape 7 : Deploiement Doc Web.
+echo Appuyez sur une touche pour passer a l'etape suivante...
 pause
 
+call :STEP_DOC_WEB
+if errorlevel 1 goto FULL_FAIL
+
 echo.
-echo =========================================================
-echo Etape 7 : Deploiement de la documentation sur GitHub Pages
-echo =========================================================
-mkdocs gh-deploy --force
-if %ERRORLEVEL% NEQ 0 (
-    echo [ERREUR] Echec du deploiement de la documentation.
-    pause
-    exit /b %ERRORLEVEL%
-)
-echo.
-echo Le script est termine. Appuyez sur une touche pour voir les instructions finales.
-pause
-echo.
-echo [SUCCES] Le code et le tag v%VERSION% ont ete pousses sur GitHub.
+echo [SUCCES] Deploiement complet termine pour v%VERSION%.
 echo.
 echo Prochaine etape : Publier la release manuellement sur GitHub.
 echo   1. Allez sur la page "Releases" de votre depot.
@@ -157,3 +136,85 @@ echo   2. Reperez la version v%VERSION% (probablement en "Draft" creee par l'Act
 echo   3. Cliquez sur le bouton "Edit" (crayon).
 echo   4. Verifiez les fichiers, ajoutez l'installateur si besoin, et cliquez sur "Publish release".
 pause
+goto MENU
+
+:FULL_FAIL
+echo.
+echo [ECHEC] Le deploiement complet a rencontre une erreur.
+pause
+goto MENU
+
+:CHECK_VERSION
+if "%VERSION%"=="" (
+    set /p VERSION="Veuillez entrer la version (ex: 1.2.3) : "
+)
+if "%VERSION%"=="" (
+    echo [ERREUR] Version requise.
+    exit /b 1
+)
+exit /b 0
+
+:STEP_VERSION
+echo.
+echo ==========================================
+echo Etape 1 : Incrementer la version a %VERSION%
+echo ==========================================
+powershell -ExecutionPolicy Bypass -File ".\Set-Version.ps1" -Version %VERSION%
+exit /b %ERRORLEVEL%
+
+:STEP_DOC_LOCAL
+echo.
+echo ==========================================
+echo Etape 2 : Generer la documentation locale
+echo ==========================================
+mkdocs build
+exit /b %ERRORLEVEL%
+
+:STEP_EXE
+echo.
+echo ==========================================
+echo Etape 3 : Generer l'executable (dotnet publish)
+echo ==========================================
+dotnet publish TimeReference.App -c Release -r win-x64 --self-contained true
+exit /b %ERRORLEVEL%
+
+:STEP_INSTALLER
+echo.
+echo ==========================================
+echo Etape 4 : Compiler l'installateur (Inno Setup)
+echo ==========================================
+%ISCC% "TimeReference.App\setup.iss"
+exit /b %ERRORLEVEL%
+
+:STEP_GIT
+echo.
+echo =================================================================
+echo Etape 5 : Validation Git (Commit, Tag)
+echo =================================================================
+git add .
+git commit -m "Release v%VERSION%" || echo "Pas de nouveaux changements a commiter."
+echo.
+echo Nettoyage et (re)creation du tag v%VERSION%...
+git tag -d v%VERSION% >nul 2>&1
+git push origin --delete v%VERSION% >nul 2>&1
+git tag v%VERSION%
+exit /b %ERRORLEVEL%
+
+:STEP_PUSH
+echo.
+echo =========================================================
+echo Etape 6 : Push vers GitHub
+echo =========================================================
+git push origin main --tags --force
+exit /b %ERRORLEVEL%
+
+:STEP_DOC_WEB
+echo.
+echo =========================================================
+echo Etape 7 : Deploiement de la documentation sur GitHub Pages
+echo =========================================================
+mkdocs gh-deploy --force
+exit /b %ERRORLEVEL%
+
+:END
+exit /b 0

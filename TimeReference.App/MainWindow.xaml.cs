@@ -160,13 +160,6 @@ public partial class MainWindow : Window
             // Déplacé ici pour permettre l'affichage immédiat de la fenêtre
             await Task.Yield();
 
-            // FIX: Fermer le splash screen avant les opérations bloquantes pour éviter de masquer les dialogues
-            if (_splash != null && _splash.IsVisible)
-            {
-                _splash.Close();
-                _splash = null;
-            }
-
             // S'assurer que la fenêtre est visible sur l'écran (cas des changements de résolution/écrans)
             EnsureWindowVisible();
             this.Activate();

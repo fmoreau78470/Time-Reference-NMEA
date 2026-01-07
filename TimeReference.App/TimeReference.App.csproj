@@ -10,7 +10,9 @@
     <AssemblyVersion>1.2.1.0</AssemblyVersion>
     <Authors>Francis Moreau</Authors>
     <Company>Francis Moreau</Company>
+    <Copyright>Francis Moreau</Copyright>
     <Product>Time Reference NMEA</Product>
+    <ApplicationIcon>Assets\Icone-Time-Reference.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.IO.Ports" Version="10.0.1" />
@@ -25,5 +27,13 @@
     </None>
     <Resource Include="Assets\**\*.png" />
     <Resource Include="Assets\**\*.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\config.json" Link="config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ntp.template" Link="ntp.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

@@ -59,8 +59,8 @@ namespace TimeReference.App
 
             if (autoClose)
             {
-                // Timer pour fermer automatiquement après 3 secondes
-                _autoCloseTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+                // Timer pour fermer automatiquement après 5 secondes
+                _autoCloseTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
                 _autoCloseTimer.Tick += (s, e) => { _autoCloseTimer.Stop(); Close(); };
                 _autoCloseTimer.Start();
             }
