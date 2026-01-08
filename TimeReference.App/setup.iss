@@ -2,12 +2,12 @@
 
 [Setup]
 AppName=Time Reference NMEA
-AppVersion=1.3.0
+AppVersion=1.3.1
 AppPublisher=Votre Nom
 DefaultDirName={autopf}\Time Reference NMEA
 DefaultGroupName=Time Reference NMEA
 OutputDir=Installer
-OutputBaseFilename=TimeReferenceNMEA_Setup_v1.3.0
+OutputBaseFilename=TimeReferenceNMEA_Setup_v1.3.1
 Compression=lzma2
 SolidCompression=yes
 PrivilegesRequired=admin
@@ -48,6 +48,7 @@ en.AdditionalIcons=Additional icons:
 
 fr.LaunchApp=Lancer l'application
 en.LaunchApp=Launch the application
+
 
 
 
