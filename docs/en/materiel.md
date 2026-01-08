@@ -87,10 +87,15 @@ Once the hardware is assembled, you must flash the RP2040 to act as a smart inte
 6.  The RP2040 restarts automatically: your hardware is ready.
 
 ### 💡 Diagnostic LED (RP2040-Zero)
+
 The internal RGB LED indicates the status of the GPS:
+
 * **Blue:** No data received from GPS (check wiring).
+
 * **Red:** GPS data received, but no satellite fix yet.
+
 * **Green:** GPS Fix acquired, but PPS signal missing (> 5s).
+
 * **White Flash:** PPS signal detected (LED turns off between flashes when PPS is active).
 
 You can verify that your GPS is emitting NMEA frames by analyzing the serial port using software like Putty.

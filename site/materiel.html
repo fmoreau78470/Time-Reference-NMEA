@@ -890,11 +890,21 @@ Les données NMEA (envoyées via TX/RX) fournissent la date et l'heure, mais ave
 <li>Le RP2040 redémarre automatiquement : votre matériel est prêt.</li>
 </ol>
 <h3 id="led-de-diagnostic-rp2040-zero">💡 LED de Diagnostic (RP2040-Zero)</h3>
-<p>La LED RGB interne indique l'état du GPS :
-* <strong>Bleu :</strong> Aucune donnée reçue du GPS (vérifier le câblage).
-* <strong>Rouge :</strong> Données GPS reçues, mais pas de fix satellite.
-* <strong>Vert :</strong> Fix GPS acquis, mais signal PPS absent (&gt; 5s).
-* <strong>Flash Blanc :</strong> Signal PPS détecté (La LED s'éteint entre les flashs quand le PPS est actif).</p>
+<p>La LED RGB interne indique l'état du GPS :</p>
+<ul>
+<li>
+<p><strong>Bleu :</strong> Aucune donnée reçue du GPS (vérifier le câblage).</p>
+</li>
+<li>
+<p><strong>Rouge :</strong> Données GPS reçues, mais pas de fix satellite.</p>
+</li>
+<li>
+<p><strong>Vert :</strong> Fix GPS acquis, mais signal PPS absent (&gt; 5s).</p>
+</li>
+<li>
+<p><strong>Flash Blanc :</strong> Signal PPS détecté (La LED s'éteint entre les flashs quand le PPS est actif).</p>
+</li>
+</ul>
 <p>Vous pouvez vérifier que votre GPS émet les trames NMEA grâce à l'analyse du port série à l'aide d'un logiciel de type <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">Putty</a></p>
 <p><img alt="Ma photo" src="PrintScreen/Putty.png" /></p>
 <h2 id="6-fonctionnement-du-firmware-pour-aller-plus-loin">6. Fonctionnement du Firmware (Pour aller plus loin)</h2>
