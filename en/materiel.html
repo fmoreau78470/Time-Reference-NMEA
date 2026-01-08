@@ -624,6 +624,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="5. Firmware Installation (Stratum 0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagnostic-led-rp2040-zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 Diagnostic LED (RP2040-Zero)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -872,6 +889,12 @@ NMEA data (sent via TX/RX) provides date and time, but with variable latency (Ji
 <li>Copy the <code>Stratum0.uf2</code> file to this drive.</li>
 <li>The RP2040 restarts automatically: your hardware is ready.</li>
 </ol>
+<h3 id="diagnostic-led-rp2040-zero">💡 Diagnostic LED (RP2040-Zero)</h3>
+<p>The internal RGB LED indicates the status of the GPS:
+* <strong>Blue:</strong> No data received from GPS (check wiring).
+* <strong>Red:</strong> GPS data received, but no satellite fix yet.
+* <strong>Green:</strong> GPS Fix acquired, but PPS signal missing (&gt; 5s).
+* <strong>White Flash:</strong> PPS signal detected (LED turns off between flashes when PPS is active).</p>
 <p>You can verify that your GPS is emitting NMEA frames by analyzing the serial port using software like Putty.</p>
 <p><img alt="Ma photo" src="../PrintScreen/Putty.png" /></p>
 <h2 id="6-firmware-operation-going-further">6. Firmware Operation (Going further)</h2>
