@@ -86,6 +86,13 @@ Une fois le matériel assemblé, vous devez flasher le RP2040 pour qu'il agisse 
 5.  Copiez le fichier `Stratum0.uf2` dans ce disque.
 6.  Le RP2040 redémarre automatiquement : votre matériel est prêt.
 
+### 💡 LED de Diagnostic (RP2040-Zero)
+La LED RGB interne indique l'état du GPS :
+* **Bleu :** Aucune donnée reçue du GPS (vérifier le câblage).
+* **Rouge :** Données GPS reçues, mais pas de fix satellite.
+* **Vert :** Fix GPS acquis, mais signal PPS absent (> 5s).
+* **Flash Blanc :** Signal PPS détecté (La LED s'éteint entre les flashs quand le PPS est actif).
+
 Vous pouvez vérifier que votre GPS émet les trames NMEA grâce à l'analyse du port série à l'aide d'un logiciel de type [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
 
 ![Ma photo](../PrintScreen/Putty.png)
