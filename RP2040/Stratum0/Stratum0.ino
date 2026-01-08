@@ -4,8 +4,8 @@
  */
 
 #include <Arduino.h>
-#include <Adafruit_TinyUSB.h>
-
+#include "Adafruit_TinyUSB.h"
+ 
 // --- CONFIGURATION ---
 const int PPS_PIN = 2;       // Le fil PPS du GPS va sur GP2 (Pin 3)
 
