@@ -107,5 +107,12 @@ namespace TimeReference.App
             this.Top = SystemParameters.WorkArea.Top + (SystemParameters.WorkArea.Height - this.Height) / 2;
         }
     }
+    private void BtnLoopstats_Click(object sender, RoutedEventArgs e)
+    {
+        var loopstatsWindow = new LoopstatsWindow();
+        loopstatsWindow.Owner = this;
+        loopstatsWindow.Show();
+    }
+    
     }
 }

@@ -210,6 +210,8 @@
   "STATUS_QUERYING_NTP": "Querying NTP...",
   "STATUS_NO_NTP_DATA": "No NTP data",
   "LOGS_TITLE": "Log Viewer",
+  "BTN_LOOPSTATS": "Statistics",
+  "TITLE_LOOPSTATS": "Statistics",
   "LBL_LOG_FILE": "File:",
   "BTN_REFRESH": "Refresh",
   "BTN_DELETE": "Delete",
