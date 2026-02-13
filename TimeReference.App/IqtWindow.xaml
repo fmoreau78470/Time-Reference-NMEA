@@ -6,7 +6,7 @@
         xmlns:ext="clr-namespace:TimeReference.App.MarkupExtensions"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="{ext:Lang IQT_TITLE}" Height="450" Width="350"
+        Title="{ext:Lang IQT_TITLE}" Height="600" Width="400"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -88,6 +88,20 @@
                                         IsInverted="False"
                                         ToolTip="{ext:Lang IQT_SATS_TOOLTIP}"/>
                 </UniformGrid>
+
+                <!-- Terminal NMEA -->
+                <GroupBox Header="{ext:Lang GRP_NMEA_TERMINAL}" Margin="0,0,0,15" Height="150" BorderBrush="{DynamicResource BorderColor}" Foreground="{DynamicResource PrimaryText}">
+                    <TextBox x:Name="TxtNmeaTerminal"
+                             IsReadOnly="True"
+                             AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto"
+                             FontFamily="Consolas"
+                             FontSize="11"
+                             Background="#FF1E1E1E"
+                             Foreground="#FF00FF00"
+                             BorderThickness="0"
+                             Padding="5"/>
+                </GroupBox>
 
                 <Button x:Name="BtnRetry" Content="{ext:Lang BTN_RETRY_CONNECT}" Height="35" Background="{DynamicResource SecondaryText}" Foreground="{DynamicResource PrimaryText}" BorderThickness="0" Click="BtnRetry_Click" Cursor="Hand" Margin="20,0">
                     <Button.Resources>

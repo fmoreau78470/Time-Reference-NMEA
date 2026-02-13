@@ -1,18 +1,23 @@
 {
-  "serial_port": "COM1",
+  "serial_port": "COM10",
   "baud_rate": 9600,
   "timeout": 1,
   "config_ntp": "C:\\Program Files (x86)\\NTP\\etc\\ntp.conf",
-  "servers": [],
+  "servers": [
+    "0.fr.pool.ntp.org",
+    "1.fr.pool.ntp.org",
+    "2.fr.pool.ntp.org",
+    "3.fr.pool.ntp.org"
+  ],
   "server_options": "iburst",
   "time2_value": 0,
-  "utc_mode": false,
+  "utc_mode": true,
   "mini_mode_always_on_top": true,
   "mini_mode_opacity": 1,
   "mini_mode_left": 3360.8,
   "mini_mode_top": 752.8000000000001,
-  "peers_window_left": 2486.4,
-  "peers_window_top": 561.6,
+  "peers_window_left": 1483,
+  "peers_window_top": 507,
   "meinberg_url": "https://www.meinbergglobal.com/english/sw/ntp.htm",
   "language": "fr"
 }
