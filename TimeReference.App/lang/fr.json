@@ -199,6 +199,7 @@
   "IQT_HDOP_TOOLTIP": "Il s'agit d'un indicateur de la précision géométrique de votre positionnement.\nPlus simplement, il vous dit si la disposition des satellites dans le ciel est favorable ou non\npour calculer votre position à la surface de la Terre (latitude et longitude).\nPlus c'est bas, mieux c'est.",
   "IQT_SATS_TITLE": "SATS",
   "IQT_SATS_TOOLTIP": "Nombre de satellites utilisés.",
+  "GRP_NMEA_TERMINAL": "Terminal NMEA",
   "BTN_RETRY_CONNECT": "Réessayer connexion",
   "STATUS_INIT": "Initialisation...",
   "STATUS_CONNECTING": "Connexion au GPS...",

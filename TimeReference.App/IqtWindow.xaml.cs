@@ -77,6 +77,14 @@ namespace TimeReference.App
             if (!string.IsNullOrEmpty(data.RawNmea))
             {
                 _iqtService.ProcessNmeaLine(data.RawNmea);
+
+                // Mise à jour du terminal (sur le thread UI)
+                Dispatcher.Invoke(() => 
+                {
+                    // On ajoute la ligne et on fait défiler
+                    TxtNmeaTerminal.AppendText(data.RawNmea.Trim() + Environment.NewLine);
+                    TxtNmeaTerminal.ScrollToEnd();
+                });
             }
         }
 
