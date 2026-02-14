@@ -1,3 +1,6 @@
+---
+title: FAQ
+---
 # FAQ & Troubleshooting
 
 ## My GPS does not fix (No flashing LED)

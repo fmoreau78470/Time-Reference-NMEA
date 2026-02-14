@@ -1,3 +1,6 @@
+---
+title: NTP Theory
+---
 # NTP Theory & Synchronization
 
 Understanding the mechanisms that allow your computer to be precisely on time is essential to getting the most out of this project. This page popularizes the key concepts of the NTP protocol and explains why adding a GPS changes the game.

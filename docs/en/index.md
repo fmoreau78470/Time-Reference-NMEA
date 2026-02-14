@@ -1,3 +1,6 @@
+---
+title: Home
+---
 # Home - Time Reference NMEA
 
 Welcome to the official documentation of the **Time Reference NMEA** project.

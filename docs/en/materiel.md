@@ -1,3 +1,6 @@
+---
+title: Hardware
+---
 # Hardware & Assembly Guide
 
 This guide details the necessary components and assembly steps to build your Stratum 0 GPS receiver.

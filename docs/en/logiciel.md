@@ -1,3 +1,6 @@
+---
+title: Software
+---
 # Software Manual
 
 This guide details the installation, configuration, and use of the **Time Reference NMEA** application.
